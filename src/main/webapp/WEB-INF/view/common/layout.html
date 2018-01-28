@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:la="http://dbflute.org/lastaflute">
+
+<head th:fragment="head">
+	<!--/*/ <th:block th:fragment="head (title)"> /*/-->
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}+${vq}" href="../../../css/reset.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}+${vq}" href="../../../css/common.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/individual.css}+${vq}" href="../../../css/individual.css" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/semantic.min.css}+${vq}" href="../../../css/semantic.min.css" />
+	<script th:src="@{/js/jquery-3.3.1.min.js}+${vq}" src="../../../js/jquery-3.3.1.min.js"></script>
+	<script th:src="@{/js/semantic.min.js}+${vq}" src="../../../js/semantic.min.js"></script>
+	<script th:src="@{/js/riot+compiler.js}+${vq}" src="../../../js/riot+compiler.js"></script>
+	<title th:text="${title} + ' | 判例DB'">title</title>
+
+	<!--/*/ </th:block> /*/-->
+</head>
+
+<body>
+	<div th:fragment="header">
+		<div class="ui secondary pointing menu">
+			<a class="item" th:href="@{/judgement/list}">
+				判例検索
+			</a>
+			<a class="item">
+				利用上の注意
+			</a>
+			<!-- <a class="item" th:href="@{/introduce}" href="../introduce/introduce.html">
+				このサイトについて
+			</a> -->
+			<!-- <a class="item" th:href="@{/introduce}" href="../introduce/introduce.html">
+				このサイトについて
+			</a> -->
+			<!-- <div class="right menu">
+				<a class="ui item">
+					Logout
+				</a>
+			</div> -->
+		</div>
+		<!-- <section class="nav-main cf">
+		<div class="wrap">
+			<h1 class="main-title"><a th:href="@{/}" href="#">Hanreidb<span> (LastaFlute Example)</span></a></h1>
+			<ul class="nav-home">
+				<li><a th:href="@{/product/list/}" href="../product/product_list.html"><span class="link-block">Products</span></a></li>
+			</ul>
+			<ul class="nav-user">
+				<li>
+					<p th:if="${headerBean.isLogin}" class="nameHeader" th:text="'Hello, ' + ${headerBean.memberName}">Hello, ${f:h(headerBean.memberName)}</p>
+					<p th:unless="${headerBean.isLogin}" class="nameHeader">Welcome, Mr.Guest</p>
+					<ul class="child">
+						<li><a th:href="@{/profile/}" href="#">Profile</a></li>
+						<li><a th:href="@{/signout/}" href="#">Sign out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</section> -->
+		<!-- タグを展開する場所 -->
+		<item name='Annoy-o-Tron' quote='Hello, Hello, Hello'></item>
+
+		<!-- タグの定義 -->
+		<script type="riot/tag">
+	      <item>
+	        <h1>{ name }</h1>
+	        <p>{ quote }</p>
+	
+	        this.name   = opts.name;
+	        this.quote = opts.quote;
+	      </item>
+	    </script>
+
+		<script>
+			// マウント
+			riot.mount('*');
+		</script>
+	</div>
+
+	<main>
+
+		<!--/* paging navi */-->
+		<div class="paging-navi" th:fragment="paging-navi" th:if="${pagingNavi}">
+			<!--/*/ <th:block th:if="${pagingNavi.displayPagingNavi}"> /*/-->
+			<span th:text="${pagingNavi.currentPageNumber}">${pagingNavi.currentPageNumber}</span>/
+			<span th:text="${pagingNavi.allPageCount}">${pagingNavi.allPageCount}</span> (
+			<span th:text="${pagingNavi.allRecordCount}">${pagingNavi.allRecordCount}</span>)
+			<a th:if="${pagingNavi.existsPreviousPage}" th:href="${pagingNavi.previousPageLinkHref}">pre</a>
+			<span th:each="link : ${pagingNavi.pageNumberLinkList}">
+				<span id="pageNumberElement" th:unless="${link.current}">
+					<a th:href="${link.pageNumberLinkHref}" th:text="${link.pageNumberElement}">${link.pageNumberElement}</a>
+				</span>
+				<span id="pageNumberElement" th:if="${link.current}" th:text="${link.pageNumberElement}">${link.pageNumberElement}</span>
+			</span>
+			<a th:if="${pagingNavi.existsNextPage}" th:href="${pagingNavi.nextPageLinkHref}">next</a>
+			<!--/*/ </th:block> /*/-->
+		</div>
+
+	</main>
+	<footer th:fragment="footer">
+		<div class="wrap">
+			<ul class="footer-link">
+				<li>
+					<a href="http://dbflute.seasar.org/">DBFlute Top</a>
+				</li>
+				<li>
+					<a href="http://dbflute.seasar.org/lastaflute">LastaFlute Top</a>
+				</li>
+			</ul>
+			<p class="copyright">&copy; LastaFlute project</p>
+		</div>
+	</footer>
+	<!--/*/ <th:block th:fragment="afterScript"> /*/-->
+	<!-- script contents -->
+	<script th:src="@{/js/jquery-2.1.3.min.js}+${vq}" src="../../../js/jquery-2.1.3.min.js"></script>
+	<script th:src="@{/js/common.js}+${vq}" src="../../../js/common.js"></script>
+	<!--/*/ </th:block> /*/-->
+	<!--/*
+ ${param.individualScript}
+ */-->
+</body>
+
+</html>

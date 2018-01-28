@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+
+<head th:replace="/common/layout.html :: head (title=判例検索)">
+</head>
+
+<body>
+  <!-- <script type="text/javascript" src="bundle.js" charset="utf-8"></script> -->
+  <div class="header" th:replace="/common/layout.html :: header"></div>
+  <form class="ui form">
+    <div class="ui center aligned grid">
+      <div class="ten wide column">
+        <div class="ui right aligned grid">
+          <div class="four wide column">
+            <label>行為</label>
+          </div>
+          <div class="twelve wide column">
+            <input type="text" name="" value="" />
+          </div>
+          <div class="right floated left aligned six wide column">
+            <button class="ui blue button" type="submit" onclick="searchRequest()">検索</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="ui section divider">
+
+  </div>
+  <div class="ui grid">
+
+  </div>
+
+  <script>
+    // ===================================================================================
+    //                                                                               Const
+    //                                                                               =====
+
+
+    // ===================================================================================
+    //                                                                               Event
+    //                                                                               =====
+
+    // ===================================================================================
+    //                                                                             Request
+    //                                                                             =======
+    this.searchRequest = () => {
+      const url = `http://localhost:9001/hanreidb/master/list`;
+      $.ajax({
+        url: url,
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'POST',
+        data: null
+      })
+        .done(function (json) {
+          console.log(json);
+          alert('result ok');
+        })
+        .fail(function (xhr, stat, err) {
+          alert('failed');
+        })
+    }
+
+    this.test = () => {
+      console.log("json");
+      alert('result ok');
+    }
+  </script>
+</body>
+
+</html>

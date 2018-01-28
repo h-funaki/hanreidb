@@ -1,0 +1,832 @@
+map:{
+    ; 2018/01/28 16:25:38 = map:{
+        ; diffDate = 2018/01/28 16:25:38
+        ; tableDiff = map:{
+            ; COURT = map:{
+                ; tableName = COURT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; COURT_ALIAS = map:{
+                        ; columnName = COURT_ALIAS
+                        ; diffType = ADD
+                    }
+                    ; REGISTER_DATETIME = map:{
+                        ; columnName = REGISTER_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; REGISTER_USER = map:{
+                        ; columnName = REGISTER_USER
+                        ; diffType = ADD
+                    }
+                    ; UPDATE_DATETIME = map:{
+                        ; columnName = UPDATE_DATETIME
+                        ; diffType = ADD
+                    }
+                    ; UPDATE_USER = map:{
+                        ; columnName = UPDATE_USER
+                        ; diffType = ADD
+                    }
+                    ; VERSION_NO = map:{
+                        ; columnName = VERSION_NO
+                        ; diffType = ADD
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; COURT_ALIAS = map:{
+                        ; constraintName = COURT_ALIAS
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/01/21 19:46:52 = map:{
+        ; diffDate = 2018/01/21 19:46:52
+        ; tableCount = map:{
+            ; next = 14
+            ; previous = 12
+        }
+        ; tableDiff = map:{
+            ; COURT = map:{
+                ; tableName = COURT
+                ; diffType = ADD
+            }
+            ; JUDGEMENT_SOURCE_REL = map:{
+                ; tableName = JUDGEMENT_SOURCE_REL
+                ; diffType = ADD
+            }
+            ; SOURCE = map:{
+                ; tableName = SOURCE
+                ; diffType = ADD
+            }
+            ; CASE_MARK = map:{
+                ; tableName = CASE_MARK
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; CASE_CATEGORY_CODE = map:{
+                        ; columnName = CASE_CATEGORY_CODE
+                        ; diffType = ADD
+                    }
+                    ; CASE_MARK_DETAIL = map:{
+                        ; columnName = CASE_MARK_DETAIL
+                        ; diffType = ADD
+                    }
+                    ; COURT_TYPE_CODE = map:{
+                        ; columnName = COURT_TYPE_CODE
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = false
+                            ; previous = true
+                        }
+                    }
+                    ; CASE_TYPE_ID = map:{
+                        ; columnName = CASE_TYPE_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_CASE_MARK_CLS_CASE_CATEGORY = map:{
+                        ; constraintName = FK_CASE_MARK_CLS_CASE_CATEGORY
+                        ; diffType = ADD
+                    }
+                    ; FK_CASE_MARK_CASE_TYPE = map:{
+                        ; constraintName = FK_CASE_MARK_CASE_TYPE
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_CASE_MARK_CLS_CASE_CATEGORY = map:{
+                        ; constraintName = FK_CASE_MARK_CLS_CASE_CATEGORY
+                        ; diffType = ADD
+                    }
+                    ; FK_CASE_MARK_CASE_TYPE = map:{
+                        ; constraintName = FK_CASE_MARK_CASE_TYPE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; CLS_CASE_CATEGORY = map:{
+                ; tableName = CLS_CASE_CATEGORY
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; CASE_CATEGORY_ALIAS = map:{
+                        ; columnName = CASE_CATEGORY_ALIAS
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 30
+                            ; previous = 10
+                        }
+                    }
+                }
+            }
+            ; JUDGEMENT = map:{
+                ; tableName = JUDGEMENT
+                ; diffType = CHANGE
+                ; columnDefOrderDiff = map:{
+                    ; next = CASE_NUMBER_YEAR(12), CASE_MARK_ID(13), CASE_NUMBER_SERIAL_NUMBER(14)
+                    ; previous = CASE_NUMBER_YEAR(18), CASE_MARK_ID(16), CASE_NUMBER_SERIAL_NUMBER(17)
+                }
+                ; columnDiff = map:{
+                    ; COURT_ID = map:{
+                        ; columnName = COURT_ID
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_ID = map:{
+                        ; columnName = JUDGEMENT_ID
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = BIGINT UNSIGNED
+                            ; previous = INT UNSIGNED
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                    ; ORIGINAL_JUDGEMENT_ID = map:{
+                        ; columnName = ORIGINAL_JUDGEMENT_ID
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = BIGINT UNSIGNED
+                            ; previous = INT UNSIGNED
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                    ; JUDGEMENT_RESULT_CODE = map:{
+                        ; columnName = JUDGEMENT_RESULT_CODE
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = false
+                            ; previous = true
+                        }
+                    }
+                    ; JUDGEMENT_TYPE_CODE = map:{
+                        ; columnName = JUDGEMENT_TYPE_CODE
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = false
+                            ; previous = true
+                        }
+                    }
+                    ; COURT_TYPE_CODE = map:{
+                        ; columnName = COURT_TYPE_CODE
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_JUDGEMENT_COURT = map:{
+                        ; constraintName = FK_JUDGEMENT_COURT
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_COURT_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_COURT_TYPE
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_JUDGEMENT_COURT = map:{
+                        ; constraintName = FK_JUDGEMENT_COURT
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_COURT_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_COURT_TYPE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; CASE_TYPE = map:{
+                ; tableName = CASE_TYPE
+                ; diffType = DELETE
+            }
+        }
+    }
+    ; 2018/01/21 13:52:43 = map:{
+        ; diffDate = 2018/01/21 13:52:43
+        ; tableDiff = map:{
+            ; CASE_TYPE = map:{
+                ; tableName = CASE_TYPE
+                ; diffType = ADD
+            }
+            ; CLS_CASE_CATEGORY = map:{
+                ; tableName = CLS_CASE_CATEGORY
+                ; diffType = ADD
+            }
+            ; CASE_MARK = map:{
+                ; tableName = CASE_MARK
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; CASE_TYPE_ID = map:{
+                        ; columnName = CASE_TYPE_ID
+                        ; diffType = ADD
+                    }
+                    ; COURT_TYPE_CODE = map:{
+                        ; columnName = COURT_TYPE_CODE
+                        ; diffType = ADD
+                    }
+                    ; DESCRIPTION = map:{
+                        ; columnName = DESCRIPTION
+                        ; diffType = DELETE
+                    }
+                    ; DISPLAY_ORDER = map:{
+                        ; columnName = DISPLAY_ORDER
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_CASE_MARK_CLS_CASE_TYPE = map:{
+                        ; constraintName = FK_CASE_MARK_CLS_CASE_TYPE
+                        ; diffType = ADD
+                    }
+                    ; FK_CASE_MARK_CLS_COURT_TYPE = map:{
+                        ; constraintName = FK_CASE_MARK_CLS_COURT_TYPE
+                        ; diffType = ADD
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; DISPLAY_ORDER = map:{
+                        ; constraintName = DISPLAY_ORDER
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_CASE_MARK_CLS_CASE_TYPE = map:{
+                        ; constraintName = FK_CASE_MARK_CLS_CASE_TYPE
+                        ; diffType = ADD
+                    }
+                    ; FK_CASE_MARK_CLS_COURT_TYPE = map:{
+                        ; constraintName = FK_CASE_MARK_CLS_COURT_TYPE
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; CLS_BENCH = map:{
+                ; tableName = CLS_BENCH
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; BENCH_ALIAS = map:{
+                        ; constraintName = BENCH_ALIAS
+                        ; diffType = ADD
+                    }
+                    ; BENCH_NAME = map:{
+                        ; constraintName = BENCH_NAME
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; CLS_COURT_TYPE = map:{
+                ; tableName = CLS_COURT_TYPE
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; COURT_TYPE_ALIAS = map:{
+                        ; constraintName = COURT_TYPE_ALIAS
+                        ; diffType = ADD
+                    }
+                    ; COURT_TYPE_NAME = map:{
+                        ; constraintName = COURT_TYPE_NAME
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; CLS_ERA = map:{
+                ; tableName = CLS_ERA
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; ERA_ALIAS = map:{
+                        ; constraintName = ERA_ALIAS
+                        ; diffType = ADD
+                    }
+                    ; ERA_NAME = map:{
+                        ; constraintName = ERA_NAME
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; CLS_JUDGEMENT_RESULT = map:{
+                ; tableName = CLS_JUDGEMENT_RESULT
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; JUDGEMENT_RESULT_ALIAS = map:{
+                        ; constraintName = JUDGEMENT_RESULT_ALIAS
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_RESULT_NAME = map:{
+                        ; constraintName = JUDGEMENT_RESULT_NAME
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; CLS_JUDGEMENT_TYPE = map:{
+                ; tableName = CLS_JUDGEMENT_TYPE
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; JUDGEMENT_TYPE_ALIAS = map:{
+                        ; constraintName = JUDGEMENT_TYPE_ALIAS
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_TYPE_NAME = map:{
+                        ; constraintName = JUDGEMENT_TYPE_NAME
+                        ; diffType = ADD
+                    }
+                }
+            }
+            ; JUDGEMENT = map:{
+                ; tableName = JUDGEMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; BENCH_CODE = map:{
+                        ; columnName = BENCH_CODE
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = false
+                            ; previous = true
+                        }
+                    }
+                    ; CASE_TYPE_CODE = map:{
+                        ; columnName = CASE_TYPE_CODE
+                        ; diffType = DELETE
+                    }
+                    ; MINKEI_CODE = map:{
+                        ; columnName = MINKEI_CODE
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_JUDGEMENT_CLS_CASE_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_CASE_TYPE
+                        ; diffType = DELETE
+                    }
+                    ; FK_JUDGEMENT_CLS_MINKEI = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_MINKEI
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_JUDGEMENT_CLS_CASE_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_CASE_TYPE
+                        ; diffType = DELETE
+                    }
+                    ; FK_JUDGEMENT_CLS_MINKEI = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_MINKEI
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; CLS_CASE_TYPE = map:{
+                ; tableName = CLS_CASE_TYPE
+                ; diffType = DELETE
+            }
+            ; CLS_MINKEI = map:{
+                ; tableName = CLS_MINKEI
+                ; diffType = DELETE
+            }
+        }
+    }
+    ; 2018/01/20 22:41:13 = map:{
+        ; diffDate = 2018/01/20 22:41:13
+        ; tableDiff = map:{
+            ; JUDGEMENT = map:{
+                ; tableName = JUDGEMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; CASE_NUMBER_ERA_CODE = map:{
+                        ; columnName = CASE_NUMBER_ERA_CODE
+                        ; diffType = ADD
+                    }
+                    ; CASE_NUMBER_SERIAL_NUMBER = map:{
+                        ; columnName = CASE_NUMBER_SERIAL_NUMBER
+                        ; diffType = ADD
+                    }
+                    ; CASE_NUMBER_YEAR = map:{
+                        ; columnName = CASE_NUMBER_YEAR
+                        ; diffType = ADD
+                    }
+                    ; ERA_CODE = map:{
+                        ; columnName = ERA_CODE
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_JUDGEMENT_CLS_ERA = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_ERA
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = CASE_NUMBER_ERA_CODE
+                            ; previous = ERA_CODE
+                        }
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_JUDGEMENT_CLS_ERA = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_ERA
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = CASE_NUMBER_ERA_CODE
+                            ; previous = ERA_CODE
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/01/20 18:04:31 = map:{
+        ; diffDate = 2018/01/20 18:04:31
+        ; tableDiff = map:{
+            ; CASE_MARK = map:{
+                ; tableName = CASE_MARK
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; CASE_MARK_ID = map:{
+                        ; columnName = CASE_MARK_ID
+                        ; diffType = CHANGE
+                        ; autoIncrementDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/01/20 18:01:23 = map:{
+        ; diffDate = 2018/01/20 18:01:23
+        ; tableDiff = map:{
+            ; CASE_MARK = map:{
+                ; tableName = CASE_MARK
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; CASE_MARK_ID = map:{
+                        ; columnName = CASE_MARK_ID
+                        ; diffType = ADD
+                    }
+                    ; CASE_MARK_CODE = map:{
+                        ; columnName = CASE_MARK_CODE
+                        ; diffType = DELETE
+                    }
+                }
+                ; primaryKeyDiff = map:{
+                    ; PRIMARY = map:{
+                        ; constraintName = PRIMARY
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = CASE_MARK_ID
+                            ; previous = CASE_MARK_CODE
+                        }
+                    }
+                }
+            }
+            ; JUDGEMENT = map:{
+                ; tableName = JUDGEMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; JUDGEMENT_PUBLIC_CODE = map:{
+                        ; columnName = JUDGEMENT_PUBLIC_CODE
+                        ; diffType = ADD
+                    }
+                    ; CASE_NAME = map:{
+                        ; columnName = CASE_NAME
+                        ; diffType = ADD
+                    }
+                    ; PRECEDENT_REPORTS_KAN = map:{
+                        ; columnName = PRECEDENT_REPORTS_KAN
+                        ; diffType = ADD
+                    }
+                    ; PRECEDENT_REPORTS_GO = map:{
+                        ; columnName = PRECEDENT_REPORTS_GO
+                        ; diffType = ADD
+                    }
+                    ; PRECEDENT_REPORTS_KO = map:{
+                        ; columnName = PRECEDENT_REPORTS_KO
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_REPORTS_GO = map:{
+                        ; columnName = JUDGEMENT_REPORTS_GO
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_REPORTS_KO = map:{
+                        ; columnName = JUDGEMENT_REPORTS_KO
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_DATE = map:{
+                        ; columnName = JUDGEMENT_DATE
+                        ; diffType = ADD
+                    }
+                    ; ORIGINAL_JUDGEMENT_ID = map:{
+                        ; columnName = ORIGINAL_JUDGEMENT_ID
+                        ; diffType = ADD
+                    }
+                    ; COURT_TYPE_CODE = map:{
+                        ; columnName = COURT_TYPE_CODE
+                        ; diffType = ADD
+                    }
+                    ; ERA_CODE = map:{
+                        ; columnName = ERA_CODE
+                        ; diffType = ADD
+                    }
+                    ; BENCH_CODE = map:{
+                        ; columnName = BENCH_CODE
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_RESULT_CODE = map:{
+                        ; columnName = JUDGEMENT_RESULT_CODE
+                        ; diffType = ADD
+                    }
+                    ; CASE_TYPE_CODE = map:{
+                        ; columnName = CASE_TYPE_CODE
+                        ; diffType = ADD
+                    }
+                    ; MINKEI_CODE = map:{
+                        ; columnName = MINKEI_CODE
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_TYPE_CODE = map:{
+                        ; columnName = JUDGEMENT_TYPE_CODE
+                        ; diffType = ADD
+                    }
+                    ; CASE_MARK_ID = map:{
+                        ; columnName = CASE_MARK_ID
+                        ; diffType = ADD
+                    }
+                    ; HANKETU_PUBLIC_CODE = map:{
+                        ; columnName = HANKETU_PUBLIC_CODE
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_JUDGEMENT_CLS_BENCH = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_BENCH
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CASE_MARK = map:{
+                        ; constraintName = FK_JUDGEMENT_CASE_MARK
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_CASE_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_CASE_TYPE
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_COURT_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_COURT_TYPE
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_ERA = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_ERA
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_JUDGEMENT_RESULT = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_JUDGEMENT_RESULT
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_JUDGEMENT_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_JUDGEMENT_TYPE
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_MINKEI = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_MINKEI
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_JUDGEMENT = map:{
+                        ; constraintName = FK_JUDGEMENT_JUDGEMENT
+                        ; diffType = ADD
+                    }
+                }
+                ; uniqueKeyDiff = map:{
+                    ; JUDGEMENT_PUBLIC_CODE = map:{
+                        ; constraintName = JUDGEMENT_PUBLIC_CODE
+                        ; diffType = ADD
+                    }
+                    ; HANKETU_PUBLIC_CODE = map:{
+                        ; constraintName = HANKETU_PUBLIC_CODE
+                        ; diffType = DELETE
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_JUDGEMENT_CASE_MARK = map:{
+                        ; constraintName = FK_JUDGEMENT_CASE_MARK
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_BENCH = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_BENCH
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_CASE_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_CASE_TYPE
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_COURT_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_COURT_TYPE
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_ERA = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_ERA
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_JUDGEMENT_RESULT = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_JUDGEMENT_RESULT
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_JUDGEMENT_TYPE = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_JUDGEMENT_TYPE
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_CLS_MINKEI = map:{
+                        ; constraintName = FK_JUDGEMENT_CLS_MINKEI
+                        ; diffType = ADD
+                    }
+                    ; FK_JUDGEMENT_JUDGEMENT = map:{
+                        ; constraintName = FK_JUDGEMENT_JUDGEMENT
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/01/20 14:39:58 = map:{
+        ; diffDate = 2018/01/20 14:39:58
+        ; tableCount = map:{
+            ; next = 12
+            ; previous = 11
+        }
+        ; tableDiff = map:{
+            ; CLS_USER_STATUS = map:{
+                ; tableName = CLS_USER_STATUS
+                ; diffType = ADD
+            }
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USER_STATUS_CODE = map:{
+                        ; columnName = USER_STATUS_CODE
+                        ; diffType = ADD
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_USER_CLS_USER_STATUS = map:{
+                        ; constraintName = FK_USER_CLS_USER_STATUS
+                        ; diffType = ADD
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_USER_CLS_USER_STATUS = map:{
+                        ; constraintName = FK_USER_CLS_USER_STATUS
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/01/20 12:47:53 = map:{
+        ; diffDate = 2018/01/20 12:47:53
+        ; tableCount = map:{
+            ; next = 11
+            ; previous = 16
+        }
+        ; tableDiff = map:{
+            ; CASE_MARK = map:{
+                ; tableName = CASE_MARK
+                ; diffType = ADD
+            }
+            ; CLS_BENCH = map:{
+                ; tableName = CLS_BENCH
+                ; diffType = ADD
+            }
+            ; CLS_CASE_TYPE = map:{
+                ; tableName = CLS_CASE_TYPE
+                ; diffType = ADD
+            }
+            ; CLS_COURT_TYPE = map:{
+                ; tableName = CLS_COURT_TYPE
+                ; diffType = ADD
+            }
+            ; CLS_ERA = map:{
+                ; tableName = CLS_ERA
+                ; diffType = ADD
+            }
+            ; CLS_JUDGEMENT_RESULT = map:{
+                ; tableName = CLS_JUDGEMENT_RESULT
+                ; diffType = ADD
+            }
+            ; CLS_JUDGEMENT_TYPE = map:{
+                ; tableName = CLS_JUDGEMENT_TYPE
+                ; diffType = ADD
+            }
+            ; CLS_MINKEI = map:{
+                ; tableName = CLS_MINKEI
+                ; diffType = ADD
+            }
+            ; JUDGEMENT = map:{
+                ; tableName = JUDGEMENT
+                ; diffType = ADD
+            }
+            ; LOGIN_HISTORY = map:{
+                ; tableName = LOGIN_HISTORY
+                ; diffType = ADD
+            }
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = ADD
+            }
+            ; MEMBER = map:{
+                ; tableName = MEMBER
+                ; diffType = DELETE
+            }
+            ; MEMBER_ADDRESS = map:{
+                ; tableName = MEMBER_ADDRESS
+                ; diffType = DELETE
+            }
+            ; MEMBER_FOLLOWING = map:{
+                ; tableName = MEMBER_FOLLOWING
+                ; diffType = DELETE
+            }
+            ; MEMBER_LOGIN = map:{
+                ; tableName = MEMBER_LOGIN
+                ; diffType = DELETE
+            }
+            ; MEMBER_SECURITY = map:{
+                ; tableName = MEMBER_SECURITY
+                ; diffType = DELETE
+            }
+            ; MEMBER_SERVICE = map:{
+                ; tableName = MEMBER_SERVICE
+                ; diffType = DELETE
+            }
+            ; MEMBER_STATUS = map:{
+                ; tableName = MEMBER_STATUS
+                ; diffType = DELETE
+            }
+            ; MEMBER_WITHDRAWAL = map:{
+                ; tableName = MEMBER_WITHDRAWAL
+                ; diffType = DELETE
+            }
+            ; PRODUCT = map:{
+                ; tableName = PRODUCT
+                ; diffType = DELETE
+            }
+            ; PRODUCT_CATEGORY = map:{
+                ; tableName = PRODUCT_CATEGORY
+                ; diffType = DELETE
+            }
+            ; PRODUCT_STATUS = map:{
+                ; tableName = PRODUCT_STATUS
+                ; diffType = DELETE
+            }
+            ; PURCHASE = map:{
+                ; tableName = PURCHASE
+                ; diffType = DELETE
+            }
+            ; PURCHASE_PAYMENT = map:{
+                ; tableName = PURCHASE_PAYMENT
+                ; diffType = DELETE
+            }
+            ; REGION = map:{
+                ; tableName = REGION
+                ; diffType = DELETE
+            }
+            ; SERVICE_RANK = map:{
+                ; tableName = SERVICE_RANK
+                ; diffType = DELETE
+            }
+            ; WITHDRAWAL_REASON = map:{
+                ; tableName = WITHDRAWAL_REASON
+                ; diffType = DELETE
+            }
+        }
+    }
+    ; 2015/12/02 23:48:43 = map:{
+        ; diffDate = 2015/12/02 23:48:43
+        ; tableDiff = map:{
+            ; MEMBER = map:{
+                ; tableName = MEMBER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMBER_NAME = map:{
+                        ; columnName = MEMBER_NAME
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 100
+                            ; previous = 200
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ; 2015/09/25 16:35:28 = map:{
+        ; diffDate = 2015/09/25 16:35:28
+        ; tableDiff = map:{
+            ; MEMBER_WITHDRAWAL = map:{
+                ; tableName = MEMBER_WITHDRAWAL
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; VERSION_NO = map:{
+                        ; columnName = VERSION_NO
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+}

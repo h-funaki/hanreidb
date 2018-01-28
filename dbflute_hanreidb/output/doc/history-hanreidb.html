@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>hanreidb history</title>
+	<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: Verdana, "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, "メイリオ", "MS P Gothic", "MS Pゴシック", sans-serif;
+	font-size: 80%;
+	margin: 1em 1.5em;
+	background-color: #ffffee;
+}
+
+/* heading */
+h1 {
+	font-size: 1.5em;
+	border-bottom: 2px solid #af0000;
+	border-top: 2px solid #af0000;
+}
+h2 {
+	margin-top: 2em;
+	border-bottom: 2px solid #af0000;
+	border-left: 10px solid #af0000;
+	text-indent: 1em;
+	font-size: 1.6em;
+}
+h3 {
+	width: 14em;
+	margin: 0.8em 0;
+	padding-left: 1.8em;
+	border-bottom: solid 1px #333;
+	color: #555;
+	font-size: 1.2em;
+}
+h4 {
+	margin: 1em 0em;
+	font-size: 1em;
+	font-weight: normal;
+	display: list-item;
+}
+h5 {
+	width: 11em;
+	font-size: 80%;
+	border-bottom: solid 1px #333;
+	text-indent: 0.3em;
+	color: #555;
+}
+
+/* total info */
+.updatedate {
+	text-align: right;
+}
+.mainschema {
+	text-align: right;
+}
+.navilinkarea {
+	text-align: right;
+}
+.sisterlink {
+	margin-top: 0.6em;
+	font-size: 110%;
+}
+.sistersublink {
+	margin-top: 0.6em;
+	font-size: 80%;
+}
+
+/* history info */
+.table-content {
+	margin: 0 6em;
+}
+.column-content {
+	margin: 0.5em 1em 0.5em 3em;
+	line-height: 1.4em;
+}
+
+div.change-table-content {
+	margin-left: 3em;
+}
+
+dl.column-content dt {
+	display: list-item;
+}
+dl.column-content dd {
+	margin: 0 4em;
+}
+dl.column-content dd span {
+	display: block;
+	float: left;
+	width: 6em;
+	margin-right: 1.5em;
+	border-right: dotted 2px #333;
+	font-weight: bold;
+	font-size: 80%;
+	color: #555;
+}
+
+span.dt {
+	font-size: 80%;
+}
+p.comment {
+	margin-left: 23em;
+}
+p.tablecount {
+	margin-left: 23em;
+}
+	</style>
+</head>
+
+<body>
+<h1>History for hanreidb (mysql)</h1>
+<div class="navilinkarea">
+<p class="sisterlink"><a href="./schema-hanreidb.html">to SchemaHTML</a></p>
+<p class="sistersublink"><a href="./properties-hanreidb.html">to PropertiesHTML</a></p>
+</div>
+
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/01/28 16:25:38</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-hanreidb.html#court">COURT</a></h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>COURT_ALIAS</li>
+				<li>REGISTER_DATETIME</li>
+				<li>REGISTER_USER</li>
+				<li>UPDATE_DATETIME</li>
+				<li>UPDATE_USER</li>
+				<li>VERSION_NO</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>COURT_ALIAS</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/01/21 19:46:52</h2>
+	<p class="tablecount"><span class="dt">table count: </span>12&nbsp;-&gt;&nbsp;14</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>COURT</li>
+		<li>JUDGEMENT_SOURCE_REL</li>
+		<li>SOURCE</li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>CASE_MARK</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>CASE_CATEGORY_CODE</li>
+				<li>CASE_MARK_DETAIL</li>
+			</ul>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>COURT_TYPE_CODE</dt>
+				<dd><span>Not Null</span>true&nbsp;-&gt;&nbsp;false</dd>
+			</dl>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>CASE_TYPE_ID</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>FK_CASE_MARK_CLS_CASE_CATEGORY</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>FK_CASE_MARK_CASE_TYPE</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>FK_CASE_MARK_CLS_CASE_CATEGORY</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>FK_CASE_MARK_CASE_TYPE</li>
+			</ul>
+		</div>
+		<h4>CLS_CASE_CATEGORY</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>CASE_CATEGORY_ALIAS</dt>
+				<dd><span>Size</span>10&nbsp;-&gt;&nbsp;30</dd>
+			</dl>
+		</div>
+		<h4>JUDGEMENT</h4>
+		<div class="change-table-content">
+			<h5>Column-Def Order</h5>
+			<div class="column-content">CASE_NUMBER_YEAR(18),&nbsp;CASE_MARK_ID(16),&nbsp;CASE_NUMBER_SERIAL_NUMBER(17)&nbsp;-&gt;&nbsp;CASE_NUMBER_YEAR(12),&nbsp;CASE_MARK_ID(13),&nbsp;CASE_NUMBER_SERIAL_NUMBER(14)</div>
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>COURT_ID</li>
+			</ul>
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>JUDGEMENT_ID</dt>
+				<dd><span>Type</span>INT&nbsp;UNSIGNED&nbsp;-&gt;&nbsp;BIGINT&nbsp;UNSIGNED</dd>
+				<dd><span>Size</span>10&nbsp;-&gt;&nbsp;20</dd>
+				<dt>ORIGINAL_JUDGEMENT_ID</dt>
+				<dd><span>Type</span>INT&nbsp;UNSIGNED&nbsp;-&gt;&nbsp;BIGINT&nbsp;UNSIGNED</dd>
+				<dd><span>Size</span>10&nbsp;-&gt;&nbsp;20</dd>
+				<dt>JUDGEMENT_RESULT_CODE</dt>
+				<dd><span>Not Null</span>true&nbsp;-&gt;&nbsp;false</dd>
+				<dt>JUDGEMENT_TYPE_CODE</dt>
+				<dd><span>Not Null</span>true&nbsp;-&gt;&nbsp;false</dd>
+			</dl>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>COURT_TYPE_CODE</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_COURT</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_CLS_COURT_TYPE</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_COURT</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_CLS_COURT_TYPE</li>
+			</ul>
+		</div>
+	</div>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>CASE_TYPE</li>
+	</ul>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/01/21 13:52:43</h2>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>CASE_TYPE</li>
+		<li>CLS_CASE_CATEGORY</li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>CASE_MARK</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>CASE_TYPE_ID</li>
+				<li>COURT_TYPE_CODE</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>DESCRIPTION</li>
+				<li>DISPLAY_ORDER</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>FK_CASE_MARK_CLS_CASE_TYPE</li>
+				<li>FK_CASE_MARK_CLS_COURT_TYPE</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>DISPLAY_ORDER</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>FK_CASE_MARK_CLS_CASE_TYPE</li>
+				<li>FK_CASE_MARK_CLS_COURT_TYPE</li>
+			</ul>
+		</div>
+		<h4>CLS_BENCH</h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>BENCH_ALIAS</li>
+				<li>BENCH_NAME</li>
+			</ul>
+		</div>
+		<h4>CLS_COURT_TYPE</h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>COURT_TYPE_ALIAS</li>
+				<li>COURT_TYPE_NAME</li>
+			</ul>
+		</div>
+		<h4>CLS_ERA</h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>ERA_ALIAS</li>
+				<li>ERA_NAME</li>
+			</ul>
+		</div>
+		<h4>CLS_JUDGEMENT_RESULT</h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>JUDGEMENT_RESULT_ALIAS</li>
+				<li>JUDGEMENT_RESULT_NAME</li>
+			</ul>
+		</div>
+		<h4>CLS_JUDGEMENT_TYPE</h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>JUDGEMENT_TYPE_ALIAS</li>
+				<li>JUDGEMENT_TYPE_NAME</li>
+			</ul>
+		</div>
+		<h4>JUDGEMENT</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>BENCH_CODE</dt>
+				<dd><span>Not Null</span>true&nbsp;-&gt;&nbsp;false</dd>
+			</dl>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>CASE_TYPE_CODE</li>
+				<li>MINKEI_CODE</li>
+			</ul>
+			<h5>Delete FK</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_CLS_CASE_TYPE</li>
+				<li>FK_JUDGEMENT_CLS_MINKEI</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_CLS_CASE_TYPE</li>
+				<li>FK_JUDGEMENT_CLS_MINKEI</li>
+			</ul>
+		</div>
+	</div>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>CLS_CASE_TYPE</li>
+		<li>CLS_MINKEI</li>
+	</ul>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/01/20 22:41:13</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>JUDGEMENT</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>CASE_NUMBER_ERA_CODE</li>
+				<li>CASE_NUMBER_SERIAL_NUMBER</li>
+				<li>CASE_NUMBER_YEAR</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>ERA_CODE</li>
+			</ul>
+			<h5>Change FK</h5>
+			<dl class="column-content">
+				<dt>FK_JUDGEMENT_CLS_ERA</dt>
+				<dd><span>Column</span>ERA_CODE&nbsp;-&gt;&nbsp;CASE_NUMBER_ERA_CODE</dd>
+			</dl>
+			<h5>Change Index</h5>
+			<dl class="column-content">
+				<dt>FK_JUDGEMENT_CLS_ERA</dt>
+				<dd><span>Column</span>ERA_CODE&nbsp;-&gt;&nbsp;CASE_NUMBER_ERA_CODE</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/01/20 18:04:31</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>CASE_MARK</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>CASE_MARK_ID</dt>
+				<dd><span>Identity</span>false&nbsp;-&gt;&nbsp;true</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/01/20 18:01:23</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>CASE_MARK</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>CASE_MARK_ID</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>CASE_MARK_CODE</li>
+			</ul>
+			<h5>Change PK</h5>
+			<dl class="column-content">
+				<dt>PRIMARY</dt>
+				<dd><span>Column</span>CASE_MARK_CODE&nbsp;-&gt;&nbsp;CASE_MARK_ID</dd>
+			</dl>
+		</div>
+		<h4>JUDGEMENT</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>JUDGEMENT_PUBLIC_CODE</li>
+				<li>CASE_NAME</li>
+				<li>PRECEDENT_REPORTS_KAN</li>
+				<li>PRECEDENT_REPORTS_GO</li>
+				<li>PRECEDENT_REPORTS_KO</li>
+				<li>JUDGEMENT_REPORTS_GO</li>
+				<li>JUDGEMENT_REPORTS_KO</li>
+				<li>JUDGEMENT_DATE</li>
+				<li>ORIGINAL_JUDGEMENT_ID</li>
+				<li>COURT_TYPE_CODE</li>
+				<li>ERA_CODE</li>
+				<li>BENCH_CODE</li>
+				<li>JUDGEMENT_RESULT_CODE</li>
+				<li>CASE_TYPE_CODE</li>
+				<li>MINKEI_CODE</li>
+				<li>JUDGEMENT_TYPE_CODE</li>
+				<li>CASE_MARK_ID</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>HANKETU_PUBLIC_CODE</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_CLS_BENCH</li>
+				<li>FK_JUDGEMENT_CASE_MARK</li>
+				<li>FK_JUDGEMENT_CLS_CASE_TYPE</li>
+				<li>FK_JUDGEMENT_CLS_COURT_TYPE</li>
+				<li>FK_JUDGEMENT_CLS_ERA</li>
+				<li>FK_JUDGEMENT_CLS_JUDGEMENT_RESULT</li>
+				<li>FK_JUDGEMENT_CLS_JUDGEMENT_TYPE</li>
+				<li>FK_JUDGEMENT_CLS_MINKEI</li>
+				<li>FK_JUDGEMENT_JUDGEMENT</li>
+			</ul>
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>JUDGEMENT_PUBLIC_CODE</li>
+			</ul>
+			<h5>Delete UQ</h5>
+			<ul class="column-content">
+				<li>HANKETU_PUBLIC_CODE</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_CASE_MARK</li>
+				<li>FK_JUDGEMENT_CLS_BENCH</li>
+				<li>FK_JUDGEMENT_CLS_CASE_TYPE</li>
+				<li>FK_JUDGEMENT_CLS_COURT_TYPE</li>
+				<li>FK_JUDGEMENT_CLS_ERA</li>
+				<li>FK_JUDGEMENT_CLS_JUDGEMENT_RESULT</li>
+				<li>FK_JUDGEMENT_CLS_JUDGEMENT_TYPE</li>
+				<li>FK_JUDGEMENT_CLS_MINKEI</li>
+				<li>FK_JUDGEMENT_JUDGEMENT</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/01/20 14:39:58</h2>
+	<p class="tablecount"><span class="dt">table count: </span>11&nbsp;-&gt;&nbsp;12</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>CLS_USER_STATUS</li>
+	</ul>
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>USER</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>USER_STATUS_CODE</li>
+			</ul>
+			<h5>Add FK</h5>
+			<ul class="column-content">
+				<li>FK_USER_CLS_USER_STATUS</li>
+			</ul>
+			<h5>Add Index</h5>
+			<ul class="column-content">
+				<li>FK_USER_CLS_USER_STATUS</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/01/20 12:47:53</h2>
+	<p class="tablecount"><span class="dt">table count: </span>16&nbsp;-&gt;&nbsp;11</p>
+
+	<h3>Add Table</h3>
+	<ul class="table-content">
+		<li>CASE_MARK</li>
+		<li>CLS_BENCH</li>
+		<li>CLS_CASE_TYPE</li>
+		<li>CLS_COURT_TYPE</li>
+		<li>CLS_ERA</li>
+		<li>CLS_JUDGEMENT_RESULT</li>
+		<li>CLS_JUDGEMENT_TYPE</li>
+		<li>CLS_MINKEI</li>
+		<li>JUDGEMENT</li>
+		<li>LOGIN_HISTORY</li>
+		<li>USER</li>
+	</ul>
+	<h3>Delete Table</h3>
+	<ul class="table-content">
+		<li>MEMBER</li>
+		<li>MEMBER_ADDRESS</li>
+		<li>MEMBER_FOLLOWING</li>
+		<li>MEMBER_LOGIN</li>
+		<li>MEMBER_SECURITY</li>
+		<li>MEMBER_SERVICE</li>
+		<li>MEMBER_STATUS</li>
+		<li>MEMBER_WITHDRAWAL</li>
+		<li>PRODUCT</li>
+		<li>PRODUCT_CATEGORY</li>
+		<li>PRODUCT_STATUS</li>
+		<li>PURCHASE</li>
+		<li>PURCHASE_PAYMENT</li>
+		<li>REGION</li>
+		<li>SERVICE_RANK</li>
+		<li>WITHDRAWAL_REASON</li>
+	</ul>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2015/12/02 23:48:43</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>MEMBER</h4>
+		<div class="change-table-content">
+			<h5>Change Column</h5>
+			<dl class="column-content">
+				<dt>MEMBER_NAME</dt>
+				<dd><span>Size</span>200&nbsp;-&gt;&nbsp;100</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2015/09/25 16:35:28</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>MEMBER_WITHDRAWAL</h4>
+		<div class="change-table-content">
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>VERSION_NO</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<h2>Thanks</h2>
+<p>
+	Created by <a href="http://dbflute.org/">DBFlute(AutoGenerator)</a>
+</p>
+</body>
+</html>

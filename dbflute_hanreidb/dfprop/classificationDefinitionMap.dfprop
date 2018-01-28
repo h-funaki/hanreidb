@@ -1,0 +1,97 @@
+# /---------------------------------------------------------------------------
+# classificationDefinitionMap: (NotRequired - Default map:{})
+#
+# The definition of classification.
+#
+# Specification:
+# map: {
+#     [classification-name] = list:{
+#         ; map:{
+#             ; topComment=[comment]; codeType=[String(default) or Number or Boolean]
+#             ; undefinedHandlingType=[EXCEPTION or LOGGING(default) or ALLOWED]
+#             ; isUseDocumentOnly=[true or false(default)]
+#             ; isSuppressAutoDeploy=[true or false(default)]
+#             ; groupingMap = map:{
+#                 ; [group-name] = map:{
+#                     ; groupComment=[comment]
+#                     ; elementList=list:{[the list of classification element's name]}
+#                 }
+#             }
+#         }
+#         # classification elements for implicit classification
+#         ; map:{
+#             ; code=[code]; name=[name]; alias=[alias]; comment=[comment]
+#             ; sisterCode=[code or code-list]; subItemMap=map:{[free-map]}
+#         }
+#         # settings for table classification
+#         ; map:{
+#             ; table=[table-name]
+#             ; code=[column-name for code]; name=[column-name for name]
+#             ; alias=[column-name for alias]; comment=[column-name for comment]}
+#             ; where=[condition for select]; orderBy=[column-name for ordering]
+#             ; exceptCodeList=[the list of except code]
+#         }
+#     }
+# }
+#
+# *The line that starts with '#' means comment-out.
+#
+map:{
+    # ====================================================================================
+    #                                                                               Common
+    #                                                                               ======
+    ; Flg = list:{
+        ; map:{
+            ; topComment=general boolean classification for every flg-column; codeType=Number
+        }
+        ; map:{code=1; name=True ; alias=Checked  ; comment=means yes; sisterCode=true }
+        ; map:{code=0; name=False; alias=Unchecked; comment=means no ; sisterCode=false}
+    }
+
+    # ====================================================================================
+    #                                                                               Member
+    #                                                                               ======
+    ; Era = list:{
+        ; map:{
+            ; table=CLS_ERA
+            ; code=ERA_CODE; name=ERA_NAME; alias=ERA_ALIAS;
+            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+        }
+    }
+    ; Bench = list:{
+        ; map:{
+            ; table=CLS_BENCH
+            ; code=BENCH_CODE; name=BENCH_NAME; alias=BENCH_ALIAS;
+            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+        }
+    }
+    ; JudgementResult = list:{
+        ; map:{
+            ; table=CLS_JUDGEMENT_RESULT
+            ; code=JUDGEMENT_RESULT_CODE; name=JUDGEMENT_RESULT_NAME; alias=JUDGEMENT_RESULT_ALIAS;
+            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+        }
+    }
+    ; JudgementType = list:{
+        ; map:{
+            ; table=CLS_JUDGEMENT_TYPE
+            ; code=JUDGEMENT_TYPE_CODE; name=JUDGEMENT_TYPE_NAME; alias=JUDGEMENT_TYPE_ALIAS;
+            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+        }
+    }
+    ; CaseCategory = list:{
+        ; map:{
+            ; table=CLS_CASE_CATEGORY
+            ; code=CASE_CATEGORY_CODE; name=CASE_CATEGORY_NAME; alias=CASE_CATEGORY_ALIAS;
+            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+        }
+    }
+    ; CourtType = list:{
+        ; map:{
+            ; table=CLS_COURT_TYPE
+            ; code=COURT_TYPE_CODE; name=COURT_TYPE_NAME; alias=COURT_TYPE_ALIAS;
+            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+        }
+    }
+}
+# ----------------/

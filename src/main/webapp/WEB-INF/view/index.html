@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:la="http://dbflute.org/lastaflute">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}+${vq}" href="../../css/reset.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}+${vq}" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/individual.css}+${vq}" href="../../css/individual.css" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/semantic.min.css}+${vq}" href="../../css/semantic.min.css" />
+  <script th:src="@{/js/jquery-3.3.1.min.js}+${vq}" src="../../js/jquery-3.3.1.min.js"></script>
+  <script th:src="@{/js/semantic.min.js}+${vq}" src="../../js/semantic.min.js"></script>
+  <script th:src="@{/js/riot+compiler.js}+${vq}" src="../../js/riot+compiler.js"></script>
+  <title>判例DB</title>
+</head>
+
+<body>
+
+  <!-- <div class="ui pointing secondary menu orange">
+    <a ref="judgement_list_tab" data-tab="aaa" class="item active">
+      aa
+    </a>
+    <a ref="" data-tab="bbb" class="item">
+      利用上の注意
+    </a>
+    <a ref="information" data-tab="ccc" class="item">
+      このサイトについて
+    </a>
+  </div> -->
+  <!-- <div class="ui tab active" data-tab="aaa">aaaaaaa</div>
+    <div class="ui tab" data-tab="bbb">bbbbb</div>
+    <div class="ui tab" data-tab="ccc">cccccc</div> -->
+  <!-- <judgement-list>
+      判例検索
+    </judgement-list>
+    <form class="ui form">
+      <div class="ui grid">
+        <div class="four wide column">
+          <div class="ui grid">
+            <div class="four wide column">
+              <label>民刑区分</label>
+            </div>
+            <div class="ten wide column">
+              <input type="text" name="" value="" />
+            </div>
+          </div>
+        </div>
+        <div class="four wide column">
+          <button class="ui blue button" type="submit" onclick="searchRequest()">検索</button>
+        </div>
+        
+      </div>
+    </form> -->
+  <div class="ui section divider">
+
+  </div>
+  <div class="ui star rating" data-rating="3"></div>
+  <div class="ui grid">
+
+  </div>
+
+  <script>
+    // ===================================================================================
+    //                                                                               Const
+    //                                                                               =====
+
+
+    // ===================================================================================
+    //                                                                               Event
+    //                                                                               =====
+
+    // ===================================================================================
+    //                                                                             Request
+    //                                                                             =======
+    this.searchRequest = () => {
+      const url = `http://localhost:9001/hanreidb/master/list`;
+      $.ajax({
+        url: url,
+        dataType: 'json',
+        contentType: 'application/json',
+        type: 'GET',
+      })
+        .done(function (json) {
+          console.log(json);
+          alert('result ok');
+        })
+        .fail(function (xhr, stat, err) {
+          alert('failed');
+        })
+    }
+
+    this.test = () => {
+      console.log("json");
+      alert('result ok');
+    }
+
+    this.activateJudgementList = () => {
+      console.log("tab changed");
+      // this.refs.judgement_list_tab
+    }
+  </script>
+</body>
+
+</html>
