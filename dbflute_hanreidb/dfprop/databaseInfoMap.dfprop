@@ -16,10 +16,10 @@
 #
 map:{
     ; driver   = com.mysql.jdbc.Driver
-    ; url      = jdbc:mysql://35.200.87.172:3306/hanreidb
+    ; url      = jdbc:mysql://localhost:3306/hanreidb
     ; schema   = 
     ; user     = root
-    ; password = hana9941
+    ; password = 
     #; driver   = com.mysql.jdbc.Driver
     #; url      = jdbc:mysql://localhost:3306/hanreidb
     #; schema   = 
