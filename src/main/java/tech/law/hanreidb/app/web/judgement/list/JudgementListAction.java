@@ -12,6 +12,7 @@ import org.lastaflute.web.response.JsonResponse;
 
 import tech.law.hanreidb.app.base.HanreidbBaseAction;
 import tech.law.hanreidb.app.web.judgement.list.JudgementListContentResult.JudgementPart;
+import tech.law.hanreidb.dbflute.cbean.JudgementCB;
 import tech.law.hanreidb.dbflute.exbhv.JudgementBhv;
 import tech.law.hanreidb.dbflute.exentity.Judgement;
 
@@ -33,11 +34,11 @@ public class JudgementListAction extends HanreidbBaseAction {
     //                                                                             Execute
     //                                                                            =======
     @Execute
-    public JsonResponse<JudgementListContentResult> index() {
-        return asJson(mappingToContent(selectJudgementList()));
+    public JsonResponse<JudgementListContentResult> index(JudgementListBody body) {
+        return asJson(mappingToContent(selectJudgementList(body)));
     }
 
-    private ImmutableList<Judgement> selectJudgementList() {
+    private ImmutableList<Judgement> selectJudgementList(JudgementListBody body) {
         return toImmutable(judgementBhv.selectList(cb -> {
             cb.specify().columnBenchCode();
             cb.specify().columnCaseMarkId();
@@ -67,8 +68,62 @@ public class JudgementListAction extends HanreidbBaseAction {
             cb.specify().specifyCourt().columnCourtName();
             cb.specify().specifyCourt().columnCourtAlias();
 
+            conditionBean(body, cb);
+
             cb.addOrderBy_PK_Asc();
         }));
+    }
+
+    private void conditionBean(JudgementListBody body, JudgementCB cb) {
+        ifNotNull(body.bench).ifPresent(value -> {
+            cb.query().setBenchCode_Equal_AsBench(value);
+        });
+        ifNotNull(body.case_mark_id).ifPresent(value -> {
+            cb.query().setCaseMarkId_Equal(value);
+        });
+        ifNotNull(body.case_name).ifPresent(value -> {
+            cb.query().setCaseName_LikeSearch(value, op -> op.likeContain());
+        });
+        ifNotNull(body.case_number_era).ifPresent(value -> {
+            cb.query().setCaseNumberEraCode_Equal_AsEra(value);
+        });
+        ifNotNull(body.case_number_serial_number).ifPresent(value -> {
+            cb.query().setCaseNumberSerialNumber_Equal(value);
+        });
+        ifNotNull(body.case_number_year).ifPresent(value -> {
+            cb.query().setCaseNumberYear_Equal(value);
+        });
+        ifNotNull(body.court_id).ifPresent(value -> {
+            cb.query().setCourtId_Equal(value);
+        });
+        if (body.judgement_date_from != null || body.judgement_date_to != null) {
+            cb.query().setJudgementDate_FromTo(body.judgement_date_from, body.judgement_date_to, op -> op.allowOneSide());
+
+        }
+        ifNotNull(body.judgement_public_code).ifPresent(value -> {
+            cb.query().setJudgementPublicCode_Equal(value);
+        });
+        ifNotNull(body.judgement_reports_go).ifPresent(value -> {
+            cb.query().setJudgementReportsGo_Equal(value);
+        });
+        ifNotNull(body.judgement_reports_ko).ifPresent(value -> {
+            cb.query().setJudgementReportsKo_Equal(value);
+        });
+        ifNotNull(body.judgement_result).ifPresent(value -> {
+            cb.query().setJudgementResultCode_Equal_AsJudgementResult(value);
+        });
+        ifNotNull(body.judgement_type).ifPresent(value -> {
+            cb.query().setJudgementTypeCode_Equal_AsJudgementType(value);
+        });
+        ifNotNull(body.precedent_reports_go).ifPresent(value -> {
+            cb.query().setPrecedentReportsGo_Equal(value);
+        });
+        ifNotNull(body.precedent_reports_kan).ifPresent(value -> {
+            cb.query().setPrecedentReportsKan_Equal(value);
+        });
+        ifNotNull(body.precedent_reports_ko).ifPresent(value -> {
+            cb.query().setPrecedentReportsKo_Equal(value);
+        });
     }
 
     // ===================================================================================

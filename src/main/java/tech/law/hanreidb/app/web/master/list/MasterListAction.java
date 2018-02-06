@@ -13,7 +13,6 @@ import org.lastaflute.web.response.JsonResponse;
 
 import tech.law.hanreidb.app.base.HanreidbBaseAction;
 import tech.law.hanreidb.app.web.master.list.MasterListContentResult.LabelValuePart;
-import tech.law.hanreidb.app.web.master.list.MasterListContentResult.NameIdPart;
 import tech.law.hanreidb.dbflute.allcommon.CDef;
 import tech.law.hanreidb.dbflute.exbhv.CaseMarkBhv;
 import tech.law.hanreidb.dbflute.exbhv.CourtBhv;
@@ -91,20 +90,20 @@ public class MasterListAction extends HanreidbBaseAction {
         content.judgement_type_list = judgementTypeList.collect(this::convertToLabelValuePart).castToList();
         content.case_category_list = minkeiList.collect(this::convertToLabelValuePart).castToList();
         content.court_type_list = courtTypeList.collect(this::convertToLabelValuePart).castToList();
-        content.court_list = courtList.collect(this::convertToIdNamePart).castToList();
-        content.case_mark_list = caseMarkList.collect(this::convertToIdNamePart).castToList();
+        content.court_list = courtList.collect(this::convertToLabelValuePart).castToList();
+        content.case_mark_list = caseMarkList.collect(this::convertToLabelValuePart).castToList();
         return content;
     }
 
-    private NameIdPart convertToIdNamePart(Court entity) {
-        NameIdPart part = new NameIdPart();
+    private LabelValuePart convertToLabelValuePart(Court entity) {
+        LabelValuePart part = new LabelValuePart();
         part.label = entity.getCourtName();
         part.value = entity.getCourtId().toString();
         return part;
     }
 
-    private NameIdPart convertToIdNamePart(CaseMark entity) {
-        NameIdPart part = new NameIdPart();
+    private LabelValuePart convertToLabelValuePart(CaseMark entity) {
+        LabelValuePart part = new LabelValuePart();
         part.label = entity.getCaseMarkAlias();
         part.value = entity.getCaseMarkId().toString();
         return part;

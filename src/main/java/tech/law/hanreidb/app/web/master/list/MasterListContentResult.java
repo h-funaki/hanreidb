@@ -38,11 +38,11 @@ public class MasterListContentResult {
 
     @NotNull
     @Valid
-    public List<NameIdPart> court_list;
+    public List<LabelValuePart> court_list;
 
     @NotNull
     @Valid
-    public List<NameIdPart> case_mark_list;
+    public List<LabelValuePart> case_mark_list;
 
     public static class LabelValuePart {
 
@@ -50,13 +50,6 @@ public class MasterListContentResult {
         public String label;
 
         @Required
-        public String value;
-    }
-
-    public static class NameIdPart {
-
-        public String label;
-
         public String value;
     }
 }
