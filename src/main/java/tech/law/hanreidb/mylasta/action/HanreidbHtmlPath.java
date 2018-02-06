@@ -29,6 +29,9 @@ public interface HanreidbHtmlPath {
     /** The path of the HTML: /index.html */
     HtmlNext path_IndexHtml = new HtmlNext("/index.html");
 
+    /** The path of the HTML: /introduce/introduce.html */
+    HtmlNext path_Introduce_IntroduceHtml = new HtmlNext("/introduce/introduce.html");
+
     /** The path of the HTML: /judgement/list/judgement_list.html */
     HtmlNext path_JudgementList_JudgementListHtml = new HtmlNext("/judgement/list/judgement_list.html");
 

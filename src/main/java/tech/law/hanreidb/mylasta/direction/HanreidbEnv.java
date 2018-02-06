@@ -68,10 +68,10 @@ public interface HanreidbEnv {
     /** The key of the configuration. e.g. jdbc:mysql://localhost:3306/hanreidb */
     String JDBC_URL = "jdbc.url";
 
-    /** The key of the configuration. e.g. hanreidb */
+    /** The key of the configuration. e.g. root */
     String JDBC_USER = "jdbc.user";
 
-    /** The key of the configuration. e.g. hanreidb */
+    /** The key of the configuration. e.g.  */
     String JDBC_PASSWORD = "jdbc.password";
 
     /** The key of the configuration. e.g. 10 */
@@ -251,7 +251,7 @@ public interface HanreidbEnv {
 
     /**
      * Get the value for the key 'jdbc.user'. <br>
-     * The value is, e.g. hanreidb <br>
+     * The value is, e.g. root <br>
      * comment: The user of database connection for JDBC
      * @return The value of found property. (NotNull: if not found, exception but basically no way)
      */
@@ -259,11 +259,20 @@ public interface HanreidbEnv {
 
     /**
      * Get the value for the key 'jdbc.password'. <br>
-     * The value is, e.g. hanreidb <br>
+     * The value is, e.g.  <br>
      * comment: @Secure The password of database connection for JDBC
      * @return The value of found property. (NotNull: if not found, exception but basically no way)
      */
     String getJdbcPassword();
+
+    /**
+     * Get the value for the key 'jdbc.password' as {@link Integer}. <br>
+     * The value is, e.g.  <br>
+     * comment: @Secure The password of database connection for JDBC
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     * @throws NumberFormatException When the property is not integer.
+     */
+    Integer getJdbcPasswordAsInteger();
 
     /**
      * Get the value for the key 'jdbc.connection.pooling.size'. <br>
@@ -381,6 +390,10 @@ public interface HanreidbEnv {
 
         public String getJdbcPassword() {
             return get(HanreidbEnv.JDBC_PASSWORD);
+        }
+
+        public Integer getJdbcPasswordAsInteger() {
+            return getAsInteger(HanreidbEnv.JDBC_PASSWORD);
         }
 
         public String getJdbcConnectionPoolingSize() {
