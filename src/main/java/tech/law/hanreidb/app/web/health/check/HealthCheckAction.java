@@ -28,8 +28,8 @@ public class HealthCheckAction extends HanreidbBaseAction {
     public JsonResponse<HealthCheckContentResult> index() {
         HealthCheckContentResult result = new HealthCheckContentResult();
         result.version = 3;
-
         result.env_title = env.getEnvironmentTitle();
+        result.db_ip = env.getJdbcUrl();
         return asJson(result);
     }
 
