@@ -39,6 +39,6 @@ public class HanreidbBoot extends JettyBoot {
     }
 
     private static boolean isDevelopment() {
-        return System.getProperty("lasta.env") == null;
+        return System.getProperty("lastaenv") == null;
     }
 }
