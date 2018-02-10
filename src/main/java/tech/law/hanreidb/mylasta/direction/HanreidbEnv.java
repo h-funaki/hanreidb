@@ -80,6 +80,9 @@ public interface HanreidbEnv {
     /** The key of the configuration. e.g. localhost:8090/hanreidb */
     String SERVER_DOMAIN = "server.domain";
 
+    /** The key of the configuration. e.g. http://localhost:3000 */
+    String CORS_URL = "cors.url";
+
     /**
      * Get the value of property as {@link String}.
      * @param propertyKey The key of the property. (NotNull)
@@ -300,6 +303,13 @@ public interface HanreidbEnv {
     String getServerDomain();
 
     /**
+     * Get the value for the key 'cors.url'. <br>
+     * The value is, e.g. http://localhost:3000 <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getCorsUrl();
+
+    /**
      * The simple implementation for configuration.
      * @author FreeGen
      */
@@ -406,6 +416,10 @@ public interface HanreidbEnv {
 
         public String getServerDomain() {
             return get(HanreidbEnv.SERVER_DOMAIN);
+        }
+
+        public String getCorsUrl() {
+            return get(HanreidbEnv.CORS_URL);
         }
     }
 }

@@ -39,6 +39,7 @@ import org.lastaflute.web.servlet.filter.cors.CorsHook;
 import org.lastaflute.web.servlet.request.UserLocaleProcessProvider;
 import org.lastaflute.web.servlet.request.UserTimeZoneProcessProvider;
 
+import tech.law.hanreidb.HanreidbBoot;
 import tech.law.hanreidb.mylasta.direction.sponsor.HanreidbActionAdjustmentProvider;
 import tech.law.hanreidb.mylasta.direction.sponsor.HanreidbApiFailureHook;
 import tech.law.hanreidb.mylasta.direction.sponsor.HanreidbCookieResourceProvider;
@@ -141,7 +142,8 @@ public class HanreidbFwAssistantDirector extends CachedFwAssistantDirector {
         direction.directApiCall(createApiFailureHook());
         direction.directHtmlRendering(createHtmlRenderingProvider());
         direction.directMultipart(createMultipartResourceProvider());
-        direction.directCors(new CorsHook("http://localhost:3000"));
+            direction.directCors(new CorsHook("http://localhost:3000"));
+            direction.directCors(new CorsHook("http://0.0.0.0:3000"));
     }
 
     protected UserLocaleProcessProvider createUserLocaleProcessProvider() {
