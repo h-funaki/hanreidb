@@ -15,6 +15,9 @@
  */
 package tech.law.hanreidb.app.web.mypage;
 
+import org.lastaflute.web.Execute;
+import org.lastaflute.web.response.HtmlResponse;
+
 import tech.law.hanreidb.app.base.HanreidbBaseAction;
 
 /**
@@ -22,6 +25,10 @@ import tech.law.hanreidb.app.base.HanreidbBaseAction;
  */
 public class MypageAction extends HanreidbBaseAction {
 
+    @Execute
+    public HtmlResponse index() {
+        return asHtml(path_IndexHtml);
+    }
     //    // ===================================================================================
     //    //                                                                           Attribute
     //    //                                                                           =========
