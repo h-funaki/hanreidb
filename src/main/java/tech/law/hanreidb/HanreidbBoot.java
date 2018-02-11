@@ -20,19 +20,7 @@ import org.dbflute.jetty.JettyBoot;
 /**
  * @author jflute
  */
-public class HanreidbBoot extends JettyBoot {
-    public HanreidbBoot(int port, String contextPath) {
-        super(port, contextPath);
-        // TODO Auto-generated constructor stub
-    }
-
-    // #change_it_first
-
-    @Override
-    protected String getServerHost() {
-        // TODO Auto-generated method stub
-        return "*";
-    }
+public class HanreidbBoot {
 
     public static void main(String[] args) { // e.g. java -Dlasta.env=production -jar hanreidb.war
         new JettyBoot(9001, "/hanreidb").asDevelopment(isDevelopment()).bootAwait();
