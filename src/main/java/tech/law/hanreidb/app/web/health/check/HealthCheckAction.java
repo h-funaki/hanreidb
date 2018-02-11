@@ -30,6 +30,7 @@ public class HealthCheckAction extends HanreidbBaseAction {
         result.version = 3;
         result.env_title = env.getEnvironmentTitle();
         result.db_ip = env.getJdbcUrl();
+        result.cors_url = env.getCorsUrl();
         return asJson(result);
     }
 
@@ -40,5 +41,7 @@ public class HealthCheckAction extends HanreidbBaseAction {
         public String env_title;
 
         public String db_ip;
+
+        public String cors_url;
     }
 }
