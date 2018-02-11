@@ -27,6 +27,6 @@ public class HanreidbBoot {
     }
 
     private static boolean isDevelopment() {
-        return System.getProperty("lastaenv") == null;
+        return System.getProperty("lasta.env") == null;
     }
 }
