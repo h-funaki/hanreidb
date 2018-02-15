@@ -41,7 +41,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     JUDGEMENT_ID
  *
  * [column]
- *     JUDGEMENT_ID, JUDGEMENT_PUBLIC_CODE, CASE_NAME, PRECEDENT_REPORTS_KAN, PRECEDENT_REPORTS_GO, PRECEDENT_REPORTS_KO, JUDGEMENT_REPORTS_GO, JUDGEMENT_REPORTS_KO, JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_ID, CASE_NUMBER_ERA_CODE, CASE_NUMBER_YEAR, CASE_MARK_ID, CASE_NUMBER_SERIAL_NUMBER, COURT_ID, BENCH_CODE, JUDGEMENT_RESULT_CODE, JUDGEMENT_TYPE_CODE
+ *     JUDGEMENT_ID, JUDGEMENT_PUBLIC_CODE, CASE_NAME, PRECEDENT_REPORTS_KAN, PRECEDENT_REPORTS_GO, PRECEDENT_REPORTS_KO, JUDGEMENT_REPORTS_GO, JUDGEMENT_REPORTS_KO, JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_ID, CASE_NUMBER_ERA_CODE, CASE_NUMBER_YEAR, CASE_MARK_ID, CASE_NUMBER_SERIAL_NUMBER, COURT_ID, BENCH_CODE, JUDGEMENT_RESULT_CODE, JUDGEMENT_TYPE_CODE, SENTENCE
  *
  * [sequence]
  *     
@@ -56,13 +56,13 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     CLS_BENCH, CASE_MARK, CLS_ERA, COURT, CLS_JUDGEMENT_RESULT, CLS_JUDGEMENT_TYPE, JUDGEMENT
  *
  * [referrer table]
- *     JUDGEMENT, JUDGEMENT_SOURCE_REL
+ *     JUDGEMENT, JUDGEMENT_SOURCE_REL, JUDGEMENT_USER_FAVORITE_REL
  *
  * [foreign property]
  *     clsBench, caseMark, clsEra, court, clsJudgementResult, clsJudgementType, judgementSelf
  *
  * [referrer property]
- *     judgementSelfList, judgementSourceRelList
+ *     judgementSelfList, judgementSourceRelList, judgementUserFavoriteRelList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -525,6 +525,70 @@ public abstract class BsJudgementBhv extends AbstractBehaviorWritable<Judgement,
 
     protected NestedReferrerListGateway<JudgementSourceRel> doLoadJudgementSourceRel(List<Judgement> judgementList, LoadReferrerOption<JudgementSourceRelCB, JudgementSourceRel> option) {
         return helpLoadReferrerInternally(judgementList, option, "judgementSourceRelList");
+    }
+
+    /**
+     * Load referrer of judgementUserFavoriteRelList by the set-upper of referrer. <br>
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelList'.
+     * <pre>
+     * <span style="color: #0000C0">judgementBhv</span>.<span style="color: #CC4747">loadJudgementUserFavoriteRel</span>(<span style="color: #553000">judgementList</span>, <span style="color: #553000">relCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">relCB</span>.setupSelect...
+     *     <span style="color: #553000">relCB</span>.query().set...
+     *     <span style="color: #553000">relCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (Judgement judgement : <span style="color: #553000">judgementList</span>) {
+     *     ... = judgement.<span style="color: #CC4747">getJudgementUserFavoriteRelList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setJudgementId_InScope(pkList);
+     * cb.query().addOrderBy_JudgementId_Asc();
+     * </pre>
+     * @param judgementList The entity list of judgement. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<JudgementUserFavoriteRel> loadJudgementUserFavoriteRel(List<Judgement> judgementList, ReferrerConditionSetupper<JudgementUserFavoriteRelCB> refCBLambda) {
+        xassLRArg(judgementList, refCBLambda);
+        return doLoadJudgementUserFavoriteRel(judgementList, new LoadReferrerOption<JudgementUserFavoriteRelCB, JudgementUserFavoriteRel>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of judgementUserFavoriteRelList by the set-upper of referrer. <br>
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelList'.
+     * <pre>
+     * <span style="color: #0000C0">judgementBhv</span>.<span style="color: #CC4747">loadJudgementUserFavoriteRel</span>(<span style="color: #553000">judgement</span>, <span style="color: #553000">relCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">relCB</span>.setupSelect...
+     *     <span style="color: #553000">relCB</span>.query().set...
+     *     <span style="color: #553000">relCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">judgement</span>.<span style="color: #CC4747">getJudgementUserFavoriteRelList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setJudgementId_InScope(pkList);
+     * cb.query().addOrderBy_JudgementId_Asc();
+     * </pre>
+     * @param judgement The entity of judgement. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<JudgementUserFavoriteRel> loadJudgementUserFavoriteRel(Judgement judgement, ReferrerConditionSetupper<JudgementUserFavoriteRelCB> refCBLambda) {
+        xassLRArg(judgement, refCBLambda);
+        return doLoadJudgementUserFavoriteRel(xnewLRLs(judgement), new LoadReferrerOption<JudgementUserFavoriteRelCB, JudgementUserFavoriteRel>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<JudgementUserFavoriteRel> doLoadJudgementUserFavoriteRel(List<Judgement> judgementList, LoadReferrerOption<JudgementUserFavoriteRelCB, JudgementUserFavoriteRel> option) {
+        return helpLoadReferrerInternally(judgementList, option, "judgementUserFavoriteRelList");
     }
 
     // ===================================================================================

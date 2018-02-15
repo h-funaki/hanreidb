@@ -174,6 +174,25 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
     public abstract String keepUserStatusCode_ExistsReferrer_UserList(UserCQ sq);
 
     /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select USER_NEW_STATUS_CODE from USER_STATUS_HISTORY where ...)} <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_NEW_STATUS_CODE, named 'userStatusHistoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsUserStatusHistory</span>(historyCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     historyCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of UserStatusHistoryList for 'exists'. (NotNull)
+     */
+    public void existsUserStatusHistory(SubQuery<UserStatusHistoryCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        UserStatusHistoryCB cb = new UserStatusHistoryCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserStatusCode_ExistsReferrer_UserStatusHistoryList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_STATUS_CODE", "USER_NEW_STATUS_CODE", pp, "userStatusHistoryList");
+    }
+    public abstract String keepUserStatusCode_ExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq);
+
+    /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
      * {not exists (select USER_STATUS_CODE from USER where ...)} <br>
      * (ユーザー)USER by USER_STATUS_CODE, named 'userAsOne'.
@@ -192,6 +211,25 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
     }
     public abstract String keepUserStatusCode_NotExistsReferrer_UserList(UserCQ sq);
 
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select USER_NEW_STATUS_CODE from USER_STATUS_HISTORY where ...)} <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_NEW_STATUS_CODE, named 'userStatusHistoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsUserStatusHistory</span>(historyCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     historyCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of UserStatusCode_NotExistsReferrer_UserStatusHistoryList for 'not exists'. (NotNull)
+     */
+    public void notExistsUserStatusHistory(SubQuery<UserStatusHistoryCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        UserStatusHistoryCB cb = new UserStatusHistoryCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserStatusCode_NotExistsReferrer_UserStatusHistoryList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_STATUS_CODE", "USER_NEW_STATUS_CODE", pp, "userStatusHistoryList");
+    }
+    public abstract String keepUserStatusCode_NotExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq);
+
     public void xsderiveUserList(String fn, SubQuery<UserCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         UserCB cb = new UserCB(); cb.xsetupForDerivedReferrer(this);
@@ -199,6 +237,14 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "USER_STATUS_CODE", "USER_STATUS_CODE", pp, "userList", al, op);
     }
     public abstract String keepUserStatusCode_SpecifyDerivedReferrer_UserList(UserCQ sq);
+
+    public void xsderiveUserStatusHistoryList(String fn, SubQuery<UserStatusHistoryCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        UserStatusHistoryCB cb = new UserStatusHistoryCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepUserStatusCode_SpecifyDerivedReferrer_UserStatusHistoryList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_STATUS_CODE", "USER_NEW_STATUS_CODE", pp, "userStatusHistoryList", al, op);
+    }
+    public abstract String keepUserStatusCode_SpecifyDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -226,6 +272,33 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
     }
     public abstract String keepUserStatusCode_QueryDerivedReferrer_UserList(UserCQ sq);
     public abstract String keepUserStatusCode_QueryDerivedReferrer_UserListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from USER_STATUS_HISTORY where ...)} <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_NEW_STATUS_CODE, named 'userStatusHistoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedUserStatusHistory()</span>.<span style="color: #CC4747">max</span>(historyCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     historyCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     historyCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<UserStatusHistoryCB> derivedUserStatusHistory() {
+        return xcreateQDRFunctionUserStatusHistoryList();
+    }
+    protected HpQDRFunction<UserStatusHistoryCB> xcreateQDRFunctionUserStatusHistoryList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveUserStatusHistoryList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveUserStatusHistoryList(String fn, SubQuery<UserStatusHistoryCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        UserStatusHistoryCB cb = new UserStatusHistoryCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserStatusCode_QueryDerivedReferrer_UserStatusHistoryList(cb.query()); String prpp = keepUserStatusCode_QueryDerivedReferrer_UserStatusHistoryListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_STATUS_CODE", "USER_NEW_STATUS_CODE", sqpp, "userStatusHistoryList", rd, vl, prpp, op);
+    }
+    public abstract String keepUserStatusCode_QueryDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq);
+    public abstract String keepUserStatusCode_QueryDerivedReferrer_UserStatusHistoryListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
@@ -400,6 +473,260 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
 
     protected void regUserStatusAlias(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUserStatusAlias(), "USER_STATUS_ALIAS"); }
     protected abstract ConditionValue xgetCValueUserStatusAlias();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (説明)DESCRIPTION: {NotNull, TEXT(65535)}
+     * @param description The value of description as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setDescription_Equal(String description) {
+        doSetDescription_Equal(fRES(description));
+    }
+
+    protected void doSetDescription_Equal(String description) {
+        regDescription(CK_EQ, description);
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (説明)DESCRIPTION: {NotNull, TEXT(65535)} <br>
+     * <pre>e.g. setDescription_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param description The value of description as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setDescription_LikeSearch(String description, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setDescription_LikeSearch(description, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (説明)DESCRIPTION: {NotNull, TEXT(65535)} <br>
+     * <pre>e.g. setDescription_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param description The value of description as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setDescription_LikeSearch(String description, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(description), xgetCValueDescription(), "DESCRIPTION", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (説明)DESCRIPTION: {NotNull, TEXT(65535)}
+     * @param description The value of description as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setDescription_NotLikeSearch(String description, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setDescription_NotLikeSearch(description, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (説明)DESCRIPTION: {NotNull, TEXT(65535)}
+     * @param description The value of description as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setDescription_NotLikeSearch(String description, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(description), xgetCValueDescription(), "DESCRIPTION", likeSearchOption);
+    }
+
+    protected void regDescription(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueDescription(), "DESCRIPTION"); }
+    protected abstract ConditionValue xgetCValueDescription();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)}
+     * @param displayOrder The value of displayOrder as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setDisplayOrder_Equal(Integer displayOrder) {
+        doSetDisplayOrder_Equal(displayOrder);
+    }
+
+    protected void doSetDisplayOrder_Equal(Integer displayOrder) {
+        regDisplayOrder(CK_EQ, displayOrder);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)}
+     * @param minNumber The min number of displayOrder. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of displayOrder. (NullAllowed: if null, no to-condition)
+     * @param opLambda The callback for option of range-of. (NotNull)
+     */
+    public void setDisplayOrder_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setDisplayOrder_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)}
+     * @param minNumber The min number of displayOrder. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of displayOrder. (NullAllowed: if null, no to-condition)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    protected void setDisplayOrder_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueDisplayOrder(), "DISPLAY_ORDER", rangeOfOption);
+    }
+
+    protected void regDisplayOrder(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueDisplayOrder(), "DISPLAY_ORDER"); }
+    protected abstract ConditionValue xgetCValueDisplayOrder();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @param registerDatetime The value of registerDatetime as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setRegisterDatetime_Equal(java.time.LocalDateTime registerDatetime) {
+        regRegisterDatetime(CK_EQ,  registerDatetime);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setRegisterDatetime_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of from-to. (NotNull)
+     */
+    public void setRegisterDatetime_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, ConditionOptionCall<FromToOption> opLambda) {
+        setRegisterDatetime_FromTo(fromDatetime, toDatetime, xcFTOP(opLambda));
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setRegisterDatetime_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    protected void setRegisterDatetime_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, FromToOption fromToOption) {
+        String nm = "REGISTER_DATETIME"; FromToOption op = fromToOption;
+        regFTQ(xfFTHD(fromDatetime, nm, op), xfFTHD(toDatetime, nm, op), xgetCValueRegisterDatetime(), nm, op);
+    }
+
+    protected void regRegisterDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueRegisterDatetime(), "REGISTER_DATETIME"); }
+    protected abstract ConditionValue xgetCValueRegisterDatetime();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @param registerUser The value of registerUser as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setRegisterUser_Equal(String registerUser) {
+        doSetRegisterUser_Equal(fRES(registerUser));
+    }
+
+    protected void doSetRegisterUser_Equal(String registerUser) {
+        regRegisterUser(CK_EQ, registerUser);
+    }
+
+    protected void regRegisterUser(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueRegisterUser(), "REGISTER_USER"); }
+    protected abstract ConditionValue xgetCValueRegisterUser();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @param updateDatetime The value of updateDatetime as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setUpdateDatetime_Equal(java.time.LocalDateTime updateDatetime) {
+        regUpdateDatetime(CK_EQ,  updateDatetime);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of from-to. (NotNull)
+     */
+    public void setUpdateDatetime_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, ConditionOptionCall<FromToOption> opLambda) {
+        setUpdateDatetime_FromTo(fromDatetime, toDatetime, xcFTOP(opLambda));
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    protected void setUpdateDatetime_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, FromToOption fromToOption) {
+        String nm = "UPDATE_DATETIME"; FromToOption op = fromToOption;
+        regFTQ(xfFTHD(fromDatetime, nm, op), xfFTHD(toDatetime, nm, op), xgetCValueUpdateDatetime(), nm, op);
+    }
+
+    protected void regUpdateDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUpdateDatetime(), "UPDATE_DATETIME"); }
+    protected abstract ConditionValue xgetCValueUpdateDatetime();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @param updateUser The value of updateUser as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdateUser_Equal(String updateUser) {
+        doSetUpdateUser_Equal(fRES(updateUser));
+    }
+
+    protected void doSetUpdateUser_Equal(String updateUser) {
+        regUpdateUser(CK_EQ, updateUser);
+    }
+
+    protected void regUpdateUser(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUpdateUser(), "UPDATE_USER"); }
+    protected abstract ConditionValue xgetCValueUpdateUser();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @param versionNo The value of versionNo as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setVersionNo_Equal(Long versionNo) {
+        doSetVersionNo_Equal(versionNo);
+    }
+
+    protected void doSetVersionNo_Equal(Long versionNo) {
+        regVersionNo(CK_EQ, versionNo);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @param minNumber The min number of versionNo. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of versionNo. (NullAllowed: if null, no to-condition)
+     * @param opLambda The callback for option of range-of. (NotNull)
+     */
+    public void setVersionNo_RangeOf(Long minNumber, Long maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setVersionNo_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @param minNumber The min number of versionNo. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of versionNo. (NullAllowed: if null, no to-condition)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    protected void setVersionNo_RangeOf(Long minNumber, Long maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueVersionNo(), "VERSION_NO", rangeOfOption);
+    }
+
+    protected void regVersionNo(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueVersionNo(), "VERSION_NO"); }
+    protected abstract ConditionValue xgetCValueVersionNo();
 
     // ===================================================================================
     //                                                                     ScalarCondition

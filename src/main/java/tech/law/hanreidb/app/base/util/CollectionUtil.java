@@ -1,4 +1,4 @@
-package tech.law.hanreidb.app.base;
+package tech.law.hanreidb.app.base.util;
 
 import java.util.Collection;
 

@@ -174,6 +174,25 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select USER_ID from JUDGEMENT_USER_FAVORITE_REL where ...)} <br>
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by USER_ID, named 'judgementUserFavoriteRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsJudgementUserFavoriteRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of JudgementUserFavoriteRelList for 'exists'. (NotNull)
+     */
+    public void existsJudgementUserFavoriteRel(SubQuery<JudgementUserFavoriteRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        JudgementUserFavoriteRelCB cb = new JudgementUserFavoriteRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_JudgementUserFavoriteRelList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "judgementUserFavoriteRelList");
+    }
+    public abstract String keepUserId_ExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
      * {exists (select USER_ID from LOGIN_HISTORY where ...)} <br>
      * (ログイン履歴)LOGIN_HISTORY by USER_ID, named 'loginHistoryAsOne'.
      * <pre>
@@ -190,6 +209,44 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
         registerExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "loginHistoryList");
     }
     public abstract String keepUserId_ExistsReferrer_LoginHistoryList(LoginHistoryCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select USER_ID from USER_STATUS_HISTORY where ...)} <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_ID, named 'userStatusHistoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsUserStatusHistory</span>(historyCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     historyCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of UserStatusHistoryList for 'exists'. (NotNull)
+     */
+    public void existsUserStatusHistory(SubQuery<UserStatusHistoryCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        UserStatusHistoryCB cb = new UserStatusHistoryCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_ExistsReferrer_UserStatusHistoryList(cb.query());
+        registerExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "userStatusHistoryList");
+    }
+    public abstract String keepUserId_ExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select USER_ID from JUDGEMENT_USER_FAVORITE_REL where ...)} <br>
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by USER_ID, named 'judgementUserFavoriteRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsJudgementUserFavoriteRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_JudgementUserFavoriteRelList for 'not exists'. (NotNull)
+     */
+    public void notExistsJudgementUserFavoriteRel(SubQuery<JudgementUserFavoriteRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        JudgementUserFavoriteRelCB cb = new JudgementUserFavoriteRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_JudgementUserFavoriteRelList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "judgementUserFavoriteRelList");
+    }
+    public abstract String keepUserId_NotExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq);
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
@@ -210,6 +267,33 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     }
     public abstract String keepUserId_NotExistsReferrer_LoginHistoryList(LoginHistoryCQ sq);
 
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select USER_ID from USER_STATUS_HISTORY where ...)} <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_ID, named 'userStatusHistoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsUserStatusHistory</span>(historyCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     historyCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of UserId_NotExistsReferrer_UserStatusHistoryList for 'not exists'. (NotNull)
+     */
+    public void notExistsUserStatusHistory(SubQuery<UserStatusHistoryCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        UserStatusHistoryCB cb = new UserStatusHistoryCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepUserId_NotExistsReferrer_UserStatusHistoryList(cb.query());
+        registerNotExistsReferrer(cb.query(), "USER_ID", "USER_ID", pp, "userStatusHistoryList");
+    }
+    public abstract String keepUserId_NotExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq);
+
+    public void xsderiveJudgementUserFavoriteRelList(String fn, SubQuery<JudgementUserFavoriteRelCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        JudgementUserFavoriteRelCB cb = new JudgementUserFavoriteRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", pp, "judgementUserFavoriteRelList", al, op);
+    }
+    public abstract String keepUserId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq);
+
     public void xsderiveLoginHistoryList(String fn, SubQuery<LoginHistoryCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         LoginHistoryCB cb = new LoginHistoryCB(); cb.xsetupForDerivedReferrer(this);
@@ -217,6 +301,41 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", pp, "loginHistoryList", al, op);
     }
     public abstract String keepUserId_SpecifyDerivedReferrer_LoginHistoryList(LoginHistoryCQ sq);
+
+    public void xsderiveUserStatusHistoryList(String fn, SubQuery<UserStatusHistoryCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        UserStatusHistoryCB cb = new UserStatusHistoryCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepUserId_SpecifyDerivedReferrer_UserStatusHistoryList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", pp, "userStatusHistoryList", al, op);
+    }
+    public abstract String keepUserId_SpecifyDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from JUDGEMENT_USER_FAVORITE_REL where ...)} <br>
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by USER_ID, named 'judgementUserFavoriteRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedJudgementUserFavoriteRel()</span>.<span style="color: #CC4747">max</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     relCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<JudgementUserFavoriteRelCB> derivedJudgementUserFavoriteRel() {
+        return xcreateQDRFunctionJudgementUserFavoriteRelList();
+    }
+    protected HpQDRFunction<JudgementUserFavoriteRelCB> xcreateQDRFunctionJudgementUserFavoriteRelList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveJudgementUserFavoriteRelList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveJudgementUserFavoriteRelList(String fn, SubQuery<JudgementUserFavoriteRelCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        JudgementUserFavoriteRelCB cb = new JudgementUserFavoriteRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_JudgementUserFavoriteRelList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", sqpp, "judgementUserFavoriteRelList", rd, vl, prpp, op);
+    }
+    public abstract String keepUserId_QueryDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -244,6 +363,33 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     }
     public abstract String keepUserId_QueryDerivedReferrer_LoginHistoryList(LoginHistoryCQ sq);
     public abstract String keepUserId_QueryDerivedReferrer_LoginHistoryListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from USER_STATUS_HISTORY where ...)} <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_ID, named 'userStatusHistoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedUserStatusHistory()</span>.<span style="color: #CC4747">max</span>(historyCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     historyCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     historyCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<UserStatusHistoryCB> derivedUserStatusHistory() {
+        return xcreateQDRFunctionUserStatusHistoryList();
+    }
+    protected HpQDRFunction<UserStatusHistoryCB> xcreateQDRFunctionUserStatusHistoryList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveUserStatusHistoryList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveUserStatusHistoryList(String fn, SubQuery<UserStatusHistoryCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        UserStatusHistoryCB cb = new UserStatusHistoryCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepUserId_QueryDerivedReferrer_UserStatusHistoryList(cb.query()); String prpp = keepUserId_QueryDerivedReferrer_UserStatusHistoryListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "USER_ID", "USER_ID", sqpp, "userStatusHistoryList", rd, vl, prpp, op);
+    }
+    public abstract String keepUserId_QueryDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq);
+    public abstract String keepUserId_QueryDerivedReferrer_UserStatusHistoryListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>

@@ -22,9 +22,12 @@
 	<component name="clsJudgementTypeBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsJudgementTypeBhv"/>
 	<component name="clsUserStatusBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsUserStatusBhv"/>
 	<component name="courtBhv" class="tech.law.hanreidb.dbflute.exbhv.CourtBhv"/>
+	<component name="courtScrapeResultBhv" class="tech.law.hanreidb.dbflute.exbhv.CourtScrapeResultBhv"/>
 	<component name="judgementBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementBhv"/>
 	<component name="judgementSourceRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementSourceRelBhv"/>
+	<component name="judgementUserFavoriteRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementUserFavoriteRelBhv"/>
 	<component name="loginHistoryBhv" class="tech.law.hanreidb.dbflute.exbhv.LoginHistoryBhv"/>
 	<component name="sourceBhv" class="tech.law.hanreidb.dbflute.exbhv.SourceBhv"/>
 	<component name="userBhv" class="tech.law.hanreidb.dbflute.exbhv.UserBhv"/>
+	<component name="userStatusHistoryBhv" class="tech.law.hanreidb.dbflute.exbhv.UserStatusHistoryBhv"/>
 </components>

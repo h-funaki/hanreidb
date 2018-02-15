@@ -17,19 +17,27 @@ package tech.law.hanreidb.app.web.signin;
 
 import javax.annotation.Resource;
 
-import tech.law.hanreidb.app.base.HanreidbBaseAction;
-import tech.law.hanreidb.app.web.base.login.HanreidbLoginAssist;
-import tech.law.hanreidb.app.web.mypage.MypageAction;
-import tech.law.hanreidb.mylasta.action.HanreidbMessages;
 import org.lastaflute.core.util.LaStringUtil;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.login.credential.UserPasswordCredential;
 import org.lastaflute.web.response.HtmlResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import tech.law.hanreidb.app.base.HanreidbBaseAction;
+import tech.law.hanreidb.app.web.base.login.HanreidbLoginAssist;
+import tech.law.hanreidb.app.web.mypage.MypageAction;
+import tech.law.hanreidb.mylasta.action.HanreidbMessages;
 
 /**
  * @author jflute
  */
 public class SigninAction extends HanreidbBaseAction {
+
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+    private static final Logger logger = LoggerFactory.getLogger(SigninAction.class);
 
     // ===================================================================================
     //                                                                           Attribute
@@ -61,7 +69,9 @@ public class SigninAction extends HanreidbBaseAction {
 
     private void moreValidate(SigninForm form, HanreidbMessages messages) {
         if (LaStringUtil.isNotEmpty(form.account) && LaStringUtil.isNotEmpty(form.password)) {
-            if (!loginAssist.checkUserLoginable(createCredential(form))) {
+            UserPasswordCredential createCredential = createCredential(form); // 
+            logger.debug("password: " + createCredential.getPassword());
+            if (!loginAssist.checkUserLoginable(createCredential)) {
                 messages.addErrorsLoginFailure("account");
             }
         }

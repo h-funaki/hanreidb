@@ -1,4 +1,4 @@
-package tech.law.hanreidb.app.base;
+package tech.law.hanreidb.app.base.util;
 
 /**
  * 比較に関する処理のちょっとした補完クラス。(継承とかも何もない)<br>

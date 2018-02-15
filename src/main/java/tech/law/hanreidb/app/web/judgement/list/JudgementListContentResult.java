@@ -42,5 +42,6 @@ public class JudgementListContentResult {
         public String judgement_result_alias;
         public String judgement_type_code;
         public String judgement_type_alias;
+        public String sentence;
     }
 }

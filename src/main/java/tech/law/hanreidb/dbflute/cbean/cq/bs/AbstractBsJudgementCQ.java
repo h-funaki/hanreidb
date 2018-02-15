@@ -211,6 +211,25 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     public abstract String keepJudgementId_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq);
 
     /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select JUDGEMENT_ID from JUDGEMENT_USER_FAVORITE_REL where ...)} <br>
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsJudgementUserFavoriteRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of JudgementUserFavoriteRelList for 'exists'. (NotNull)
+     */
+    public void existsJudgementUserFavoriteRel(SubQuery<JudgementUserFavoriteRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        JudgementUserFavoriteRelCB cb = new JudgementUserFavoriteRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepJudgementId_ExistsReferrer_JudgementUserFavoriteRelList(cb.query());
+        registerExistsReferrer(cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementUserFavoriteRelList");
+    }
+    public abstract String keepJudgementId_ExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq);
+
+    /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
      * {not exists (select ORIGINAL_JUDGEMENT_ID from JUDGEMENT where ...)} <br>
      * (判決)JUDGEMENT by ORIGINAL_JUDGEMENT_ID, named 'judgementSelfAsOne'.
@@ -248,6 +267,25 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     }
     public abstract String keepJudgementId_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq);
 
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select JUDGEMENT_ID from JUDGEMENT_USER_FAVORITE_REL where ...)} <br>
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsJudgementUserFavoriteRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of JudgementId_NotExistsReferrer_JudgementUserFavoriteRelList for 'not exists'. (NotNull)
+     */
+    public void notExistsJudgementUserFavoriteRel(SubQuery<JudgementUserFavoriteRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        JudgementUserFavoriteRelCB cb = new JudgementUserFavoriteRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepJudgementId_NotExistsReferrer_JudgementUserFavoriteRelList(cb.query());
+        registerNotExistsReferrer(cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementUserFavoriteRelList");
+    }
+    public abstract String keepJudgementId_NotExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq);
+
     public void xsderiveJudgementSelfList(String fn, SubQuery<JudgementCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         JudgementCB cb = new JudgementCB(); cb.xsetupForDerivedReferrer(this);
@@ -263,6 +301,14 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementSourceRelList", al, op);
     }
     public abstract String keepJudgementId_SpecifyDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq);
+
+    public void xsderiveJudgementUserFavoriteRelList(String fn, SubQuery<JudgementUserFavoriteRelCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        JudgementUserFavoriteRelCB cb = new JudgementUserFavoriteRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepJudgementId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementUserFavoriteRelList", al, op);
+    }
+    public abstract String keepJudgementId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -317,6 +363,33 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     }
     public abstract String keepJudgementId_QueryDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq);
     public abstract String keepJudgementId_QueryDerivedReferrer_JudgementSourceRelListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from JUDGEMENT_USER_FAVORITE_REL where ...)} <br>
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedJudgementUserFavoriteRel()</span>.<span style="color: #CC4747">max</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     relCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<JudgementUserFavoriteRelCB> derivedJudgementUserFavoriteRel() {
+        return xcreateQDRFunctionJudgementUserFavoriteRelList();
+    }
+    protected HpQDRFunction<JudgementUserFavoriteRelCB> xcreateQDRFunctionJudgementUserFavoriteRelList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveJudgementUserFavoriteRelList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveJudgementUserFavoriteRelList(String fn, SubQuery<JudgementUserFavoriteRelCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        JudgementUserFavoriteRelCB cb = new JudgementUserFavoriteRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList(cb.query()); String prpp = keepJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", sqpp, "judgementUserFavoriteRelList", rd, vl, prpp, op);
+    }
+    public abstract String keepJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq);
+    public abstract String keepJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
@@ -2496,6 +2569,84 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     protected void regJudgementTypeCode(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueJudgementTypeCode(), "JUDGEMENT_TYPE_CODE"); }
     protected abstract ConditionValue xgetCValueJudgementTypeCode();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (判決文)SENTENCE: {TEXT(65535)}
+     * @param sentence The value of sentence as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setSentence_Equal(String sentence) {
+        doSetSentence_Equal(fRES(sentence));
+    }
+
+    protected void doSetSentence_Equal(String sentence) {
+        regSentence(CK_EQ, sentence);
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (判決文)SENTENCE: {TEXT(65535)} <br>
+     * <pre>e.g. setSentence_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param sentence The value of sentence as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setSentence_LikeSearch(String sentence, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setSentence_LikeSearch(sentence, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (判決文)SENTENCE: {TEXT(65535)} <br>
+     * <pre>e.g. setSentence_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param sentence The value of sentence as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setSentence_LikeSearch(String sentence, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(sentence), xgetCValueSentence(), "SENTENCE", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (判決文)SENTENCE: {TEXT(65535)}
+     * @param sentence The value of sentence as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setSentence_NotLikeSearch(String sentence, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setSentence_NotLikeSearch(sentence, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (判決文)SENTENCE: {TEXT(65535)}
+     * @param sentence The value of sentence as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setSentence_NotLikeSearch(String sentence, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(sentence), xgetCValueSentence(), "SENTENCE", likeSearchOption);
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br>
+     * (判決文)SENTENCE: {TEXT(65535)}
+     */
+    public void setSentence_IsNull() { regSentence(CK_ISN, DOBJ); }
+
+    /**
+     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
+     * (判決文)SENTENCE: {TEXT(65535)}
+     */
+    public void setSentence_IsNullOrEmpty() { regSentence(CK_ISNOE, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
+     * (判決文)SENTENCE: {TEXT(65535)}
+     */
+    public void setSentence_IsNotNull() { regSentence(CK_ISNN, DOBJ); }
+
+    protected void regSentence(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueSentence(), "SENTENCE"); }
+    protected abstract ConditionValue xgetCValueSentence();
 
     // ===================================================================================
     //                                                                     ScalarCondition

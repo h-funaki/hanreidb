@@ -18,6 +18,6 @@ data-directory: playsql/data/common/xls
   SOURCE (1)
   JUDGEMENT (7)
   JUDGEMENT_SOURCE_REL (7)
-  CLS_USER_STATUS (0)
-  USER (0)
+  CLS_USER_STATUS (2)
+  USER (1)
   LOGIN_HISTORY (0)

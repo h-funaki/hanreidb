@@ -49,13 +49,13 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     CLS_USER_STATUS
  *
  * [referrer table]
- *     LOGIN_HISTORY
+ *     JUDGEMENT_USER_FAVORITE_REL, LOGIN_HISTORY, USER_STATUS_HISTORY
  *
  * [foreign property]
  *     clsUserStatus
  *
  * [referrer property]
- *     loginHistoryList
+ *     judgementUserFavoriteRelList, loginHistoryList, userStatusHistoryList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -179,6 +179,26 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
+    /** (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by USER_ID, named 'judgementUserFavoriteRelList'. */
+    protected List<JudgementUserFavoriteRel> _judgementUserFavoriteRelList;
+
+    /**
+     * [get] (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by USER_ID, named 'judgementUserFavoriteRelList'.
+     * @return The entity list of referrer property 'judgementUserFavoriteRelList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<JudgementUserFavoriteRel> getJudgementUserFavoriteRelList() {
+        if (_judgementUserFavoriteRelList == null) { _judgementUserFavoriteRelList = newReferrerList(); }
+        return _judgementUserFavoriteRelList;
+    }
+
+    /**
+     * [set] (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by USER_ID, named 'judgementUserFavoriteRelList'.
+     * @param judgementUserFavoriteRelList The entity list of referrer property 'judgementUserFavoriteRelList'. (NullAllowed)
+     */
+    public void setJudgementUserFavoriteRelList(List<JudgementUserFavoriteRel> judgementUserFavoriteRelList) {
+        _judgementUserFavoriteRelList = judgementUserFavoriteRelList;
+    }
+
     /** (ログイン履歴)LOGIN_HISTORY by USER_ID, named 'loginHistoryList'. */
     protected List<LoginHistory> _loginHistoryList;
 
@@ -197,6 +217,26 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
      */
     public void setLoginHistoryList(List<LoginHistory> loginHistoryList) {
         _loginHistoryList = loginHistoryList;
+    }
+
+    /** (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_ID, named 'userStatusHistoryList'. */
+    protected List<UserStatusHistory> _userStatusHistoryList;
+
+    /**
+     * [get] (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_ID, named 'userStatusHistoryList'.
+     * @return The entity list of referrer property 'userStatusHistoryList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<UserStatusHistory> getUserStatusHistoryList() {
+        if (_userStatusHistoryList == null) { _userStatusHistoryList = newReferrerList(); }
+        return _userStatusHistoryList;
+    }
+
+    /**
+     * [set] (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_ID, named 'userStatusHistoryList'.
+     * @param userStatusHistoryList The entity list of referrer property 'userStatusHistoryList'. (NullAllowed)
+     */
+    public void setUserStatusHistoryList(List<UserStatusHistory> userStatusHistoryList) {
+        _userStatusHistoryList = userStatusHistoryList;
     }
 
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
@@ -230,8 +270,12 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
         StringBuilder sb = new StringBuilder();
         if (_clsUserStatus != null && _clsUserStatus.isPresent())
         { sb.append(li).append(xbRDS(_clsUserStatus, "clsUserStatus")); }
+        if (_judgementUserFavoriteRelList != null) { for (JudgementUserFavoriteRel et : _judgementUserFavoriteRelList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "judgementUserFavoriteRelList")); } } }
         if (_loginHistoryList != null) { for (LoginHistory et : _loginHistoryList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "loginHistoryList")); } } }
+        if (_userStatusHistoryList != null) { for (UserStatusHistory et : _userStatusHistoryList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "userStatusHistoryList")); } } }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -262,8 +306,12 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
         StringBuilder sb = new StringBuilder();
         if (_clsUserStatus != null && _clsUserStatus.isPresent())
         { sb.append(dm).append("clsUserStatus"); }
+        if (_judgementUserFavoriteRelList != null && !_judgementUserFavoriteRelList.isEmpty())
+        { sb.append(dm).append("judgementUserFavoriteRelList"); }
         if (_loginHistoryList != null && !_loginHistoryList.isEmpty())
         { sb.append(dm).append("loginHistoryList"); }
+        if (_userStatusHistoryList != null && !_userStatusHistoryList.isEmpty())
+        { sb.append(dm).append("userStatusHistoryList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }

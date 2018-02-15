@@ -77,15 +77,35 @@ public class UserCIQ extends AbstractBsUserCQ {
     //                                                                Override about Query
     //                                                                ====================
     protected ConditionValue xgetCValueUserId() { return _myCQ.xdfgetUserId(); }
+    public String keepUserId_ExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepUserId_ExistsReferrer_LoginHistoryList(LoginHistoryCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepUserId_ExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepUserId_NotExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepUserId_NotExistsReferrer_LoginHistoryList(LoginHistoryCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepUserId_NotExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepUserId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepUserId_SpecifyDerivedReferrer_LoginHistoryList(LoginHistoryCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepUserId_SpecifyDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepUserId_QueryDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepUserId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepUserId_QueryDerivedReferrer_LoginHistoryList(LoginHistoryCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepUserId_QueryDerivedReferrer_LoginHistoryListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepUserId_QueryDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepUserId_QueryDerivedReferrer_UserStatusHistoryListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueMailAddress() { return _myCQ.xdfgetMailAddress(); }
     protected ConditionValue xgetCValuePassword() { return _myCQ.xdfgetPassword(); }

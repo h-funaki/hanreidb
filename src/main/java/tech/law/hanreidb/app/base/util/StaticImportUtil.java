@@ -1,4 +1,4 @@
-package tech.law.hanreidb.app.base;
+package tech.law.hanreidb.app.base.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +20,7 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Maps;
 import org.eclipse.collections.impl.factory.Sets;
 
-import tech.law.hanreidb.app.base.CompareUtil.BasicCompare;
+import tech.law.hanreidb.app.base.util.CompareUtil.BasicCompare;
 
 /**
  * static import を許可するメソッドを定義するクラス。<br>

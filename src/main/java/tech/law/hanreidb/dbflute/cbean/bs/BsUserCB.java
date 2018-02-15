@@ -409,6 +409,23 @@ public class BsUserCB extends AbstractConditionBean {
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from JUDGEMENT_USER_FAVORITE_REL where ...) as FOO_MAX} <br>
+         * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by USER_ID, named 'judgementUserFavoriteRelList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     relCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     relCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, JudgementUserFavoriteRel.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<JudgementUserFavoriteRelCB, UserCQ> derivedJudgementUserFavoriteRel() {
+            assertDerived("judgementUserFavoriteRelList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<JudgementUserFavoriteRelCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveJudgementUserFavoriteRelList(fn, sq, al, op), _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
          * {select max(FOO) from LOGIN_HISTORY where ...) as FOO_MAX} <br>
          * (ログイン履歴)LOGIN_HISTORY by USER_ID, named 'loginHistoryList'.
          * <pre>
@@ -423,6 +440,23 @@ public class BsUserCB extends AbstractConditionBean {
             assertDerived("loginHistoryList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
             return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<LoginHistoryCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsderiveLoginHistoryList(fn, sq, al, op), _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from USER_STATUS_HISTORY where ...) as FOO_MAX} <br>
+         * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_ID, named 'userStatusHistoryList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(historyCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     historyCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     historyCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, UserStatusHistory.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<UserStatusHistoryCB, UserCQ> derivedUserStatusHistory() {
+            assertDerived("userStatusHistoryList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<UserStatusHistoryCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveUserStatusHistoryList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

@@ -100,17 +100,26 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
     public Map<String, JudgementSourceRelCQ> xdfgetJudgementId_ExistsReferrer_JudgementSourceRelList() { return xgetSQueMap("judgementId_ExistsReferrer_JudgementSourceRelList"); }
     public String keepJudgementId_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("judgementId_ExistsReferrer_JudgementSourceRelList", sq); }
 
+    public Map<String, JudgementUserFavoriteRelCQ> xdfgetJudgementId_ExistsReferrer_JudgementUserFavoriteRelList() { return xgetSQueMap("judgementId_ExistsReferrer_JudgementUserFavoriteRelList"); }
+    public String keepJudgementId_ExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq) { return xkeepSQue("judgementId_ExistsReferrer_JudgementUserFavoriteRelList", sq); }
+
     public Map<String, JudgementCQ> xdfgetJudgementId_NotExistsReferrer_JudgementSelfList() { return xgetSQueMap("judgementId_NotExistsReferrer_JudgementSelfList"); }
     public String keepJudgementId_NotExistsReferrer_JudgementSelfList(JudgementCQ sq) { return xkeepSQue("judgementId_NotExistsReferrer_JudgementSelfList", sq); }
 
     public Map<String, JudgementSourceRelCQ> xdfgetJudgementId_NotExistsReferrer_JudgementSourceRelList() { return xgetSQueMap("judgementId_NotExistsReferrer_JudgementSourceRelList"); }
     public String keepJudgementId_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("judgementId_NotExistsReferrer_JudgementSourceRelList", sq); }
 
+    public Map<String, JudgementUserFavoriteRelCQ> xdfgetJudgementId_NotExistsReferrer_JudgementUserFavoriteRelList() { return xgetSQueMap("judgementId_NotExistsReferrer_JudgementUserFavoriteRelList"); }
+    public String keepJudgementId_NotExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq) { return xkeepSQue("judgementId_NotExistsReferrer_JudgementUserFavoriteRelList", sq); }
+
     public Map<String, JudgementCQ> xdfgetJudgementId_SpecifyDerivedReferrer_JudgementSelfList() { return xgetSQueMap("judgementId_SpecifyDerivedReferrer_JudgementSelfList"); }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSelfList(JudgementCQ sq) { return xkeepSQue("judgementId_SpecifyDerivedReferrer_JudgementSelfList", sq); }
 
     public Map<String, JudgementSourceRelCQ> xdfgetJudgementId_SpecifyDerivedReferrer_JudgementSourceRelList() { return xgetSQueMap("judgementId_SpecifyDerivedReferrer_JudgementSourceRelList"); }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("judgementId_SpecifyDerivedReferrer_JudgementSourceRelList", sq); }
+
+    public Map<String, JudgementUserFavoriteRelCQ> xdfgetJudgementId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList() { return xgetSQueMap("judgementId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList"); }
+    public String keepJudgementId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq) { return xkeepSQue("judgementId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList", sq); }
 
     public Map<String, JudgementCQ> xdfgetJudgementId_QueryDerivedReferrer_JudgementSelfList() { return xgetSQueMap("judgementId_QueryDerivedReferrer_JudgementSelfList"); }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSelfList(JudgementCQ sq) { return xkeepSQue("judgementId_QueryDerivedReferrer_JudgementSelfList", sq); }
@@ -121,6 +130,11 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
     public String keepJudgementId_QueryDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("judgementId_QueryDerivedReferrer_JudgementSourceRelList", sq); }
     public Map<String, Object> xdfgetJudgementId_QueryDerivedReferrer_JudgementSourceRelListParameter() { return xgetSQuePmMap("judgementId_QueryDerivedReferrer_JudgementSourceRelList"); }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSourceRelListParameter(Object pm) { return xkeepSQuePm("judgementId_QueryDerivedReferrer_JudgementSourceRelList", pm); }
+
+    public Map<String, JudgementUserFavoriteRelCQ> xdfgetJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList() { return xgetSQueMap("judgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList"); }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq) { return xkeepSQue("judgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList", sq); }
+    public Map<String, Object> xdfgetJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter() { return xgetSQuePmMap("judgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList"); }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter(Object pm) { return xkeepSQuePm("judgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList", pm); }
 
     /** 
      * Add order-by as ascend. <br>
@@ -461,6 +475,12 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
      * @return this. (NotNull)
      */
     public BsJudgementCQ addOrderBy_JudgementTypeCode_Desc() { regOBD("JUDGEMENT_TYPE_CODE"); return this; }
+
+    protected ConditionValue _sentence;
+    public ConditionValue xdfgetSentence()
+    { if (_sentence == null) { _sentence = nCV(); }
+      return _sentence; }
+    protected ConditionValue xgetCValueSentence() { return xdfgetSentence(); }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

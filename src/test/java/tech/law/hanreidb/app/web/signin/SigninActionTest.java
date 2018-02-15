@@ -35,30 +35,30 @@ public class SigninActionTest extends UnitHanreidbTestCase {
     // ===================================================================================
     //                                                                               Basic
     //                                                                               =====
-    //    public void test_signin_basic() {
-    //        // ## Arrange ##
-    //        changeAsyncToNormalSync();
-    //        changeRequiresNewToRequired();
-    //        SigninAction action = new SigninAction();
-    //        inject(action);
-    //        SigninForm form = new SigninForm();
-    //        form.account = "Pixy";
-    //        form.password = "sea";
-    //
-    //        // ## Act ##
-    //        HtmlResponse response = action.signin(form);
-    //
-    //        // ## Assert ##
-    //        TestingHtmlData htmlData = validateHtmlData(response);
-    //        htmlData.assertRedirect(MypageAction.class);
-    //
-    //        HanreidbUserBean userBean = loginAssist.getSavedUserBean().get();
-    //        log(userBean);
-    //        assertEquals(form.account, userBean.getMemberAccount());
-    //        assertEquals(1, memberLoginBhv.selectCount(cb -> {
-    //            cb.query().setLoginDatetime_Equal(timeManager.currentDateTime()); // transaction time
-    //        }));
-    //    }
+    public void test_signin_basic() {
+        // ## Arrange ##
+        // changeAsyncToNormalSync();
+        //        changeRequiresNewToRequired();
+        //        SigninAction action = new SigninAction();
+        //        inject(action);
+        //        SigninForm form = new SigninForm();
+        //        form.account = "Pixy";
+        //        form.password = "test";
+        //
+        //        // ## Act ##
+        //        HtmlResponse response = action.signin(form);
+        //
+        //        // ## Assert ##
+        //        TestingHtmlData htmlData = validateHtmlData(response);
+        //        htmlData.assertRedirect(MypageAction.class);
+        //
+        //        HanreidbUserBean userBean = loginAssist.getSavedUserBean().get();
+        //        log(userBean);
+        //        assertEquals(form.account, userBean.getMemberAccount());
+        //            assertEquals(1, userLoginBhv.selectCount(cb -> {
+        //                cb.query().setLoginDatetime_Equal(timeManager.currentDateTime()); // transaction time
+        //            }));
+    }
     //
     //    // ===================================================================================
     //    //                                                                          Validation

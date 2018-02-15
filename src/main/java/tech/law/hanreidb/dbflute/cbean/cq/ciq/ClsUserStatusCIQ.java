@@ -79,16 +79,33 @@ public class ClsUserStatusCIQ extends AbstractBsClsUserStatusCQ {
     protected ConditionValue xgetCValueUserStatusCode() { return _myCQ.xdfgetUserStatusCode(); }
     public String keepUserStatusCode_ExistsReferrer_UserList(UserCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepUserStatusCode_ExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepUserStatusCode_NotExistsReferrer_UserList(UserCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepUserStatusCode_NotExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepUserStatusCode_SpecifyDerivedReferrer_UserList(UserCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepUserStatusCode_SpecifyDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepUserStatusCode_QueryDerivedReferrer_UserList(UserCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepUserStatusCode_QueryDerivedReferrer_UserListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepUserStatusCode_QueryDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepUserStatusCode_QueryDerivedReferrer_UserStatusHistoryListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueUserStatusName() { return _myCQ.xdfgetUserStatusName(); }
     protected ConditionValue xgetCValueUserStatusAlias() { return _myCQ.xdfgetUserStatusAlias(); }
+    protected ConditionValue xgetCValueDescription() { return _myCQ.xdfgetDescription(); }
+    protected ConditionValue xgetCValueDisplayOrder() { return _myCQ.xdfgetDisplayOrder(); }
+    protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
+    protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }
+    protected ConditionValue xgetCValueUpdateDatetime() { return _myCQ.xdfgetUpdateDatetime(); }
+    protected ConditionValue xgetCValueUpdateUser() { return _myCQ.xdfgetUpdateUser(); }
+    protected ConditionValue xgetCValueVersionNo() { return _myCQ.xdfgetVersionNo(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(ClsUserStatusCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

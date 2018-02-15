@@ -1,7 +1,7 @@
 package tech.law.hanreidb.app.web.judgement.list;
 
-import static tech.law.hanreidb.app.base.StaticImportUtil.ifNotNull;
-import static tech.law.hanreidb.app.base.StaticImportUtil.toImmutable;
+import static tech.law.hanreidb.app.base.util.StaticImportUtil.ifNotNull;
+import static tech.law.hanreidb.app.base.util.StaticImportUtil.toImmutable;
 
 import javax.annotation.Resource;
 
@@ -32,7 +32,7 @@ public class JudgementListAction extends HanreidbBaseAction {
 
     // ===================================================================================
     //                                                                             Execute
-    //                                                                            =======
+    //                                                                             =======
     @Execute
     public JsonResponse<JudgementListContentResult> index(JudgementListBody body) {
         return asJson(mappingToContent(selectJudgementList(body)));
@@ -58,6 +58,7 @@ public class JudgementListAction extends HanreidbBaseAction {
             cb.specify().columnPrecedentReportsGo();
             cb.specify().columnPrecedentReportsKan();
             cb.specify().columnPrecedentReportsKo();
+            cb.specify().columnSentence();
 
             cb.setupSelect_CaseMark();
             cb.specify().specifyCaseMark().columnCaseMarkAlias();
@@ -124,6 +125,7 @@ public class JudgementListAction extends HanreidbBaseAction {
         ifNotNull(body.precedent_reports_ko).ifPresent(value -> {
             cb.query().setPrecedentReportsKo_Equal(value);
         });
+        // sentence condition
     }
 
     // ===================================================================================
@@ -168,6 +170,7 @@ public class JudgementListAction extends HanreidbBaseAction {
         judgementPart.precedent_reports_go = judgement.getPrecedentReportsGo();
         judgementPart.precedent_reports_kan = judgement.getPrecedentReportsKan();
         judgementPart.precedent_reports_ko = judgement.getPrecedentReportsKo();
+        judgementPart.sentence = judgement.getSentence();
         return judgementPart;
     }
 }

@@ -105,6 +105,18 @@ public class BsClsUserStatusCB extends AbstractConditionBean {
         return (ClsUserStatusCB)this;
     }
 
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param displayOrder (順番): UQ, NotNull, INT UNSIGNED(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public ClsUserStatusCB acceptUniqueOf(Integer displayOrder) {
+        assertObjectNotNull("displayOrder", displayOrder);
+        BsClsUserStatusCB cb = this;
+        cb.query().setDisplayOrder_Equal(displayOrder);
+        return (ClsUserStatusCB)this;
+    }
+
     public ConditionBean addOrderBy_PK_Asc() {
         query().addOrderBy_UserStatusCode_Asc();
         return this;
@@ -312,6 +324,41 @@ public class BsClsUserStatusCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserStatusAlias() { return doColumn("USER_STATUS_ALIAS"); }
+        /**
+         * (説明)DESCRIPTION: {NotNull, TEXT(65535)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnDescription() { return doColumn("DESCRIPTION"); }
+        /**
+         * (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnDisplayOrder() { return doColumn("DISPLAY_ORDER"); }
+        /**
+         * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnRegisterDatetime() { return doColumn("REGISTER_DATETIME"); }
+        /**
+         * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnRegisterUser() { return doColumn("REGISTER_USER"); }
+        /**
+         * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }
+        /**
+         * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnUpdateUser() { return doColumn("UPDATE_USER"); }
+        /**
+         * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnVersionNo() { return doColumn("VERSION_NO"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
@@ -336,6 +383,23 @@ public class BsClsUserStatusCB extends AbstractConditionBean {
             assertDerived("userList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
             return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<UserCB> sq, ClsUserStatusCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsderiveUserList(fn, sq, al, op), _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from USER_STATUS_HISTORY where ...) as FOO_MAX} <br>
+         * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_NEW_STATUS_CODE, named 'userStatusHistoryList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(historyCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     historyCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     historyCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, UserStatusHistory.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<UserStatusHistoryCB, ClsUserStatusCQ> derivedUserStatusHistory() {
+            assertDerived("userStatusHistoryList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<UserStatusHistoryCB> sq, ClsUserStatusCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveUserStatusHistoryList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

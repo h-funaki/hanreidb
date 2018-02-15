@@ -101,7 +101,7 @@ public class UserDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, "ユーザーID", Integer.class, "userId", null, true, true, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, "loginHistoryList", null, false);
+    protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, "ユーザーID", Integer.class, "userId", null, true, true, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, "judgementUserFavoriteRelList,loginHistoryList,userStatusHistoryList", null, false);
     protected final ColumnInfo _columnMailAddress = cci("MAIL_ADDRESS", "MAIL_ADDRESS", null, "メールアドレス", String.class, "mailAddress", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnPassword = cci("PASSWORD", "PASSWORD", null, "パスワード", String.class, "password", null, false, false, true, "VARCHAR", 255, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserStatusCode = cci("USER_STATUS_CODE", "USER_STATUS_CODE", null, "ユーザーステータスコード", String.class, "userStatusCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsUserStatus", null, null, false);
@@ -209,12 +209,28 @@ public class UserDbm extends AbstractDBMeta {
     //                                     Referrer Property
     //                                     -----------------
     /**
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by USER_ID, named 'judgementUserFavoriteRelList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerJudgementUserFavoriteRelList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), JudgementUserFavoriteRelDbm.getInstance().columnUserId());
+        return cri("FK_JUDGEMENT_USER_FAVORITE_REL_USER", "judgementUserFavoriteRelList", this, JudgementUserFavoriteRelDbm.getInstance(), mp, false, "user");
+    }
+    /**
      * (ログイン履歴)LOGIN_HISTORY by USER_ID, named 'loginHistoryList'.
      * @return The information object of referrer property. (NotNull)
      */
     public ReferrerInfo referrerLoginHistoryList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), LoginHistoryDbm.getInstance().columnUserId());
         return cri("FK_LOGIN_HISTORY_USER", "loginHistoryList", this, LoginHistoryDbm.getInstance(), mp, false, "user");
+    }
+    /**
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_ID, named 'userStatusHistoryList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerUserStatusHistoryList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserId(), UserStatusHistoryDbm.getInstance().columnUserId());
+        return cri("FK_USER_STATUS_HISTORY_USER", "userStatusHistoryList", this, UserStatusHistoryDbm.getInstance(), mp, false, "user");
     }
 
     // ===================================================================================

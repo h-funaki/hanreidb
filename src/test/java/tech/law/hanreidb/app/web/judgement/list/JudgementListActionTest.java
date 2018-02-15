@@ -36,6 +36,18 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         assertHasAnyElement(judgementList);
     }
 
+    public void test_正常に検索されること_目視() throws Exception {
+        // ## Arrange ##
+        JudgementListAction action = new JudgementListAction();
+        inject(action);
+        // ## Act ##
+
+        JudgementListBody body = new JudgementListBody();
+        body.judgement_public_code = "JID001";
+        List<JudgementPart> judgementList = action.index(body).getJsonResult().judgement_list;
+        log(judgementList.get(0).sentence);
+    }
+
     public void test_正常に検索されること_条件あり() throws Exception { // TODO h-funaki 指定する条件ごとにテストをわける (2018/02/04)
         // ## Arrange ##
         JudgementListAction action = new JudgementListAction();
@@ -57,6 +69,7 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         Integer precedentReportsKan = 5;
         Integer precedentReportsGo = 6;
         Integer precedentReportsKo = 7;
+        String sentence = "色々あって却下";
         entity.setBenchCodeAsBench(bench);
         entity.setCaseMarkId(caseMarkId);
         entity.setCaseNumberEraCodeAsEra(era);
@@ -73,6 +86,7 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         entity.setPrecedentReportsKan(precedentReportsKan);
         entity.setPrecedentReportsGo(precedentReportsGo);
         entity.setPrecedentReportsKo(precedentReportsKo);
+        entity.setSentence(sentence);
         judgementBhv.insert(entity);
 
         JudgementListBody body = new JudgementListBody();
@@ -92,6 +106,7 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         body.precedent_reports_go = precedentReportsGo;
         body.precedent_reports_kan = precedentReportsKan;
         body.precedent_reports_ko = precedentReportsKo;
+        // TODO h-funaki sentence condition (2018/02/10)
 
         // ## Act ##
         List<JudgementPart> judgementList = action.index(body).getJsonResult().judgement_list;

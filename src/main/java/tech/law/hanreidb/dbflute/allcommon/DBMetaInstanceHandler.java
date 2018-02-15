@@ -55,11 +55,14 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
         tmpMap.put("CLS_JUDGEMENT_TYPE", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsJudgementTypeDbm");
         tmpMap.put("CLS_USER_STATUS", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsUserStatusDbm");
         tmpMap.put("COURT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.CourtDbm");
+        tmpMap.put("COURT_SCRAPE_RESULT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.CourtScrapeResultDbm");
         tmpMap.put("JUDGEMENT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementDbm");
         tmpMap.put("JUDGEMENT_SOURCE_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementSourceRelDbm");
+        tmpMap.put("JUDGEMENT_USER_FAVORITE_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementUserFavoriteRelDbm");
         tmpMap.put("LOGIN_HISTORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LoginHistoryDbm");
         tmpMap.put("SOURCE", "tech.law.hanreidb.dbflute.bsentity.dbmeta.SourceDbm");
         tmpMap.put("USER", "tech.law.hanreidb.dbflute.bsentity.dbmeta.UserDbm");
+        tmpMap.put("USER_STATUS_HISTORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.UserStatusHistoryDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);
     }
 

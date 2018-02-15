@@ -30,7 +30,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     USER_STATUS_CODE
  *
  * [column]
- *     USER_STATUS_CODE, USER_STATUS_NAME, USER_STATUS_ALIAS
+ *     USER_STATUS_CODE, USER_STATUS_NAME, USER_STATUS_ALIAS, DESCRIPTION, DISPLAY_ORDER, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -39,19 +39,19 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     
  *
  * [version-no]
- *     
+ *     VERSION_NO
  *
  * [foreign table]
  *     
  *
  * [referrer table]
- *     USER
+ *     USER, USER_STATUS_HISTORY
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     userList
+ *     userList, userStatusHistoryList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -108,6 +108,40 @@ public class LoaderOfClsUserStatus {
     public NestedReferrerLoaderGateway<LoaderOfUser> loadUser(ReferrerConditionSetupper<UserCB> refCBLambda) {
         myBhv().loadUser(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerUser = refLs);
         return hd -> hd.handle(new LoaderOfUser().ready(_referrerUser, _selector));
+    }
+
+    protected List<UserStatusHistory> _referrerUserStatusHistory;
+
+    /**
+     * Load referrer of userStatusHistoryList by the set-upper of referrer. <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_NEW_STATUS_CODE, named 'userStatusHistoryList'.
+     * <pre>
+     * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">clsUserStatusList</span>, <span style="color: #553000">statusLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">statusLoader</span>.<span style="color: #CC4747">loadUserStatusHistory</span>(<span style="color: #553000">historyCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">historyCB</span>.setupSelect...
+     *         <span style="color: #553000">historyCB</span>.query().set...
+     *         <span style="color: #553000">historyCB</span>.query().addOrderBy...
+     *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">historyLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    historyLoader.load...</span>
+     *     <span style="color: #3F7E5E">//});</span>
+     * });
+     * for (ClsUserStatus clsUserStatus : <span style="color: #553000">clsUserStatusList</span>) {
+     *     ... = clsUserStatus.<span style="color: #CC4747">getUserStatusHistoryList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserNewStatusCode_InScope(pkList);
+     * cb.query().addOrderBy_UserNewStatusCode_Asc();
+     * </pre>
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerLoaderGateway<LoaderOfUserStatusHistory> loadUserStatusHistory(ReferrerConditionSetupper<UserStatusHistoryCB> refCBLambda) {
+        myBhv().loadUserStatusHistory(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerUserStatusHistory = refLs);
+        return hd -> hd.handle(new LoaderOfUserStatusHistory().ready(_referrerUserStatusHistory, _selector));
     }
 
     // ===================================================================================

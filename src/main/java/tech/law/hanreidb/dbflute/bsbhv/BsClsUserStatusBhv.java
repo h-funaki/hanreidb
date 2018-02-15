@@ -41,7 +41,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     USER_STATUS_CODE
  *
  * [column]
- *     USER_STATUS_CODE, USER_STATUS_NAME, USER_STATUS_ALIAS
+ *     USER_STATUS_CODE, USER_STATUS_NAME, USER_STATUS_ALIAS, DESCRIPTION, DISPLAY_ORDER, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -50,19 +50,19 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     
  *
  * [version-no]
- *     
+ *     VERSION_NO
  *
  * [foreign table]
  *     
  *
  * [referrer table]
- *     USER
+ *     USER, USER_STATUS_HISTORY
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     userList
+ *     userList, userStatusHistoryList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -197,6 +197,31 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     protected ClsUserStatusCB xprepareCBAsPK(String userStatusCode) {
         assertObjectNotNull("userStatusCode", userStatusCode);
         return newConditionBean().acceptPK(userStatusCode);
+    }
+
+    /**
+     * Select the entity by the unique-key value.
+     * @param displayOrder (順番): UQ, NotNull, INT UNSIGNED(10). (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<ClsUserStatus> selectByUniqueOf(Integer displayOrder) {
+        return facadeSelectByUniqueOf(displayOrder);
+    }
+
+    protected OptionalEntity<ClsUserStatus> facadeSelectByUniqueOf(Integer displayOrder) {
+        return doSelectByUniqueOf(displayOrder, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends ClsUserStatus> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer displayOrder, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(displayOrder), tp), displayOrder);
+    }
+
+    protected ClsUserStatusCB xprepareCBAsUniqueOf(Integer displayOrder) {
+        assertObjectNotNull("displayOrder", displayOrder);
+        return newConditionBean().acceptUniqueOf(displayOrder);
     }
 
     // ===================================================================================
@@ -438,6 +463,70 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
         return helpLoadReferrerInternally(clsUserStatusList, option, "userList");
     }
 
+    /**
+     * Load referrer of userStatusHistoryList by the set-upper of referrer. <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_NEW_STATUS_CODE, named 'userStatusHistoryList'.
+     * <pre>
+     * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #CC4747">loadUserStatusHistory</span>(<span style="color: #553000">clsUserStatusList</span>, <span style="color: #553000">historyCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">historyCB</span>.setupSelect...
+     *     <span style="color: #553000">historyCB</span>.query().set...
+     *     <span style="color: #553000">historyCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (ClsUserStatus clsUserStatus : <span style="color: #553000">clsUserStatusList</span>) {
+     *     ... = clsUserStatus.<span style="color: #CC4747">getUserStatusHistoryList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserNewStatusCode_InScope(pkList);
+     * cb.query().addOrderBy_UserNewStatusCode_Asc();
+     * </pre>
+     * @param clsUserStatusList The entity list of clsUserStatus. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<UserStatusHistory> loadUserStatusHistory(List<ClsUserStatus> clsUserStatusList, ReferrerConditionSetupper<UserStatusHistoryCB> refCBLambda) {
+        xassLRArg(clsUserStatusList, refCBLambda);
+        return doLoadUserStatusHistory(clsUserStatusList, new LoadReferrerOption<UserStatusHistoryCB, UserStatusHistory>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of userStatusHistoryList by the set-upper of referrer. <br>
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_NEW_STATUS_CODE, named 'userStatusHistoryList'.
+     * <pre>
+     * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #CC4747">loadUserStatusHistory</span>(<span style="color: #553000">clsUserStatus</span>, <span style="color: #553000">historyCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">historyCB</span>.setupSelect...
+     *     <span style="color: #553000">historyCB</span>.query().set...
+     *     <span style="color: #553000">historyCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">clsUserStatus</span>.<span style="color: #CC4747">getUserStatusHistoryList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setUserNewStatusCode_InScope(pkList);
+     * cb.query().addOrderBy_UserNewStatusCode_Asc();
+     * </pre>
+     * @param clsUserStatus The entity of clsUserStatus. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<UserStatusHistory> loadUserStatusHistory(ClsUserStatus clsUserStatus, ReferrerConditionSetupper<UserStatusHistoryCB> refCBLambda) {
+        xassLRArg(clsUserStatus, refCBLambda);
+        return doLoadUserStatusHistory(xnewLRLs(clsUserStatus), new LoadReferrerOption<UserStatusHistoryCB, UserStatusHistory>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<UserStatusHistory> doLoadUserStatusHistory(List<ClsUserStatus> clsUserStatusList, LoadReferrerOption<UserStatusHistoryCB, UserStatusHistory> option) {
+        return helpLoadReferrerInternally(clsUserStatusList, option, "userStatusHistoryList");
+    }
+
     // ===================================================================================
     //                                                                   Pull out Relation
     //                                                                   =================
@@ -451,6 +540,14 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
      */
     public List<String> extractUserStatusCodeList(List<ClsUserStatus> clsUserStatusList)
     { return helpExtractListInternally(clsUserStatusList, "userStatusCode"); }
+
+    /**
+     * Extract the value list of (single) unique key displayOrder.
+     * @param clsUserStatusList The list of clsUserStatus. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Integer> extractDisplayOrderList(List<ClsUserStatus> clsUserStatusList)
+    { return helpExtractListInternally(clsUserStatusList, "displayOrder"); }
 
     // ===================================================================================
     //                                                                       Entity Update
@@ -477,7 +574,7 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     }
 
     /**
-     * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Update the entity modified-only. (ZeroUpdateException, ExclusiveControl) <br>
      * By PK as default, and also you can update by unique keys using entity's uniqueOf().
      * <pre>
      * ClsUserStatus clsUserStatus = <span style="color: #70226C">new</span> ClsUserStatus();
@@ -490,8 +587,8 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
      * clsUserStatus.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #CC4747">update</span>(clsUserStatus);
      * </pre>
-     * @param clsUserStatus The entity of update. (NotNull, PrimaryKeyNotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @param clsUserStatus The entity of update. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -500,11 +597,35 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     }
 
     /**
-     * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
+     * Update the entity non-strictly modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * By PK as default, and also you can update by unique keys using entity's uniqueOf().
+     * <pre>
+     * ClsUserStatus clsUserStatus = <span style="color: #70226C">new</span> ClsUserStatus();
+     * clsUserStatus.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * clsUserStatus.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     * <span style="color: #3F7E5E">//clsUserStatus.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//clsUserStatus.set...;</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//clsUserStatus.setVersionNo(value);</span>
+     * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #CC4747">updateNonstrict</span>(clsUserStatus);
+     * </pre>
+     * @param clsUserStatus The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void updateNonstrict(ClsUserStatus clsUserStatus) {
+        doUpdateNonstrict(clsUserStatus, null);
+    }
+
+    /**
+     * Insert or update the entity modified-only. (DefaultConstraintsEnabled, ExclusiveControl) <br>
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
      * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
      * @param clsUserStatus The entity of insert or update. (NotNull, ...depends on insert or update)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -513,7 +634,20 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     }
 
     /**
-     * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Insert or update the entity non-strictly modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
+     * if (the entity has no PK) { insert() } else { update(), but no data, insert() }
+     * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
+     * @param clsUserStatus The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void insertOrUpdateNonstrict(ClsUserStatus clsUserStatus) {
+        doInsertOrUpdateNonstrict(clsUserStatus, null, null);
+    }
+
+    /**
+     * Delete the entity. (ZeroUpdateException, ExclusiveControl) <br>
      * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
      * <pre>
      * ClsUserStatus clsUserStatus = <span style="color: #70226C">new</span> ClsUserStatus();
@@ -526,12 +660,31 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
      *     ...
      * }
      * </pre>
-     * @param clsUserStatus The entity of delete. (NotNull, PrimaryKeyNotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @param clsUserStatus The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
     public void delete(ClsUserStatus clsUserStatus) {
         doDelete(clsUserStatus, null);
+    }
+
+    /**
+     * Delete the entity non-strictly. {ZeroUpdateException, NonExclusiveControl} <br>
+     * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
+     * <pre>
+     * ClsUserStatus clsUserStatus = <span style="color: #70226C">new</span> ClsUserStatus();
+     * clsUserStatus.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//clsUserStatus.setVersionNo(value);</span>
+     * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #CC4747">deleteNonstrict</span>(clsUserStatus);
+     * </pre>
+     * @param clsUserStatus The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void deleteNonstrict(ClsUserStatus clsUserStatus) {
+        doDeleteNonstrict(clsUserStatus, null);
     }
 
     // ===================================================================================
@@ -566,7 +719,7 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     }
 
     /**
-     * Batch-update the entity list modified-only of same-set columns. (NonExclusiveControl) <br>
+     * Batch-update the entity list modified-only of same-set columns. (ExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement. <br>
      * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
@@ -585,23 +738,62 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
      * }
      * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #CC4747">batchUpdate</span>(clsUserStatusList);
      * </pre>
-     * @param clsUserStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param clsUserStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws BatchEntityAlreadyUpdatedException When the entity has already been updated. This exception extends EntityAlreadyUpdatedException.
      */
     public int[] batchUpdate(List<ClsUserStatus> clsUserStatusList) {
         return doBatchUpdate(clsUserStatusList, null);
     }
 
     /**
-     * Batch-delete the entity list. (NonExclusiveControl) <br>
+     * Batch-update the entity list non-strictly modified-only of same-set columns. (NonExclusiveControl) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement. <br>
+     * <span style="color: #CC4747; font-size: 140%">You should specify same-set columns to all entities like this:</span>
+     * <pre>
+     * <span style="color: #70226C">for</span> (... : ...) {
+     *     ClsUserStatus clsUserStatus = <span style="color: #70226C">new</span> ClsUserStatus();
+     *     clsUserStatus.setFooName("foo");
+     *     <span style="color: #70226C">if</span> (...) {
+     *         clsUserStatus.setFooPrice(123);
+     *     } <span style="color: #70226C">else</span> {
+     *         clsUserStatus.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//clsUserStatus.setFooDate(...); // *not allowed, fragmented</span>
+     *     }
+     *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
+     *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
+     *     clsUserStatusList.add(clsUserStatus);
+     * }
+     * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #CC4747">batchUpdate</span>(clsUserStatusList);
+     * </pre>
+     * @param clsUserStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     */
+    public int[] batchUpdateNonstrict(List<ClsUserStatus> clsUserStatusList) {
+        return doBatchUpdateNonstrict(clsUserStatusList, null);
+    }
+
+    /**
+     * Batch-delete the entity list. (ExclusiveControl) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement.
+     * @param clsUserStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     * @throws BatchEntityAlreadyUpdatedException When the entity has already been updated. This exception extends EntityAlreadyUpdatedException.
+     */
+    public int[] batchDelete(List<ClsUserStatus> clsUserStatusList) {
+        return doBatchDelete(clsUserStatusList, null);
+    }
+
+    /**
+     * Batch-delete the entity list non-strictly. {NonExclusiveControl} <br>
      * This method uses executeBatch() of java.sql.PreparedStatement.
      * @param clsUserStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchDelete(List<ClsUserStatus> clsUserStatusList) {
-        return doBatchDelete(clsUserStatusList, null);
+    public int[] batchDeleteNonstrict(List<ClsUserStatus> clsUserStatusList) {
+        return doBatchDeleteNonstrict(clsUserStatusList, null);
     }
 
     // ===================================================================================
@@ -708,7 +900,7 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     }
 
     /**
-     * Update the entity with varying requests modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Update the entity with varying requests modified-only. (ZeroUpdateException, ExclusiveControl) <br>
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
      * Other specifications are same as update(entity).
      * <pre>
@@ -724,9 +916,9 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
      * });
      * </pre>
-     * @param clsUserStatus The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param clsUserStatus The entity of update. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -735,12 +927,40 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     }
 
     /**
+     * Update the entity with varying requests non-strictly modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
+     * Other specifications are same as updateNonstrict(entity).
+     * <pre>
+     * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
+     * ClsUserStatus clsUserStatus = <span style="color: #70226C">new</span> ClsUserStatus();
+     * clsUserStatus.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * clsUserStatus.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//clsUserStatus.setVersionNo(value);</span>
+     * <span style="color: #0000C0">clsUserStatusBhv</span>.<span style="color: #CC4747">varyingUpdateNonstrict</span>(clsUserStatus, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
+     *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
+     * });
+     * </pre>
+     * @param clsUserStatus The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingUpdateNonstrict(ClsUserStatus clsUserStatus, WritableOptionCall<ClsUserStatusCB, UpdateOption<ClsUserStatusCB>> opLambda) {
+        doUpdateNonstrict(clsUserStatus, createUpdateOption(opLambda));
+    }
+
+    /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
      * Other specifications are same as insertOrUpdate(entity).
      * @param clsUserStatus The entity of insert or update. (NotNull)
      * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
      * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -749,16 +969,43 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     }
 
     /**
-     * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Insert or update the entity with varying requests non-strictly. (NonExclusiveControl: when update) <br>
+     * Other specifications are same as insertOrUpdateNonstrict(entity).
+     * @param clsUserStatus The entity of insert or update. (NotNull)
+     * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
+     * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingInsertOrUpdateNonstrict(ClsUserStatus clsUserStatus, WritableOptionCall<ClsUserStatusCB, InsertOption<ClsUserStatusCB>> insertOpLambda, WritableOptionCall<ClsUserStatusCB, UpdateOption<ClsUserStatusCB>> updateOpLambda) {
+        doInsertOrUpdateNonstrict(clsUserStatus, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    }
+
+    /**
+     * Delete the entity with varying requests. (ZeroUpdateException, ExclusiveControl) <br>
      * Now a valid option does not exist. <br>
      * Other specifications are same as delete(entity).
+     * @param clsUserStatus The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void varyingDelete(ClsUserStatus clsUserStatus, WritableOptionCall<ClsUserStatusCB, DeleteOption<ClsUserStatusCB>> opLambda) {
+        doDelete(clsUserStatus, createDeleteOption(opLambda));
+    }
+
+    /**
+     * Delete the entity with varying requests non-strictly. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Now a valid option does not exist. <br>
+     * Other specifications are same as deleteNonstrict(entity).
      * @param clsUserStatus The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void varyingDelete(ClsUserStatus clsUserStatus, WritableOptionCall<ClsUserStatusCB, DeleteOption<ClsUserStatusCB>> opLambda) {
-        doDelete(clsUserStatus, createDeleteOption(opLambda));
+    public void varyingDeleteNonstrict(ClsUserStatus clsUserStatus, WritableOptionCall<ClsUserStatusCB, DeleteOption<ClsUserStatusCB>> opLambda) {
+        doDeleteNonstrict(clsUserStatus, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -791,6 +1038,19 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     }
 
     /**
+     * Batch-update the list with varying requests non-strictly. <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
+     * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
+     * Other specifications are same as batchUpdateNonstrict(entityList).
+     * @param clsUserStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchUpdateNonstrict(List<ClsUserStatus> clsUserStatusList, WritableOptionCall<ClsUserStatusCB, UpdateOption<ClsUserStatusCB>> opLambda) {
+        return doBatchUpdateNonstrict(clsUserStatusList, createUpdateOption(opLambda));
+    }
+
+    /**
      * Batch-delete the list with varying requests. <br>
      * For example, limitBatchDeleteLogging(). <br>
      * Other specifications are same as batchDelete(entityList).
@@ -800,6 +1060,18 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
      */
     public int[] varyingBatchDelete(List<ClsUserStatus> clsUserStatusList, WritableOptionCall<ClsUserStatusCB, DeleteOption<ClsUserStatusCB>> opLambda) {
         return doBatchDelete(clsUserStatusList, createDeleteOption(opLambda));
+    }
+
+    /**
+     * Batch-delete the list with varying requests non-strictly. <br>
+     * For example, limitBatchDeleteLogging(). <br>
+     * Other specifications are same as batchDeleteNonstrict(entityList).
+     * @param clsUserStatusList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchDeleteNonstrict(List<ClsUserStatus> clsUserStatusList, WritableOptionCall<ClsUserStatusCB, DeleteOption<ClsUserStatusCB>> opLambda) {
+        return doBatchDeleteNonstrict(clsUserStatusList, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -903,6 +1175,12 @@ public abstract class BsClsUserStatusBhv extends AbstractBehaviorWritable<ClsUse
     public OutsideSqlAllFacadeExecutor<ClsUserStatusBhv> outsideSql() {
         return doOutsideSql();
     }
+
+    // ===================================================================================
+    //                                                                Optimistic Lock Info
+    //                                                                ====================
+    @Override
+    protected boolean hasVersionNoValue(Entity et) { return downcast(et).getVersionNo() != null; }
 
     // ===================================================================================
     //                                                                         Type Helper

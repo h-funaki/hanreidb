@@ -34,7 +34,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     JUDGEMENT_ID
  *
  * [column]
- *     JUDGEMENT_ID, JUDGEMENT_PUBLIC_CODE, CASE_NAME, PRECEDENT_REPORTS_KAN, PRECEDENT_REPORTS_GO, PRECEDENT_REPORTS_KO, JUDGEMENT_REPORTS_GO, JUDGEMENT_REPORTS_KO, JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_ID, CASE_NUMBER_ERA_CODE, CASE_NUMBER_YEAR, CASE_MARK_ID, CASE_NUMBER_SERIAL_NUMBER, COURT_ID, BENCH_CODE, JUDGEMENT_RESULT_CODE, JUDGEMENT_TYPE_CODE
+ *     JUDGEMENT_ID, JUDGEMENT_PUBLIC_CODE, CASE_NAME, PRECEDENT_REPORTS_KAN, PRECEDENT_REPORTS_GO, PRECEDENT_REPORTS_KO, JUDGEMENT_REPORTS_GO, JUDGEMENT_REPORTS_KO, JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_ID, CASE_NUMBER_ERA_CODE, CASE_NUMBER_YEAR, CASE_MARK_ID, CASE_NUMBER_SERIAL_NUMBER, COURT_ID, BENCH_CODE, JUDGEMENT_RESULT_CODE, JUDGEMENT_TYPE_CODE, SENTENCE
  *
  * [sequence]
  *     
@@ -49,13 +49,13 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     CLS_BENCH, CASE_MARK, CLS_ERA, COURT, CLS_JUDGEMENT_RESULT, CLS_JUDGEMENT_TYPE, JUDGEMENT
  *
  * [referrer table]
- *     JUDGEMENT, JUDGEMENT_SOURCE_REL
+ *     JUDGEMENT, JUDGEMENT_SOURCE_REL, JUDGEMENT_USER_FAVORITE_REL
  *
  * [foreign property]
  *     clsBench, caseMark, clsEra, court, clsJudgementResult, clsJudgementType, judgementSelf
  *
  * [referrer property]
- *     judgementSelfList, judgementSourceRelList
+ *     judgementSelfList, judgementSourceRelList, judgementUserFavoriteRelList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -77,6 +77,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * String benchCode = entity.getBenchCode();
  * String judgementResultCode = entity.getJudgementResultCode();
  * String judgementTypeCode = entity.getJudgementTypeCode();
+ * String sentence = entity.getSentence();
  * entity.setJudgementId(judgementId);
  * entity.setJudgementPublicCode(judgementPublicCode);
  * entity.setCaseName(caseName);
@@ -95,6 +96,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * entity.setBenchCode(benchCode);
  * entity.setJudgementResultCode(judgementResultCode);
  * entity.setJudgementTypeCode(judgementTypeCode);
+ * entity.setSentence(sentence);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -163,6 +165,9 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /** (判決種別コード)JUDGEMENT_TYPE_CODE: {IX, VARCHAR(10), FK to CLS_JUDGEMENT_TYPE, classification=JudgementType} */
     protected String _judgementTypeCode;
+
+    /** (判決文)SENTENCE: {TEXT(65535)} */
+    protected String _sentence;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -760,6 +765,26 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         _judgementSourceRelList = judgementSourceRelList;
     }
 
+    /** (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelList'. */
+    protected List<JudgementUserFavoriteRel> _judgementUserFavoriteRelList;
+
+    /**
+     * [get] (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelList'.
+     * @return The entity list of referrer property 'judgementUserFavoriteRelList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<JudgementUserFavoriteRel> getJudgementUserFavoriteRelList() {
+        if (_judgementUserFavoriteRelList == null) { _judgementUserFavoriteRelList = newReferrerList(); }
+        return _judgementUserFavoriteRelList;
+    }
+
+    /**
+     * [set] (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelList'.
+     * @param judgementUserFavoriteRelList The entity list of referrer property 'judgementUserFavoriteRelList'. (NullAllowed)
+     */
+    public void setJudgementUserFavoriteRelList(List<JudgementUserFavoriteRel> judgementUserFavoriteRelList) {
+        _judgementUserFavoriteRelList = judgementUserFavoriteRelList;
+    }
+
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
         return new ArrayList<ELEMENT>();
     }
@@ -807,6 +832,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         { if (et != null) { sb.append(li).append(xbRDS(et, "judgementSelfList")); } } }
         if (_judgementSourceRelList != null) { for (JudgementSourceRel et : _judgementSourceRelList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "judgementSourceRelList")); } } }
+        if (_judgementUserFavoriteRelList != null) { for (JudgementUserFavoriteRel et : _judgementUserFavoriteRelList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "judgementUserFavoriteRelList")); } } }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -834,6 +861,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         sb.append(dm).append(xfND(_benchCode));
         sb.append(dm).append(xfND(_judgementResultCode));
         sb.append(dm).append(xfND(_judgementTypeCode));
+        sb.append(dm).append(xfND(_sentence));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -862,6 +890,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         { sb.append(dm).append("judgementSelfList"); }
         if (_judgementSourceRelList != null && !_judgementSourceRelList.isEmpty())
         { sb.append(dm).append("judgementSourceRelList"); }
+        if (_judgementUserFavoriteRelList != null && !_judgementUserFavoriteRelList.isEmpty())
+        { sb.append(dm).append("judgementUserFavoriteRelList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }
@@ -1198,5 +1228,25 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     public void setJudgementTypeCode(String judgementTypeCode) {
         registerModifiedProperty("judgementTypeCode");
         _judgementTypeCode = judgementTypeCode;
+    }
+
+    /**
+     * [get] (判決文)SENTENCE: {TEXT(65535)} <br>
+     * 取り込み時に判決文がないことを許容したい
+     * @return The value of the column 'SENTENCE'. (NullAllowed even if selected: for no constraint)
+     */
+    public String getSentence() {
+        checkSpecifiedProperty("sentence");
+        return convertEmptyToNull(_sentence);
+    }
+
+    /**
+     * [set] (判決文)SENTENCE: {TEXT(65535)} <br>
+     * 取り込み時に判決文がないことを許容したい
+     * @param sentence The value of the column 'SENTENCE'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setSentence(String sentence) {
+        registerModifiedProperty("sentence");
+        _sentence = sentence;
     }
 }

@@ -97,16 +97,30 @@ public class BsClsUserStatusCQ extends AbstractBsClsUserStatusCQ {
     public Map<String, UserCQ> xdfgetUserStatusCode_ExistsReferrer_UserList() { return xgetSQueMap("userStatusCode_ExistsReferrer_UserList"); }
     public String keepUserStatusCode_ExistsReferrer_UserList(UserCQ sq) { return xkeepSQue("userStatusCode_ExistsReferrer_UserList", sq); }
 
+    public Map<String, UserStatusHistoryCQ> xdfgetUserStatusCode_ExistsReferrer_UserStatusHistoryList() { return xgetSQueMap("userStatusCode_ExistsReferrer_UserStatusHistoryList"); }
+    public String keepUserStatusCode_ExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq) { return xkeepSQue("userStatusCode_ExistsReferrer_UserStatusHistoryList", sq); }
+
     public Map<String, UserCQ> xdfgetUserStatusCode_NotExistsReferrer_UserList() { return xgetSQueMap("userStatusCode_NotExistsReferrer_UserList"); }
     public String keepUserStatusCode_NotExistsReferrer_UserList(UserCQ sq) { return xkeepSQue("userStatusCode_NotExistsReferrer_UserList", sq); }
 
+    public Map<String, UserStatusHistoryCQ> xdfgetUserStatusCode_NotExistsReferrer_UserStatusHistoryList() { return xgetSQueMap("userStatusCode_NotExistsReferrer_UserStatusHistoryList"); }
+    public String keepUserStatusCode_NotExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq) { return xkeepSQue("userStatusCode_NotExistsReferrer_UserStatusHistoryList", sq); }
+
     public Map<String, UserCQ> xdfgetUserStatusCode_SpecifyDerivedReferrer_UserList() { return xgetSQueMap("userStatusCode_SpecifyDerivedReferrer_UserList"); }
     public String keepUserStatusCode_SpecifyDerivedReferrer_UserList(UserCQ sq) { return xkeepSQue("userStatusCode_SpecifyDerivedReferrer_UserList", sq); }
+
+    public Map<String, UserStatusHistoryCQ> xdfgetUserStatusCode_SpecifyDerivedReferrer_UserStatusHistoryList() { return xgetSQueMap("userStatusCode_SpecifyDerivedReferrer_UserStatusHistoryList"); }
+    public String keepUserStatusCode_SpecifyDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq) { return xkeepSQue("userStatusCode_SpecifyDerivedReferrer_UserStatusHistoryList", sq); }
 
     public Map<String, UserCQ> xdfgetUserStatusCode_QueryDerivedReferrer_UserList() { return xgetSQueMap("userStatusCode_QueryDerivedReferrer_UserList"); }
     public String keepUserStatusCode_QueryDerivedReferrer_UserList(UserCQ sq) { return xkeepSQue("userStatusCode_QueryDerivedReferrer_UserList", sq); }
     public Map<String, Object> xdfgetUserStatusCode_QueryDerivedReferrer_UserListParameter() { return xgetSQuePmMap("userStatusCode_QueryDerivedReferrer_UserList"); }
     public String keepUserStatusCode_QueryDerivedReferrer_UserListParameter(Object pm) { return xkeepSQuePm("userStatusCode_QueryDerivedReferrer_UserList", pm); }
+
+    public Map<String, UserStatusHistoryCQ> xdfgetUserStatusCode_QueryDerivedReferrer_UserStatusHistoryList() { return xgetSQueMap("userStatusCode_QueryDerivedReferrer_UserStatusHistoryList"); }
+    public String keepUserStatusCode_QueryDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq) { return xkeepSQue("userStatusCode_QueryDerivedReferrer_UserStatusHistoryList", sq); }
+    public Map<String, Object> xdfgetUserStatusCode_QueryDerivedReferrer_UserStatusHistoryListParameter() { return xgetSQuePmMap("userStatusCode_QueryDerivedReferrer_UserStatusHistoryList"); }
+    public String keepUserStatusCode_QueryDerivedReferrer_UserStatusHistoryListParameter(Object pm) { return xkeepSQuePm("userStatusCode_QueryDerivedReferrer_UserStatusHistoryList", pm); }
 
     /** 
      * Add order-by as ascend. <br>
@@ -161,6 +175,132 @@ public class BsClsUserStatusCQ extends AbstractBsClsUserStatusCQ {
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusAlias_Desc() { regOBD("USER_STATUS_ALIAS"); return this; }
+
+    protected ConditionValue _description;
+    public ConditionValue xdfgetDescription()
+    { if (_description == null) { _description = nCV(); }
+      return _description; }
+    protected ConditionValue xgetCValueDescription() { return xdfgetDescription(); }
+
+    protected ConditionValue _displayOrder;
+    public ConditionValue xdfgetDisplayOrder()
+    { if (_displayOrder == null) { _displayOrder = nCV(); }
+      return _displayOrder; }
+    protected ConditionValue xgetCValueDisplayOrder() { return xdfgetDisplayOrder(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_DisplayOrder_Asc() { regOBA("DISPLAY_ORDER"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_DisplayOrder_Desc() { regOBD("DISPLAY_ORDER"); return this; }
+
+    protected ConditionValue _registerDatetime;
+    public ConditionValue xdfgetRegisterDatetime()
+    { if (_registerDatetime == null) { _registerDatetime = nCV(); }
+      return _registerDatetime; }
+    protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
+
+    protected ConditionValue _registerUser;
+    public ConditionValue xdfgetRegisterUser()
+    { if (_registerUser == null) { _registerUser = nCV(); }
+      return _registerUser; }
+    protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_RegisterUser_Asc() { regOBA("REGISTER_USER"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_RegisterUser_Desc() { regOBD("REGISTER_USER"); return this; }
+
+    protected ConditionValue _updateDatetime;
+    public ConditionValue xdfgetUpdateDatetime()
+    { if (_updateDatetime == null) { _updateDatetime = nCV(); }
+      return _updateDatetime; }
+    protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
+
+    protected ConditionValue _updateUser;
+    public ConditionValue xdfgetUpdateUser()
+    { if (_updateUser == null) { _updateUser = nCV(); }
+      return _updateUser; }
+    protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_UpdateUser_Asc() { regOBA("UPDATE_USER"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_UpdateUser_Desc() { regOBD("UPDATE_USER"); return this; }
+
+    protected ConditionValue _versionNo;
+    public ConditionValue xdfgetVersionNo()
+    { if (_versionNo == null) { _versionNo = nCV(); }
+      return _versionNo; }
+    protected ConditionValue xgetCValueVersionNo() { return xdfgetVersionNo(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_VersionNo_Asc() { regOBA("VERSION_NO"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return this. (NotNull)
+     */
+    public BsClsUserStatusCQ addOrderBy_VersionNo_Desc() { regOBD("VERSION_NO"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

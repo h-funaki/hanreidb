@@ -76,6 +76,7 @@ public class JudgementDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Judgement)et).getBenchCode(), (et, vl) -> ((Judgement)et).setBenchCode((String)vl), "benchCode");
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementResultCode(), (et, vl) -> ((Judgement)et).setJudgementResultCode((String)vl), "judgementResultCode");
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementTypeCode(), (et, vl) -> ((Judgement)et).setJudgementTypeCode((String)vl), "judgementTypeCode");
+        setupEpg(_epgMap, et -> ((Judgement)et).getSentence(), (et, vl) -> ((Judgement)et).setSentence((String)vl), "sentence");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -116,7 +117,7 @@ public class JudgementDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, "judgementSelfList,judgementSourceRelList", null, false);
+    protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, "judgementSelfList,judgementSourceRelList,judgementUserFavoriteRelList", null, false);
     protected final ColumnInfo _columnJudgementPublicCode = cci("JUDGEMENT_PUBLIC_CODE", "JUDGEMENT_PUBLIC_CODE", null, "判決公開コード", String.class, "judgementPublicCode", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnCaseName = cci("CASE_NAME", "CASE_NAME", null, "事件名", String.class, "caseName", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnPrecedentReportsKan = cci("PRECEDENT_REPORTS_KAN", "PRECEDENT_REPORTS_KAN", null, "判例集巻", Integer.class, "precedentReportsKan", null, false, false, false, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
@@ -134,6 +135,7 @@ public class JudgementDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnBenchCode = cci("BENCH_CODE", "BENCH_CODE", null, "法廷種別コード", String.class, "benchCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsBench", null, CDef.DefMeta.Bench, false);
     protected final ColumnInfo _columnJudgementResultCode = cci("JUDGEMENT_RESULT_CODE", "JUDGEMENT_RESULT_CODE", null, "判決結果コード", String.class, "judgementResultCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsJudgementResult", null, CDef.DefMeta.JudgementResult, false);
     protected final ColumnInfo _columnJudgementTypeCode = cci("JUDGEMENT_TYPE_CODE", "JUDGEMENT_TYPE_CODE", null, "判決種別コード", String.class, "judgementTypeCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsJudgementType", null, CDef.DefMeta.JudgementType, false);
+    protected final ColumnInfo _columnSentence = cci("SENTENCE", "SENTENCE", null, "判決文", String.class, "sentence", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
 
     /**
      * (判決ID)JUDGEMENT_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
@@ -225,6 +227,11 @@ public class JudgementDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnJudgementTypeCode() { return _columnJudgementTypeCode; }
+    /**
+     * (判決文)SENTENCE: {TEXT(65535)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnSentence() { return _columnSentence; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
@@ -246,6 +253,7 @@ public class JudgementDbm extends AbstractDBMeta {
         ls.add(columnBenchCode());
         ls.add(columnJudgementResultCode());
         ls.add(columnJudgementTypeCode());
+        ls.add(columnSentence());
         return ls;
     }
 
@@ -349,6 +357,14 @@ public class JudgementDbm extends AbstractDBMeta {
     public ReferrerInfo referrerJudgementSourceRelList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnJudgementId(), JudgementSourceRelDbm.getInstance().columnJudgementId());
         return cri("FK_JUDGEMENT_SOURCE_REL_JUDGEMENT", "judgementSourceRelList", this, JudgementSourceRelDbm.getInstance(), mp, false, "judgement");
+    }
+    /**
+     * (判決ユーザーお気に入りリレーション)JUDGEMENT_USER_FAVORITE_REL by JUDGEMENT_ID, named 'judgementUserFavoriteRelList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerJudgementUserFavoriteRelList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnJudgementId(), JudgementUserFavoriteRelDbm.getInstance().columnJudgementId());
+        return cri("FK_JUDGEMENT_USER_FAVORITE_REL_JUDGEMENT", "judgementUserFavoriteRelList", this, JudgementUserFavoriteRelDbm.getInstance(), mp, false, "judgement");
     }
 
     // ===================================================================================

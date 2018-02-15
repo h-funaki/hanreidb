@@ -81,13 +81,19 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepJudgementId_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepJudgementId_ExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepJudgementId_NotExistsReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepJudgementId_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepJudgementId_NotExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepJudgementId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
@@ -96,6 +102,10 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     public String keepJudgementId_QueryDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSourceRelListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueJudgementPublicCode() { return _myCQ.xdfgetJudgementPublicCode(); }
     protected ConditionValue xgetCValueCaseName() { return _myCQ.xdfgetCaseName(); }
@@ -114,6 +124,7 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     protected ConditionValue xgetCValueBenchCode() { return _myCQ.xdfgetBenchCode(); }
     protected ConditionValue xgetCValueJudgementResultCode() { return _myCQ.xdfgetJudgementResultCode(); }
     protected ConditionValue xgetCValueJudgementTypeCode() { return _myCQ.xdfgetJudgementTypeCode(); }
+    protected ConditionValue xgetCValueSentence() { return _myCQ.xdfgetSentence(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(JudgementCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

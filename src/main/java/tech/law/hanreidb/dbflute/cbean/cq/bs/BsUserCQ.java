@@ -94,19 +94,47 @@ public class BsUserCQ extends AbstractBsUserCQ {
       return _userId; }
     protected ConditionValue xgetCValueUserId() { return xdfgetUserId(); }
 
+    public Map<String, JudgementUserFavoriteRelCQ> xdfgetUserId_ExistsReferrer_JudgementUserFavoriteRelList() { return xgetSQueMap("userId_ExistsReferrer_JudgementUserFavoriteRelList"); }
+    public String keepUserId_ExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq) { return xkeepSQue("userId_ExistsReferrer_JudgementUserFavoriteRelList", sq); }
+
     public Map<String, LoginHistoryCQ> xdfgetUserId_ExistsReferrer_LoginHistoryList() { return xgetSQueMap("userId_ExistsReferrer_LoginHistoryList"); }
     public String keepUserId_ExistsReferrer_LoginHistoryList(LoginHistoryCQ sq) { return xkeepSQue("userId_ExistsReferrer_LoginHistoryList", sq); }
+
+    public Map<String, UserStatusHistoryCQ> xdfgetUserId_ExistsReferrer_UserStatusHistoryList() { return xgetSQueMap("userId_ExistsReferrer_UserStatusHistoryList"); }
+    public String keepUserId_ExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq) { return xkeepSQue("userId_ExistsReferrer_UserStatusHistoryList", sq); }
+
+    public Map<String, JudgementUserFavoriteRelCQ> xdfgetUserId_NotExistsReferrer_JudgementUserFavoriteRelList() { return xgetSQueMap("userId_NotExistsReferrer_JudgementUserFavoriteRelList"); }
+    public String keepUserId_NotExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq) { return xkeepSQue("userId_NotExistsReferrer_JudgementUserFavoriteRelList", sq); }
 
     public Map<String, LoginHistoryCQ> xdfgetUserId_NotExistsReferrer_LoginHistoryList() { return xgetSQueMap("userId_NotExistsReferrer_LoginHistoryList"); }
     public String keepUserId_NotExistsReferrer_LoginHistoryList(LoginHistoryCQ sq) { return xkeepSQue("userId_NotExistsReferrer_LoginHistoryList", sq); }
 
+    public Map<String, UserStatusHistoryCQ> xdfgetUserId_NotExistsReferrer_UserStatusHistoryList() { return xgetSQueMap("userId_NotExistsReferrer_UserStatusHistoryList"); }
+    public String keepUserId_NotExistsReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq) { return xkeepSQue("userId_NotExistsReferrer_UserStatusHistoryList", sq); }
+
+    public Map<String, JudgementUserFavoriteRelCQ> xdfgetUserId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList() { return xgetSQueMap("userId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList"); }
+    public String keepUserId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq) { return xkeepSQue("userId_SpecifyDerivedReferrer_JudgementUserFavoriteRelList", sq); }
+
     public Map<String, LoginHistoryCQ> xdfgetUserId_SpecifyDerivedReferrer_LoginHistoryList() { return xgetSQueMap("userId_SpecifyDerivedReferrer_LoginHistoryList"); }
     public String keepUserId_SpecifyDerivedReferrer_LoginHistoryList(LoginHistoryCQ sq) { return xkeepSQue("userId_SpecifyDerivedReferrer_LoginHistoryList", sq); }
+
+    public Map<String, UserStatusHistoryCQ> xdfgetUserId_SpecifyDerivedReferrer_UserStatusHistoryList() { return xgetSQueMap("userId_SpecifyDerivedReferrer_UserStatusHistoryList"); }
+    public String keepUserId_SpecifyDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq) { return xkeepSQue("userId_SpecifyDerivedReferrer_UserStatusHistoryList", sq); }
+
+    public Map<String, JudgementUserFavoriteRelCQ> xdfgetUserId_QueryDerivedReferrer_JudgementUserFavoriteRelList() { return xgetSQueMap("userId_QueryDerivedReferrer_JudgementUserFavoriteRelList"); }
+    public String keepUserId_QueryDerivedReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq) { return xkeepSQue("userId_QueryDerivedReferrer_JudgementUserFavoriteRelList", sq); }
+    public Map<String, Object> xdfgetUserId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter() { return xgetSQuePmMap("userId_QueryDerivedReferrer_JudgementUserFavoriteRelList"); }
+    public String keepUserId_QueryDerivedReferrer_JudgementUserFavoriteRelListParameter(Object pm) { return xkeepSQuePm("userId_QueryDerivedReferrer_JudgementUserFavoriteRelList", pm); }
 
     public Map<String, LoginHistoryCQ> xdfgetUserId_QueryDerivedReferrer_LoginHistoryList() { return xgetSQueMap("userId_QueryDerivedReferrer_LoginHistoryList"); }
     public String keepUserId_QueryDerivedReferrer_LoginHistoryList(LoginHistoryCQ sq) { return xkeepSQue("userId_QueryDerivedReferrer_LoginHistoryList", sq); }
     public Map<String, Object> xdfgetUserId_QueryDerivedReferrer_LoginHistoryListParameter() { return xgetSQuePmMap("userId_QueryDerivedReferrer_LoginHistoryList"); }
     public String keepUserId_QueryDerivedReferrer_LoginHistoryListParameter(Object pm) { return xkeepSQuePm("userId_QueryDerivedReferrer_LoginHistoryList", pm); }
+
+    public Map<String, UserStatusHistoryCQ> xdfgetUserId_QueryDerivedReferrer_UserStatusHistoryList() { return xgetSQueMap("userId_QueryDerivedReferrer_UserStatusHistoryList"); }
+    public String keepUserId_QueryDerivedReferrer_UserStatusHistoryList(UserStatusHistoryCQ sq) { return xkeepSQue("userId_QueryDerivedReferrer_UserStatusHistoryList", sq); }
+    public Map<String, Object> xdfgetUserId_QueryDerivedReferrer_UserStatusHistoryListParameter() { return xgetSQuePmMap("userId_QueryDerivedReferrer_UserStatusHistoryList"); }
+    public String keepUserId_QueryDerivedReferrer_UserStatusHistoryListParameter(Object pm) { return xkeepSQuePm("userId_QueryDerivedReferrer_UserStatusHistoryList", pm); }
 
     /** 
      * Add order-by as ascend. <br>

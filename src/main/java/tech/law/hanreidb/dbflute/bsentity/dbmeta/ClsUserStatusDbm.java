@@ -60,6 +60,13 @@ public class ClsUserStatusDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((ClsUserStatus)et).getUserStatusCode(), (et, vl) -> ((ClsUserStatus)et).setUserStatusCode((String)vl), "userStatusCode");
         setupEpg(_epgMap, et -> ((ClsUserStatus)et).getUserStatusName(), (et, vl) -> ((ClsUserStatus)et).setUserStatusName((String)vl), "userStatusName");
         setupEpg(_epgMap, et -> ((ClsUserStatus)et).getUserStatusAlias(), (et, vl) -> ((ClsUserStatus)et).setUserStatusAlias((String)vl), "userStatusAlias");
+        setupEpg(_epgMap, et -> ((ClsUserStatus)et).getDescription(), (et, vl) -> ((ClsUserStatus)et).setDescription((String)vl), "description");
+        setupEpg(_epgMap, et -> ((ClsUserStatus)et).getDisplayOrder(), (et, vl) -> ((ClsUserStatus)et).setDisplayOrder(cti(vl)), "displayOrder");
+        setupEpg(_epgMap, et -> ((ClsUserStatus)et).getRegisterDatetime(), (et, vl) -> ((ClsUserStatus)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
+        setupEpg(_epgMap, et -> ((ClsUserStatus)et).getRegisterUser(), (et, vl) -> ((ClsUserStatus)et).setRegisterUser((String)vl), "registerUser");
+        setupEpg(_epgMap, et -> ((ClsUserStatus)et).getUpdateDatetime(), (et, vl) -> ((ClsUserStatus)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
+        setupEpg(_epgMap, et -> ((ClsUserStatus)et).getUpdateUser(), (et, vl) -> ((ClsUserStatus)et).setUpdateUser((String)vl), "updateUser");
+        setupEpg(_epgMap, et -> ((ClsUserStatus)et).getVersionNo(), (et, vl) -> ((ClsUserStatus)et).setVersionNo(ctl(vl)), "versionNo");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -82,9 +89,16 @@ public class ClsUserStatusDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnUserStatusCode = cci("USER_STATUS_CODE", "USER_STATUS_CODE", null, "ユーザーステータスコード", String.class, "userStatusCode", null, true, false, true, "VARCHAR", 10, 0, null, false, null, null, null, "userList", null, false);
+    protected final ColumnInfo _columnUserStatusCode = cci("USER_STATUS_CODE", "USER_STATUS_CODE", null, "ユーザーステータスコード", String.class, "userStatusCode", null, true, false, true, "VARCHAR", 10, 0, null, false, null, null, null, "userList,userStatusHistoryList", null, false);
     protected final ColumnInfo _columnUserStatusName = cci("USER_STATUS_NAME", "USER_STATUS_NAME", null, "ユーザーステータス名", String.class, "userStatusName", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserStatusAlias = cci("USER_STATUS_ALIAS", "USER_STATUS_ALIAS", null, "ユーザーステータス別名", String.class, "userStatusAlias", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnDescription = cci("DESCRIPTION", "DESCRIPTION", null, "説明", String.class, "description", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, "順番", Integer.class, "displayOrder", null, false, false, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, "更新ユーザー", String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT UNSIGNED", 20, 0, "0", false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
      * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
@@ -101,12 +115,54 @@ public class ClsUserStatusDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserStatusAlias() { return _columnUserStatusAlias; }
+    /**
+     * (説明)DESCRIPTION: {NotNull, TEXT(65535)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnDescription() { return _columnDescription; }
+    /**
+     * (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnDisplayOrder() { return _columnDisplayOrder; }
+    /**
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRegisterDatetime() { return _columnRegisterDatetime; }
+    /**
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRegisterUser() { return _columnRegisterUser; }
+    /**
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }
+    /**
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdateUser() { return _columnUpdateUser; }
+    /**
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnVersionNo() { return _columnVersionNo; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnUserStatusCode());
         ls.add(columnUserStatusName());
         ls.add(columnUserStatusAlias());
+        ls.add(columnDescription());
+        ls.add(columnDisplayOrder());
+        ls.add(columnRegisterDatetime());
+        ls.add(columnRegisterUser());
+        ls.add(columnUpdateDatetime());
+        ls.add(columnUpdateUser());
+        ls.add(columnVersionNo());
         return ls;
     }
 
@@ -121,6 +177,11 @@ public class ClsUserStatusDbm extends AbstractDBMeta {
     protected UniqueInfo cpui() { return hpcpui(columnUserStatusCode()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
+
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() { return hpcui(columnDisplayOrder()); }
 
     // ===================================================================================
     //                                                                       Relation Info
@@ -142,10 +203,27 @@ public class ClsUserStatusDbm extends AbstractDBMeta {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserStatusCode(), UserDbm.getInstance().columnUserStatusCode());
         return cri("FK_USER_CLS_USER_STATUS", "userList", this, UserDbm.getInstance(), mp, false, "clsUserStatus");
     }
+    /**
+     * (ユーザーステータス履歴)USER_STATUS_HISTORY by USER_NEW_STATUS_CODE, named 'userStatusHistoryList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerUserStatusHistoryList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnUserStatusCode(), UserStatusHistoryDbm.getInstance().columnUserNewStatusCode());
+        return cri("FK_USER_STATUS_HISTORY_CLS_USER_STATUS", "userStatusHistoryList", this, UserStatusHistoryDbm.getInstance(), mp, false, "clsUserStatus");
+    }
 
     // ===================================================================================
     //                                                                        Various Info
     //                                                                        ============
+    public boolean hasVersionNo() { return true; }
+    public ColumnInfo getVersionNoColumnInfo() { return _columnVersionNo; }
+    public boolean hasCommonColumn() { return true; }
+    public List<ColumnInfo> getCommonColumnInfoList()
+    { return newArrayList(columnRegisterDatetime(), columnRegisterUser(), columnUpdateDatetime(), columnUpdateUser()); }
+    public List<ColumnInfo> getCommonColumnInfoBeforeInsertList()
+    { return newArrayList(columnRegisterDatetime(), columnRegisterUser(), columnUpdateDatetime(), columnUpdateUser()); }
+    public List<ColumnInfo> getCommonColumnInfoBeforeUpdateList()
+    { return newArrayList(columnUpdateDatetime(), columnUpdateUser()); }
 
     // ===================================================================================
     //                                                                           Type Name

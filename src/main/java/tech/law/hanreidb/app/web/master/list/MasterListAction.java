@@ -1,6 +1,6 @@
 package tech.law.hanreidb.app.web.master.list;
 
-import static tech.law.hanreidb.app.base.StaticImportUtil.toImmutable;
+import static tech.law.hanreidb.app.base.util.StaticImportUtil.toImmutable;
 
 import java.util.List;
 
