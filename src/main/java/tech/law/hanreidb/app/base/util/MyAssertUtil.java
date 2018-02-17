@@ -1,10 +1,14 @@
+/*
+ * Copyright(c) u-next.
+ */
 package tech.law.hanreidb.app.base.util;
 
 /**
  * アサートに関する処理のちょっとした補完クラス。(継承とかも何もない)<br>
  * ディベロッパーは NxAssertions を経由するので、実質的に表には出てこない。<br>
  * フレームワーク用のクラスと言ってもいいかも。
- * @author h-funaki
+ * @author mito (NSBOからコピーしたらしい)
+ * @author jflute
  */
 public class MyAssertUtil {
 

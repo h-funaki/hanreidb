@@ -1,5 +1,6 @@
 package tech.law.hanreidb.app.job;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -70,13 +71,16 @@ public class ScrapeCourtHanreiJobAssist {
         entity.setPrecedentReports(map.get(PRECEDENT_REPORTS));
         entity.setRightType(map.get(RIGHT_TYPE));
         entity.setTextUrl(map.get(TEXT_URL));
-        entity.setSourceOriginalId(Integer.parseInt(map.get(SOURCE_ORIGINAL_ID)));
+        entity.setSourceOriginalId(Integer.parseInt(map.get(SOURCE_ORIGINAL_ID))); // NotNull
+        entity.setVersionNo(0L);
+        entity.setRegisterDatetime(LocalDateTime.now());
+        entity.setRegisterUser("ScrapeCourtHanreiJob");
         courtScrapeResultBhv.insert(entity);
-        logger.debug("事件番号:{} 事件名:{} 裁判年月日:{} 裁判所名:{} 裁判種別:{}" + //
-                "結果:{} 判例集:{} 原審裁判所名:{} 原審裁判年月日:{}" + //
-                "原審結果:{} 判示事項:{} 裁判要旨:{} 参照法条:{}" + //
-                "URL:{} 高裁判例集:{} 判示事項の要旨:{} 権利種別:{}" + //
-                "訴訟類型:{} 事件分野:{} 取得元ID:{}", //
+        logger.debug("事件番号:{}\n事件名:{}\n裁判年月日:{}\n裁判所名:{}\n裁判種別:{}\n" + //
+                "結果:{}\n判例集:{}\n原審裁判所名:{}\n原審裁判年月日:{}\n" + //
+                "原審結果:{}\n判示事項:{}\n裁判要旨:{}\n参照法条:{}\n" + //
+                "URL:{}\n高裁判例集:{}\n判示事項の要旨:{}\n権利種別:{}\n" + //
+                "訴訟類型:{}\n事件分野:{}\n取得元ID:{}", //
                 map.get(CASE_NUMBER), map.get(CASE_NAME), map.get(JUDGEMENT_DATE), map.get(COURT_NAME), map.get(JUDGEMENT_TYPE), //
                 map.get(JUDGEMENT_RESULT), map.get(PRECEDENT_REPORTS), map.get(ORIGINAL_COURT_NAME), map.get(ORIGINAL_JUDGEMENT_DATE), //
                 map.get(ORIGINAL_JUDGEMENT_RESULT), map.get(JUDGEMENT_CONTENT), map.get(JUDGEMENT_SUMMARY), map.get(LAW), //

@@ -207,21 +207,46 @@ public abstract class BsCourtScrapeResultBhv extends AbstractBehaviorWritable<Co
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<CourtScrapeResult> selectByUniqueOf(String caseNumber) {
-        return facadeSelectByUniqueOf(caseNumber);
+    public OptionalEntity<CourtScrapeResult> selectByUniqueOfCaseNumber(String caseNumber) {
+        return facadeSelectByUniqueOfCaseNumber(caseNumber);
     }
 
-    protected OptionalEntity<CourtScrapeResult> facadeSelectByUniqueOf(String caseNumber) {
-        return doSelectByUniqueOf(caseNumber, typeOfSelectedEntity());
+    protected OptionalEntity<CourtScrapeResult> facadeSelectByUniqueOfCaseNumber(String caseNumber) {
+        return doSelectByUniqueOfCaseNumber(caseNumber, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends CourtScrapeResult> OptionalEntity<ENTITY> doSelectByUniqueOf(String caseNumber, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(caseNumber), tp), caseNumber);
+    protected <ENTITY extends CourtScrapeResult> OptionalEntity<ENTITY> doSelectByUniqueOfCaseNumber(String caseNumber, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOfCaseNumber(caseNumber), tp), caseNumber);
     }
 
-    protected CourtScrapeResultCB xprepareCBAsUniqueOf(String caseNumber) {
+    protected CourtScrapeResultCB xprepareCBAsUniqueOfCaseNumber(String caseNumber) {
         assertObjectNotNull("caseNumber", caseNumber);
-        return newConditionBean().acceptUniqueOf(caseNumber);
+        return newConditionBean().acceptUniqueOfCaseNumber(caseNumber);
+    }
+
+    /**
+     * Select the entity by the unique-key value.
+     * @param sourceOriginalId (取得元ID): UQ, NotNull, INT UNSIGNED(10). (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<CourtScrapeResult> selectByUniqueOfSourceOriginalId(Integer sourceOriginalId) {
+        return facadeSelectByUniqueOfSourceOriginalId(sourceOriginalId);
+    }
+
+    protected OptionalEntity<CourtScrapeResult> facadeSelectByUniqueOfSourceOriginalId(Integer sourceOriginalId) {
+        return doSelectByUniqueOfSourceOriginalId(sourceOriginalId, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends CourtScrapeResult> OptionalEntity<ENTITY> doSelectByUniqueOfSourceOriginalId(Integer sourceOriginalId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOfSourceOriginalId(sourceOriginalId), tp), sourceOriginalId);
+    }
+
+    protected CourtScrapeResultCB xprepareCBAsUniqueOfSourceOriginalId(Integer sourceOriginalId) {
+        assertObjectNotNull("sourceOriginalId", sourceOriginalId);
+        return newConditionBean().acceptUniqueOfSourceOriginalId(sourceOriginalId);
     }
 
     // ===================================================================================
@@ -420,6 +445,14 @@ public abstract class BsCourtScrapeResultBhv extends AbstractBehaviorWritable<Co
      */
     public List<String> extractCaseNumberList(List<CourtScrapeResult> courtScrapeResultList)
     { return helpExtractListInternally(courtScrapeResultList, "caseNumber"); }
+
+    /**
+     * Extract the value list of (single) unique key sourceOriginalId.
+     * @param courtScrapeResultList The list of courtScrapeResult. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Integer> extractSourceOriginalIdList(List<CourtScrapeResult> courtScrapeResultList)
+    { return helpExtractListInternally(courtScrapeResultList, "sourceOriginalId"); }
 
     // ===================================================================================
     //                                                                       Entity Update

@@ -2199,7 +2199,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param sourceOriginalId The value of sourceOriginalId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceOriginalId_Equal(Integer sourceOriginalId) {
@@ -2212,7 +2212,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param sourceOriginalId The value of sourceOriginalId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceOriginalId_NotEqual(Integer sourceOriginalId) {
@@ -2225,7 +2225,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param sourceOriginalId The value of sourceOriginalId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceOriginalId_GreaterThan(Integer sourceOriginalId) {
@@ -2234,7 +2234,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param sourceOriginalId The value of sourceOriginalId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceOriginalId_LessThan(Integer sourceOriginalId) {
@@ -2243,7 +2243,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param sourceOriginalId The value of sourceOriginalId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceOriginalId_GreaterEqual(Integer sourceOriginalId) {
@@ -2252,7 +2252,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param sourceOriginalId The value of sourceOriginalId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceOriginalId_LessEqual(Integer sourceOriginalId) {
@@ -2263,7 +2263,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param minNumber The min number of sourceOriginalId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of sourceOriginalId. (NullAllowed: if null, no to-condition)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -2276,7 +2276,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param minNumber The min number of sourceOriginalId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of sourceOriginalId. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -2287,7 +2287,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param sourceOriginalIdList The collection of sourceOriginalId as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceOriginalId_InScope(Collection<Integer> sourceOriginalIdList) {
@@ -2300,7 +2300,7 @@ public abstract class AbstractBsCourtScrapeResultCQ extends AbstractConditionQue
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @param sourceOriginalIdList The collection of sourceOriginalId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceOriginalId_NotInScope(Collection<Integer> sourceOriginalIdList) {

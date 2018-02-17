@@ -1,5 +1,7 @@
 package tech.law.hanreidb.app.web.job;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Resource;
 
 import org.lastaflute.job.JobManager;
@@ -55,7 +57,7 @@ public class JobExecuteAction extends HanreidbBaseAction {
     }
 
     private void mappingToParams(JobExecuteBody body, LaunchNowOption op) {
-        op.param("executionDateTime", body.executionDateTime);
+        op.param("executionDateTime", LocalDateTime.now()); // body.executionDateTime);
         if (body.varyingParameter != null) {
             body.varyingParameter.forEach((key, value) -> op.param(key, value));
         }

@@ -110,10 +110,22 @@ public class BsCourtScrapeResultCB extends AbstractConditionBean {
      * @param caseNumber (事件番号): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return this. (NotNull)
      */
-    public CourtScrapeResultCB acceptUniqueOf(String caseNumber) {
+    public CourtScrapeResultCB acceptUniqueOfCaseNumber(String caseNumber) {
         assertObjectNotNull("caseNumber", caseNumber);
         BsCourtScrapeResultCB cb = this;
         cb.query().setCaseNumber_Equal(caseNumber);
+        return (CourtScrapeResultCB)this;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param sourceOriginalId (取得元ID): UQ, NotNull, INT UNSIGNED(10). (NotNull)
+     * @return this. (NotNull)
+     */
+    public CourtScrapeResultCB acceptUniqueOfSourceOriginalId(Integer sourceOriginalId) {
+        assertObjectNotNull("sourceOriginalId", sourceOriginalId);
+        BsCourtScrapeResultCB cb = this;
+        cb.query().setSourceOriginalId_Equal(sourceOriginalId);
         return (CourtScrapeResultCB)this;
     }
 
@@ -415,7 +427,7 @@ public class BsCourtScrapeResultCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnCaseCategory() { return doColumn("CASE_CATEGORY"); }
         /**
-         * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+         * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceOriginalId() { return doColumn("SOURCE_ORIGINAL_ID"); }

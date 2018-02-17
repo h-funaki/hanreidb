@@ -6,13 +6,17 @@ import java.util.Map;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.lastaflute.job.LaJob;
 import org.lastaflute.job.mock.MockJobRuntime;
-import org.lastaflute.job.subsidiary.InitialCronOpCall;
 
-import tech.law.hanreidb.unit.UnitHanreidbTestCase;
+import tech.law.hanreidb.app.base.job.JobRecorder;
+import tech.law.hanreidb.unit.NxJobTestCase;
 
-public class ScrapeCourtHanreiJobTest extends UnitHanreidbTestCase {
+public class ScrapeCourtHanreiJobTest extends NxJobTestCase {
+
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+    private static final Boolean REAL_ACCESS = true;
 
     // ===================================================================================
     //                                                                           Attribute
@@ -21,16 +25,53 @@ public class ScrapeCourtHanreiJobTest extends UnitHanreidbTestCase {
     // ===================================================================================
     //                                                                               正常系
     //                                                                               =====
-    public void test_processHanrei() throws IOException {
+    public void test_processHanrei_mock() throws IOException {
         // ## Arrange ##
         ScrapeCourtHanreiJob job = prepareHtmlMockJob();
         inject(job);
 
         // ## Act ##
-        MockJobRuntime runtime = createMockJobRuntime(job);
+        MockJobRuntime runtime = createMockJobRuntime(job, 1, 1);
         job.run(runtime);
 
         // ## Assert ##
+        showEndTitleRoll(runtime); // end-title-rollの中身を目視するため
+        assertPlannedSuccess(runtime); // 計画通りの成功であることをアサート
+    }
+
+    public void test_processHanrei_real_access() {
+        // ## Arrange ##
+        if (!REAL_ACCESS) {
+            return;
+        }
+        ScrapeCourtHanreiJob job = new ScrapeCourtHanreiJob();
+        inject(job);
+
+        // ## Act ##
+        //        MockJobRuntime runtime = createMockJobRuntime(job, 1, 2);
+        //        job.run(runtime);
+
+        // ## Assert ##
+    }
+
+    // ===================================================================================
+    //                                                                               異常系
+    //                                                                               =====
+    public void test_指定したidのページがない() throws Exception {
+        // ## Arrange ##
+        ScrapeCourtHanreiJob job = new ScrapeCourtHanreiJob();
+        inject(job);
+
+        // ## Act ##
+        MockJobRuntime runtime = createMockJobRuntime(job, 100000, 100000);
+        job.run(runtime);
+
+        // ## Assert ##
+        JobRecorder recorder = getRecorder(runtime);
+        String skipTitle = recorder.getBusinessSkips().getFirst().getSkipTitle();
+        softly.then(skipTitle).as("").contains("100000");
+        softly.then(skipTitle).as("").contains("HTTP error fetching URL");
+        softly.then(recorder.getErrors().size()).as("").isEqualTo(0);
     }
 
     // ===================================================================================
@@ -40,50 +81,26 @@ public class ScrapeCourtHanreiJobTest extends UnitHanreidbTestCase {
         return new ScrapeCourtHanreiJob() {
             @Override
             protected Document getHtmlDocument(Integer detail, Integer targetId) throws IOException {
-                return Jsoup.parse(new File(
-                        "/Users/h-funaki/Documents/hanreidb/src/test/resources/job/court_hanrei_detail" + detail.toString() + ".html"),
-                        "UTF-8");
+                return Jsoup.parse(new File("/Users/h-funaki/Documents/hanreidb/src/test/resources/job/scrape/court/court_hanrei_detail"
+                        + detail.toString() + ".html"), "UTF-8");
             };
         };
     }
 
-    private MockJobRuntime createMockJobRuntime(ScrapeCourtHanreiJob job) {
+    private MockJobRuntime createMockJobRuntime(ScrapeCourtHanreiJob job, Integer beginId, Integer endId) {
         return mockRuntime(job, op -> op.params(() -> {
             Map<String, Object> map = newHashMap();
-            map.put(ScrapeCourtHanreiJob.BEGIN_ID, 87428);
-            map.put(ScrapeCourtHanreiJob.END_ID, 87428);
+            map.put(ScrapeCourtHanreiJob.BEGIN_ID, beginId);
+            map.put(ScrapeCourtHanreiJob.END_ID, endId);
             return map;
         }));
     }
 
-    // ===================================================================================
-    //                                                                     LastaJob Helper
-    //                                                                     ===============
-    /**
-     * Prepare mock of job runtime.
-     * @param job The execution job on the runtime. (NotNull)
-     * @return The mock instance of job runtime for the job. (NotNull)
-     */
-    protected MockJobRuntime mockRuntime(LaJob job) {
-        if (job == null) {
-            throw new IllegalArgumentException("The argument 'job' should not be null.");
-        }
-        return MockJobRuntime.of(job.getClass());
-    }
-
-    /**
-     * Prepare mock of job runtime.
-     * @param job The execution job on the runtime. (NotNull)
-     * @param opLambda The callback for option of initial cron. (NotNull)
-     * @return The mock instance of job runtime for the job. (NotNull)
-     */
-    protected MockJobRuntime mockRuntime(LaJob job, InitialCronOpCall opLambda) {
-        if (job == null) {
-            throw new IllegalArgumentException("The argument 'job' should not be null.");
-        }
-        if (opLambda == null) {
-            throw new IllegalArgumentException("The argument 'opLambda' should not be null.");
-        }
-        return MockJobRuntime.of(job.getClass(), opLambda);
+    //===================================================================================
+    //                                                                       Small Helper
+    //                                                                       ============
+    // NxBatchRecorderを取得する
+    private JobRecorder getRecorder(MockJobRuntime runtime) {
+        return (JobRecorder) runtime.getEndTitleRollMap().get("recorder");
     }
 }

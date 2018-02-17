@@ -240,7 +240,7 @@ public class CourtScrapeResultDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnCaseCategory() { return _columnCaseCategory; }
     /**
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceOriginalId() { return _columnSourceOriginalId; }
@@ -317,7 +317,8 @@ public class CourtScrapeResultDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                        Unique Element
     //                                        --------------
-    public UniqueInfo uniqueOf() { return hpcui(columnCaseNumber()); }
+    public UniqueInfo uniqueOfCaseNumber() { return hpcui(columnCaseNumber()); }
+    public UniqueInfo uniqueOfSourceOriginalId() { return hpcui(columnSourceOriginalId()); }
 
     // ===================================================================================
     //                                                                       Relation Info

@@ -1,7 +1,7 @@
 package tech.law.hanreidb.app.web.judgement.list;
 
-import static tech.law.hanreidb.app.base.util.StaticImportUtil.ifNotNull;
-import static tech.law.hanreidb.app.base.util.StaticImportUtil.toImmutable;
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotNull;
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.toImmutable;
 
 import javax.annotation.Resource;
 

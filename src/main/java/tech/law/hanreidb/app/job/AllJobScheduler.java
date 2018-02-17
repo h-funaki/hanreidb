@@ -24,7 +24,10 @@ public class AllJobScheduler implements LaJobScheduler {
 
     @Override
     public void schedule(LaCron cron) {
-        cron.registerNonCron(ScrapeCourtHanreiJob.class, waitIfConcurrent(), op -> {});
+        cron.register("11 02 * * * ", ScrapeCourtHanreiJob.class, waitIfConcurrent(), op -> {});
+        //        cron.registerNonCron(ScrapeCourtHanreiJob.class, waitIfConcurrent(), op -> {
+        //            op.uniqueBy("ScrapeCourtHanrei");
+        //        });
     }
 
     @Override

@@ -65,7 +65,7 @@ public class CreateApiTest extends UnitHanreidbTestCase {
         actionLines.add("import org.lastaflute.web.Execute;");
         actionLines.add("import org.lastaflute.web.response.JsonResponse;");
         actionLines.add("");
-        actionLines.add("import tech.law.hanreidb.app.base.HanreidbBaseAction;");
+        actionLines.add("import tech.law.hanreidb.HanreidbBaseAction;");
         actionLines.add("import org.slf4j.Logger;");
         actionLines.add("import org.slf4j.LoggerFactory;");
         addAuthor(actionLines);

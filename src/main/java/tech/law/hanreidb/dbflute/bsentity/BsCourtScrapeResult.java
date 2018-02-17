@@ -190,7 +190,7 @@ public abstract class BsCourtScrapeResult extends AbstractEntity implements Doma
     /** (事件分野)CASE_CATEGORY: {VARCHAR(100)} */
     protected String _caseCategory;
 
-    /** (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)} */
+    /** (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)} */
     protected Integer _sourceOriginalId;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -235,10 +235,21 @@ public abstract class BsCourtScrapeResult extends AbstractEntity implements Doma
      * You can update the entity by the key when entity update (NOT batch update).
      * @param caseNumber (事件番号): UQ, NotNull, VARCHAR(50). (NotNull)
      */
-    public void uniqueBy(String caseNumber) {
+    public void uniqueByCaseNumber(String caseNumber) {
         __uniqueDrivenProperties.clear();
         __uniqueDrivenProperties.addPropertyName("caseNumber");
         setCaseNumber(caseNumber);
+    }
+
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param sourceOriginalId (取得元ID): UQ, NotNull, INT UNSIGNED(10). (NotNull)
+     */
+    public void uniqueBySourceOriginalId(Integer sourceOriginalId) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("sourceOriginalId");
+        setSourceOriginalId(sourceOriginalId);
     }
 
     // ===================================================================================
@@ -707,7 +718,7 @@ public abstract class BsCourtScrapeResult extends AbstractEntity implements Doma
     }
 
     /**
-     * [get] (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)} <br>
+     * [get] (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)} <br>
      * URL末尾のID。最大6桁。
      * @return The value of the column 'SOURCE_ORIGINAL_ID'. (basically NotNull if selected: for the constraint)
      */
@@ -717,7 +728,7 @@ public abstract class BsCourtScrapeResult extends AbstractEntity implements Doma
     }
 
     /**
-     * [set] (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)} <br>
+     * [set] (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)} <br>
      * URL末尾のID。最大6桁。
      * @param sourceOriginalId The value of the column 'SOURCE_ORIGINAL_ID'. (basically NotNull if update: for the constraint)
      */

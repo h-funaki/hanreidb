@@ -38,6 +38,7 @@ map:{
         ; REGISTER_USER     = $$AccessContext$$.getAccessUserOnThread()
         ; UPDATE_DATETIME   = entity.getRegisterDatetime()
         ; UPDATE_USER       = entity.getRegisterUser()
+        ; VERSION_NO        = 0        
     }
     ; beforeUpdateMap = map:{
         ; UPDATE_DATETIME   = $$AccessContext$$.getAccessLocalDateTimeOnThread()

@@ -1,6 +1,9 @@
+/*
+ * Copyright(c) u-next.
+ */
 package tech.law.hanreidb.app.base.job;
 
-import static tech.law.hanreidb.app.base.util.StaticImportUtil.toImmutable;
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.toImmutable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -12,7 +15,7 @@ import org.eclipse.collections.impl.Counter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import tech.law.hanreidb.app.base.exception.HanreidbSystemException;
+import tech.law.hanreidb.app.base.core.exception.system.NxSystemException;
 import tech.law.hanreidb.app.base.util.MyAssertUtil;
 
 /**
@@ -46,7 +49,8 @@ import tech.law.hanreidb.app.base.util.MyAssertUtil;
  *     ...
  * }
  * </pre>
- * @author h-funaki
+ * @author awane
+ * @author jflute
  */
 public class JobRecorder {
 
@@ -378,7 +382,7 @@ public class JobRecorder {
      * 同じエラーが続いたときの例外。
      * @author jflute
      */
-    public static class JobSameErrorContinueException extends HanreidbSystemException {
+    public static class JobSameErrorContinueException extends NxSystemException {
 
         private static final long serialVersionUID = 1L;
 

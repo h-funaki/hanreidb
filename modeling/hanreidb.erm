@@ -806,6 +806,7 @@
 					<unsigned>true</unsigned>
 					<description>URL末尾のID。最大6桁。</description>
 					<not_null>true</not_null>
+					<unique_key>true</unique_key>
 				</normal_column>
 				<column_group>共通カラム</column_group>
 			</columns>

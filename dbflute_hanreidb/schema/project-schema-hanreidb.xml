@@ -422,6 +422,9 @@
         <unique name="CASE_NUMBER">
             <unique-column name="CASE_NUMBER" position="1"/>
         </unique>
+        <unique name="SOURCE_ORIGINAL_ID">
+            <unique-column name="SOURCE_ORIGINAL_ID" position="1"/>
+        </unique>
     </table>
     <table comment="判決" name="JUDGEMENT"
         schema="hanreidb.$$NoNameSchema$$" type="TABLE">

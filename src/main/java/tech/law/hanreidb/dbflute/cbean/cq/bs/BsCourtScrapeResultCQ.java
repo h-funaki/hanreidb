@@ -432,14 +432,14 @@ public class BsCourtScrapeResultCQ extends AbstractBsCourtScrapeResultCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @return this. (NotNull)
      */
     public BsCourtScrapeResultCQ addOrderBy_SourceOriginalId_Asc() { regOBA("SOURCE_ORIGINAL_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元ID)SOURCE_ORIGINAL_ID: {NotNull, INT UNSIGNED(10)}
+     * (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)}
      * @return this. (NotNull)
      */
     public BsCourtScrapeResultCQ addOrderBy_SourceOriginalId_Desc() { regOBD("SOURCE_ORIGINAL_ID"); return this; }
