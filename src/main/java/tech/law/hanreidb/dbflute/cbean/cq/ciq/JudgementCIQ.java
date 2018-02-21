@@ -79,17 +79,23 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     protected ConditionValue xgetCValueJudgementId() { return _myCQ.xdfgetJudgementId(); }
     public String keepJudgementId_ExistsReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepJudgementId_ExistsReferrer_JudgementReportRelList(JudgementReportRelCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepJudgementId_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepJudgementId_ExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepJudgementId_NotExistsReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepJudgementId_NotExistsReferrer_JudgementReportRelList(JudgementReportRelCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepJudgementId_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepJudgementId_NotExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSelfList(JudgementCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepJudgementId_SpecifyDerivedReferrer_JudgementReportRelList(JudgementReportRelCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
@@ -98,6 +104,10 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     public String keepJudgementId_QueryDerivedReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSelfListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementReportRelList(JudgementReportRelCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementReportRelListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
@@ -109,11 +119,6 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueJudgementPublicCode() { return _myCQ.xdfgetJudgementPublicCode(); }
     protected ConditionValue xgetCValueCaseName() { return _myCQ.xdfgetCaseName(); }
-    protected ConditionValue xgetCValuePrecedentReportsKan() { return _myCQ.xdfgetPrecedentReportsKan(); }
-    protected ConditionValue xgetCValuePrecedentReportsGo() { return _myCQ.xdfgetPrecedentReportsGo(); }
-    protected ConditionValue xgetCValuePrecedentReportsKo() { return _myCQ.xdfgetPrecedentReportsKo(); }
-    protected ConditionValue xgetCValueJudgementReportsGo() { return _myCQ.xdfgetJudgementReportsGo(); }
-    protected ConditionValue xgetCValueJudgementReportsKo() { return _myCQ.xdfgetJudgementReportsKo(); }
     protected ConditionValue xgetCValueJudgementDate() { return _myCQ.xdfgetJudgementDate(); }
     protected ConditionValue xgetCValueOriginalJudgementId() { return _myCQ.xdfgetOriginalJudgementId(); }
     protected ConditionValue xgetCValueCaseNumberEraCode() { return _myCQ.xdfgetCaseNumberEraCode(); }
@@ -125,6 +130,11 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     protected ConditionValue xgetCValueJudgementResultCode() { return _myCQ.xdfgetJudgementResultCode(); }
     protected ConditionValue xgetCValueJudgementTypeCode() { return _myCQ.xdfgetJudgementTypeCode(); }
     protected ConditionValue xgetCValueSentence() { return _myCQ.xdfgetSentence(); }
+    protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
+    protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }
+    protected ConditionValue xgetCValueUpdateDatetime() { return _myCQ.xdfgetUpdateDatetime(); }
+    protected ConditionValue xgetCValueUpdateUser() { return _myCQ.xdfgetUpdateUser(); }
+    protected ConditionValue xgetCValueVersionNo() { return _myCQ.xdfgetVersionNo(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(JudgementCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

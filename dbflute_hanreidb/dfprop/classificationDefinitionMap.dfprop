@@ -93,5 +93,12 @@ map:{
             ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
         }
     }
+    ; Source = list:{
+        ; map:{
+            ; table=CLS_SOURCE
+            ; code=SOURCE_CODE; name=SOURCE_NAME; alias=SOURCE_ALIAS;
+            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+        }
+    }
 }
 # ----------------/

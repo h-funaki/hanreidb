@@ -108,7 +108,7 @@ public class BsJudgementCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param judgementPublicCode (判決公開コード): UQ, NotNull, VARCHAR(20). (NotNull)
+     * @param judgementPublicCode (判決公開コード): UQ, NotNull, VARCHAR(12). (NotNull)
      * @return this. (NotNull)
      */
     public JudgementCB acceptUniqueOf(String judgementPublicCode) {
@@ -490,7 +490,7 @@ public class BsJudgementCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnJudgementId() { return doColumn("JUDGEMENT_ID"); }
         /**
-         * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+         * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnJudgementPublicCode() { return doColumn("JUDGEMENT_PUBLIC_CODE"); }
@@ -499,31 +499,6 @@ public class BsJudgementCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnCaseName() { return doColumn("CASE_NAME"); }
-        /**
-         * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnPrecedentReportsKan() { return doColumn("PRECEDENT_REPORTS_KAN"); }
-        /**
-         * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnPrecedentReportsGo() { return doColumn("PRECEDENT_REPORTS_GO"); }
-        /**
-         * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnPrecedentReportsKo() { return doColumn("PRECEDENT_REPORTS_KO"); }
-        /**
-         * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnJudgementReportsGo() { return doColumn("JUDGEMENT_REPORTS_GO"); }
-        /**
-         * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnJudgementReportsKo() { return doColumn("JUDGEMENT_REPORTS_KO"); }
         /**
          * (裁判年月日)JUDGEMENT_DATE: {DATE(10)}
          * @return The information object of specified column. (NotNull)
@@ -579,6 +554,31 @@ public class BsJudgementCB extends AbstractConditionBean {
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSentence() { return doColumn("SENTENCE"); }
+        /**
+         * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnRegisterDatetime() { return doColumn("REGISTER_DATETIME"); }
+        /**
+         * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnRegisterUser() { return doColumn("REGISTER_USER"); }
+        /**
+         * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnUpdateDatetime() { return doColumn("UPDATE_DATETIME"); }
+        /**
+         * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnUpdateUser() { return doColumn("UPDATE_USER"); }
+        /**
+         * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnVersionNo() { return doColumn("VERSION_NO"); }
         public void everyColumn() { doEveryColumn(); }
         public void exceptRecordMetaColumn() { doExceptRecordMetaColumn(); }
         @Override
@@ -771,6 +771,23 @@ public class BsJudgementCB extends AbstractConditionBean {
             assertDerived("judgementSelfList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
             return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<JudgementCB> sq, JudgementCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsderiveJudgementSelfList(fn, sq, al, op), _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from JUDGEMENT_REPORT_REL where ...) as FOO_MAX} <br>
+         * (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     relCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     relCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, JudgementReportRel.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<JudgementReportRelCB, JudgementCQ> derivedJudgementReportRel() {
+            assertDerived("judgementReportRelList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<JudgementReportRelCB> sq, JudgementCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveJudgementReportRelList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.lastaflute.core.util.Lato;
+import org.lastaflute.web.validation.Required;
 
 public class JobExecuteBody {
 
@@ -11,7 +12,7 @@ public class JobExecuteBody {
     //                                                                           Attribute
     //                                                                           =========
     /** 実行日時。 */
-    //@Required
+    @Required
     public LocalDateTime executionDateTime;
 
     /** 可変パラメータ。 (NullAllowed) */

@@ -284,22 +284,22 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
 
     /**
      * Set up relation columns to select clause. <br>
-     * (取得元)SOURCE by my SOURCE_ID, named 'source'.
+     * ([区分値]取得元)CLS_SOURCE by my SOURCE_CODE, named 'clsSource'.
      * <pre>
      * <span style="color: #0000C0">judgementSourceRelBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Source()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_ClsSource()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * }).alwaysPresent(<span style="color: #553000">judgementSourceRel</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     ... = <span style="color: #553000">judgementSourceRel</span>.<span style="color: #CC4747">getSource()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     *     ... = <span style="color: #553000">judgementSourceRel</span>.<span style="color: #CC4747">getClsSource()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
      * });
      * </pre>
      */
-    public void setupSelect_Source() {
-        assertSetupSelectPurpose("source");
+    public void setupSelect_ClsSource() {
+        assertSetupSelectPurpose("clsSource");
         if (hasSpecifiedLocalColumn()) {
-            specify().columnSourceId();
+            specify().columnSourceCode();
         }
-        doSetupSelect(() -> query().querySource());
+        doSetupSelect(() -> query().queryClsSource());
     }
 
     // [DBFlute-0.7.4]
@@ -344,7 +344,7 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
 
     public static class HpSpecification extends HpAbstractSpecification<JudgementSourceRelCQ> {
         protected JudgementCB.HpSpecification _judgement;
-        protected SourceCB.HpSpecification _source;
+        protected ClsSourceCB.HpSpecification _clsSource;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<JudgementSourceRelCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
@@ -360,10 +360,10 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnJudgementId() { return doColumn("JUDGEMENT_ID"); }
         /**
-         * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
+         * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnSourceId() { return doColumn("SOURCE_ID"); }
+        public SpecifiedColumn columnSourceCode() { return doColumn("SOURCE_CODE"); }
         /**
          * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
@@ -403,9 +403,9 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
                     || qyCall().qy().xgetReferrerQuery() instanceof JudgementCQ) {
                 columnJudgementId(); // FK or one-to-one referrer
             }
-            if (qyCall().qy().hasConditionQuerySource()
-                    || qyCall().qy().xgetReferrerQuery() instanceof SourceCQ) {
-                columnSourceId(); // FK or one-to-one referrer
+            if (qyCall().qy().hasConditionQueryClsSource()
+                    || qyCall().qy().xgetReferrerQuery() instanceof ClsSourceCQ) {
+                columnSourceCode(); // FK or one-to-one referrer
             }
         }
         @Override
@@ -432,23 +432,23 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
         }
         /**
          * Prepare to specify functions about relation table. <br>
-         * (取得元)SOURCE by my SOURCE_ID, named 'source'.
+         * ([区分値]取得元)CLS_SOURCE by my SOURCE_CODE, named 'clsSource'.
          * @return The instance for specification for relation table to specify. (NotNull)
          */
-        public SourceCB.HpSpecification specifySource() {
-            assertRelation("source");
-            if (_source == null) {
-                _source = new SourceCB.HpSpecification(_baseCB
-                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQuerySource()
-                                    , () -> _qyCall.qy().querySource())
+        public ClsSourceCB.HpSpecification specifyClsSource() {
+            assertRelation("clsSource");
+            if (_clsSource == null) {
+                _clsSource = new ClsSourceCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryClsSource()
+                                    , () -> _qyCall.qy().queryClsSource())
                     , _purpose, _dbmetaProvider, xgetSDRFnFc());
                 if (xhasSyncQyCall()) { // inherits it
-                    _source.xsetSyncQyCall(xcreateSpQyCall(
-                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQuerySource()
-                      , () -> xsyncQyCall().qy().querySource()));
+                    _clsSource.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryClsSource()
+                      , () -> xsyncQyCall().qy().queryClsSource()));
                 }
             }
-            return _source;
+            return _clsSource;
         }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).

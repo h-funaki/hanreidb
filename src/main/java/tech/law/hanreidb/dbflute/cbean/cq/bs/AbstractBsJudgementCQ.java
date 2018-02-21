@@ -193,6 +193,25 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select JUDGEMENT_ID from JUDGEMENT_REPORT_REL where ...)} <br>
+     * (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsJudgementReportRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of JudgementReportRelList for 'exists'. (NotNull)
+     */
+    public void existsJudgementReportRel(SubQuery<JudgementReportRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        JudgementReportRelCB cb = new JudgementReportRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepJudgementId_ExistsReferrer_JudgementReportRelList(cb.query());
+        registerExistsReferrer(cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementReportRelList");
+    }
+    public abstract String keepJudgementId_ExistsReferrer_JudgementReportRelList(JudgementReportRelCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
      * {exists (select JUDGEMENT_ID from JUDGEMENT_SOURCE_REL where ...)} <br>
      * (判決取得元リレーション)JUDGEMENT_SOURCE_REL by JUDGEMENT_ID, named 'judgementSourceRelAsOne'.
      * <pre>
@@ -250,6 +269,25 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select JUDGEMENT_ID from JUDGEMENT_REPORT_REL where ...)} <br>
+     * (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsJudgementReportRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of JudgementId_NotExistsReferrer_JudgementReportRelList for 'not exists'. (NotNull)
+     */
+    public void notExistsJudgementReportRel(SubQuery<JudgementReportRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        JudgementReportRelCB cb = new JudgementReportRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepJudgementId_NotExistsReferrer_JudgementReportRelList(cb.query());
+        registerNotExistsReferrer(cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementReportRelList");
+    }
+    public abstract String keepJudgementId_NotExistsReferrer_JudgementReportRelList(JudgementReportRelCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
      * {not exists (select JUDGEMENT_ID from JUDGEMENT_SOURCE_REL where ...)} <br>
      * (判決取得元リレーション)JUDGEMENT_SOURCE_REL by JUDGEMENT_ID, named 'judgementSourceRelAsOne'.
      * <pre>
@@ -294,6 +332,14 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     }
     public abstract String keepJudgementId_SpecifyDerivedReferrer_JudgementSelfList(JudgementCQ sq);
 
+    public void xsderiveJudgementReportRelList(String fn, SubQuery<JudgementReportRelCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        JudgementReportRelCB cb = new JudgementReportRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepJudgementId_SpecifyDerivedReferrer_JudgementReportRelList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementReportRelList", al, op);
+    }
+    public abstract String keepJudgementId_SpecifyDerivedReferrer_JudgementReportRelList(JudgementReportRelCQ sq);
+
     public void xsderiveJudgementSourceRelList(String fn, SubQuery<JudgementSourceRelCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         JudgementSourceRelCB cb = new JudgementSourceRelCB(); cb.xsetupForDerivedReferrer(this);
@@ -336,6 +382,33 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     }
     public abstract String keepJudgementId_QueryDerivedReferrer_JudgementSelfList(JudgementCQ sq);
     public abstract String keepJudgementId_QueryDerivedReferrer_JudgementSelfListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from JUDGEMENT_REPORT_REL where ...)} <br>
+     * (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedJudgementReportRel()</span>.<span style="color: #CC4747">max</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     relCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<JudgementReportRelCB> derivedJudgementReportRel() {
+        return xcreateQDRFunctionJudgementReportRelList();
+    }
+    protected HpQDRFunction<JudgementReportRelCB> xcreateQDRFunctionJudgementReportRelList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveJudgementReportRelList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveJudgementReportRelList(String fn, SubQuery<JudgementReportRelCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        JudgementReportRelCB cb = new JudgementReportRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepJudgementId_QueryDerivedReferrer_JudgementReportRelList(cb.query()); String prpp = keepJudgementId_QueryDerivedReferrer_JudgementReportRelListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", sqpp, "judgementReportRelList", rd, vl, prpp, op);
+    }
+    public abstract String keepJudgementId_QueryDerivedReferrer_JudgementReportRelList(JudgementReportRelCQ sq);
+    public abstract String keepJudgementId_QueryDerivedReferrer_JudgementReportRelListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -408,7 +481,7 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @param judgementPublicCode The value of judgementPublicCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setJudgementPublicCode_Equal(String judgementPublicCode) {
@@ -421,7 +494,7 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @param judgementPublicCode The value of judgementPublicCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setJudgementPublicCode_NotEqual(String judgementPublicCode) {
@@ -434,7 +507,7 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @param judgementPublicCodeList The collection of judgementPublicCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setJudgementPublicCode_InScope(Collection<String> judgementPublicCodeList) {
@@ -447,7 +520,7 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @param judgementPublicCodeList The collection of judgementPublicCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setJudgementPublicCode_NotInScope(Collection<String> judgementPublicCodeList) {
@@ -460,7 +533,7 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)} <br>
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)} <br>
      * <pre>e.g. setJudgementPublicCode_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param judgementPublicCode The value of judgementPublicCode as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -471,7 +544,7 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)} <br>
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)} <br>
      * <pre>e.g. setJudgementPublicCode_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param judgementPublicCode The value of judgementPublicCode as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -483,7 +556,7 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @param judgementPublicCode The value of judgementPublicCode as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -494,7 +567,7 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @param judgementPublicCode The value of judgementPublicCode as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -582,651 +655,6 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     protected void regCaseName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueCaseName(), "CASE_NAME"); }
     protected abstract ConditionValue xgetCValueCaseName();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param precedentReportsKan The value of precedentReportsKan as equal. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKan_Equal(Integer precedentReportsKan) {
-        doSetPrecedentReportsKan_Equal(precedentReportsKan);
-    }
-
-    protected void doSetPrecedentReportsKan_Equal(Integer precedentReportsKan) {
-        regPrecedentReportsKan(CK_EQ, precedentReportsKan);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param precedentReportsKan The value of precedentReportsKan as notEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKan_NotEqual(Integer precedentReportsKan) {
-        doSetPrecedentReportsKan_NotEqual(precedentReportsKan);
-    }
-
-    protected void doSetPrecedentReportsKan_NotEqual(Integer precedentReportsKan) {
-        regPrecedentReportsKan(CK_NES, precedentReportsKan);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param precedentReportsKan The value of precedentReportsKan as greaterThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKan_GreaterThan(Integer precedentReportsKan) {
-        regPrecedentReportsKan(CK_GT, precedentReportsKan);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param precedentReportsKan The value of precedentReportsKan as lessThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKan_LessThan(Integer precedentReportsKan) {
-        regPrecedentReportsKan(CK_LT, precedentReportsKan);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param precedentReportsKan The value of precedentReportsKan as greaterEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKan_GreaterEqual(Integer precedentReportsKan) {
-        regPrecedentReportsKan(CK_GE, precedentReportsKan);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param precedentReportsKan The value of precedentReportsKan as lessEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKan_LessEqual(Integer precedentReportsKan) {
-        regPrecedentReportsKan(CK_LE, precedentReportsKan);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param minNumber The min number of precedentReportsKan. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of precedentReportsKan. (NullAllowed: if null, no to-condition)
-     * @param opLambda The callback for option of range-of. (NotNull)
-     */
-    public void setPrecedentReportsKan_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setPrecedentReportsKan_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param minNumber The min number of precedentReportsKan. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of precedentReportsKan. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    protected void setPrecedentReportsKan_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValuePrecedentReportsKan(), "PRECEDENT_REPORTS_KAN", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param precedentReportsKanList The collection of precedentReportsKan as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setPrecedentReportsKan_InScope(Collection<Integer> precedentReportsKanList) {
-        doSetPrecedentReportsKan_InScope(precedentReportsKanList);
-    }
-
-    protected void doSetPrecedentReportsKan_InScope(Collection<Integer> precedentReportsKanList) {
-        regINS(CK_INS, cTL(precedentReportsKanList), xgetCValuePrecedentReportsKan(), "PRECEDENT_REPORTS_KAN");
-    }
-
-    /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @param precedentReportsKanList The collection of precedentReportsKan as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setPrecedentReportsKan_NotInScope(Collection<Integer> precedentReportsKanList) {
-        doSetPrecedentReportsKan_NotInScope(precedentReportsKanList);
-    }
-
-    protected void doSetPrecedentReportsKan_NotInScope(Collection<Integer> precedentReportsKanList) {
-        regINS(CK_NINS, cTL(precedentReportsKanList), xgetCValuePrecedentReportsKan(), "PRECEDENT_REPORTS_KAN");
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     */
-    public void setPrecedentReportsKan_IsNull() { regPrecedentReportsKan(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     */
-    public void setPrecedentReportsKan_IsNotNull() { regPrecedentReportsKan(CK_ISNN, DOBJ); }
-
-    protected void regPrecedentReportsKan(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValuePrecedentReportsKan(), "PRECEDENT_REPORTS_KAN"); }
-    protected abstract ConditionValue xgetCValuePrecedentReportsKan();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param precedentReportsGo The value of precedentReportsGo as equal. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsGo_Equal(Integer precedentReportsGo) {
-        doSetPrecedentReportsGo_Equal(precedentReportsGo);
-    }
-
-    protected void doSetPrecedentReportsGo_Equal(Integer precedentReportsGo) {
-        regPrecedentReportsGo(CK_EQ, precedentReportsGo);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param precedentReportsGo The value of precedentReportsGo as notEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsGo_NotEqual(Integer precedentReportsGo) {
-        doSetPrecedentReportsGo_NotEqual(precedentReportsGo);
-    }
-
-    protected void doSetPrecedentReportsGo_NotEqual(Integer precedentReportsGo) {
-        regPrecedentReportsGo(CK_NES, precedentReportsGo);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param precedentReportsGo The value of precedentReportsGo as greaterThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsGo_GreaterThan(Integer precedentReportsGo) {
-        regPrecedentReportsGo(CK_GT, precedentReportsGo);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param precedentReportsGo The value of precedentReportsGo as lessThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsGo_LessThan(Integer precedentReportsGo) {
-        regPrecedentReportsGo(CK_LT, precedentReportsGo);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param precedentReportsGo The value of precedentReportsGo as greaterEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsGo_GreaterEqual(Integer precedentReportsGo) {
-        regPrecedentReportsGo(CK_GE, precedentReportsGo);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param precedentReportsGo The value of precedentReportsGo as lessEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsGo_LessEqual(Integer precedentReportsGo) {
-        regPrecedentReportsGo(CK_LE, precedentReportsGo);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param minNumber The min number of precedentReportsGo. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of precedentReportsGo. (NullAllowed: if null, no to-condition)
-     * @param opLambda The callback for option of range-of. (NotNull)
-     */
-    public void setPrecedentReportsGo_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setPrecedentReportsGo_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param minNumber The min number of precedentReportsGo. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of precedentReportsGo. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    protected void setPrecedentReportsGo_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValuePrecedentReportsGo(), "PRECEDENT_REPORTS_GO", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param precedentReportsGoList The collection of precedentReportsGo as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setPrecedentReportsGo_InScope(Collection<Integer> precedentReportsGoList) {
-        doSetPrecedentReportsGo_InScope(precedentReportsGoList);
-    }
-
-    protected void doSetPrecedentReportsGo_InScope(Collection<Integer> precedentReportsGoList) {
-        regINS(CK_INS, cTL(precedentReportsGoList), xgetCValuePrecedentReportsGo(), "PRECEDENT_REPORTS_GO");
-    }
-
-    /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param precedentReportsGoList The collection of precedentReportsGo as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setPrecedentReportsGo_NotInScope(Collection<Integer> precedentReportsGoList) {
-        doSetPrecedentReportsGo_NotInScope(precedentReportsGoList);
-    }
-
-    protected void doSetPrecedentReportsGo_NotInScope(Collection<Integer> precedentReportsGoList) {
-        regINS(CK_NINS, cTL(precedentReportsGoList), xgetCValuePrecedentReportsGo(), "PRECEDENT_REPORTS_GO");
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     */
-    public void setPrecedentReportsGo_IsNull() { regPrecedentReportsGo(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     */
-    public void setPrecedentReportsGo_IsNotNull() { regPrecedentReportsGo(CK_ISNN, DOBJ); }
-
-    protected void regPrecedentReportsGo(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValuePrecedentReportsGo(), "PRECEDENT_REPORTS_GO"); }
-    protected abstract ConditionValue xgetCValuePrecedentReportsGo();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param precedentReportsKo The value of precedentReportsKo as equal. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKo_Equal(Integer precedentReportsKo) {
-        doSetPrecedentReportsKo_Equal(precedentReportsKo);
-    }
-
-    protected void doSetPrecedentReportsKo_Equal(Integer precedentReportsKo) {
-        regPrecedentReportsKo(CK_EQ, precedentReportsKo);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param precedentReportsKo The value of precedentReportsKo as notEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKo_NotEqual(Integer precedentReportsKo) {
-        doSetPrecedentReportsKo_NotEqual(precedentReportsKo);
-    }
-
-    protected void doSetPrecedentReportsKo_NotEqual(Integer precedentReportsKo) {
-        regPrecedentReportsKo(CK_NES, precedentReportsKo);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param precedentReportsKo The value of precedentReportsKo as greaterThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKo_GreaterThan(Integer precedentReportsKo) {
-        regPrecedentReportsKo(CK_GT, precedentReportsKo);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param precedentReportsKo The value of precedentReportsKo as lessThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKo_LessThan(Integer precedentReportsKo) {
-        regPrecedentReportsKo(CK_LT, precedentReportsKo);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param precedentReportsKo The value of precedentReportsKo as greaterEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKo_GreaterEqual(Integer precedentReportsKo) {
-        regPrecedentReportsKo(CK_GE, precedentReportsKo);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param precedentReportsKo The value of precedentReportsKo as lessEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setPrecedentReportsKo_LessEqual(Integer precedentReportsKo) {
-        regPrecedentReportsKo(CK_LE, precedentReportsKo);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param minNumber The min number of precedentReportsKo. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of precedentReportsKo. (NullAllowed: if null, no to-condition)
-     * @param opLambda The callback for option of range-of. (NotNull)
-     */
-    public void setPrecedentReportsKo_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setPrecedentReportsKo_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param minNumber The min number of precedentReportsKo. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of precedentReportsKo. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    protected void setPrecedentReportsKo_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValuePrecedentReportsKo(), "PRECEDENT_REPORTS_KO", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param precedentReportsKoList The collection of precedentReportsKo as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setPrecedentReportsKo_InScope(Collection<Integer> precedentReportsKoList) {
-        doSetPrecedentReportsKo_InScope(precedentReportsKoList);
-    }
-
-    protected void doSetPrecedentReportsKo_InScope(Collection<Integer> precedentReportsKoList) {
-        regINS(CK_INS, cTL(precedentReportsKoList), xgetCValuePrecedentReportsKo(), "PRECEDENT_REPORTS_KO");
-    }
-
-    /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param precedentReportsKoList The collection of precedentReportsKo as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setPrecedentReportsKo_NotInScope(Collection<Integer> precedentReportsKoList) {
-        doSetPrecedentReportsKo_NotInScope(precedentReportsKoList);
-    }
-
-    protected void doSetPrecedentReportsKo_NotInScope(Collection<Integer> precedentReportsKoList) {
-        regINS(CK_NINS, cTL(precedentReportsKoList), xgetCValuePrecedentReportsKo(), "PRECEDENT_REPORTS_KO");
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     */
-    public void setPrecedentReportsKo_IsNull() { regPrecedentReportsKo(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     */
-    public void setPrecedentReportsKo_IsNotNull() { regPrecedentReportsKo(CK_ISNN, DOBJ); }
-
-    protected void regPrecedentReportsKo(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValuePrecedentReportsKo(), "PRECEDENT_REPORTS_KO"); }
-    protected abstract ConditionValue xgetCValuePrecedentReportsKo();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param judgementReportsGo The value of judgementReportsGo as equal. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsGo_Equal(Integer judgementReportsGo) {
-        doSetJudgementReportsGo_Equal(judgementReportsGo);
-    }
-
-    protected void doSetJudgementReportsGo_Equal(Integer judgementReportsGo) {
-        regJudgementReportsGo(CK_EQ, judgementReportsGo);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param judgementReportsGo The value of judgementReportsGo as notEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsGo_NotEqual(Integer judgementReportsGo) {
-        doSetJudgementReportsGo_NotEqual(judgementReportsGo);
-    }
-
-    protected void doSetJudgementReportsGo_NotEqual(Integer judgementReportsGo) {
-        regJudgementReportsGo(CK_NES, judgementReportsGo);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param judgementReportsGo The value of judgementReportsGo as greaterThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsGo_GreaterThan(Integer judgementReportsGo) {
-        regJudgementReportsGo(CK_GT, judgementReportsGo);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param judgementReportsGo The value of judgementReportsGo as lessThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsGo_LessThan(Integer judgementReportsGo) {
-        regJudgementReportsGo(CK_LT, judgementReportsGo);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param judgementReportsGo The value of judgementReportsGo as greaterEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsGo_GreaterEqual(Integer judgementReportsGo) {
-        regJudgementReportsGo(CK_GE, judgementReportsGo);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param judgementReportsGo The value of judgementReportsGo as lessEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsGo_LessEqual(Integer judgementReportsGo) {
-        regJudgementReportsGo(CK_LE, judgementReportsGo);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param minNumber The min number of judgementReportsGo. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of judgementReportsGo. (NullAllowed: if null, no to-condition)
-     * @param opLambda The callback for option of range-of. (NotNull)
-     */
-    public void setJudgementReportsGo_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setJudgementReportsGo_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param minNumber The min number of judgementReportsGo. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of judgementReportsGo. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    protected void setJudgementReportsGo_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueJudgementReportsGo(), "JUDGEMENT_REPORTS_GO", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param judgementReportsGoList The collection of judgementReportsGo as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setJudgementReportsGo_InScope(Collection<Integer> judgementReportsGoList) {
-        doSetJudgementReportsGo_InScope(judgementReportsGoList);
-    }
-
-    protected void doSetJudgementReportsGo_InScope(Collection<Integer> judgementReportsGoList) {
-        regINS(CK_INS, cTL(judgementReportsGoList), xgetCValueJudgementReportsGo(), "JUDGEMENT_REPORTS_GO");
-    }
-
-    /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @param judgementReportsGoList The collection of judgementReportsGo as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setJudgementReportsGo_NotInScope(Collection<Integer> judgementReportsGoList) {
-        doSetJudgementReportsGo_NotInScope(judgementReportsGoList);
-    }
-
-    protected void doSetJudgementReportsGo_NotInScope(Collection<Integer> judgementReportsGoList) {
-        regINS(CK_NINS, cTL(judgementReportsGoList), xgetCValueJudgementReportsGo(), "JUDGEMENT_REPORTS_GO");
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     */
-    public void setJudgementReportsGo_IsNull() { regJudgementReportsGo(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     */
-    public void setJudgementReportsGo_IsNotNull() { regJudgementReportsGo(CK_ISNN, DOBJ); }
-
-    protected void regJudgementReportsGo(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueJudgementReportsGo(), "JUDGEMENT_REPORTS_GO"); }
-    protected abstract ConditionValue xgetCValueJudgementReportsGo();
-
-    /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param judgementReportsKo The value of judgementReportsKo as equal. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsKo_Equal(Integer judgementReportsKo) {
-        doSetJudgementReportsKo_Equal(judgementReportsKo);
-    }
-
-    protected void doSetJudgementReportsKo_Equal(Integer judgementReportsKo) {
-        regJudgementReportsKo(CK_EQ, judgementReportsKo);
-    }
-
-    /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param judgementReportsKo The value of judgementReportsKo as notEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsKo_NotEqual(Integer judgementReportsKo) {
-        doSetJudgementReportsKo_NotEqual(judgementReportsKo);
-    }
-
-    protected void doSetJudgementReportsKo_NotEqual(Integer judgementReportsKo) {
-        regJudgementReportsKo(CK_NES, judgementReportsKo);
-    }
-
-    /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param judgementReportsKo The value of judgementReportsKo as greaterThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsKo_GreaterThan(Integer judgementReportsKo) {
-        regJudgementReportsKo(CK_GT, judgementReportsKo);
-    }
-
-    /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param judgementReportsKo The value of judgementReportsKo as lessThan. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsKo_LessThan(Integer judgementReportsKo) {
-        regJudgementReportsKo(CK_LT, judgementReportsKo);
-    }
-
-    /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param judgementReportsKo The value of judgementReportsKo as greaterEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsKo_GreaterEqual(Integer judgementReportsKo) {
-        regJudgementReportsKo(CK_GE, judgementReportsKo);
-    }
-
-    /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param judgementReportsKo The value of judgementReportsKo as lessEqual. (basically NotNull: error as default, or no condition as option)
-     */
-    public void setJudgementReportsKo_LessEqual(Integer judgementReportsKo) {
-        regJudgementReportsKo(CK_LE, judgementReportsKo);
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param minNumber The min number of judgementReportsKo. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of judgementReportsKo. (NullAllowed: if null, no to-condition)
-     * @param opLambda The callback for option of range-of. (NotNull)
-     */
-    public void setJudgementReportsKo_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setJudgementReportsKo_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
-    }
-
-    /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param minNumber The min number of judgementReportsKo. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of judgementReportsKo. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
-     */
-    protected void setJudgementReportsKo_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueJudgementReportsKo(), "JUDGEMENT_REPORTS_KO", rangeOfOption);
-    }
-
-    /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param judgementReportsKoList The collection of judgementReportsKo as inScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setJudgementReportsKo_InScope(Collection<Integer> judgementReportsKoList) {
-        doSetJudgementReportsKo_InScope(judgementReportsKoList);
-    }
-
-    protected void doSetJudgementReportsKo_InScope(Collection<Integer> judgementReportsKoList) {
-        regINS(CK_INS, cTL(judgementReportsKoList), xgetCValueJudgementReportsKo(), "JUDGEMENT_REPORTS_KO");
-    }
-
-    /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @param judgementReportsKoList The collection of judgementReportsKo as notInScope. (NullAllowed: if null (or empty), no condition)
-     */
-    public void setJudgementReportsKo_NotInScope(Collection<Integer> judgementReportsKoList) {
-        doSetJudgementReportsKo_NotInScope(judgementReportsKoList);
-    }
-
-    protected void doSetJudgementReportsKo_NotInScope(Collection<Integer> judgementReportsKoList) {
-        regINS(CK_NINS, cTL(judgementReportsKoList), xgetCValueJudgementReportsKo(), "JUDGEMENT_REPORTS_KO");
-    }
-
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     */
-    public void setJudgementReportsKo_IsNull() { regJudgementReportsKo(CK_ISN, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     */
-    public void setJudgementReportsKo_IsNotNull() { regJudgementReportsKo(CK_ISNN, DOBJ); }
-
-    protected void regJudgementReportsKo(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueJudgementReportsKo(), "JUDGEMENT_REPORTS_KO"); }
-    protected abstract ConditionValue xgetCValueJudgementReportsKo();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
@@ -2647,6 +2075,158 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     protected void regSentence(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueSentence(), "SENTENCE"); }
     protected abstract ConditionValue xgetCValueSentence();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @param registerDatetime The value of registerDatetime as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setRegisterDatetime_Equal(java.time.LocalDateTime registerDatetime) {
+        regRegisterDatetime(CK_EQ,  registerDatetime);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setRegisterDatetime_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of from-to. (NotNull)
+     */
+    public void setRegisterDatetime_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, ConditionOptionCall<FromToOption> opLambda) {
+        setRegisterDatetime_FromTo(fromDatetime, toDatetime, xcFTOP(opLambda));
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setRegisterDatetime_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of registerDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    protected void setRegisterDatetime_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, FromToOption fromToOption) {
+        String nm = "REGISTER_DATETIME"; FromToOption op = fromToOption;
+        regFTQ(xfFTHD(fromDatetime, nm, op), xfFTHD(toDatetime, nm, op), xgetCValueRegisterDatetime(), nm, op);
+    }
+
+    protected void regRegisterDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueRegisterDatetime(), "REGISTER_DATETIME"); }
+    protected abstract ConditionValue xgetCValueRegisterDatetime();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @param registerUser The value of registerUser as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setRegisterUser_Equal(String registerUser) {
+        doSetRegisterUser_Equal(fRES(registerUser));
+    }
+
+    protected void doSetRegisterUser_Equal(String registerUser) {
+        regRegisterUser(CK_EQ, registerUser);
+    }
+
+    protected void regRegisterUser(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueRegisterUser(), "REGISTER_USER"); }
+    protected abstract ConditionValue xgetCValueRegisterUser();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @param updateDatetime The value of updateDatetime as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setUpdateDatetime_Equal(java.time.LocalDateTime updateDatetime) {
+        regUpdateDatetime(CK_EQ,  updateDatetime);
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">compareAsDate()</span>);</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param opLambda The callback for option of from-to. (NotNull)
+     */
+    public void setUpdateDatetime_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, ConditionOptionCall<FromToOption> opLambda) {
+        setUpdateDatetime_FromTo(fromDatetime, toDatetime, xcFTOP(opLambda));
+    }
+
+    /**
+     * FromTo with various options. (versatile) {(default) fromDatetime &lt;= column &lt;= toDatetime} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * <pre>e.g. setUpdateDatetime_FromTo(fromDate, toDate, new <span style="color: #CC4747">FromToOption</span>().compareAsDate());</pre>
+     * @param fromDatetime The from-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param toDatetime The to-datetime(yyyy/MM/dd HH:mm:ss.SSS) of updateDatetime. (basically NotNull: if op.allowOneSide(), null allowed)
+     * @param fromToOption The option of from-to. (NotNull)
+     */
+    protected void setUpdateDatetime_FromTo(java.time.LocalDateTime fromDatetime, java.time.LocalDateTime toDatetime, FromToOption fromToOption) {
+        String nm = "UPDATE_DATETIME"; FromToOption op = fromToOption;
+        regFTQ(xfFTHD(fromDatetime, nm, op), xfFTHD(toDatetime, nm, op), xgetCValueUpdateDatetime(), nm, op);
+    }
+
+    protected void regUpdateDatetime(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUpdateDatetime(), "UPDATE_DATETIME"); }
+    protected abstract ConditionValue xgetCValueUpdateDatetime();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @param updateUser The value of updateUser as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUpdateUser_Equal(String updateUser) {
+        doSetUpdateUser_Equal(fRES(updateUser));
+    }
+
+    protected void doSetUpdateUser_Equal(String updateUser) {
+        regUpdateUser(CK_EQ, updateUser);
+    }
+
+    protected void regUpdateUser(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUpdateUser(), "UPDATE_USER"); }
+    protected abstract ConditionValue xgetCValueUpdateUser();
+
+    /**
+     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @param versionNo The value of versionNo as equal. (basically NotNull: error as default, or no condition as option)
+     */
+    public void setVersionNo_Equal(Long versionNo) {
+        doSetVersionNo_Equal(versionNo);
+    }
+
+    protected void doSetVersionNo_Equal(Long versionNo) {
+        regVersionNo(CK_EQ, versionNo);
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @param minNumber The min number of versionNo. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of versionNo. (NullAllowed: if null, no to-condition)
+     * @param opLambda The callback for option of range-of. (NotNull)
+     */
+    public void setVersionNo_RangeOf(Long minNumber, Long maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+        setVersionNo_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    }
+
+    /**
+     * RangeOf with various options. (versatile) <br>
+     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
+     * And NullIgnored, OnlyOnceRegistered. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @param minNumber The min number of versionNo. (NullAllowed: if null, no from-condition)
+     * @param maxNumber The max number of versionNo. (NullAllowed: if null, no to-condition)
+     * @param rangeOfOption The option of range-of. (NotNull)
+     */
+    protected void setVersionNo_RangeOf(Long minNumber, Long maxNumber, RangeOfOption rangeOfOption) {
+        regROO(minNumber, maxNumber, xgetCValueVersionNo(), "VERSION_NO", rangeOfOption);
+    }
+
+    protected void regVersionNo(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueVersionNo(), "VERSION_NO"); }
+    protected abstract ConditionValue xgetCValueVersionNo();
 
     // ===================================================================================
     //                                                                     ScalarCondition

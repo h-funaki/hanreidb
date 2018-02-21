@@ -912,6 +912,122 @@ public interface CDef extends Classification {
         @Override public String toString() { return code(); }
     }
 
+    public enum Source implements CDef {
+        /** 裁判所裁判例: 裁判所裁判例 */
+        裁判所裁判例("COURT", "裁判所裁判例", emptyStrings())
+        ;
+        private static final Map<String, Source> _codeClsMap = new HashMap<String, Source>();
+        private static final Map<String, Source> _nameClsMap = new HashMap<String, Source>();
+        static {
+            for (Source value : values()) {
+                _codeClsMap.put(value.code().toLowerCase(), value);
+                for (String sister : value.sisterSet()) { _codeClsMap.put(sister.toLowerCase(), value); }
+                _nameClsMap.put(value.name().toLowerCase(), value);
+            }
+        }
+        private String _code; private String _alias; private Set<String> _sisterSet;
+        private Source(String code, String alias, String[] sisters)
+        { _code = code; _alias = alias; _sisterSet = Collections.unmodifiableSet(new LinkedHashSet<String>(Arrays.asList(sisters))); }
+        public String code() { return _code; } public String alias() { return _alias; }
+        public Set<String> sisterSet() { return _sisterSet; }
+        public Map<String, Object> subItemMap() { return Collections.emptyMap(); }
+        public ClassificationMeta meta() { return CDef.DefMeta.Source; }
+
+        public boolean inGroup(String groupName) {
+            return false;
+        }
+
+        /**
+         * Get the classification of the code. (CaseInsensitive)
+         * @param code The value of code, which is case-insensitive. (NullAllowed: if null, returns empty)
+         * @return The optional classification corresponding to the code. (NotNull, EmptyAllowed: if not found, returns empty)
+         */
+        public static OptionalThing<Source> of(Object code) {
+            if (code == null) { return OptionalThing.ofNullable(null, () -> { throw new ClassificationNotFoundException("null code specified"); }); }
+            if (code instanceof Source) { return OptionalThing.of((Source)code); }
+            if (code instanceof OptionalThing<?>) { return of(((OptionalThing<?>)code).orElse(null)); }
+            return OptionalThing.ofNullable(_codeClsMap.get(code.toString().toLowerCase()), () ->{
+                throw new ClassificationNotFoundException("Unknown classification code: " + code);
+            });
+        }
+
+        /**
+         * Find the classification by the name. (CaseInsensitive)
+         * @param name The string of name, which is case-insensitive. (NotNull)
+         * @return The optional classification corresponding to the name. (NotNull, EmptyAllowed: if not found, returns empty)
+         */
+        public static OptionalThing<Source> byName(String name) {
+            if (name == null) { throw new IllegalArgumentException("The argument 'name' should not be null."); }
+            return OptionalThing.ofNullable(_nameClsMap.get(name.toLowerCase()), () ->{
+                throw new ClassificationNotFoundException("Unknown classification name: " + name);
+            });
+        }
+
+        /**
+         * <span style="color: #AD4747; font-size: 120%">Old style so use of(code).</span> <br>
+         * Get the classification by the code. (CaseInsensitive)
+         * @param code The value of code, which is case-insensitive. (NullAllowed: if null, returns null)
+         * @return The instance of the corresponding classification to the code. (NullAllowed: if not found, returns null)
+         */
+        public static Source codeOf(Object code) {
+            if (code == null) { return null; }
+            if (code instanceof Source) { return (Source)code; }
+            return _codeClsMap.get(code.toString().toLowerCase());
+        }
+
+        /**
+         * <span style="color: #AD4747; font-size: 120%">Old style so use byName(name).</span> <br>
+         * Get the classification by the name (also called 'value' in ENUM world).
+         * @param name The string of name, which is case-sensitive. (NullAllowed: if null, returns null)
+         * @return The instance of the corresponding classification to the name. (NullAllowed: if not found, returns null)
+         */
+        public static Source nameOf(String name) {
+            if (name == null) { return null; }
+            try { return valueOf(name); } catch (RuntimeException ignored) { return null; }
+        }
+
+        /**
+         * Get the list of all classification elements. (returns new copied list)
+         * @return The snapshot list of all classification elements. (NotNull)
+         */
+        public static List<Source> listAll() {
+            return new ArrayList<Source>(Arrays.asList(values()));
+        }
+
+        /**
+         * Get the list of classification elements in the specified group. (returns new copied list) <br>
+         * @param groupName The string of group name, which is case-insensitive. (NotNull)
+         * @return The snapshot list of classification elements in the group. (NotNull, EmptyAllowed: if not found, throws exception)
+         */
+        public static List<Source> listByGroup(String groupName) {
+            if (groupName == null) { throw new IllegalArgumentException("The argument 'groupName' should not be null."); }
+            throw new ClassificationNotFoundException("Unknown classification group: Source." + groupName);
+        }
+
+        /**
+         * Get the list of classification elements corresponding to the specified codes. (returns new copied list) <br>
+         * @param codeList The list of plain code, which is case-insensitive. (NotNull)
+         * @return The snapshot list of classification elements in the code list. (NotNull, EmptyAllowed: when empty specified)
+         */
+        public static List<Source> listOf(Collection<String> codeList) {
+            if (codeList == null) { throw new IllegalArgumentException("The argument 'codeList' should not be null."); }
+            List<Source> clsList = new ArrayList<Source>(codeList.size());
+            for (String code : codeList) { clsList.add(of(code).get()); }
+            return clsList;
+        }
+
+        /**
+         * Get the list of classification elements in the specified group. (returns new copied list) <br>
+         * @param groupName The string of group name, which is case-sensitive. (NullAllowed: if null, returns empty list)
+         * @return The snapshot list of classification elements in the group. (NotNull, EmptyAllowed: if the group is not found)
+         */
+        public static List<Source> groupOf(String groupName) {
+            return new ArrayList<Source>(4);
+        }
+
+        @Override public String toString() { return code(); }
+    }
+
     public enum DefMeta implements ClassificationMeta {
         /** general boolean classification for every flg-column */
         Flg
@@ -927,6 +1043,8 @@ public interface CDef extends Classification {
         CaseCategory
         ,
         CourtType
+        ,
+        Source
         ;
         public String classificationName() {
             return name(); // same as definition name
@@ -940,6 +1058,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return CDef.JudgementType.of(code); }
             if (CaseCategory.name().equals(name())) { return CDef.CaseCategory.of(code); }
             if (CourtType.name().equals(name())) { return CDef.CourtType.of(code); }
+            if (Source.name().equals(name())) { return CDef.Source.of(code); }
             throw new IllegalStateException("Unknown definition: " + this); // basically unreachable
         }
 
@@ -951,6 +1070,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return CDef.JudgementType.byName(name); }
             if (CaseCategory.name().equals(name())) { return CDef.CaseCategory.byName(name); }
             if (CourtType.name().equals(name())) { return CDef.CourtType.byName(name); }
+            if (Source.name().equals(name())) { return CDef.Source.byName(name); }
             throw new IllegalStateException("Unknown definition: " + this); // basically unreachable
         }
 
@@ -962,6 +1082,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return CDef.JudgementType.codeOf(code); }
             if (CaseCategory.name().equals(name())) { return CDef.CaseCategory.codeOf(code); }
             if (CourtType.name().equals(name())) { return CDef.CourtType.codeOf(code); }
+            if (Source.name().equals(name())) { return CDef.Source.codeOf(code); }
             throw new IllegalStateException("Unknown definition: " + this); // basically unreachable
         }
 
@@ -973,6 +1094,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return CDef.JudgementType.valueOf(name); }
             if (CaseCategory.name().equals(name())) { return CDef.CaseCategory.valueOf(name); }
             if (CourtType.name().equals(name())) { return CDef.CourtType.valueOf(name); }
+            if (Source.name().equals(name())) { return CDef.Source.valueOf(name); }
             throw new IllegalStateException("Unknown definition: " + this); // basically unreachable
         }
 
@@ -984,6 +1106,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return toClsList(CDef.JudgementType.listAll()); }
             if (CaseCategory.name().equals(name())) { return toClsList(CDef.CaseCategory.listAll()); }
             if (CourtType.name().equals(name())) { return toClsList(CDef.CourtType.listAll()); }
+            if (Source.name().equals(name())) { return toClsList(CDef.Source.listAll()); }
             throw new IllegalStateException("Unknown definition: " + this); // basically unreachable
         }
 
@@ -995,6 +1118,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return toClsList(CDef.JudgementType.listByGroup(groupName)); }
             if (CaseCategory.name().equals(name())) { return toClsList(CDef.CaseCategory.listByGroup(groupName)); }
             if (CourtType.name().equals(name())) { return toClsList(CDef.CourtType.listByGroup(groupName)); }
+            if (Source.name().equals(name())) { return toClsList(CDef.Source.listByGroup(groupName)); }
             throw new IllegalStateException("Unknown definition: " + this); // basically unreachable
         }
 
@@ -1006,6 +1130,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return toClsList(CDef.JudgementType.listOf(codeList)); }
             if (CaseCategory.name().equals(name())) { return toClsList(CDef.CaseCategory.listOf(codeList)); }
             if (CourtType.name().equals(name())) { return toClsList(CDef.CourtType.listOf(codeList)); }
+            if (Source.name().equals(name())) { return toClsList(CDef.Source.listOf(codeList)); }
             throw new IllegalStateException("Unknown definition: " + this); // basically unreachable
         }
 
@@ -1017,6 +1142,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return toClsList(CDef.JudgementType.groupOf(groupName)); }
             if (CaseCategory.name().equals(name())) { return toClsList(CDef.CaseCategory.groupOf(groupName)); }
             if (CourtType.name().equals(name())) { return toClsList(CDef.CourtType.groupOf(groupName)); }
+            if (Source.name().equals(name())) { return toClsList(CDef.Source.groupOf(groupName)); }
             throw new IllegalStateException("Unknown definition: " + this); // basically unreachable
         }
 
@@ -1033,6 +1159,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return ClassificationCodeType.String; }
             if (CaseCategory.name().equals(name())) { return ClassificationCodeType.String; }
             if (CourtType.name().equals(name())) { return ClassificationCodeType.String; }
+            if (Source.name().equals(name())) { return ClassificationCodeType.String; }
             return ClassificationCodeType.String; // as default
         }
 
@@ -1044,6 +1171,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equals(name())) { return ClassificationUndefinedHandlingType.LOGGING; }
             if (CaseCategory.name().equals(name())) { return ClassificationUndefinedHandlingType.LOGGING; }
             if (CourtType.name().equals(name())) { return ClassificationUndefinedHandlingType.LOGGING; }
+            if (Source.name().equals(name())) { return ClassificationUndefinedHandlingType.LOGGING; }
             return ClassificationUndefinedHandlingType.LOGGING; // as default
         }
 
@@ -1056,6 +1184,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equalsIgnoreCase(classificationName)) { return OptionalThing.of(CDef.DefMeta.JudgementType); }
             if (CaseCategory.name().equalsIgnoreCase(classificationName)) { return OptionalThing.of(CDef.DefMeta.CaseCategory); }
             if (CourtType.name().equalsIgnoreCase(classificationName)) { return OptionalThing.of(CDef.DefMeta.CourtType); }
+            if (Source.name().equalsIgnoreCase(classificationName)) { return OptionalThing.of(CDef.DefMeta.Source); }
             return OptionalThing.ofNullable(null, () -> {
                 throw new ClassificationNotFoundException("Unknown classification: " + classificationName);
             });
@@ -1070,6 +1199,7 @@ public interface CDef extends Classification {
             if (JudgementType.name().equalsIgnoreCase(classificationName)) { return CDef.DefMeta.JudgementType; }
             if (CaseCategory.name().equalsIgnoreCase(classificationName)) { return CDef.DefMeta.CaseCategory; }
             if (CourtType.name().equalsIgnoreCase(classificationName)) { return CDef.DefMeta.CourtType; }
+            if (Source.name().equalsIgnoreCase(classificationName)) { return CDef.DefMeta.Source; }
             throw new IllegalStateException("Unknown classification: " + classificationName);
         }
 

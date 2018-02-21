@@ -44,9 +44,9 @@ public class JudgementSourceRelNss {
     }
     /**
      * With nested relation columns to select clause. <br>
-     * (取得元)SOURCE by my SOURCE_ID, named 'source'.
+     * ([区分値]取得元)CLS_SOURCE by my SOURCE_CODE, named 'clsSource'.
      */
-    public void withSource() {
-        _query.xdoNss(() -> _query.querySource());
+    public void withClsSource() {
+        _query.xdoNss(() -> _query.queryClsSource());
     }
 }

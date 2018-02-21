@@ -61,11 +61,6 @@ public class JudgementDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementId(), (et, vl) -> ((Judgement)et).setJudgementId(ctl(vl)), "judgementId");
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementPublicCode(), (et, vl) -> ((Judgement)et).setJudgementPublicCode((String)vl), "judgementPublicCode");
         setupEpg(_epgMap, et -> ((Judgement)et).getCaseName(), (et, vl) -> ((Judgement)et).setCaseName((String)vl), "caseName");
-        setupEpg(_epgMap, et -> ((Judgement)et).getPrecedentReportsKan(), (et, vl) -> ((Judgement)et).setPrecedentReportsKan(cti(vl)), "precedentReportsKan");
-        setupEpg(_epgMap, et -> ((Judgement)et).getPrecedentReportsGo(), (et, vl) -> ((Judgement)et).setPrecedentReportsGo(cti(vl)), "precedentReportsGo");
-        setupEpg(_epgMap, et -> ((Judgement)et).getPrecedentReportsKo(), (et, vl) -> ((Judgement)et).setPrecedentReportsKo(cti(vl)), "precedentReportsKo");
-        setupEpg(_epgMap, et -> ((Judgement)et).getJudgementReportsGo(), (et, vl) -> ((Judgement)et).setJudgementReportsGo(cti(vl)), "judgementReportsGo");
-        setupEpg(_epgMap, et -> ((Judgement)et).getJudgementReportsKo(), (et, vl) -> ((Judgement)et).setJudgementReportsKo(cti(vl)), "judgementReportsKo");
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementDate(), (et, vl) -> ((Judgement)et).setJudgementDate(ctld(vl)), "judgementDate");
         setupEpg(_epgMap, et -> ((Judgement)et).getOriginalJudgementId(), (et, vl) -> ((Judgement)et).setOriginalJudgementId(ctl(vl)), "originalJudgementId");
         setupEpg(_epgMap, et -> ((Judgement)et).getCaseNumberEraCode(), (et, vl) -> ((Judgement)et).setCaseNumberEraCode((String)vl), "caseNumberEraCode");
@@ -77,6 +72,11 @@ public class JudgementDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementResultCode(), (et, vl) -> ((Judgement)et).setJudgementResultCode((String)vl), "judgementResultCode");
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementTypeCode(), (et, vl) -> ((Judgement)et).setJudgementTypeCode((String)vl), "judgementTypeCode");
         setupEpg(_epgMap, et -> ((Judgement)et).getSentence(), (et, vl) -> ((Judgement)et).setSentence((String)vl), "sentence");
+        setupEpg(_epgMap, et -> ((Judgement)et).getRegisterDatetime(), (et, vl) -> ((Judgement)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
+        setupEpg(_epgMap, et -> ((Judgement)et).getRegisterUser(), (et, vl) -> ((Judgement)et).setRegisterUser((String)vl), "registerUser");
+        setupEpg(_epgMap, et -> ((Judgement)et).getUpdateDatetime(), (et, vl) -> ((Judgement)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
+        setupEpg(_epgMap, et -> ((Judgement)et).getUpdateUser(), (et, vl) -> ((Judgement)et).setUpdateUser((String)vl), "updateUser");
+        setupEpg(_epgMap, et -> ((Judgement)et).getVersionNo(), (et, vl) -> ((Judgement)et).setVersionNo(ctl(vl)), "versionNo");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -117,14 +117,9 @@ public class JudgementDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, "judgementSelfList,judgementSourceRelList,judgementUserFavoriteRelList", null, false);
-    protected final ColumnInfo _columnJudgementPublicCode = cci("JUDGEMENT_PUBLIC_CODE", "JUDGEMENT_PUBLIC_CODE", null, "判決公開コード", String.class, "judgementPublicCode", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, "judgementSelfList,judgementReportRelList,judgementSourceRelList,judgementUserFavoriteRelList", null, false);
+    protected final ColumnInfo _columnJudgementPublicCode = cci("JUDGEMENT_PUBLIC_CODE", "JUDGEMENT_PUBLIC_CODE", null, "判決公開コード", String.class, "judgementPublicCode", null, false, false, true, "VARCHAR", 12, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnCaseName = cci("CASE_NAME", "CASE_NAME", null, "事件名", String.class, "caseName", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnPrecedentReportsKan = cci("PRECEDENT_REPORTS_KAN", "PRECEDENT_REPORTS_KAN", null, "判例集巻", Integer.class, "precedentReportsKan", null, false, false, false, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnPrecedentReportsGo = cci("PRECEDENT_REPORTS_GO", "PRECEDENT_REPORTS_GO", null, "判例集号", Integer.class, "precedentReportsGo", null, false, false, false, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnPrecedentReportsKo = cci("PRECEDENT_REPORTS_KO", "PRECEDENT_REPORTS_KO", null, "判例集頁", Integer.class, "precedentReportsKo", null, false, false, false, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnJudgementReportsGo = cci("JUDGEMENT_REPORTS_GO", "JUDGEMENT_REPORTS_GO", null, "裁判集号", Integer.class, "judgementReportsGo", null, false, false, false, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnJudgementReportsKo = cci("JUDGEMENT_REPORTS_KO", "JUDGEMENT_REPORTS_KO", null, "裁判集頁", Integer.class, "judgementReportsKo", null, false, false, false, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnJudgementDate = cci("JUDGEMENT_DATE", "JUDGEMENT_DATE", null, "裁判年月日", java.time.LocalDate.class, "judgementDate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnOriginalJudgementId = cci("ORIGINAL_JUDGEMENT_ID", "ORIGINAL_JUDGEMENT_ID", null, "原審判決ID", Long.class, "originalJudgementId", null, false, false, false, "BIGINT UNSIGNED", 20, 0, null, false, null, null, "judgementSelf", null, null, false);
     protected final ColumnInfo _columnCaseNumberEraCode = cci("CASE_NUMBER_ERA_CODE", "CASE_NUMBER_ERA_CODE", null, "元号コード", String.class, "caseNumberEraCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsEra", null, CDef.DefMeta.Era, false);
@@ -136,6 +131,11 @@ public class JudgementDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnJudgementResultCode = cci("JUDGEMENT_RESULT_CODE", "JUDGEMENT_RESULT_CODE", null, "判決結果コード", String.class, "judgementResultCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsJudgementResult", null, CDef.DefMeta.JudgementResult, false);
     protected final ColumnInfo _columnJudgementTypeCode = cci("JUDGEMENT_TYPE_CODE", "JUDGEMENT_TYPE_CODE", null, "判決種別コード", String.class, "judgementTypeCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsJudgementType", null, CDef.DefMeta.JudgementType, false);
     protected final ColumnInfo _columnSentence = cci("SENTENCE", "SENTENCE", null, "判決文", String.class, "sentence", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, "更新ユーザー", String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT UNSIGNED", 20, 0, "0", false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
      * (判決ID)JUDGEMENT_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
@@ -143,7 +143,7 @@ public class JudgementDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnJudgementId() { return _columnJudgementId; }
     /**
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnJudgementPublicCode() { return _columnJudgementPublicCode; }
@@ -152,31 +152,6 @@ public class JudgementDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnCaseName() { return _columnCaseName; }
-    /**
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnPrecedentReportsKan() { return _columnPrecedentReportsKan; }
-    /**
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnPrecedentReportsGo() { return _columnPrecedentReportsGo; }
-    /**
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnPrecedentReportsKo() { return _columnPrecedentReportsKo; }
-    /**
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnJudgementReportsGo() { return _columnJudgementReportsGo; }
-    /**
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnJudgementReportsKo() { return _columnJudgementReportsKo; }
     /**
      * (裁判年月日)JUDGEMENT_DATE: {DATE(10)}
      * @return The information object of specified column. (NotNull)
@@ -232,17 +207,37 @@ public class JudgementDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSentence() { return _columnSentence; }
+    /**
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRegisterDatetime() { return _columnRegisterDatetime; }
+    /**
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRegisterUser() { return _columnRegisterUser; }
+    /**
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }
+    /**
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdateUser() { return _columnUpdateUser; }
+    /**
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnVersionNo() { return _columnVersionNo; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnJudgementId());
         ls.add(columnJudgementPublicCode());
         ls.add(columnCaseName());
-        ls.add(columnPrecedentReportsKan());
-        ls.add(columnPrecedentReportsGo());
-        ls.add(columnPrecedentReportsKo());
-        ls.add(columnJudgementReportsGo());
-        ls.add(columnJudgementReportsKo());
         ls.add(columnJudgementDate());
         ls.add(columnOriginalJudgementId());
         ls.add(columnCaseNumberEraCode());
@@ -254,6 +249,11 @@ public class JudgementDbm extends AbstractDBMeta {
         ls.add(columnJudgementResultCode());
         ls.add(columnJudgementTypeCode());
         ls.add(columnSentence());
+        ls.add(columnRegisterDatetime());
+        ls.add(columnRegisterUser());
+        ls.add(columnUpdateDatetime());
+        ls.add(columnUpdateUser());
+        ls.add(columnVersionNo());
         return ls;
     }
 
@@ -351,6 +351,14 @@ public class JudgementDbm extends AbstractDBMeta {
         return cri("FK_JUDGEMENT_JUDGEMENT", "judgementSelfList", this, JudgementDbm.getInstance(), mp, false, "judgementSelf");
     }
     /**
+     * (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerJudgementReportRelList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnJudgementId(), JudgementReportRelDbm.getInstance().columnJudgementId());
+        return cri("FK_JUDGEMENT_REPORT_REL_JUDGEMENT", "judgementReportRelList", this, JudgementReportRelDbm.getInstance(), mp, false, "judgement");
+    }
+    /**
      * (判決取得元リレーション)JUDGEMENT_SOURCE_REL by JUDGEMENT_ID, named 'judgementSourceRelList'.
      * @return The information object of referrer property. (NotNull)
      */
@@ -371,6 +379,15 @@ public class JudgementDbm extends AbstractDBMeta {
     //                                                                        Various Info
     //                                                                        ============
     public boolean hasIdentity() { return true; }
+    public boolean hasVersionNo() { return true; }
+    public ColumnInfo getVersionNoColumnInfo() { return _columnVersionNo; }
+    public boolean hasCommonColumn() { return true; }
+    public List<ColumnInfo> getCommonColumnInfoList()
+    { return newArrayList(columnRegisterDatetime(), columnRegisterUser(), columnUpdateDatetime(), columnUpdateUser()); }
+    public List<ColumnInfo> getCommonColumnInfoBeforeInsertList()
+    { return newArrayList(columnRegisterDatetime(), columnRegisterUser(), columnUpdateDatetime(), columnUpdateUser()); }
+    public List<ColumnInfo> getCommonColumnInfoBeforeUpdateList()
+    { return newArrayList(columnUpdateDatetime(), columnUpdateUser()); }
 
     // ===================================================================================
     //                                                                           Type Name

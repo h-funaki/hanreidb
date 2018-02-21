@@ -60,7 +60,7 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
     protected void xsetupEpg() {
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getJudgementSourceRelId(), (et, vl) -> ((JudgementSourceRel)et).setJudgementSourceRelId(ctl(vl)), "judgementSourceRelId");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getJudgementId(), (et, vl) -> ((JudgementSourceRel)et).setJudgementId(ctl(vl)), "judgementId");
-        setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getSourceId(), (et, vl) -> ((JudgementSourceRel)et).setSourceId(cti(vl)), "sourceId");
+        setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getSourceCode(), (et, vl) -> ((JudgementSourceRel)et).setSourceCode((String)vl), "sourceCode");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getSourceJudgementId(), (et, vl) -> ((JudgementSourceRel)et).setSourceJudgementId((String)vl), "sourceJudgementId");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getRegisterDatetime(), (et, vl) -> ((JudgementSourceRel)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getRegisterUser(), (et, vl) -> ((JudgementSourceRel)et).setRegisterUser((String)vl), "registerUser");
@@ -79,7 +79,7 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
     @SuppressWarnings("unchecked")
     protected void xsetupEfpg() {
         setupEfpg(_efpgMap, et -> ((JudgementSourceRel)et).getJudgement(), (et, vl) -> ((JudgementSourceRel)et).setJudgement((OptionalEntity<Judgement>)vl), "judgement");
-        setupEfpg(_efpgMap, et -> ((JudgementSourceRel)et).getSource(), (et, vl) -> ((JudgementSourceRel)et).setSource((OptionalEntity<Source>)vl), "source");
+        setupEfpg(_efpgMap, et -> ((JudgementSourceRel)et).getClsSource(), (et, vl) -> ((JudgementSourceRel)et).setClsSource((OptionalEntity<ClsSource>)vl), "clsSource");
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -104,7 +104,7 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnJudgementSourceRelId = cci("JUDGEMENT_SOURCE_REL_ID", "JUDGEMENT_SOURCE_REL_ID", null, "判決取得元リレーションID", Long.class, "judgementSourceRelId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, false, false, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, "judgement", null, null, false);
-    protected final ColumnInfo _columnSourceId = cci("SOURCE_ID", "SOURCE_ID", null, "取得元ID", Integer.class, "sourceId", null, false, false, true, "INT UNSIGNED", 10, 0, null, false, null, null, "source", null, null, false);
+    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsSource", null, CDef.DefMeta.Source, false);
     protected final ColumnInfo _columnSourceJudgementId = cci("SOURCE_JUDGEMENT_ID", "SOURCE_JUDGEMENT_ID", null, "取得元判決ID", String.class, "sourceJudgementId", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
@@ -123,10 +123,10 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnJudgementId() { return _columnJudgementId; }
     /**
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnSourceId() { return _columnSourceId; }
+    public ColumnInfo columnSourceCode() { return _columnSourceCode; }
     /**
      * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
@@ -162,7 +162,7 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnJudgementSourceRelId());
         ls.add(columnJudgementId());
-        ls.add(columnSourceId());
+        ls.add(columnSourceCode());
         ls.add(columnSourceJudgementId());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());
@@ -201,12 +201,12 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
         return cfi("FK_JUDGEMENT_SOURCE_REL_JUDGEMENT", "judgement", this, JudgementDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "judgementSourceRelList", false);
     }
     /**
-     * (取得元)SOURCE by my SOURCE_ID, named 'source'.
+     * ([区分値]取得元)CLS_SOURCE by my SOURCE_CODE, named 'clsSource'.
      * @return The information object of foreign property. (NotNull)
      */
-    public ForeignInfo foreignSource() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnSourceId(), SourceDbm.getInstance().columnSourceId());
-        return cfi("FK_JUDGEMENT_SOURCE_REL_SOURCE", "source", this, SourceDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "judgementSourceRelList", false);
+    public ForeignInfo foreignClsSource() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnSourceCode(), ClsSourceDbm.getInstance().columnSourceCode());
+        return cfi("FK_JUDGEMENT_SOURCE_REL_SOURCE", "clsSource", this, ClsSourceDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "judgementSourceRelList", false);
     }
 
     // -----------------------------------------------------

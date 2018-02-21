@@ -25,6 +25,7 @@ import org.dbflute.dbmeta.accessory.DomainEntity;
 import org.dbflute.optional.OptionalEntity;
 import tech.law.hanreidb.dbflute.allcommon.EntityDefinedCommonColumn;
 import tech.law.hanreidb.dbflute.allcommon.DBMetaInstanceHandler;
+import tech.law.hanreidb.dbflute.allcommon.CDef;
 import tech.law.hanreidb.dbflute.exentity.*;
 
 /**
@@ -34,7 +35,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     JUDGEMENT_SOURCE_REL_ID
  *
  * [column]
- *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_ID, SOURCE_JUDGEMENT_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_CODE, SOURCE_JUDGEMENT_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -46,13 +47,13 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     JUDGEMENT, SOURCE
+ *     JUDGEMENT, CLS_SOURCE
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     judgement, source
+ *     judgement, clsSource
  *
  * [referrer property]
  *     
@@ -61,7 +62,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Long judgementSourceRelId = entity.getJudgementSourceRelId();
  * Long judgementId = entity.getJudgementId();
- * Integer sourceId = entity.getSourceId();
+ * String sourceCode = entity.getSourceCode();
  * String sourceJudgementId = entity.getSourceJudgementId();
  * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
  * String registerUser = entity.getRegisterUser();
@@ -70,7 +71,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * Long versionNo = entity.getVersionNo();
  * entity.setJudgementSourceRelId(judgementSourceRelId);
  * entity.setJudgementId(judgementId);
- * entity.setSourceId(sourceId);
+ * entity.setSourceCode(sourceCode);
  * entity.setSourceJudgementId(sourceJudgementId);
  * entity.setRegisterDatetime(registerDatetime);
  * entity.setRegisterUser(registerUser);
@@ -98,8 +99,8 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     /** (判決ID)JUDGEMENT_ID: {IX, NotNull, BIGINT UNSIGNED(20), FK to JUDGEMENT} */
     protected Long _judgementId;
 
-    /** (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE} */
-    protected Integer _sourceId;
+    /** (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} */
+    protected String _sourceCode;
 
     /** (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)} */
     protected String _sourceJudgementId;
@@ -142,6 +143,53 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     }
 
     // ===================================================================================
+    //                                                             Classification Property
+    //                                                             =======================
+    /**
+     * Get the value of sourceCode as the classification of Source. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.Source getSourceCodeAsSource() {
+        return CDef.Source.codeOf(getSourceCode());
+    }
+
+    /**
+     * Set the value of sourceCode as the classification of Source. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setSourceCodeAsSource(CDef.Source cdef) {
+        setSourceCode(cdef != null ? cdef.code() : null);
+    }
+
+    // ===================================================================================
+    //                                                              Classification Setting
+    //                                                              ======================
+    /**
+     * Set the value of sourceCode as 裁判所裁判例 (COURT). <br>
+     * 裁判所裁判例: 裁判所裁判例
+     */
+    public void setSourceCode_裁判所裁判例() {
+        setSourceCodeAsSource(CDef.Source.裁判所裁判例);
+    }
+
+    // ===================================================================================
+    //                                                        Classification Determination
+    //                                                        ============================
+    /**
+     * Is the value of sourceCode 裁判所裁判例? <br>
+     * 裁判所裁判例: 裁判所裁判例
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isSourceCode裁判所裁判例() {
+        CDef.Source cdef = getSourceCodeAsSource();
+        return cdef != null ? cdef.equals(CDef.Source.裁判所裁判例) : false;
+    }
+
+    // ===================================================================================
     //                                                                    Foreign Property
     //                                                                    ================
     /** (判決)JUDGEMENT by my JUDGEMENT_ID, named 'judgement'. */
@@ -165,25 +213,25 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
         _judgement = judgement;
     }
 
-    /** (取得元)SOURCE by my SOURCE_ID, named 'source'. */
-    protected OptionalEntity<Source> _source;
+    /** ([区分値]取得元)CLS_SOURCE by my SOURCE_CODE, named 'clsSource'. */
+    protected OptionalEntity<ClsSource> _clsSource;
 
     /**
-     * [get] (取得元)SOURCE by my SOURCE_ID, named 'source'. <br>
+     * [get] ([区分値]取得元)CLS_SOURCE by my SOURCE_CODE, named 'clsSource'. <br>
      * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
-     * @return The entity of foreign property 'source'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
+     * @return The entity of foreign property 'clsSource'. (NotNull, EmptyAllowed: when e.g. null FK column, no setupSelect)
      */
-    public OptionalEntity<Source> getSource() {
-        if (_source == null) { _source = OptionalEntity.relationEmpty(this, "source"); }
-        return _source;
+    public OptionalEntity<ClsSource> getClsSource() {
+        if (_clsSource == null) { _clsSource = OptionalEntity.relationEmpty(this, "clsSource"); }
+        return _clsSource;
     }
 
     /**
-     * [set] (取得元)SOURCE by my SOURCE_ID, named 'source'.
-     * @param source The entity of foreign property 'source'. (NullAllowed)
+     * [set] ([区分値]取得元)CLS_SOURCE by my SOURCE_CODE, named 'clsSource'.
+     * @param clsSource The entity of foreign property 'clsSource'. (NullAllowed)
      */
-    public void setSource(OptionalEntity<Source> source) {
-        _source = source;
+    public void setClsSource(OptionalEntity<ClsSource> clsSource) {
+        _clsSource = clsSource;
     }
 
     // ===================================================================================
@@ -220,8 +268,8 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
         StringBuilder sb = new StringBuilder();
         if (_judgement != null && _judgement.isPresent())
         { sb.append(li).append(xbRDS(_judgement, "judgement")); }
-        if (_source != null && _source.isPresent())
-        { sb.append(li).append(xbRDS(_source, "source")); }
+        if (_clsSource != null && _clsSource.isPresent())
+        { sb.append(li).append(xbRDS(_clsSource, "clsSource")); }
         return sb.toString();
     }
     protected <ET extends Entity> String xbRDS(org.dbflute.optional.OptionalEntity<ET> et, String name) { // buildRelationDisplayString()
@@ -233,7 +281,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
         StringBuilder sb = new StringBuilder();
         sb.append(dm).append(xfND(_judgementSourceRelId));
         sb.append(dm).append(xfND(_judgementId));
-        sb.append(dm).append(xfND(_sourceId));
+        sb.append(dm).append(xfND(_sourceCode));
         sb.append(dm).append(xfND(_sourceJudgementId));
         sb.append(dm).append(xfND(_registerDatetime));
         sb.append(dm).append(xfND(_registerUser));
@@ -252,8 +300,8 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
         StringBuilder sb = new StringBuilder();
         if (_judgement != null && _judgement.isPresent())
         { sb.append(dm).append("judgement"); }
-        if (_source != null && _source.isPresent())
-        { sb.append(dm).append("source"); }
+        if (_clsSource != null && _clsSource.isPresent())
+        { sb.append(dm).append("clsSource"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }
@@ -305,21 +353,21 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     }
 
     /**
-     * [get] (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE} <br>
-     * @return The value of the column 'SOURCE_ID'. (basically NotNull if selected: for the constraint)
+     * [get] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * @return The value of the column 'SOURCE_CODE'. (basically NotNull if selected: for the constraint)
      */
-    public Integer getSourceId() {
-        checkSpecifiedProperty("sourceId");
-        return _sourceId;
+    public String getSourceCode() {
+        checkSpecifiedProperty("sourceCode");
+        return convertEmptyToNull(_sourceCode);
     }
 
     /**
-     * [set] (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE} <br>
-     * @param sourceId The value of the column 'SOURCE_ID'. (basically NotNull if update: for the constraint)
+     * [set] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * @param sourceCode The value of the column 'SOURCE_CODE'. (basically NotNull if update: for the constraint)
      */
-    public void setSourceId(Integer sourceId) {
-        registerModifiedProperty("sourceId");
-        _sourceId = sourceId;
+    public void setSourceCode(String sourceCode) {
+        registerModifiedProperty("sourceCode");
+        _sourceCode = sourceCode;
     }
 
     /**

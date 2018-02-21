@@ -305,121 +305,111 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
     protected abstract ConditionValue xgetCValueJudgementId();
 
     /**
-     * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param sourceId The value of sourceId as equal. (basically NotNull: error as default, or no condition as option)
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * @param sourceCode The value of sourceCode as equal. (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceId_Equal(Integer sourceId) {
-        doSetSourceId_Equal(sourceId);
-    }
-
-    protected void doSetSourceId_Equal(Integer sourceId) {
-        regSourceId(CK_EQ, sourceId);
+    public void setSourceCode_Equal(String sourceCode) {
+        doSetSourceCode_Equal(fRES(sourceCode));
     }
 
     /**
-     * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param sourceId The value of sourceId as notEqual. (basically NotNull: error as default, or no condition as option)
+     * Equal(=). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
-    public void setSourceId_NotEqual(Integer sourceId) {
-        doSetSourceId_NotEqual(sourceId);
-    }
-
-    protected void doSetSourceId_NotEqual(Integer sourceId) {
-        regSourceId(CK_NES, sourceId);
+    public void setSourceCode_Equal_AsSource(CDef.Source cdef) {
+        doSetSourceCode_Equal(cdef != null ? cdef.code() : null);
     }
 
     /**
-     * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param sourceId The value of sourceId as greaterThan. (basically NotNull: error as default, or no condition as option)
+     * Equal(=). As 裁判所裁判例 (COURT). And OnlyOnceRegistered. <br>
+     * 裁判所裁判例: 裁判所裁判例
      */
-    public void setSourceId_GreaterThan(Integer sourceId) {
-        regSourceId(CK_GT, sourceId);
+    public void setSourceCode_Equal_裁判所裁判例() {
+        setSourceCode_Equal_AsSource(CDef.Source.裁判所裁判例);
+    }
+
+    protected void doSetSourceCode_Equal(String sourceCode) {
+        regSourceCode(CK_EQ, sourceCode);
     }
 
     /**
-     * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param sourceId The value of sourceId as lessThan. (basically NotNull: error as default, or no condition as option)
+     * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * @param sourceCode The value of sourceCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceId_LessThan(Integer sourceId) {
-        regSourceId(CK_LT, sourceId);
+    public void setSourceCode_NotEqual(String sourceCode) {
+        doSetSourceCode_NotEqual(fRES(sourceCode));
     }
 
     /**
-     * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param sourceId The value of sourceId as greaterEqual. (basically NotNull: error as default, or no condition as option)
+     * NotEqual(&lt;&gt;). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
-    public void setSourceId_GreaterEqual(Integer sourceId) {
-        regSourceId(CK_GE, sourceId);
+    public void setSourceCode_NotEqual_AsSource(CDef.Source cdef) {
+        doSetSourceCode_NotEqual(cdef != null ? cdef.code() : null);
     }
 
     /**
-     * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param sourceId The value of sourceId as lessEqual. (basically NotNull: error as default, or no condition as option)
+     * NotEqual(&lt;&gt;). As 裁判所裁判例 (COURT). And OnlyOnceRegistered. <br>
+     * 裁判所裁判例: 裁判所裁判例
      */
-    public void setSourceId_LessEqual(Integer sourceId) {
-        regSourceId(CK_LE, sourceId);
+    public void setSourceCode_NotEqual_裁判所裁判例() {
+        setSourceCode_NotEqual_AsSource(CDef.Source.裁判所裁判例);
+    }
+
+    protected void doSetSourceCode_NotEqual(String sourceCode) {
+        regSourceCode(CK_NES, sourceCode);
     }
 
     /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param minNumber The min number of sourceId. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of sourceId. (NullAllowed: if null, no to-condition)
-     * @param opLambda The callback for option of range-of. (NotNull)
+     * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * @param sourceCodeList The collection of sourceCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
-        setSourceId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
+    public void setSourceCode_InScope(Collection<String> sourceCodeList) {
+        doSetSourceCode_InScope(sourceCodeList);
     }
 
     /**
-     * RangeOf with various options. (versatile) <br>
-     * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
-     * And NullIgnored, OnlyOnceRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param minNumber The min number of sourceId. (NullAllowed: if null, no from-condition)
-     * @param maxNumber The max number of sourceId. (NullAllowed: if null, no to-condition)
-     * @param rangeOfOption The option of range-of. (NotNull)
+     * InScope {in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
-    protected void setSourceId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
-        regROO(minNumber, maxNumber, xgetCValueSourceId(), "SOURCE_ID", rangeOfOption);
+    public void setSourceCode_InScope_AsSource(Collection<CDef.Source> cdefList) {
+        doSetSourceCode_InScope(cTStrL(cdefList));
+    }
+
+    protected void doSetSourceCode_InScope(Collection<String> sourceCodeList) {
+        regINS(CK_INS, cTL(sourceCodeList), xgetCValueSourceCode(), "SOURCE_CODE");
     }
 
     /**
-     * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param sourceIdList The collection of sourceId as inScope. (NullAllowed: if null (or empty), no condition)
+     * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * @param sourceCodeList The collection of sourceCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceId_InScope(Collection<Integer> sourceIdList) {
-        doSetSourceId_InScope(sourceIdList);
-    }
-
-    protected void doSetSourceId_InScope(Collection<Integer> sourceIdList) {
-        regINS(CK_INS, cTL(sourceIdList), xgetCValueSourceId(), "SOURCE_ID");
+    public void setSourceCode_NotInScope(Collection<String> sourceCodeList) {
+        doSetSourceCode_NotInScope(sourceCodeList);
     }
 
     /**
-     * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
-     * @param sourceIdList The collection of sourceId as notInScope. (NullAllowed: if null (or empty), no condition)
+     * NotInScope {not in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceId_NotInScope(Collection<Integer> sourceIdList) {
-        doSetSourceId_NotInScope(sourceIdList);
+    public void setSourceCode_NotInScope_AsSource(Collection<CDef.Source> cdefList) {
+        doSetSourceCode_NotInScope(cTStrL(cdefList));
     }
 
-    protected void doSetSourceId_NotInScope(Collection<Integer> sourceIdList) {
-        regINS(CK_NINS, cTL(sourceIdList), xgetCValueSourceId(), "SOURCE_ID");
+    protected void doSetSourceCode_NotInScope(Collection<String> sourceCodeList) {
+        regINS(CK_NINS, cTL(sourceCodeList), xgetCValueSourceCode(), "SOURCE_CODE");
     }
 
-    protected void regSourceId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueSourceId(), "SOURCE_ID"); }
-    protected abstract ConditionValue xgetCValueSourceId();
+    protected void regSourceCode(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueSourceCode(), "SOURCE_CODE"); }
+    protected abstract ConditionValue xgetCValueSourceCode();
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>

@@ -97,6 +97,9 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
     public Map<String, JudgementCQ> xdfgetJudgementId_ExistsReferrer_JudgementSelfList() { return xgetSQueMap("judgementId_ExistsReferrer_JudgementSelfList"); }
     public String keepJudgementId_ExistsReferrer_JudgementSelfList(JudgementCQ sq) { return xkeepSQue("judgementId_ExistsReferrer_JudgementSelfList", sq); }
 
+    public Map<String, JudgementReportRelCQ> xdfgetJudgementId_ExistsReferrer_JudgementReportRelList() { return xgetSQueMap("judgementId_ExistsReferrer_JudgementReportRelList"); }
+    public String keepJudgementId_ExistsReferrer_JudgementReportRelList(JudgementReportRelCQ sq) { return xkeepSQue("judgementId_ExistsReferrer_JudgementReportRelList", sq); }
+
     public Map<String, JudgementSourceRelCQ> xdfgetJudgementId_ExistsReferrer_JudgementSourceRelList() { return xgetSQueMap("judgementId_ExistsReferrer_JudgementSourceRelList"); }
     public String keepJudgementId_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("judgementId_ExistsReferrer_JudgementSourceRelList", sq); }
 
@@ -106,6 +109,9 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
     public Map<String, JudgementCQ> xdfgetJudgementId_NotExistsReferrer_JudgementSelfList() { return xgetSQueMap("judgementId_NotExistsReferrer_JudgementSelfList"); }
     public String keepJudgementId_NotExistsReferrer_JudgementSelfList(JudgementCQ sq) { return xkeepSQue("judgementId_NotExistsReferrer_JudgementSelfList", sq); }
 
+    public Map<String, JudgementReportRelCQ> xdfgetJudgementId_NotExistsReferrer_JudgementReportRelList() { return xgetSQueMap("judgementId_NotExistsReferrer_JudgementReportRelList"); }
+    public String keepJudgementId_NotExistsReferrer_JudgementReportRelList(JudgementReportRelCQ sq) { return xkeepSQue("judgementId_NotExistsReferrer_JudgementReportRelList", sq); }
+
     public Map<String, JudgementSourceRelCQ> xdfgetJudgementId_NotExistsReferrer_JudgementSourceRelList() { return xgetSQueMap("judgementId_NotExistsReferrer_JudgementSourceRelList"); }
     public String keepJudgementId_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("judgementId_NotExistsReferrer_JudgementSourceRelList", sq); }
 
@@ -114,6 +120,9 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
 
     public Map<String, JudgementCQ> xdfgetJudgementId_SpecifyDerivedReferrer_JudgementSelfList() { return xgetSQueMap("judgementId_SpecifyDerivedReferrer_JudgementSelfList"); }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSelfList(JudgementCQ sq) { return xkeepSQue("judgementId_SpecifyDerivedReferrer_JudgementSelfList", sq); }
+
+    public Map<String, JudgementReportRelCQ> xdfgetJudgementId_SpecifyDerivedReferrer_JudgementReportRelList() { return xgetSQueMap("judgementId_SpecifyDerivedReferrer_JudgementReportRelList"); }
+    public String keepJudgementId_SpecifyDerivedReferrer_JudgementReportRelList(JudgementReportRelCQ sq) { return xkeepSQue("judgementId_SpecifyDerivedReferrer_JudgementReportRelList", sq); }
 
     public Map<String, JudgementSourceRelCQ> xdfgetJudgementId_SpecifyDerivedReferrer_JudgementSourceRelList() { return xgetSQueMap("judgementId_SpecifyDerivedReferrer_JudgementSourceRelList"); }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("judgementId_SpecifyDerivedReferrer_JudgementSourceRelList", sq); }
@@ -125,6 +134,11 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
     public String keepJudgementId_QueryDerivedReferrer_JudgementSelfList(JudgementCQ sq) { return xkeepSQue("judgementId_QueryDerivedReferrer_JudgementSelfList", sq); }
     public Map<String, Object> xdfgetJudgementId_QueryDerivedReferrer_JudgementSelfListParameter() { return xgetSQuePmMap("judgementId_QueryDerivedReferrer_JudgementSelfList"); }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSelfListParameter(Object pm) { return xkeepSQuePm("judgementId_QueryDerivedReferrer_JudgementSelfList", pm); }
+
+    public Map<String, JudgementReportRelCQ> xdfgetJudgementId_QueryDerivedReferrer_JudgementReportRelList() { return xgetSQueMap("judgementId_QueryDerivedReferrer_JudgementReportRelList"); }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementReportRelList(JudgementReportRelCQ sq) { return xkeepSQue("judgementId_QueryDerivedReferrer_JudgementReportRelList", sq); }
+    public Map<String, Object> xdfgetJudgementId_QueryDerivedReferrer_JudgementReportRelListParameter() { return xgetSQuePmMap("judgementId_QueryDerivedReferrer_JudgementReportRelList"); }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementReportRelListParameter(Object pm) { return xkeepSQuePm("judgementId_QueryDerivedReferrer_JudgementReportRelList", pm); }
 
     public Map<String, JudgementSourceRelCQ> xdfgetJudgementId_QueryDerivedReferrer_JudgementSourceRelList() { return xgetSQueMap("judgementId_QueryDerivedReferrer_JudgementSourceRelList"); }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("judgementId_QueryDerivedReferrer_JudgementSourceRelList", sq); }
@@ -158,14 +172,14 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @return this. (NotNull)
      */
     public BsJudgementCQ addOrderBy_JudgementPublicCode_Asc() { regOBA("JUDGEMENT_PUBLIC_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)}
+     * (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)}
      * @return this. (NotNull)
      */
     public BsJudgementCQ addOrderBy_JudgementPublicCode_Desc() { regOBD("JUDGEMENT_PUBLIC_CODE"); return this; }
@@ -175,106 +189,6 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
     { if (_caseName == null) { _caseName = nCV(); }
       return _caseName; }
     protected ConditionValue xgetCValueCaseName() { return xdfgetCaseName(); }
-
-    protected ConditionValue _precedentReportsKan;
-    public ConditionValue xdfgetPrecedentReportsKan()
-    { if (_precedentReportsKan == null) { _precedentReportsKan = nCV(); }
-      return _precedentReportsKan; }
-    protected ConditionValue xgetCValuePrecedentReportsKan() { return xdfgetPrecedentReportsKan(); }
-
-    /** 
-     * Add order-by as ascend. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_PrecedentReportsKan_Asc() { regOBA("PRECEDENT_REPORTS_KAN"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_PrecedentReportsKan_Desc() { regOBD("PRECEDENT_REPORTS_KAN"); return this; }
-
-    protected ConditionValue _precedentReportsGo;
-    public ConditionValue xdfgetPrecedentReportsGo()
-    { if (_precedentReportsGo == null) { _precedentReportsGo = nCV(); }
-      return _precedentReportsGo; }
-    protected ConditionValue xgetCValuePrecedentReportsGo() { return xdfgetPrecedentReportsGo(); }
-
-    /** 
-     * Add order-by as ascend. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_PrecedentReportsGo_Asc() { regOBA("PRECEDENT_REPORTS_GO"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_PrecedentReportsGo_Desc() { regOBD("PRECEDENT_REPORTS_GO"); return this; }
-
-    protected ConditionValue _precedentReportsKo;
-    public ConditionValue xdfgetPrecedentReportsKo()
-    { if (_precedentReportsKo == null) { _precedentReportsKo = nCV(); }
-      return _precedentReportsKo; }
-    protected ConditionValue xgetCValuePrecedentReportsKo() { return xdfgetPrecedentReportsKo(); }
-
-    /** 
-     * Add order-by as ascend. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_PrecedentReportsKo_Asc() { regOBA("PRECEDENT_REPORTS_KO"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_PrecedentReportsKo_Desc() { regOBD("PRECEDENT_REPORTS_KO"); return this; }
-
-    protected ConditionValue _judgementReportsGo;
-    public ConditionValue xdfgetJudgementReportsGo()
-    { if (_judgementReportsGo == null) { _judgementReportsGo = nCV(); }
-      return _judgementReportsGo; }
-    protected ConditionValue xgetCValueJudgementReportsGo() { return xdfgetJudgementReportsGo(); }
-
-    /** 
-     * Add order-by as ascend. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_JudgementReportsGo_Asc() { regOBA("JUDGEMENT_REPORTS_GO"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_JudgementReportsGo_Desc() { regOBD("JUDGEMENT_REPORTS_GO"); return this; }
-
-    protected ConditionValue _judgementReportsKo;
-    public ConditionValue xdfgetJudgementReportsKo()
-    { if (_judgementReportsKo == null) { _judgementReportsKo = nCV(); }
-      return _judgementReportsKo; }
-    protected ConditionValue xgetCValueJudgementReportsKo() { return xdfgetJudgementReportsKo(); }
-
-    /** 
-     * Add order-by as ascend. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_JudgementReportsKo_Asc() { regOBA("JUDGEMENT_REPORTS_KO"); return this; }
-
-    /**
-     * Add order-by as descend. <br>
-     * (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)}
-     * @return this. (NotNull)
-     */
-    public BsJudgementCQ addOrderBy_JudgementReportsKo_Desc() { regOBD("JUDGEMENT_REPORTS_KO"); return this; }
 
     protected ConditionValue _judgementDate;
     public ConditionValue xdfgetJudgementDate()
@@ -481,6 +395,106 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
     { if (_sentence == null) { _sentence = nCV(); }
       return _sentence; }
     protected ConditionValue xgetCValueSentence() { return xdfgetSentence(); }
+
+    protected ConditionValue _registerDatetime;
+    public ConditionValue xdfgetRegisterDatetime()
+    { if (_registerDatetime == null) { _registerDatetime = nCV(); }
+      return _registerDatetime; }
+    protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
+
+    protected ConditionValue _registerUser;
+    public ConditionValue xdfgetRegisterUser()
+    { if (_registerUser == null) { _registerUser = nCV(); }
+      return _registerUser; }
+    protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_RegisterUser_Asc() { regOBA("REGISTER_USER"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_RegisterUser_Desc() { regOBD("REGISTER_USER"); return this; }
+
+    protected ConditionValue _updateDatetime;
+    public ConditionValue xdfgetUpdateDatetime()
+    { if (_updateDatetime == null) { _updateDatetime = nCV(); }
+      return _updateDatetime; }
+    protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
+
+    protected ConditionValue _updateUser;
+    public ConditionValue xdfgetUpdateUser()
+    { if (_updateUser == null) { _updateUser = nCV(); }
+      return _updateUser; }
+    protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_UpdateUser_Asc() { regOBA("UPDATE_USER"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_UpdateUser_Desc() { regOBD("UPDATE_USER"); return this; }
+
+    protected ConditionValue _versionNo;
+    public ConditionValue xdfgetVersionNo()
+    { if (_versionNo == null) { _versionNo = nCV(); }
+      return _versionNo; }
+    protected ConditionValue xgetCValueVersionNo() { return xdfgetVersionNo(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_VersionNo_Asc() { regOBA("VERSION_NO"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return this. (NotNull)
+     */
+    public BsJudgementCQ addOrderBy_VersionNo_Desc() { regOBD("VERSION_NO"); return this; }
 
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy

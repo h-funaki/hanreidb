@@ -23,6 +23,7 @@ import org.dbflute.dbmeta.DBMeta;
 import org.dbflute.dbmeta.AbstractEntity;
 import org.dbflute.dbmeta.accessory.DomainEntity;
 import org.dbflute.optional.OptionalEntity;
+import tech.law.hanreidb.dbflute.allcommon.EntityDefinedCommonColumn;
 import tech.law.hanreidb.dbflute.allcommon.DBMetaInstanceHandler;
 import tech.law.hanreidb.dbflute.allcommon.CDef;
 import tech.law.hanreidb.dbflute.exentity.*;
@@ -34,7 +35,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     JUDGEMENT_ID
  *
  * [column]
- *     JUDGEMENT_ID, JUDGEMENT_PUBLIC_CODE, CASE_NAME, PRECEDENT_REPORTS_KAN, PRECEDENT_REPORTS_GO, PRECEDENT_REPORTS_KO, JUDGEMENT_REPORTS_GO, JUDGEMENT_REPORTS_KO, JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_ID, CASE_NUMBER_ERA_CODE, CASE_NUMBER_YEAR, CASE_MARK_ID, CASE_NUMBER_SERIAL_NUMBER, COURT_ID, BENCH_CODE, JUDGEMENT_RESULT_CODE, JUDGEMENT_TYPE_CODE, SENTENCE
+ *     JUDGEMENT_ID, JUDGEMENT_PUBLIC_CODE, CASE_NAME, JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_ID, CASE_NUMBER_ERA_CODE, CASE_NUMBER_YEAR, CASE_MARK_ID, CASE_NUMBER_SERIAL_NUMBER, COURT_ID, BENCH_CODE, JUDGEMENT_RESULT_CODE, JUDGEMENT_TYPE_CODE, SENTENCE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -43,30 +44,25 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     JUDGEMENT_ID
  *
  * [version-no]
- *     
+ *     VERSION_NO
  *
  * [foreign table]
  *     CLS_BENCH, CASE_MARK, CLS_ERA, COURT, CLS_JUDGEMENT_RESULT, CLS_JUDGEMENT_TYPE, JUDGEMENT
  *
  * [referrer table]
- *     JUDGEMENT, JUDGEMENT_SOURCE_REL, JUDGEMENT_USER_FAVORITE_REL
+ *     JUDGEMENT, JUDGEMENT_REPORT_REL, JUDGEMENT_SOURCE_REL, JUDGEMENT_USER_FAVORITE_REL
  *
  * [foreign property]
  *     clsBench, caseMark, clsEra, court, clsJudgementResult, clsJudgementType, judgementSelf
  *
  * [referrer property]
- *     judgementSelfList, judgementSourceRelList, judgementUserFavoriteRelList
+ *     judgementSelfList, judgementReportRelList, judgementSourceRelList, judgementUserFavoriteRelList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
  * Long judgementId = entity.getJudgementId();
  * String judgementPublicCode = entity.getJudgementPublicCode();
  * String caseName = entity.getCaseName();
- * Integer precedentReportsKan = entity.getPrecedentReportsKan();
- * Integer precedentReportsGo = entity.getPrecedentReportsGo();
- * Integer precedentReportsKo = entity.getPrecedentReportsKo();
- * Integer judgementReportsGo = entity.getJudgementReportsGo();
- * Integer judgementReportsKo = entity.getJudgementReportsKo();
  * java.time.LocalDate judgementDate = entity.getJudgementDate();
  * Long originalJudgementId = entity.getOriginalJudgementId();
  * String caseNumberEraCode = entity.getCaseNumberEraCode();
@@ -78,14 +74,14 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * String judgementResultCode = entity.getJudgementResultCode();
  * String judgementTypeCode = entity.getJudgementTypeCode();
  * String sentence = entity.getSentence();
+ * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
+ * String registerUser = entity.getRegisterUser();
+ * java.time.LocalDateTime updateDatetime = entity.getUpdateDatetime();
+ * String updateUser = entity.getUpdateUser();
+ * Long versionNo = entity.getVersionNo();
  * entity.setJudgementId(judgementId);
  * entity.setJudgementPublicCode(judgementPublicCode);
  * entity.setCaseName(caseName);
- * entity.setPrecedentReportsKan(precedentReportsKan);
- * entity.setPrecedentReportsGo(precedentReportsGo);
- * entity.setPrecedentReportsKo(precedentReportsKo);
- * entity.setJudgementReportsGo(judgementReportsGo);
- * entity.setJudgementReportsKo(judgementReportsKo);
  * entity.setJudgementDate(judgementDate);
  * entity.setOriginalJudgementId(originalJudgementId);
  * entity.setCaseNumberEraCode(caseNumberEraCode);
@@ -97,11 +93,16 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * entity.setJudgementResultCode(judgementResultCode);
  * entity.setJudgementTypeCode(judgementTypeCode);
  * entity.setSentence(sentence);
+ * entity.setRegisterDatetime(registerDatetime);
+ * entity.setRegisterUser(registerUser);
+ * entity.setUpdateDatetime(updateDatetime);
+ * entity.setUpdateUser(updateUser);
+ * entity.setVersionNo(versionNo);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsJudgement extends AbstractEntity implements DomainEntity {
+public abstract class BsJudgement extends AbstractEntity implements DomainEntity, EntityDefinedCommonColumn {
 
     // ===================================================================================
     //                                                                          Definition
@@ -115,26 +116,11 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     /** (判決ID)JUDGEMENT_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} */
     protected Long _judgementId;
 
-    /** (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)} */
+    /** (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)} */
     protected String _judgementPublicCode;
 
     /** (事件名)CASE_NAME: {TEXT(65535)} */
     protected String _caseName;
-
-    /** (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)} */
-    protected Integer _precedentReportsKan;
-
-    /** (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)} */
-    protected Integer _precedentReportsGo;
-
-    /** (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)} */
-    protected Integer _precedentReportsKo;
-
-    /** (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)} */
-    protected Integer _judgementReportsGo;
-
-    /** (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)} */
-    protected Integer _judgementReportsKo;
 
     /** (裁判年月日)JUDGEMENT_DATE: {DATE(10)} */
     protected java.time.LocalDate _judgementDate;
@@ -169,6 +155,21 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     /** (判決文)SENTENCE: {TEXT(65535)} */
     protected String _sentence;
 
+    /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.time.LocalDateTime _registerDatetime;
+
+    /** (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} */
+    protected String _registerUser;
+
+    /** (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.time.LocalDateTime _updateDatetime;
+
+    /** (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} */
+    protected String _updateUser;
+
+    /** (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} */
+    protected Long _versionNo;
+
     // ===================================================================================
     //                                                                             DB Meta
     //                                                                             =======
@@ -194,7 +195,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param judgementPublicCode (判決公開コード): UQ, NotNull, VARCHAR(20). (NotNull)
+     * @param judgementPublicCode (判決公開コード): UQ, NotNull, VARCHAR(12). (NotNull)
      */
     public void uniqueBy(String judgementPublicCode) {
         __uniqueDrivenProperties.clear();
@@ -745,6 +746,26 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         _judgementSelfList = judgementSelfList;
     }
 
+    /** (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelList'. */
+    protected List<JudgementReportRel> _judgementReportRelList;
+
+    /**
+     * [get] (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelList'.
+     * @return The entity list of referrer property 'judgementReportRelList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<JudgementReportRel> getJudgementReportRelList() {
+        if (_judgementReportRelList == null) { _judgementReportRelList = newReferrerList(); }
+        return _judgementReportRelList;
+    }
+
+    /**
+     * [set] (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelList'.
+     * @param judgementReportRelList The entity list of referrer property 'judgementReportRelList'. (NullAllowed)
+     */
+    public void setJudgementReportRelList(List<JudgementReportRel> judgementReportRelList) {
+        _judgementReportRelList = judgementReportRelList;
+    }
+
     /** (判決取得元リレーション)JUDGEMENT_SOURCE_REL by JUDGEMENT_ID, named 'judgementSourceRelList'. */
     protected List<JudgementSourceRel> _judgementSourceRelList;
 
@@ -830,6 +851,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         { sb.append(li).append(xbRDS(_judgementSelf, "judgementSelf")); }
         if (_judgementSelfList != null) { for (Judgement et : _judgementSelfList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "judgementSelfList")); } } }
+        if (_judgementReportRelList != null) { for (JudgementReportRel et : _judgementReportRelList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "judgementReportRelList")); } } }
         if (_judgementSourceRelList != null) { for (JudgementSourceRel et : _judgementSourceRelList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "judgementSourceRelList")); } } }
         if (_judgementUserFavoriteRelList != null) { for (JudgementUserFavoriteRel et : _judgementUserFavoriteRelList)
@@ -846,11 +869,6 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         sb.append(dm).append(xfND(_judgementId));
         sb.append(dm).append(xfND(_judgementPublicCode));
         sb.append(dm).append(xfND(_caseName));
-        sb.append(dm).append(xfND(_precedentReportsKan));
-        sb.append(dm).append(xfND(_precedentReportsGo));
-        sb.append(dm).append(xfND(_precedentReportsKo));
-        sb.append(dm).append(xfND(_judgementReportsGo));
-        sb.append(dm).append(xfND(_judgementReportsKo));
         sb.append(dm).append(xfND(_judgementDate));
         sb.append(dm).append(xfND(_originalJudgementId));
         sb.append(dm).append(xfND(_caseNumberEraCode));
@@ -862,6 +880,11 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         sb.append(dm).append(xfND(_judgementResultCode));
         sb.append(dm).append(xfND(_judgementTypeCode));
         sb.append(dm).append(xfND(_sentence));
+        sb.append(dm).append(xfND(_registerDatetime));
+        sb.append(dm).append(xfND(_registerUser));
+        sb.append(dm).append(xfND(_updateDatetime));
+        sb.append(dm).append(xfND(_updateUser));
+        sb.append(dm).append(xfND(_versionNo));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -888,6 +911,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         { sb.append(dm).append("judgementSelf"); }
         if (_judgementSelfList != null && !_judgementSelfList.isEmpty())
         { sb.append(dm).append("judgementSelfList"); }
+        if (_judgementReportRelList != null && !_judgementReportRelList.isEmpty())
+        { sb.append(dm).append("judgementReportRelList"); }
         if (_judgementSourceRelList != null && !_judgementSourceRelList.isEmpty())
         { sb.append(dm).append("judgementSourceRelList"); }
         if (_judgementUserFavoriteRelList != null && !_judgementUserFavoriteRelList.isEmpty())
@@ -925,7 +950,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     }
 
     /**
-     * [get] (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)} <br>
+     * [get] (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)} <br>
+     * e.g. JID123456789
      * @return The value of the column 'JUDGEMENT_PUBLIC_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getJudgementPublicCode() {
@@ -934,7 +960,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     }
 
     /**
-     * [set] (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(20)} <br>
+     * [set] (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)} <br>
+     * e.g. JID123456789
      * @param judgementPublicCode The value of the column 'JUDGEMENT_PUBLIC_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setJudgementPublicCode(String judgementPublicCode) {
@@ -958,96 +985,6 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     public void setCaseName(String caseName) {
         registerModifiedProperty("caseName");
         _caseName = caseName;
-    }
-
-    /**
-     * [get] (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)} <br>
-     * @return The value of the column 'PRECEDENT_REPORTS_KAN'. (NullAllowed even if selected: for no constraint)
-     */
-    public Integer getPrecedentReportsKan() {
-        checkSpecifiedProperty("precedentReportsKan");
-        return _precedentReportsKan;
-    }
-
-    /**
-     * [set] (判例集巻)PRECEDENT_REPORTS_KAN: {INT UNSIGNED(10)} <br>
-     * @param precedentReportsKan The value of the column 'PRECEDENT_REPORTS_KAN'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setPrecedentReportsKan(Integer precedentReportsKan) {
-        registerModifiedProperty("precedentReportsKan");
-        _precedentReportsKan = precedentReportsKan;
-    }
-
-    /**
-     * [get] (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)} <br>
-     * @return The value of the column 'PRECEDENT_REPORTS_GO'. (NullAllowed even if selected: for no constraint)
-     */
-    public Integer getPrecedentReportsGo() {
-        checkSpecifiedProperty("precedentReportsGo");
-        return _precedentReportsGo;
-    }
-
-    /**
-     * [set] (判例集号)PRECEDENT_REPORTS_GO: {INT UNSIGNED(10)} <br>
-     * @param precedentReportsGo The value of the column 'PRECEDENT_REPORTS_GO'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setPrecedentReportsGo(Integer precedentReportsGo) {
-        registerModifiedProperty("precedentReportsGo");
-        _precedentReportsGo = precedentReportsGo;
-    }
-
-    /**
-     * [get] (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)} <br>
-     * @return The value of the column 'PRECEDENT_REPORTS_KO'. (NullAllowed even if selected: for no constraint)
-     */
-    public Integer getPrecedentReportsKo() {
-        checkSpecifiedProperty("precedentReportsKo");
-        return _precedentReportsKo;
-    }
-
-    /**
-     * [set] (判例集頁)PRECEDENT_REPORTS_KO: {INT UNSIGNED(10)} <br>
-     * @param precedentReportsKo The value of the column 'PRECEDENT_REPORTS_KO'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setPrecedentReportsKo(Integer precedentReportsKo) {
-        registerModifiedProperty("precedentReportsKo");
-        _precedentReportsKo = precedentReportsKo;
-    }
-
-    /**
-     * [get] (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)} <br>
-     * @return The value of the column 'JUDGEMENT_REPORTS_GO'. (NullAllowed even if selected: for no constraint)
-     */
-    public Integer getJudgementReportsGo() {
-        checkSpecifiedProperty("judgementReportsGo");
-        return _judgementReportsGo;
-    }
-
-    /**
-     * [set] (裁判集号)JUDGEMENT_REPORTS_GO: {INT UNSIGNED(10)} <br>
-     * @param judgementReportsGo The value of the column 'JUDGEMENT_REPORTS_GO'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setJudgementReportsGo(Integer judgementReportsGo) {
-        registerModifiedProperty("judgementReportsGo");
-        _judgementReportsGo = judgementReportsGo;
-    }
-
-    /**
-     * [get] (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)} <br>
-     * @return The value of the column 'JUDGEMENT_REPORTS_KO'. (NullAllowed even if selected: for no constraint)
-     */
-    public Integer getJudgementReportsKo() {
-        checkSpecifiedProperty("judgementReportsKo");
-        return _judgementReportsKo;
-    }
-
-    /**
-     * [set] (裁判集頁)JUDGEMENT_REPORTS_KO: {INT UNSIGNED(10)} <br>
-     * @param judgementReportsKo The value of the column 'JUDGEMENT_REPORTS_KO'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setJudgementReportsKo(Integer judgementReportsKo) {
-        registerModifiedProperty("judgementReportsKo");
-        _judgementReportsKo = judgementReportsKo;
     }
 
     /**
@@ -1248,5 +1185,105 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     public void setSentence(String sentence) {
         registerModifiedProperty("sentence");
         _sentence = sentence;
+    }
+
+    /**
+     * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
+     * レコードが登録された日時
+     * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public java.time.LocalDateTime getRegisterDatetime() {
+        checkSpecifiedProperty("registerDatetime");
+        return _registerDatetime;
+    }
+
+    /**
+     * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
+     * レコードが登録された日時
+     * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setRegisterDatetime(java.time.LocalDateTime registerDatetime) {
+        registerModifiedProperty("registerDatetime");
+        _registerDatetime = registerDatetime;
+    }
+
+    /**
+     * [get] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
+     * レコードを登録したユーザー
+     * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
+     */
+    public String getRegisterUser() {
+        checkSpecifiedProperty("registerUser");
+        return convertEmptyToNull(_registerUser);
+    }
+
+    /**
+     * [set] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
+     * レコードを登録したユーザー
+     * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
+     */
+    public void setRegisterUser(String registerUser) {
+        registerModifiedProperty("registerUser");
+        _registerUser = registerUser;
+    }
+
+    /**
+     * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
+     * レコードが(最後に)更新された日時
+     * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public java.time.LocalDateTime getUpdateDatetime() {
+        checkSpecifiedProperty("updateDatetime");
+        return _updateDatetime;
+    }
+
+    /**
+     * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
+     * レコードが(最後に)更新された日時
+     * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdateDatetime(java.time.LocalDateTime updateDatetime) {
+        registerModifiedProperty("updateDatetime");
+        _updateDatetime = updateDatetime;
+    }
+
+    /**
+     * [get] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
+     * レコードを(最後に)更新したユーザー
+     * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
+     */
+    public String getUpdateUser() {
+        checkSpecifiedProperty("updateUser");
+        return convertEmptyToNull(_updateUser);
+    }
+
+    /**
+     * [set] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
+     * レコードを(最後に)更新したユーザー
+     * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdateUser(String updateUser) {
+        registerModifiedProperty("updateUser");
+        _updateUser = updateUser;
+    }
+
+    /**
+     * [get] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
+     * バージョン番号
+     * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
+     */
+    public Long getVersionNo() {
+        checkSpecifiedProperty("versionNo");
+        return _versionNo;
+    }
+
+    /**
+     * [set] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
+     * バージョン番号
+     * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
+     */
+    public void setVersionNo(Long versionNo) {
+        registerModifiedProperty("versionNo");
+        _versionNo = versionNo;
     }
 }

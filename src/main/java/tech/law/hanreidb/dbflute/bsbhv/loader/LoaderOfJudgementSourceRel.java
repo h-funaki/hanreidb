@@ -28,7 +28,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     JUDGEMENT_SOURCE_REL_ID
  *
  * [column]
- *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_ID, SOURCE_JUDGEMENT_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_CODE, SOURCE_JUDGEMENT_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -40,13 +40,13 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     JUDGEMENT, SOURCE
+ *     JUDGEMENT, CLS_SOURCE
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     judgement, source
+ *     judgement, clsSource
  *
  * [referrer property]
  *     
@@ -81,11 +81,11 @@ public class LoaderOfJudgementSourceRel {
         return _foreignJudgementLoader;
     }
 
-    protected LoaderOfSource _foreignSourceLoader;
-    public LoaderOfSource pulloutSource() {
-        if (_foreignSourceLoader == null)
-        { _foreignSourceLoader = new LoaderOfSource().ready(myBhv().pulloutSource(_selectedList), _selector); }
-        return _foreignSourceLoader;
+    protected LoaderOfClsSource _foreignClsSourceLoader;
+    public LoaderOfClsSource pulloutClsSource() {
+        if (_foreignClsSourceLoader == null)
+        { _foreignClsSourceLoader = new LoaderOfClsSource().ready(myBhv().pulloutClsSource(_selectedList), _selector); }
+        return _foreignClsSourceLoader;
     }
 
     // ===================================================================================

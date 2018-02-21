@@ -282,6 +282,45 @@
             <unique-column name="JUDGEMENT_TYPE_NAME" position="1"/>
         </unique>
     </table>
+    <table comment="[区分値]取得元" name="CLS_SOURCE"
+        schema="hanreidb.$$NoNameSchema$$" type="TABLE">
+        <column comment="取得元コード" dbType="VARCHAR" javaType="String"
+            name="SOURCE_CODE" pkName="PRIMARY" pkPosition="1"
+            primaryKey="true" required="true" size="10" type="VARCHAR"/>
+        <column comment="取得元名" dbType="VARCHAR" javaType="String"
+            name="SOURCE_NAME" required="true" size="100" type="VARCHAR"/>
+        <column comment="取得元別名" dbType="VARCHAR" javaType="String"
+            name="SOURCE_ALIAS" required="true" size="100" type="VARCHAR"/>
+        <column comment="説明 : 説明" dbType="TEXT" javaType="String"
+            name="DESCRIPTION" required="true" size="65535" type="LONGVARCHAR"/>
+        <column comment="順番 : 順番" dbType="INT UNSIGNED"
+            javaType="Integer" name="DISPLAY_ORDER" required="true"
+            size="10" type="INTEGER"/>
+        <column comment="登録日時 : レコードが登録された日時" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="REGISTER_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="登録ユーザー : レコードを登録したユーザー" dbType="VARCHAR"
+            javaType="String" name="REGISTER_USER" required="true"
+            size="200" type="VARCHAR"/>
+        <column comment="更新日時 : レコードが(最後に)更新された日時" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="UPDATE_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="更新ユーザー : レコードを(最後に)更新したユーザー" dbType="VARCHAR"
+            javaType="String" name="UPDATE_USER" required="true"
+            size="200" type="VARCHAR"/>
+        <column comment="バージョン番号 : バージョン番号" dbType="BIGINT UNSIGNED"
+            default="0" javaType="Long" name="VERSION_NO"
+            required="true" size="20" type="BIGINT"/>
+        <unique name="DISPLAY_ORDER">
+            <unique-column name="DISPLAY_ORDER" position="1"/>
+        </unique>
+        <unique name="SOURCE_ALIAS">
+            <unique-column name="SOURCE_ALIAS" position="1"/>
+        </unique>
+        <unique name="SOURCE_NAME">
+            <unique-column name="SOURCE_NAME" position="1"/>
+        </unique>
+    </table>
     <table comment="[区分値]ユーザーステータス" name="CLS_USER_STATUS"
         schema="hanreidb.$$NoNameSchema$$" type="TABLE">
         <column comment="ユーザーステータスコード" dbType="VARCHAR"
@@ -355,12 +394,12 @@
             <index-column name="COURT_TYPE_CODE" position="1"/>
         </index>
     </table>
-    <table comment="裁判所スクレイピング結果 : 裁判所からスクレイピングした結果を格納"
-        name="COURT_SCRAPE_RESULT" schema="hanreidb.$$NoNameSchema$$" type="TABLE">
-        <column autoIncrement="true" comment="裁判所スクレイピング結果ID"
+    <table comment="裁判所判決 : 裁判所からスクレイピングした結果を格納" name="COURT_JUDGEMENT"
+        schema="hanreidb.$$NoNameSchema$$" type="TABLE">
+        <column autoIncrement="true" comment="裁判所判決ID"
             dbType="BIGINT UNSIGNED" javaType="Long"
-            name="COURT_SCRAPE_RESULT_ID" pkName="PRIMARY"
-            pkPosition="1" primaryKey="true" required="true" size="20" type="BIGINT"/>
+            name="COURT_JUDGEMENT_ID" pkName="PRIMARY" pkPosition="1"
+            primaryKey="true" required="true" size="20" type="BIGINT"/>
         <column comment="事件番号" dbType="VARCHAR" javaType="String"
             name="CASE_NUMBER" required="true" size="50" type="VARCHAR"/>
         <column comment="事件名" dbType="TEXT" javaType="String"
@@ -432,20 +471,11 @@
             dbType="BIGINT UNSIGNED" javaType="Long" name="JUDGEMENT_ID"
             pkName="PRIMARY" pkPosition="1" primaryKey="true"
             required="true" size="20" type="BIGINT"/>
-        <column comment="判決公開コード" dbType="VARCHAR" javaType="String"
-            name="JUDGEMENT_PUBLIC_CODE" required="true" size="20" type="VARCHAR"/>
+        <column comment="判決公開コード : e.g. JID123456789" dbType="VARCHAR"
+            javaType="String" name="JUDGEMENT_PUBLIC_CODE"
+            required="true" size="12" type="VARCHAR"/>
         <column comment="事件名" dbType="TEXT" javaType="String"
             name="CASE_NAME" size="65535" type="LONGVARCHAR"/>
-        <column comment="判例集巻" dbType="INT UNSIGNED" javaType="Integer"
-            name="PRECEDENT_REPORTS_KAN" size="10" type="INTEGER"/>
-        <column comment="判例集号" dbType="INT UNSIGNED" javaType="Integer"
-            name="PRECEDENT_REPORTS_GO" size="10" type="INTEGER"/>
-        <column comment="判例集頁" dbType="INT UNSIGNED" javaType="Integer"
-            name="PRECEDENT_REPORTS_KO" size="10" type="INTEGER"/>
-        <column comment="裁判集号" dbType="INT UNSIGNED" javaType="Integer"
-            name="JUDGEMENT_REPORTS_GO" size="10" type="INTEGER"/>
-        <column comment="裁判集頁" dbType="INT UNSIGNED" javaType="Integer"
-            name="JUDGEMENT_REPORTS_KO" size="10" type="INTEGER"/>
         <column comment="裁判年月日" dbType="DATE"
             javaType="java.time.LocalDate" name="JUDGEMENT_DATE"
             size="10" type="DATE"/>
@@ -471,6 +501,21 @@
             name="JUDGEMENT_TYPE_CODE" size="10" type="VARCHAR"/>
         <column comment="判決文 : 取り込み時に判決文がないことを許容したい" dbType="TEXT"
             javaType="String" name="SENTENCE" size="65535" type="LONGVARCHAR"/>
+        <column comment="登録日時 : レコードが登録された日時" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="REGISTER_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="登録ユーザー : レコードを登録したユーザー" dbType="VARCHAR"
+            javaType="String" name="REGISTER_USER" required="true"
+            size="200" type="VARCHAR"/>
+        <column comment="更新日時 : レコードが(最後に)更新された日時" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="UPDATE_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="更新ユーザー : レコードを(最後に)更新したユーザー" dbType="VARCHAR"
+            javaType="String" name="UPDATE_USER" required="true"
+            size="200" type="VARCHAR"/>
+        <column comment="バージョン番号 : バージョン番号" dbType="BIGINT UNSIGNED"
+            default="0" javaType="Long" name="VERSION_NO"
+            required="true" size="20" type="BIGINT"/>
         <foreign-key foreignSchema="hanreidb.$$NoNameSchema$$"
             foreignTable="CLS_BENCH" name="FK_JUDGEMENT_CLS_BENCH">
             <reference foreign="BENCH_CODE" local="BENCH_CODE"/>
@@ -524,6 +569,52 @@
             <index-column name="ORIGINAL_JUDGEMENT_ID" position="1"/>
         </index>
     </table>
+    <table comment="判決判例集リレーション : いったん、巻、号、頁という単位がある前提にする。"
+        name="JUDGEMENT_REPORT_REL" schema="hanreidb.$$NoNameSchema$$" type="TABLE">
+        <column autoIncrement="true" comment="判決判例集リレーションID"
+            dbType="BIGINT UNSIGNED" javaType="Long"
+            name="JUDGEMENT_REPORTS_REL_ID" pkName="PRIMARY"
+            pkPosition="1" primaryKey="true" required="true" size="20" type="BIGINT"/>
+        <column comment="判決ID" dbType="BIGINT UNSIGNED" javaType="Long"
+            name="JUDGEMENT_ID" required="true" size="20" type="BIGINT"/>
+        <column comment="判例集ID" dbType="INT UNSIGNED" javaType="Integer"
+            name="REPORT_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="判例集巻" dbType="INT UNSIGNED" javaType="Integer"
+            name="REPORT_KAN" size="10" type="INTEGER"/>
+        <column comment="判例集号" dbType="INT UNSIGNED" javaType="Integer"
+            name="REPORT_GO" size="10" type="INTEGER"/>
+        <column comment="判例集頁" dbType="INT UNSIGNED" javaType="Integer"
+            name="REPORT_KO" size="10" type="INTEGER"/>
+        <column comment="登録日時 : レコードが登録された日時" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="REGISTER_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="登録ユーザー : レコードを登録したユーザー" dbType="VARCHAR"
+            javaType="String" name="REGISTER_USER" required="true"
+            size="200" type="VARCHAR"/>
+        <column comment="更新日時 : レコードが(最後に)更新された日時" dbType="DATETIME"
+            javaType="java.time.LocalDateTime" name="UPDATE_DATETIME"
+            required="true" size="19" type="TIMESTAMP"/>
+        <column comment="更新ユーザー : レコードを(最後に)更新したユーザー" dbType="VARCHAR"
+            javaType="String" name="UPDATE_USER" required="true"
+            size="200" type="VARCHAR"/>
+        <column comment="バージョン番号 : バージョン番号" dbType="BIGINT UNSIGNED"
+            default="0" javaType="Long" name="VERSION_NO"
+            required="true" size="20" type="BIGINT"/>
+        <foreign-key foreignSchema="hanreidb.$$NoNameSchema$$"
+            foreignTable="JUDGEMENT" name="FK_JUDGEMENT_REPORT_REL_JUDGEMENT">
+            <reference foreign="JUDGEMENT_ID" local="JUDGEMENT_ID"/>
+        </foreign-key>
+        <foreign-key foreignSchema="hanreidb.$$NoNameSchema$$"
+            foreignTable="REPORT" name="FK_JUDGEMENT_REPORT_REL_REPORT">
+            <reference foreign="REPORT_ID" local="REPORT_ID"/>
+        </foreign-key>
+        <index name="FK_JUDGEMENT_REPORT_REL_JUDGEMENT">
+            <index-column name="JUDGEMENT_ID" position="1"/>
+        </index>
+        <index name="FK_JUDGEMENT_REPORT_REL_REPORT">
+            <index-column name="REPORT_ID" position="1"/>
+        </index>
+    </table>
     <table comment="判決取得元リレーション" name="JUDGEMENT_SOURCE_REL"
         schema="hanreidb.$$NoNameSchema$$" type="TABLE">
         <column autoIncrement="true" comment="判決取得元リレーションID"
@@ -532,8 +623,8 @@
             pkPosition="1" primaryKey="true" required="true" size="20" type="BIGINT"/>
         <column comment="判決ID" dbType="BIGINT UNSIGNED" javaType="Long"
             name="JUDGEMENT_ID" required="true" size="20" type="BIGINT"/>
-        <column comment="取得元ID" dbType="INT UNSIGNED" javaType="Integer"
-            name="SOURCE_ID" required="true" size="10" type="INTEGER"/>
+        <column comment="取得元コード" dbType="VARCHAR" javaType="String"
+            name="SOURCE_CODE" required="true" size="10" type="VARCHAR"/>
         <column comment="取得元判決ID" dbType="VARCHAR" javaType="String"
             name="SOURCE_JUDGEMENT_ID" required="true" size="100" type="VARCHAR"/>
         <column comment="登録日時 : レコードが登録された日時" dbType="DATETIME"
@@ -556,14 +647,14 @@
             <reference foreign="JUDGEMENT_ID" local="JUDGEMENT_ID"/>
         </foreign-key>
         <foreign-key foreignSchema="hanreidb.$$NoNameSchema$$"
-            foreignTable="SOURCE" name="FK_JUDGEMENT_SOURCE_REL_SOURCE">
-            <reference foreign="SOURCE_ID" local="SOURCE_ID"/>
+            foreignTable="CLS_SOURCE" name="FK_JUDGEMENT_SOURCE_REL_SOURCE">
+            <reference foreign="SOURCE_CODE" local="SOURCE_CODE"/>
         </foreign-key>
         <index name="FK_JUDGEMENT_SOURCE_REL_JUDGEMENT">
             <index-column name="JUDGEMENT_ID" position="1"/>
         </index>
         <index name="FK_JUDGEMENT_SOURCE_REL_SOURCE">
-            <index-column name="SOURCE_ID" position="1"/>
+            <index-column name="SOURCE_CODE" position="1"/>
         </index>
     </table>
     <table comment="判決ユーザーお気に入りリレーション"
@@ -642,16 +733,16 @@
             <index-column name="USER_ID" position="1"/>
         </index>
     </table>
-    <table comment="取得元" name="SOURCE"
+    <table comment="判例集" name="REPORT"
         schema="hanreidb.$$NoNameSchema$$" type="TABLE">
-        <column autoIncrement="true" comment="取得元ID"
-            dbType="INT UNSIGNED" javaType="Integer" name="SOURCE_ID"
+        <column autoIncrement="true" comment="判例集ID"
+            dbType="INT UNSIGNED" javaType="Integer" name="REPORT_ID"
             pkName="PRIMARY" pkPosition="1" primaryKey="true"
             required="true" size="10" type="INTEGER"/>
-        <column comment="取得元名" dbType="VARCHAR" javaType="String"
-            name="SOURCE_NAME" required="true" size="100" type="VARCHAR"/>
-        <column comment="取得元別名" dbType="VARCHAR" javaType="String"
-            name="SOURCE_ALIAS" required="true" size="100" type="VARCHAR"/>
+        <column comment="判例集名" dbType="VARCHAR" javaType="String"
+            name="REPORT_NAME" required="true" size="100" type="VARCHAR"/>
+        <column comment="判例集別名" dbType="VARCHAR" javaType="String"
+            name="REPORT_ALIAS" required="true" size="100" type="VARCHAR"/>
         <column comment="登録日時 : レコードが登録された日時" dbType="DATETIME"
             javaType="java.time.LocalDateTime" name="REGISTER_DATETIME"
             required="true" size="19" type="TIMESTAMP"/>
@@ -667,11 +758,11 @@
         <column comment="バージョン番号 : バージョン番号" dbType="BIGINT UNSIGNED"
             default="0" javaType="Long" name="VERSION_NO"
             required="true" size="20" type="BIGINT"/>
-        <unique name="SOURCE_ALIAS">
-            <unique-column name="SOURCE_ALIAS" position="1"/>
+        <unique name="REPORT_ALIAS">
+            <unique-column name="REPORT_ALIAS" position="1"/>
         </unique>
-        <unique name="SOURCE_NAME">
-            <unique-column name="SOURCE_NAME" position="1"/>
+        <unique name="REPORT_NAME">
+            <unique-column name="REPORT_NAME" position="1"/>
         </unique>
     </table>
     <table comment="ユーザー" name="USER" schema="hanreidb.$$NoNameSchema$$" type="TABLE">

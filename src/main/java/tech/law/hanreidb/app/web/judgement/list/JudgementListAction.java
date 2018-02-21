@@ -5,6 +5,7 @@ import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.toImmutable;
 
 import javax.annotation.Resource;
 
+import org.dbflute.cbean.result.ListResultBean;
 import org.eclipse.collections.api.list.ImmutableList;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.login.AllowAnyoneAccess;
@@ -12,9 +13,11 @@ import org.lastaflute.web.response.JsonResponse;
 
 import tech.law.hanreidb.app.base.HanreidbBaseAction;
 import tech.law.hanreidb.app.web.judgement.list.JudgementListContentResult.JudgementPart;
+import tech.law.hanreidb.app.web.judgement.list.JudgementListContentResult.ReportPart;
 import tech.law.hanreidb.dbflute.cbean.JudgementCB;
 import tech.law.hanreidb.dbflute.exbhv.JudgementBhv;
 import tech.law.hanreidb.dbflute.exentity.Judgement;
+import tech.law.hanreidb.dbflute.exentity.JudgementReportRel;
 
 /**
  * @author jflute
@@ -39,7 +42,7 @@ public class JudgementListAction extends HanreidbBaseAction {
     }
 
     private ImmutableList<Judgement> selectJudgementList(JudgementListBody body) {
-        return toImmutable(judgementBhv.selectList(cb -> {
+        ListResultBean<Judgement> list = judgementBhv.selectList(cb -> {
             cb.specify().columnBenchCode();
             cb.specify().columnCaseMarkId();
             cb.specify().columnCaseName();
@@ -50,14 +53,9 @@ public class JudgementListAction extends HanreidbBaseAction {
             cb.specify().columnJudgementDate();
             cb.specify().columnJudgementId();
             cb.specify().columnJudgementPublicCode();
-            cb.specify().columnJudgementReportsGo();
-            cb.specify().columnJudgementReportsKo();
             cb.specify().columnJudgementResultCode();
             cb.specify().columnJudgementTypeCode();
             cb.specify().columnOriginalJudgementId();
-            cb.specify().columnPrecedentReportsGo();
-            cb.specify().columnPrecedentReportsKan();
-            cb.specify().columnPrecedentReportsKo();
             cb.specify().columnSentence();
 
             cb.setupSelect_CaseMark();
@@ -72,7 +70,19 @@ public class JudgementListAction extends HanreidbBaseAction {
             conditionBean(body, cb);
 
             cb.addOrderBy_PK_Asc();
-        }));
+        });
+        judgementBhv.load(list, judgementLoader -> {
+            judgementLoader.loadJudgementReportRel(relCB -> {
+                relCB.specify().columnReportGo();
+                relCB.specify().columnReportKan();
+                relCB.specify().columnReportKo();
+
+                relCB.setupSelect_Report();
+                relCB.specify().specifyReport().columnReportName();
+                relCB.specify().specifyReport().columnReportAlias();
+            });
+        });
+        return toImmutable(list);
     }
 
     private void conditionBean(JudgementListBody body, JudgementCB cb) {
@@ -104,28 +114,30 @@ public class JudgementListAction extends HanreidbBaseAction {
         ifNotNull(body.judgement_public_code).ifPresent(value -> {
             cb.query().setJudgementPublicCode_Equal(value);
         });
-        ifNotNull(body.judgement_reports_go).ifPresent(value -> {
-            cb.query().setJudgementReportsGo_Equal(value);
-        });
-        ifNotNull(body.judgement_reports_ko).ifPresent(value -> {
-            cb.query().setJudgementReportsKo_Equal(value);
-        });
         ifNotNull(body.judgement_result).ifPresent(value -> {
             cb.query().setJudgementResultCode_Equal_AsJudgementResult(value);
         });
         ifNotNull(body.judgement_type).ifPresent(value -> {
             cb.query().setJudgementTypeCode_Equal_AsJudgementType(value);
         });
-        ifNotNull(body.precedent_reports_go).ifPresent(value -> {
-            cb.query().setPrecedentReportsGo_Equal(value);
-        });
-        ifNotNull(body.precedent_reports_kan).ifPresent(value -> {
-            cb.query().setPrecedentReportsKan_Equal(value);
-        });
-        ifNotNull(body.precedent_reports_ko).ifPresent(value -> {
-            cb.query().setPrecedentReportsKo_Equal(value);
-        });
-        // sentence condition
+
+        // TODO report_condition
+        //        ifNotNull(body.judgement_reports_go).ifPresent(value -> {
+        //            cb.query().setJudgementReportsGo_Equal(value);
+        //        });
+        //        ifNotNull(body.judgement_reports_ko).ifPresent(value -> {
+        //            cb.query().setJudgementReportsKo_Equal(value);
+        //        });
+        //        ifNotNull(body.precedent_reports_go).ifPresent(value -> {
+        //            cb.query().setPrecedentReportsGo_Equal(value);
+        //        });
+        //        ifNotNull(body.precedent_reports_kan).ifPresent(value -> {
+        //            cb.query().setPrecedentReportsKan_Equal(value);
+        //        });
+        //        ifNotNull(body.precedent_reports_ko).ifPresent(value -> {
+        //            cb.query().setPrecedentReportsKo_Equal(value);
+        //        });
+        // TODO sentence condition
     }
 
     // ===================================================================================
@@ -156,8 +168,6 @@ public class JudgementListAction extends HanreidbBaseAction {
         judgementPart.judgement_date = judgement.getJudgementDate();
         judgementPart.judgement_id = judgement.getJudgementId();
         judgementPart.judgement_public_code = judgement.getJudgementPublicCode();
-        judgementPart.judgement_reports_go = judgement.getJudgementReportsGo();
-        judgementPart.judgement_reports_ko = judgement.getJudgementReportsKo();
         ifNotNull(judgement.getJudgementResultCodeAsJudgementResult()).ifPresent(value -> {
             judgementPart.judgement_result_alias = value.alias();
             judgementPart.judgement_result_code = value.code();
@@ -167,10 +177,19 @@ public class JudgementListAction extends HanreidbBaseAction {
             judgementPart.judgement_type_code = value.code();
         });
         judgementPart.original_judgement_id = judgement.getJudgementId();
-        judgementPart.precedent_reports_go = judgement.getPrecedentReportsGo();
-        judgementPart.precedent_reports_kan = judgement.getPrecedentReportsKan();
-        judgementPart.precedent_reports_ko = judgement.getPrecedentReportsKo();
+
+        judgementPart.report_part_list = toImmutable(judgement.getJudgementReportRelList()).collect(this::convertToReportPart).castToList();
         judgementPart.sentence = judgement.getSentence();
         return judgementPart;
+    }
+
+    private ReportPart convertToReportPart(JudgementReportRel rel) {
+        ReportPart part = new ReportPart();
+        part.report_name = rel.getReport().get().getReportName();
+        part.report_alias = rel.getReport().get().getReportAlias();
+        part.report_go = rel.getReportGo();
+        part.report_kan = rel.getReportKan();
+        part.report_ko = rel.getReportKo();
+        return part;
     }
 }

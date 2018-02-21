@@ -52,6 +52,7 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         // ## Arrange ##
         JudgementListAction action = new JudgementListAction();
         inject(action);
+
         Judgement entity = new Judgement();
         CDef.Bench bench = CDef.Bench.大法廷;
         Integer caseMarkId = 1;
@@ -78,14 +79,14 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         entity.setCaseNumberSerialNumber(caseNumberSerialNumber);
         entity.setCourtId(courtId);
         entity.setJudgementDate(judgementDate);
-        entity.setJudgementReportsGo(judgementReportsGo);
-        entity.setJudgementReportsKo(judgementReportsKo);
+        //        entity.setJudgementReportsGo(judgementReportsGo);
+        //        entity.setJudgementReportsKo(judgementReportsKo);
         entity.setJudgementResultCodeAsJudgementResult(judgementResult);
         entity.setJudgementPublicCode(judgementPublicCode);
         entity.setJudgementTypeCodeAsJudgementType(judgementType);
-        entity.setPrecedentReportsKan(precedentReportsKan);
-        entity.setPrecedentReportsGo(precedentReportsGo);
-        entity.setPrecedentReportsKo(precedentReportsKo);
+        //        entity.setPrecedentReportsKan(precedentReportsKan);
+        //        entity.setPrecedentReportsGo(precedentReportsGo);
+        //        entity.setPrecedentReportsKo(precedentReportsKo);
         entity.setSentence(sentence);
         judgementBhv.insert(entity);
 
@@ -123,13 +124,13 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
             assertEquals(courtId, judgement.court_id);
             assertTrue(judgement.judgement_date.isAfter(body.judgement_date_from));
             assertTrue(judgement.judgement_date.isBefore(body.judgement_date_to));
-            assertEquals(judgementReportsGo, judgement.judgement_reports_go);
-            assertEquals(judgementReportsKo, judgement.judgement_reports_ko);
+            //            assertEquals(judgementReportsGo, judgement.judgement_reports_go);
+            //            assertEquals(judgementReportsKo, judgement.judgement_reports_ko);
             assertEquals(judgementResult.code(), judgement.judgement_result_code);
             assertEquals(judgementType.code(), judgement.judgement_type_code);
-            assertEquals(precedentReportsGo, judgement.precedent_reports_go);
-            assertEquals(precedentReportsKan, judgement.precedent_reports_kan);
-            assertEquals(precedentReportsKo, judgement.precedent_reports_ko);
+            //            assertEquals(precedentReportsGo, judgement.precedent_reports_go);
+            //            assertEquals(precedentReportsKan, judgement.precedent_reports_kan);
+            //            assertEquals(precedentReportsKo, judgement.precedent_reports_ko);
         });
     }
 }

@@ -41,7 +41,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     JUDGEMENT_SOURCE_REL_ID
  *
  * [column]
- *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_ID, SOURCE_JUDGEMENT_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_CODE, SOURCE_JUDGEMENT_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -53,13 +53,13 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     JUDGEMENT, SOURCE
+ *     JUDGEMENT, CLS_SOURCE
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     judgement, source
+ *     judgement, clsSource
  *
  * [referrer property]
  *     
@@ -386,12 +386,12 @@ public abstract class BsJudgementSourceRelBhv extends AbstractBehaviorWritable<J
     { return helpPulloutInternally(judgementSourceRelList, "judgement"); }
 
     /**
-     * Pull out the list of foreign table 'Source'.
+     * Pull out the list of foreign table 'ClsSource'.
      * @param judgementSourceRelList The list of judgementSourceRel. (NotNull, EmptyAllowed)
      * @return The list of foreign table. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Source> pulloutSource(List<JudgementSourceRel> judgementSourceRelList)
-    { return helpPulloutInternally(judgementSourceRelList, "source"); }
+    public List<ClsSource> pulloutClsSource(List<JudgementSourceRel> judgementSourceRelList)
+    { return helpPulloutInternally(judgementSourceRelList, "clsSource"); }
 
     // ===================================================================================
     //                                                                      Extract Column

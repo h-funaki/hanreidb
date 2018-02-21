@@ -20,11 +20,7 @@ public class JudgementListContentResult {
         public Long judgement_id;
         public String judgement_public_code;
         public String case_name;
-        public Integer precedent_reports_kan;
-        public Integer precedent_reports_go;
-        public Integer precedent_reports_ko;
-        public Integer judgement_reports_go;
-        public Integer judgement_reports_ko;
+        public List<ReportPart> report_part_list;
         public LocalDate judgement_date;
         public Long original_judgement_id;
         public String case_number_era_code;
@@ -43,5 +39,17 @@ public class JudgementListContentResult {
         public String judgement_type_code;
         public String judgement_type_alias;
         public String sentence;
+    }
+
+    /**
+     * @author h-funaki
+     *
+     */
+    public static class ReportPart {
+        public String report_name;
+        public String report_alias;
+        public Integer report_kan;
+        public Integer report_go;
+        public Integer report_ko;
     }
 }

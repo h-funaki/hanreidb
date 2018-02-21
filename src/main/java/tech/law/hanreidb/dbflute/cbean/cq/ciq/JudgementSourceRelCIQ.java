@@ -78,7 +78,7 @@ public class JudgementSourceRelCIQ extends AbstractBsJudgementSourceRelCQ {
     //                                                                ====================
     protected ConditionValue xgetCValueJudgementSourceRelId() { return _myCQ.xdfgetJudgementSourceRelId(); }
     protected ConditionValue xgetCValueJudgementId() { return _myCQ.xdfgetJudgementId(); }
-    protected ConditionValue xgetCValueSourceId() { return _myCQ.xdfgetSourceId(); }
+    protected ConditionValue xgetCValueSourceCode() { return _myCQ.xdfgetSourceCode(); }
     protected ConditionValue xgetCValueSourceJudgementId() { return _myCQ.xdfgetSourceJudgementId(); }
     protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
     protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }

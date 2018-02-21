@@ -20,14 +20,16 @@
 	<component name="clsEraBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsEraBhv"/>
 	<component name="clsJudgementResultBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsJudgementResultBhv"/>
 	<component name="clsJudgementTypeBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsJudgementTypeBhv"/>
+	<component name="clsSourceBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsSourceBhv"/>
 	<component name="clsUserStatusBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsUserStatusBhv"/>
 	<component name="courtBhv" class="tech.law.hanreidb.dbflute.exbhv.CourtBhv"/>
-	<component name="courtScrapeResultBhv" class="tech.law.hanreidb.dbflute.exbhv.CourtScrapeResultBhv"/>
+	<component name="courtJudgementBhv" class="tech.law.hanreidb.dbflute.exbhv.CourtJudgementBhv"/>
 	<component name="judgementBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementBhv"/>
+	<component name="judgementReportRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementReportRelBhv"/>
 	<component name="judgementSourceRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementSourceRelBhv"/>
 	<component name="judgementUserFavoriteRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementUserFavoriteRelBhv"/>
 	<component name="loginHistoryBhv" class="tech.law.hanreidb.dbflute.exbhv.LoginHistoryBhv"/>
-	<component name="sourceBhv" class="tech.law.hanreidb.dbflute.exbhv.SourceBhv"/>
+	<component name="reportBhv" class="tech.law.hanreidb.dbflute.exbhv.ReportBhv"/>
 	<component name="userBhv" class="tech.law.hanreidb.dbflute.exbhv.UserBhv"/>
 	<component name="userStatusHistoryBhv" class="tech.law.hanreidb.dbflute.exbhv.UserStatusHistoryBhv"/>
 </components>

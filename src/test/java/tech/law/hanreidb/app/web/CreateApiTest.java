@@ -16,6 +16,8 @@ public class CreateApiTest extends UnitHanreidbTestCase {
     /** path e.g. aaa/bbb/ccc */
     public final String PATH = "judgement/favorite/put";
 
+    private final boolean REAL_EXECUTE = false;
+
     /** base table e.g. JUDGEMENT */
     public final String BASE_TABLE = "";
 
@@ -23,6 +25,10 @@ public class CreateApiTest extends UnitHanreidbTestCase {
     //                                                                        Create Files
     //                                                                        ============
     public void test_createApi() throws IOException {
+        if (!REAL_EXECUTE) {
+            log("APIクラスを作成せずに終了しました。");
+            return;
+        }
         // path
         String fileMainPath = "/Users/h-funaki/Documents/hanreidb/src/main/java/tech/law/hanreidb/app/web/" + PATH + "/";
         String fileTestPath = "/Users/h-funaki/Documents/hanreidb/src/test/java/tech/law/hanreidb/app/web/" + PATH + "/";
@@ -32,16 +38,16 @@ public class CreateApiTest extends UnitHanreidbTestCase {
 
         // 不要なテストで落ちないように
         if (fileMainDir.mkdirs()) {
-            System.out.println("ディレクトリの作成に成功しました");
+            log("ディレクトリの作成に成功しました");
         } else {
-            System.out.println("ディレクトリの作成に失敗しました");
+            log("ディレクトリの作成に失敗しました");
             return;
         }
 
         if (fileTestDir.mkdirs()) {
-            System.out.println("ディレクトリの作成に成功しました");
+            log("ディレクトリの作成に成功しました");
         } else {
-            System.out.println("ディレクトリの作成に失敗しました");
+            log("ディレクトリの作成に失敗しました");
             return;
         }
 

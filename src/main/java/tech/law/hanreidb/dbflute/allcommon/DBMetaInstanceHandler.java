@@ -53,14 +53,16 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
         tmpMap.put("CLS_ERA", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsEraDbm");
         tmpMap.put("CLS_JUDGEMENT_RESULT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsJudgementResultDbm");
         tmpMap.put("CLS_JUDGEMENT_TYPE", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsJudgementTypeDbm");
+        tmpMap.put("CLS_SOURCE", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsSourceDbm");
         tmpMap.put("CLS_USER_STATUS", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsUserStatusDbm");
         tmpMap.put("COURT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.CourtDbm");
-        tmpMap.put("COURT_SCRAPE_RESULT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.CourtScrapeResultDbm");
+        tmpMap.put("COURT_JUDGEMENT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.CourtJudgementDbm");
         tmpMap.put("JUDGEMENT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementDbm");
+        tmpMap.put("JUDGEMENT_REPORT_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementReportRelDbm");
         tmpMap.put("JUDGEMENT_SOURCE_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementSourceRelDbm");
         tmpMap.put("JUDGEMENT_USER_FAVORITE_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementUserFavoriteRelDbm");
         tmpMap.put("LOGIN_HISTORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LoginHistoryDbm");
-        tmpMap.put("SOURCE", "tech.law.hanreidb.dbflute.bsentity.dbmeta.SourceDbm");
+        tmpMap.put("REPORT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ReportDbm");
         tmpMap.put("USER", "tech.law.hanreidb.dbflute.bsentity.dbmeta.UserDbm");
         tmpMap.put("USER_STATUS_HISTORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.UserStatusHistoryDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);

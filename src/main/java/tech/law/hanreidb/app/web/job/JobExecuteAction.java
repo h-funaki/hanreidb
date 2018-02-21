@@ -1,7 +1,5 @@
 package tech.law.hanreidb.app.web.job;
 
-import java.time.LocalDateTime;
-
 import javax.annotation.Resource;
 
 import org.lastaflute.job.JobManager;
@@ -11,6 +9,7 @@ import org.lastaflute.job.key.LaJobUnique;
 import org.lastaflute.job.subsidiary.LaunchNowOption;
 import org.lastaflute.job.subsidiary.LaunchedProcess;
 import org.lastaflute.web.Execute;
+import org.lastaflute.web.login.AllowAnyoneAccess;
 import org.lastaflute.web.response.JsonResponse;
 import org.lastaflute.web.servlet.request.ResponseManager;
 
@@ -19,6 +18,7 @@ import tech.law.hanreidb.app.base.HanreidbBaseAction;
 /**
  * @author h-funaki
  */
+@AllowAnyoneAccess
 public class JobExecuteAction extends HanreidbBaseAction {
 
     // ===================================================================================
@@ -41,6 +41,7 @@ public class JobExecuteAction extends HanreidbBaseAction {
      */
     @Execute
     public JsonResponse<JobExecuteContentResult> post$index(String jobCode, JobExecuteBody body) {
+        validateApi(body, messages -> {});
         LaScheduledJob job = findJob(jobCode);
 
         LaunchedProcess process = job.launchNow(op -> mappingToParams(body, op));
@@ -57,7 +58,7 @@ public class JobExecuteAction extends HanreidbBaseAction {
     }
 
     private void mappingToParams(JobExecuteBody body, LaunchNowOption op) {
-        op.param("executionDateTime", LocalDateTime.now()); // body.executionDateTime);
+        op.param("executionDateTime", body.executionDateTime);
         if (body.varyingParameter != null) {
             body.varyingParameter.forEach((key, value) -> op.param(key, value));
         }

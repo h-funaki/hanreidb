@@ -128,25 +128,25 @@ public class BsJudgementSourceRelCQ extends AbstractBsJudgementSourceRelCQ {
      */
     public BsJudgementSourceRelCQ addOrderBy_JudgementId_Desc() { regOBD("JUDGEMENT_ID"); return this; }
 
-    protected ConditionValue _sourceId;
-    public ConditionValue xdfgetSourceId()
-    { if (_sourceId == null) { _sourceId = nCV(); }
-      return _sourceId; }
-    protected ConditionValue xgetCValueSourceId() { return xdfgetSourceId(); }
+    protected ConditionValue _sourceCode;
+    public ConditionValue xdfgetSourceCode()
+    { if (_sourceCode == null) { _sourceCode = nCV(); }
+      return _sourceCode; }
+    protected ConditionValue xgetCValueSourceCode() { return xdfgetSourceCode(); }
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @return this. (NotNull)
      */
-    public BsJudgementSourceRelCQ addOrderBy_SourceId_Asc() { regOBA("SOURCE_ID"); return this; }
+    public BsJudgementSourceRelCQ addOrderBy_SourceCode_Asc() { regOBA("SOURCE_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元ID)SOURCE_ID: {IX, NotNull, INT UNSIGNED(10), FK to SOURCE}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @return this. (NotNull)
      */
-    public BsJudgementSourceRelCQ addOrderBy_SourceId_Desc() { regOBD("SOURCE_ID"); return this; }
+    public BsJudgementSourceRelCQ addOrderBy_SourceCode_Desc() { regOBD("SOURCE_CODE"); return this; }
 
     protected ConditionValue _sourceJudgementId;
     public ConditionValue xdfgetSourceJudgementId()
@@ -312,8 +312,8 @@ public class BsJudgementSourceRelCQ extends AbstractBsJudgementSourceRelCQ {
         if (bq.hasConditionQueryJudgement()) {
             uq.queryJudgement().reflectRelationOnUnionQuery(bq.queryJudgement(), uq.queryJudgement());
         }
-        if (bq.hasConditionQuerySource()) {
-            uq.querySource().reflectRelationOnUnionQuery(bq.querySource(), uq.querySource());
+        if (bq.hasConditionQueryClsSource()) {
+            uq.queryClsSource().reflectRelationOnUnionQuery(bq.queryClsSource(), uq.queryClsSource());
         }
     }
 
@@ -342,23 +342,23 @@ public class BsJudgementSourceRelCQ extends AbstractBsJudgementSourceRelCQ {
 
     /**
      * Get the condition-query for relation table. <br>
-     * (取得元)SOURCE by my SOURCE_ID, named 'source'.
+     * ([区分値]取得元)CLS_SOURCE by my SOURCE_CODE, named 'clsSource'.
      * @return The instance of condition-query. (NotNull)
      */
-    public SourceCQ querySource() {
-        return xdfgetConditionQuerySource();
+    public ClsSourceCQ queryClsSource() {
+        return xdfgetConditionQueryClsSource();
     }
-    public SourceCQ xdfgetConditionQuerySource() {
-        String prop = "source";
-        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQuerySource()); xsetupOuterJoinSource(); }
+    public ClsSourceCQ xdfgetConditionQueryClsSource() {
+        String prop = "clsSource";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryClsSource()); xsetupOuterJoinClsSource(); }
         return xgetQueRlMap(prop);
     }
-    protected SourceCQ xcreateQuerySource() {
-        String nrp = xresolveNRP("JUDGEMENT_SOURCE_REL", "source"); String jan = xresolveJAN(nrp, xgetNNLvl());
-        return xinitRelCQ(new SourceCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "source", nrp);
+    protected ClsSourceCQ xcreateQueryClsSource() {
+        String nrp = xresolveNRP("JUDGEMENT_SOURCE_REL", "clsSource"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new ClsSourceCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "clsSource", nrp);
     }
-    protected void xsetupOuterJoinSource() { xregOutJo("source"); }
-    public boolean hasConditionQuerySource() { return xhasQueRlMap("source"); }
+    protected void xsetupOuterJoinClsSource() { xregOutJo("clsSource"); }
+    public boolean hasConditionQueryClsSource() { return xhasQueRlMap("clsSource"); }
 
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String property) {
         return null;

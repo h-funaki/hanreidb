@@ -6,9 +6,13 @@ import org.dbflute.optional.OptionalThing;
 import org.lastaflute.core.time.TimeManager;
 import org.lastaflute.job.LaCron;
 import org.lastaflute.job.LaJobRunner;
+import org.lastaflute.job.LaJobRuntime;
 import org.lastaflute.job.LaJobScheduler;
 
-import tech.law.hanreidb.app.logic.context.AccessContextLogic;
+import tech.law.hanreidb.app.base.web.context.AccessContextCreator;
+import tech.law.hanreidb.app.job.core.JobHookAssist;
+import tech.law.hanreidb.app.job.court.judgement.CourtJudgementJob;
+import tech.law.hanreidb.app.job.court.scrape.CourtScrapeJob;
 
 /**
  * @author jflute
@@ -16,24 +20,33 @@ import tech.law.hanreidb.app.logic.context.AccessContextLogic;
 public class AllJobScheduler implements LaJobScheduler {
 
     protected static final String APP_TYPE = "JOB";
+    protected static final String USER_TYPE = "M";
 
     @Resource
     private TimeManager timeManager;
     @Resource
-    private AccessContextLogic accessContextLogic;
+    private JobHookAssist jobHookAssist;
 
     @Override
     public void schedule(LaCron cron) {
-        cron.register("11 02 * * * ", ScrapeCourtHanreiJob.class, waitIfConcurrent(), op -> {});
-        //        cron.registerNonCron(ScrapeCourtHanreiJob.class, waitIfConcurrent(), op -> {
-        //            op.uniqueBy("ScrapeCourtHanrei");
-        //        });
+        cron.registerNonCron(CourtScrapeJob.class, waitIfConcurrent(), op -> {
+            op.uniqueBy("CourtScrape");
+        });
+        cron.registerNonCron(CourtJudgementJob.class, waitIfConcurrent(), op -> {
+            op.uniqueBy("CourtJudgement");
+        });
     }
 
     @Override
     public LaJobRunner createRunner() {
-        return new LaJobRunner().useAccessContext(resource -> {
-            return accessContextLogic.create(resource, () -> OptionalThing.empty(), () -> OptionalThing.empty(), () -> APP_TYPE);
+        return new LaJobRunner() {
+            @Override
+            protected void hookFinally(LaJobRuntime runtime, OptionalThing<Throwable> cause) {
+                jobHookAssist.handleRecordedErrors(runtime, cause);
+            }
+        }.useAccessContext(resource -> {
+            final AccessContextCreator accessContextCreator = new AccessContextCreator(resource, timeManager, OptionalThing.empty());
+            return accessContextCreator.create(() -> OptionalThing.of(USER_TYPE), () -> OptionalThing.empty(), () -> APP_TYPE);
         });
     }
 }
