@@ -359,7 +359,6 @@
 		    <groupId>org.assertj</groupId>
 		    <artifactId>assertj-core</artifactId>
 		    <version>${assertj.core.version}</version>
-		    <scope>test</scope>
 		</dependency>
 		<!-- unit test -->
 		<dependency>
@@ -372,7 +371,6 @@
 			<groupId>org.dbflute.utflute</groupId>
 			<artifactId>utflute-lastaflute</artifactId>
 			<version>${utflute.version}</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
