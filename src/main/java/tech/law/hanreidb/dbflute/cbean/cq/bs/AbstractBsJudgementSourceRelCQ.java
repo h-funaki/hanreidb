@@ -306,7 +306,7 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @param sourceCode The value of sourceCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_Equal(String sourceCode) {
@@ -315,7 +315,7 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * Equal(=). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceCode_Equal_AsSource(CDef.Source cdef) {
@@ -336,7 +336,7 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @param sourceCode The value of sourceCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotEqual(String sourceCode) {
@@ -345,7 +345,7 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * NotEqual(&lt;&gt;). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceCode_NotEqual_AsSource(CDef.Source cdef) {
@@ -366,7 +366,7 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @param sourceCodeList The collection of sourceCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_InScope(Collection<String> sourceCodeList) {
@@ -375,7 +375,7 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * InScope {in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_InScope_AsSource(Collection<CDef.Source> cdefList) {
@@ -388,7 +388,7 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @param sourceCodeList The collection of sourceCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotInScope(Collection<String> sourceCodeList) {
@@ -397,7 +397,7 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * NotInScope {not in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotInScope_AsSource(Collection<CDef.Source> cdefList) {
@@ -413,102 +413,180 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
-     * @param sourceJudgementId The value of sourceJudgementId as equal. (NullAllowed: if null (or empty), no condition)
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
+     * @param judgementSourceId The value of judgementSourceId as equal. (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceJudgementId_Equal(String sourceJudgementId) {
-        doSetSourceJudgementId_Equal(fRES(sourceJudgementId));
+    public void setJudgementSourceId_Equal(String judgementSourceId) {
+        doSetJudgementSourceId_Equal(fRES(judgementSourceId));
     }
 
-    protected void doSetSourceJudgementId_Equal(String sourceJudgementId) {
-        regSourceJudgementId(CK_EQ, sourceJudgementId);
+    protected void doSetJudgementSourceId_Equal(String judgementSourceId) {
+        regJudgementSourceId(CK_EQ, judgementSourceId);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
-     * @param sourceJudgementId The value of sourceJudgementId as notEqual. (NullAllowed: if null (or empty), no condition)
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
+     * @param judgementSourceId The value of judgementSourceId as notEqual. (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceJudgementId_NotEqual(String sourceJudgementId) {
-        doSetSourceJudgementId_NotEqual(fRES(sourceJudgementId));
+    public void setJudgementSourceId_NotEqual(String judgementSourceId) {
+        doSetJudgementSourceId_NotEqual(fRES(judgementSourceId));
     }
 
-    protected void doSetSourceJudgementId_NotEqual(String sourceJudgementId) {
-        regSourceJudgementId(CK_NES, sourceJudgementId);
+    protected void doSetJudgementSourceId_NotEqual(String judgementSourceId) {
+        regJudgementSourceId(CK_NES, judgementSourceId);
     }
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
-     * @param sourceJudgementIdList The collection of sourceJudgementId as inScope. (NullAllowed: if null (or empty), no condition)
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
+     * @param judgementSourceIdList The collection of judgementSourceId as inScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceJudgementId_InScope(Collection<String> sourceJudgementIdList) {
-        doSetSourceJudgementId_InScope(sourceJudgementIdList);
+    public void setJudgementSourceId_InScope(Collection<String> judgementSourceIdList) {
+        doSetJudgementSourceId_InScope(judgementSourceIdList);
     }
 
-    protected void doSetSourceJudgementId_InScope(Collection<String> sourceJudgementIdList) {
-        regINS(CK_INS, cTL(sourceJudgementIdList), xgetCValueSourceJudgementId(), "SOURCE_JUDGEMENT_ID");
+    protected void doSetJudgementSourceId_InScope(Collection<String> judgementSourceIdList) {
+        regINS(CK_INS, cTL(judgementSourceIdList), xgetCValueJudgementSourceId(), "JUDGEMENT_SOURCE_ID");
     }
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
-     * @param sourceJudgementIdList The collection of sourceJudgementId as notInScope. (NullAllowed: if null (or empty), no condition)
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
+     * @param judgementSourceIdList The collection of judgementSourceId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
-    public void setSourceJudgementId_NotInScope(Collection<String> sourceJudgementIdList) {
-        doSetSourceJudgementId_NotInScope(sourceJudgementIdList);
+    public void setJudgementSourceId_NotInScope(Collection<String> judgementSourceIdList) {
+        doSetJudgementSourceId_NotInScope(judgementSourceIdList);
     }
 
-    protected void doSetSourceJudgementId_NotInScope(Collection<String> sourceJudgementIdList) {
-        regINS(CK_NINS, cTL(sourceJudgementIdList), xgetCValueSourceJudgementId(), "SOURCE_JUDGEMENT_ID");
+    protected void doSetJudgementSourceId_NotInScope(Collection<String> judgementSourceIdList) {
+        regINS(CK_NINS, cTL(judgementSourceIdList), xgetCValueJudgementSourceId(), "JUDGEMENT_SOURCE_ID");
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)} <br>
-     * <pre>e.g. setSourceJudgementId_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param sourceJudgementId The value of sourceJudgementId as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)} <br>
+     * <pre>e.g. setJudgementSourceId_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param judgementSourceId The value of judgementSourceId as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setSourceJudgementId_LikeSearch(String sourceJudgementId, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setSourceJudgementId_LikeSearch(sourceJudgementId, xcLSOP(opLambda));
+    public void setJudgementSourceId_LikeSearch(String judgementSourceId, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setJudgementSourceId_LikeSearch(judgementSourceId, xcLSOP(opLambda));
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)} <br>
-     * <pre>e.g. setSourceJudgementId_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param sourceJudgementId The value of sourceJudgementId as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)} <br>
+     * <pre>e.g. setJudgementSourceId_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param judgementSourceId The value of judgementSourceId as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
      */
-    protected void setSourceJudgementId_LikeSearch(String sourceJudgementId, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(sourceJudgementId), xgetCValueSourceJudgementId(), "SOURCE_JUDGEMENT_ID", likeSearchOption);
+    protected void setJudgementSourceId_LikeSearch(String judgementSourceId, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(judgementSourceId), xgetCValueJudgementSourceId(), "JUDGEMENT_SOURCE_ID", likeSearchOption);
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
-     * @param sourceJudgementId The value of sourceJudgementId as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
+     * @param judgementSourceId The value of judgementSourceId as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setSourceJudgementId_NotLikeSearch(String sourceJudgementId, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setSourceJudgementId_NotLikeSearch(sourceJudgementId, xcLSOP(opLambda));
+    public void setJudgementSourceId_NotLikeSearch(String judgementSourceId, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setJudgementSourceId_NotLikeSearch(judgementSourceId, xcLSOP(opLambda));
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
-     * @param sourceJudgementId The value of sourceJudgementId as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
+     * @param judgementSourceId The value of judgementSourceId as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
-    protected void setSourceJudgementId_NotLikeSearch(String sourceJudgementId, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(sourceJudgementId), xgetCValueSourceJudgementId(), "SOURCE_JUDGEMENT_ID", likeSearchOption);
+    protected void setJudgementSourceId_NotLikeSearch(String judgementSourceId, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(judgementSourceId), xgetCValueJudgementSourceId(), "JUDGEMENT_SOURCE_ID", likeSearchOption);
     }
 
-    protected void regSourceJudgementId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueSourceJudgementId(), "SOURCE_JUDGEMENT_ID"); }
-    protected abstract ConditionValue xgetCValueSourceJudgementId();
+    protected void regJudgementSourceId(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueJudgementSourceId(), "JUDGEMENT_SOURCE_ID"); }
+    protected abstract ConditionValue xgetCValueJudgementSourceId();
+
+    /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)}
+     * @param judgementSourceSentence The value of judgementSourceSentence as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setJudgementSourceSentence_Equal(String judgementSourceSentence) {
+        doSetJudgementSourceSentence_Equal(fRES(judgementSourceSentence));
+    }
+
+    protected void doSetJudgementSourceSentence_Equal(String judgementSourceSentence) {
+        regJudgementSourceSentence(CK_EQ, judgementSourceSentence);
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)} <br>
+     * <pre>e.g. setJudgementSourceSentence_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param judgementSourceSentence The value of judgementSourceSentence as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setJudgementSourceSentence_LikeSearch(String judgementSourceSentence, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setJudgementSourceSentence_LikeSearch(judgementSourceSentence, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)} <br>
+     * <pre>e.g. setJudgementSourceSentence_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param judgementSourceSentence The value of judgementSourceSentence as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setJudgementSourceSentence_LikeSearch(String judgementSourceSentence, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(judgementSourceSentence), xgetCValueJudgementSourceSentence(), "JUDGEMENT_SOURCE_SENTENCE", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)}
+     * @param judgementSourceSentence The value of judgementSourceSentence as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setJudgementSourceSentence_NotLikeSearch(String judgementSourceSentence, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setJudgementSourceSentence_NotLikeSearch(judgementSourceSentence, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)}
+     * @param judgementSourceSentence The value of judgementSourceSentence as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setJudgementSourceSentence_NotLikeSearch(String judgementSourceSentence, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(judgementSourceSentence), xgetCValueJudgementSourceSentence(), "JUDGEMENT_SOURCE_SENTENCE", likeSearchOption);
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br>
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)}
+     */
+    public void setJudgementSourceSentence_IsNull() { regJudgementSourceSentence(CK_ISN, DOBJ); }
+
+    /**
+     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)}
+     */
+    public void setJudgementSourceSentence_IsNullOrEmpty() { regJudgementSourceSentence(CK_ISNOE, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)}
+     */
+    public void setJudgementSourceSentence_IsNotNull() { regJudgementSourceSentence(CK_ISNN, DOBJ); }
+
+    protected void regJudgementSourceSentence(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueJudgementSourceSentence(), "JUDGEMENT_SOURCE_SENTENCE"); }
+    protected abstract ConditionValue xgetCValueJudgementSourceSentence();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>

@@ -16,8 +16,10 @@ import tech.law.hanreidb.app.web.master.list.MasterListContentResult.LabelValueP
 import tech.law.hanreidb.dbflute.allcommon.CDef;
 import tech.law.hanreidb.dbflute.exbhv.CaseMarkBhv;
 import tech.law.hanreidb.dbflute.exbhv.CourtBhv;
+import tech.law.hanreidb.dbflute.exbhv.ReportBhv;
 import tech.law.hanreidb.dbflute.exentity.CaseMark;
 import tech.law.hanreidb.dbflute.exentity.Court;
+import tech.law.hanreidb.dbflute.exentity.Report;
 
 /**
  * @author h-funaki
@@ -34,6 +36,8 @@ public class MasterListAction extends HanreidbBaseAction {
     private CaseMarkBhv caseMarkBhv;
     @Resource
     private CourtBhv courtBhv;
+    @Resource
+    private ReportBhv reportBhv;
 
     // ===================================================================================
     //                                                                             Execute
@@ -48,8 +52,8 @@ public class MasterListAction extends HanreidbBaseAction {
                 toImmutable(CDef.CaseCategory.listAll()), //
                 toImmutable(CDef.CourtType.listAll()), //
                 toImmutable(selectCourtList()), //
-                toImmutable(selectCaseMarkList())//
-        );
+                toImmutable(selectCaseMarkList()), //
+                toImmutable(selectReportlist()));
         return asJson(result);
     }
 
@@ -70,6 +74,13 @@ public class MasterListAction extends HanreidbBaseAction {
         });
     }
 
+    private List<Report> selectReportlist() {
+        return reportBhv.selectList(cb -> {
+            cb.specify().columnReportId();
+            cb.specify().columnReportAlias();
+        });
+    }
+
     // ===================================================================================
     //                                                                             Mapping
     //                                                                             =======
@@ -81,7 +92,8 @@ public class MasterListAction extends HanreidbBaseAction {
             ImmutableList<CDef.CaseCategory> minkeiList, //
             ImmutableList<CDef.CourtType> courtTypeList, //
             ImmutableList<Court> courtList, //
-            ImmutableList<CaseMark> caseMarkList) {
+            ImmutableList<CaseMark> caseMarkList, //
+            ImmutableList<Report> reportList) {
         // TODO h-funaki なぜかImmutableではjsonにはいらない (2017/12/17)
         MasterListContentResult content = new MasterListContentResult();
         content.era_list = eraList.collect(this::convertToLabelValuePart).castToList();
@@ -92,6 +104,7 @@ public class MasterListAction extends HanreidbBaseAction {
         content.court_type_list = courtTypeList.collect(this::convertToLabelValuePart).castToList();
         content.court_list = courtList.collect(this::convertToLabelValuePart).castToList();
         content.case_mark_list = caseMarkList.collect(this::convertToLabelValuePart).castToList();
+        content.report_list = reportList.collect(this::convertToLabelValuePart).castToList();
         return content;
     }
 
@@ -106,6 +119,13 @@ public class MasterListAction extends HanreidbBaseAction {
         LabelValuePart part = new LabelValuePart();
         part.label = entity.getCaseMarkAlias();
         part.value = entity.getCaseMarkId().toString();
+        return part;
+    }
+
+    private LabelValuePart convertToLabelValuePart(Report entity) {
+        LabelValuePart part = new LabelValuePart();
+        part.label = entity.getReportAlias();
+        part.value = entity.getReportId().toString();
         return part;
     }
 

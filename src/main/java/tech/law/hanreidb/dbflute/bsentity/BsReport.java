@@ -255,6 +255,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
     //                                                                            ========
     /**
      * [get] (判例集ID)REPORT_ID: {PK, ID, NotNull, INT UNSIGNED(10)} <br>
+     * 判例集ID e.g. 1
      * @return The value of the column 'REPORT_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getReportId() {
@@ -264,6 +265,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (判例集ID)REPORT_ID: {PK, ID, NotNull, INT UNSIGNED(10)} <br>
+     * 判例集ID e.g. 1
      * @param reportId The value of the column 'REPORT_ID'. (basically NotNull if update: for the constraint)
      */
     public void setReportId(Integer reportId) {
@@ -273,6 +275,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * 判例集名 e.g. 最高裁判所刑事判例
      * @return The value of the column 'REPORT_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getReportName() {
@@ -282,6 +285,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * 判例集名 e.g. 最高裁判所刑事判例
      * @param reportName The value of the column 'REPORT_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setReportName(String reportName) {
@@ -291,6 +295,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * 判例集別名 e.g. 刑集
      * @return The value of the column 'REPORT_ALIAS'. (basically NotNull if selected: for the constraint)
      */
     public String getReportAlias() {
@@ -300,6 +305,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * 判例集別名 e.g. 刑集
      * @param reportAlias The value of the column 'REPORT_ALIAS'. (basically NotNull if update: for the constraint)
      */
     public void setReportAlias(String reportAlias) {
@@ -309,7 +315,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getRegisterDatetime() {
@@ -319,7 +325,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterDatetime(java.time.LocalDateTime registerDatetime) {
@@ -329,7 +335,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
@@ -339,7 +345,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterUser(String registerUser) {
@@ -349,7 +355,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getUpdateDatetime() {
@@ -359,7 +365,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateDatetime(java.time.LocalDateTime updateDatetime) {
@@ -369,7 +375,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
@@ -379,7 +385,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateUser(String updateUser) {
@@ -389,7 +395,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [get] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
      */
     public Long getVersionNo() {
@@ -399,7 +405,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
 
     /**
      * [set] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
      */
     public void setVersionNo(Long versionNo) {

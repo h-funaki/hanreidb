@@ -170,6 +170,7 @@
 					<logical_name>事件符号ID</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
+					<description>事件符号ID e.g. 151</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 					<auto_increment>true</auto_increment>
@@ -179,6 +180,7 @@
 					<logical_name>事件符号名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>事件符号名 e.g. オ</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
@@ -186,6 +188,7 @@
 					<logical_name>事件符号別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>事件符号別名 e.g. オ</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
@@ -204,6 +207,7 @@
 					<logical_name>事件符号詳細</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
+					<description>事件符号詳細 e.g. 上告事件</description>
 				</normal_column>
 				<column_group>共通カラム</column_group>
 			</columns>
@@ -238,6 +242,7 @@
 					<type>varchar(n)</type>
 					<length>10</length>
 					<unsigned>true</unsigned>
+					<description>法廷種別コード e.g. FULL</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 				</normal_column>
@@ -246,6 +251,7 @@
 					<logical_name>法廷種別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>法廷種別名 e.g. 大法廷</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -254,6 +260,7 @@
 					<logical_name>法廷種別別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>法廷種別別名 e.g. 大法廷</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -291,6 +298,7 @@
 					<type>varchar(n)</type>
 					<length>10</length>
 					<unsigned>true</unsigned>
+					<description>事件カテゴリーコード e.g. MIN</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 				</normal_column>
@@ -299,6 +307,7 @@
 					<logical_name>事件カテゴリー名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>事件カテゴリー名 e.g. 民事事件</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -307,6 +316,7 @@
 					<logical_name>事件カテゴリー別名</logical_name>
 					<type>varchar(n)</type>
 					<length>30</length>
+					<description>事件カテゴリー別名 e.g. 民事事件</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -344,6 +354,7 @@
 					<type>varchar(n)</type>
 					<length>10</length>
 					<unsigned>true</unsigned>
+					<description>裁判所種別コード e.g. SUPREME</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 				</normal_column>
@@ -352,6 +363,7 @@
 					<logical_name>裁判所種別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>裁判所種別名 e.g. 最高裁判所</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -360,6 +372,7 @@
 					<logical_name>裁判所種別別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>裁判所種別別名 e.g. 最高裁判所</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -397,6 +410,7 @@
 					<type>varchar(n)</type>
 					<length>10</length>
 					<unsigned>true</unsigned>
+					<description>元号コード e.g. HEISEI</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 				</normal_column>
@@ -405,6 +419,7 @@
 					<logical_name>元号名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>元号名 e.g. 平成</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -413,6 +428,7 @@
 					<logical_name>元号別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>元号別名 e.g. 平成</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -450,6 +466,7 @@
 					<type>varchar(n)</type>
 					<length>10</length>
 					<unsigned>true</unsigned>
+					<description>判決結果コード e.g. DISMISSAL</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 				</normal_column>
@@ -458,6 +475,7 @@
 					<logical_name>判決結果名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>判決結果名 e.g. 棄却</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -466,6 +484,7 @@
 					<logical_name>判決結果別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>判決結果別名 e.g. 棄却</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -503,6 +522,7 @@
 					<type>varchar(n)</type>
 					<length>10</length>
 					<unsigned>true</unsigned>
+					<description>判決種別コード e.g. JUDGEMENT</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 				</normal_column>
@@ -511,6 +531,7 @@
 					<logical_name>判決種別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>判決種別名 e.g. 判決</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -519,6 +540,7 @@
 					<logical_name>判決種別別名</logical_name>
 					<type>varchar(n)</type>
 					<length>10</length>
+					<description>判決種別別名 e.g. 判決</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -540,8 +562,8 @@
 			<width>256</width>
 			<font_name>.AppleSystemUIFont</font_name>
 			<font_size>9</font_size>
-			<x>834</x>
-			<y>615</y>
+			<x>833</x>
+			<y>642</y>
 			<color>
 				<r>255</r>
 				<g>255</g>
@@ -556,6 +578,7 @@
 					<type>varchar(n)</type>
 					<length>10</length>
 					<unsigned>true</unsigned>
+					<description>取得元コード e.g. COURT</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 				</normal_column>
@@ -564,6 +587,7 @@
 					<logical_name>取得元名</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
+					<description>取得元名 e.g. 裁判所裁判例</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -572,6 +596,7 @@
 					<logical_name>取得元別名</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
+					<description>取得元別名 e.g. 裁判所裁判例</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -674,6 +699,7 @@
 					<logical_name>裁判所ID</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
+					<description>裁判所ID e.g. 161</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 					<auto_increment>true</auto_increment>
@@ -683,6 +709,7 @@
 					<logical_name>裁判所名</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
+					<description>裁判所名 e.g.  最高裁判所</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -691,6 +718,7 @@
 					<logical_name>裁判所別名</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
+					<description>裁判所別名 e.g.  最高裁</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -861,6 +889,11 @@
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
+				<normal_column>
+					<physical_name>MEMO</physical_name>
+					<logical_name>備考</logical_name>
+					<type>text</type>
+				</normal_column>
 				<column_group>共通カラム</column_group>
 			</columns>
 			<indexes>
@@ -1013,6 +1046,7 @@
 					<logical_name>判決ID</logical_name>
 					<type>bigint</type>
 					<unsigned>true</unsigned>
+					<description>判決ID e.g. 1</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 					<auto_increment>true</auto_increment>
@@ -1022,7 +1056,7 @@
 					<logical_name>判決公開コード</logical_name>
 					<type>varchar(n)</type>
 					<length>12</length>
-					<description>e.g. JID123456789</description>
+					<description>判決公開コード e.g. JID123456789</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -1030,17 +1064,20 @@
 					<physical_name>CASE_NAME</physical_name>
 					<logical_name>事件名</logical_name>
 					<type>text</type>
+					<description>事件名 e.g. めっちゃ大変な事件</description>
 				</normal_column>
 				<normal_column>
 					<physical_name>JUDGEMENT_DATE</physical_name>
 					<logical_name>裁判年月日</logical_name>
 					<type>date</type>
+					<description>裁判年月日 e.g. 2015-09-09</description>
 				</normal_column>
 				<normal_column>
 					<physical_name>ORIGINAL_JUDGEMENT_ID</physical_name>
 					<logical_name>原審判決ID</logical_name>
 					<referred_column>table.JUDGEMENT.JUDGEMENT_ID</referred_column>
 					<relationship>FK_JUDGEMENT_JUDGEMENT</relationship>
+					<description>原審判決ID e.g. 2</description>
 				</normal_column>
 				<normal_column>
 					<physical_name>CASE_NUMBER_ERA_CODE</physical_name>
@@ -1053,6 +1090,7 @@
 					<logical_name>事件番号年</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
+					<description>事件番号年 e.g. 20</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
@@ -1066,6 +1104,7 @@
 					<logical_name>事件番号連番</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
+					<description>事件番号連番 e.g. 123</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
@@ -1088,12 +1127,6 @@
 					<physical_name>JUDGEMENT_TYPE_CODE</physical_name>
 					<referred_column>table.CLS_JUDGEMENT_TYPE.JUDGEMENT_TYPE_CODE</referred_column>
 					<relationship>FK_JUDGEMENT_CLS_JUDGEMENT_TYPE</relationship>
-				</normal_column>
-				<normal_column>
-					<physical_name>SENTENCE</physical_name>
-					<logical_name>判決文</logical_name>
-					<type>text</type>
-					<description>取り込み時に判決文がないことを許容したい</description>
 				</normal_column>
 				<column_group>共通カラム</column_group>
 			</columns>
@@ -1157,6 +1190,7 @@
 					<logical_name>判決判例集リレーションID</logical_name>
 					<type>bigint</type>
 					<unsigned>true</unsigned>
+					<description>判決判例集リレーションID e.g. 1</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 					<auto_increment>true</auto_increment>
@@ -1178,18 +1212,21 @@
 					<logical_name>判例集巻</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
+					<description>判例集巻 e.g. 12</description>
 				</normal_column>
 				<normal_column>
 					<physical_name>REPORT_GO</physical_name>
 					<logical_name>判例集号</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
+					<description>判例集号 e.g. 34</description>
 				</normal_column>
 				<normal_column>
 					<physical_name>REPORT_KO</physical_name>
 					<logical_name>判例集頁</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
+					<description>判例集頁 e.g. 56</description>
 				</normal_column>
 				<column_group>共通カラム</column_group>
 			</columns>
@@ -1272,17 +1309,34 @@
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
-					<physical_name>SOURCE_JUDGEMENT_ID</physical_name>
-					<logical_name>取得元判決ID</logical_name>
+					<physical_name>JUDGEMENT_SOURCE_ID</physical_name>
+					<logical_name>判決取得元ID</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
 					<not_null>true</not_null>
+				</normal_column>
+				<normal_column>
+					<physical_name>JUDGEMENT_SOURCE_SENTENCE</physical_name>
+					<logical_name>判決文</logical_name>
+					<type>text</type>
+					<description>取得元によって微妙に判決文が違いそうなので、判決に対して一対多。&#x0A;判決文がないことをあまり許容したくないが、ないかもしれないのでnull制約はつけない。</description>
 				</normal_column>
 				<column_group>共通カラム</column_group>
 			</columns>
 			<indexes>
 			</indexes>
 			<compound_unique_key_list>
+				<compound_unique_key>
+					<name>UQ_JUDGEMENT_SOURCE_REL</name>
+					<columns>
+						<column>
+							<column_id>table.JUDGEMENT_SOURCE_REL.SOURCE_CODE</column_id>
+						</column>
+						<column>
+							<column_id>table.JUDGEMENT_SOURCE_REL.JUDGEMENT_SOURCE_ID</column_id>
+						</column>
+					</columns>
+				</compound_unique_key>
 			</compound_unique_key_list>
 			<table_properties>
 			</table_properties>
@@ -1464,6 +1518,7 @@
 					<logical_name>判例集ID</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
+					<description>判例集ID e.g. 1</description>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
 					<auto_increment>true</auto_increment>
@@ -1473,6 +1528,7 @@
 					<logical_name>判例集名</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
+					<description>判例集名 e.g. 最高裁判所刑事判例</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -1481,6 +1537,7 @@
 					<logical_name>判例集別名</logical_name>
 					<type>varchar(n)</type>
 					<length>100</length>
+					<description>判例集別名 e.g. 刑集</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -1661,7 +1718,7 @@
 					<physical_name>REGISTER_DATETIME</physical_name>
 					<logical_name>登録日時</logical_name>
 					<type>datetime</type>
-					<description>レコードが登録された日時</description>
+					<description>レコードが登録された日時 e.g. 2018-01-02T12:34:56</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
@@ -1669,14 +1726,14 @@
 					<logical_name>登録ユーザー</logical_name>
 					<type>varchar(n)</type>
 					<length>200</length>
-					<description>レコードを登録したユーザー</description>
+					<description>レコードを登録したユーザー e.g. funa</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
 					<physical_name>UPDATE_DATETIME</physical_name>
 					<logical_name>更新日時</logical_name>
 					<type>datetime</type>
-					<description>レコードが(最後に)更新された日時</description>
+					<description>レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
@@ -1684,7 +1741,7 @@
 					<logical_name>更新ユーザー</logical_name>
 					<type>varchar(n)</type>
 					<length>200</length>
-					<description>レコードを(最後に)更新したユーザー</description>
+					<description>レコードを(最後に)更新したユーザー e.g. funa</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
@@ -1692,7 +1749,7 @@
 					<logical_name>バージョン番号</logical_name>
 					<type>bigint</type>
 					<unsigned>true</unsigned>
-					<description>バージョン番号</description>
+					<description>バージョン番号 e.g. 0</description>
 					<not_null>true</not_null>
 					<default_value>0</default_value>
 				</normal_column>
@@ -1705,7 +1762,7 @@
 					<physical_name>DESCRIPTION</physical_name>
 					<logical_name>説明</logical_name>
 					<type>text</type>
-					<description>説明</description>
+					<description>説明 e.g. これこれするときのなになにです。</description>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
@@ -1713,7 +1770,7 @@
 					<logical_name>順番</logical_name>
 					<type>integer</type>
 					<unsigned>true</unsigned>
-					<description>順番</description>
+					<description>順番 e.g. 1</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>

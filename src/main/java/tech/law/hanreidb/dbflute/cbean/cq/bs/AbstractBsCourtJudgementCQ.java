@@ -2315,6 +2315,84 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     protected abstract ConditionValue xgetCValueSourceOriginalId();
 
     /**
+     * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (備考)MEMO: {TEXT(65535)}
+     * @param memo The value of memo as equal. (NullAllowed: if null (or empty), no condition)
+     */
+    public void setMemo_Equal(String memo) {
+        doSetMemo_Equal(fRES(memo));
+    }
+
+    protected void doSetMemo_Equal(String memo) {
+        regMemo(CK_EQ, memo);
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (備考)MEMO: {TEXT(65535)} <br>
+     * <pre>e.g. setMemo_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param memo The value of memo as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setMemo_LikeSearch(String memo, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setMemo_LikeSearch(memo, xcLSOP(opLambda));
+    }
+
+    /**
+     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (備考)MEMO: {TEXT(65535)} <br>
+     * <pre>e.g. setMemo_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param memo The value of memo as likeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of like-search. (NotNull)
+     */
+    protected void setMemo_LikeSearch(String memo, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(memo), xgetCValueMemo(), "MEMO", likeSearchOption);
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (備考)MEMO: {TEXT(65535)}
+     * @param memo The value of memo as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param opLambda The callback for option of like-search. (NotNull)
+     */
+    public void setMemo_NotLikeSearch(String memo, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setMemo_NotLikeSearch(memo, xcLSOP(opLambda));
+    }
+
+    /**
+     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
+     * And NullOrEmptyIgnored, SeveralRegistered. <br>
+     * (備考)MEMO: {TEXT(65535)}
+     * @param memo The value of memo as notLikeSearch. (NullAllowed: if null (or empty), no condition)
+     * @param likeSearchOption The option of not-like-search. (NotNull)
+     */
+    protected void setMemo_NotLikeSearch(String memo, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(memo), xgetCValueMemo(), "MEMO", likeSearchOption);
+    }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br>
+     * (備考)MEMO: {TEXT(65535)}
+     */
+    public void setMemo_IsNull() { regMemo(CK_ISN, DOBJ); }
+
+    /**
+     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
+     * (備考)MEMO: {TEXT(65535)}
+     */
+    public void setMemo_IsNullOrEmpty() { regMemo(CK_ISNOE, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
+     * (備考)MEMO: {TEXT(65535)}
+     */
+    public void setMemo_IsNotNull() { regMemo(CK_ISNN, DOBJ); }
+
+    protected void regMemo(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueMemo(), "MEMO"); }
+    protected abstract ConditionValue xgetCValueMemo();
+
+    /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
      * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @param registerDatetime The value of registerDatetime as equal. (basically NotNull: error as default, or no condition as option)

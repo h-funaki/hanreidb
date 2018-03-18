@@ -444,6 +444,12 @@ public class BsCourtJudgementCQ extends AbstractBsCourtJudgementCQ {
      */
     public BsCourtJudgementCQ addOrderBy_SourceOriginalId_Desc() { regOBD("SOURCE_ORIGINAL_ID"); return this; }
 
+    protected ConditionValue _memo;
+    public ConditionValue xdfgetMemo()
+    { if (_memo == null) { _memo = nCV(); }
+      return _memo; }
+    protected ConditionValue xgetCValueMemo() { return xdfgetMemo(); }
+
     protected ConditionValue _registerDatetime;
     public ConditionValue xdfgetRegisterDatetime()
     { if (_registerDatetime == null) { _registerDatetime = nCV(); }

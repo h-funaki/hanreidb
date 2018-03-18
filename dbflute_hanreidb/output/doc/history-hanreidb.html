@@ -119,11 +119,69 @@ p.tablecount {
 </div>
 
 <div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/03/18 19:49:25</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4><a href="./schema-hanreidb.html#court_judgement">COURT_JUDGEMENT</a></h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>MEMO</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/03/18 19:37:54</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>JUDGEMENT_SOURCE_REL</h4>
+		<div class="change-table-content">
+			<h5>Add UQ</h5>
+			<ul class="column-content">
+				<li>UQ_JUDGEMENT_SOURCE_REL</li>
+			</ul>
+			<h5>Delete Index</h5>
+			<ul class="column-content">
+				<li>FK_JUDGEMENT_SOURCE_REL_SOURCE</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
+	<h2><span class="dt">Diff Date: </span>2018/03/18 16:53:07</h2>
+
+	<h3>Change Table</h3>
+	<div class="table-content">
+		<h4>JUDGEMENT</h4>
+		<div class="change-table-content">
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>SENTENCE</li>
+			</ul>
+		</div>
+		<h4>JUDGEMENT_SOURCE_REL</h4>
+		<div class="change-table-content">
+			<h5>Add Column</h5>
+			<ul class="column-content">
+				<li>JUDGEMENT_SOURCE_ID</li>
+				<li>JUDGEMENT_SOURCE_SENTENCE</li>
+			</ul>
+			<h5>Delete Column</h5>
+			<ul class="column-content">
+				<li>SOURCE_JUDGEMENT_ID</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="section">
 	<h2><span class="dt">Diff Date: </span>2018/02/20 21:47:41</h2>
 
 	<h3>Change Table</h3>
 	<div class="table-content">
-		<h4><a href="./schema-hanreidb.html#judgement">JUDGEMENT</a></h4>
+		<h4>JUDGEMENT</h4>
 		<div class="change-table-content">
 			<h5>Add Column</h5>
 			<ul class="column-content">

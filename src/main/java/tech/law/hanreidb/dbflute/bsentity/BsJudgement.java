@@ -35,7 +35,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     JUDGEMENT_ID
  *
  * [column]
- *     JUDGEMENT_ID, JUDGEMENT_PUBLIC_CODE, CASE_NAME, JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_ID, CASE_NUMBER_ERA_CODE, CASE_NUMBER_YEAR, CASE_MARK_ID, CASE_NUMBER_SERIAL_NUMBER, COURT_ID, BENCH_CODE, JUDGEMENT_RESULT_CODE, JUDGEMENT_TYPE_CODE, SENTENCE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     JUDGEMENT_ID, JUDGEMENT_PUBLIC_CODE, CASE_NAME, JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_ID, CASE_NUMBER_ERA_CODE, CASE_NUMBER_YEAR, CASE_MARK_ID, CASE_NUMBER_SERIAL_NUMBER, COURT_ID, BENCH_CODE, JUDGEMENT_RESULT_CODE, JUDGEMENT_TYPE_CODE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -73,7 +73,6 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * String benchCode = entity.getBenchCode();
  * String judgementResultCode = entity.getJudgementResultCode();
  * String judgementTypeCode = entity.getJudgementTypeCode();
- * String sentence = entity.getSentence();
  * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
  * String registerUser = entity.getRegisterUser();
  * java.time.LocalDateTime updateDatetime = entity.getUpdateDatetime();
@@ -92,7 +91,6 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * entity.setBenchCode(benchCode);
  * entity.setJudgementResultCode(judgementResultCode);
  * entity.setJudgementTypeCode(judgementTypeCode);
- * entity.setSentence(sentence);
  * entity.setRegisterDatetime(registerDatetime);
  * entity.setRegisterUser(registerUser);
  * entity.setUpdateDatetime(updateDatetime);
@@ -151,9 +149,6 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /** (判決種別コード)JUDGEMENT_TYPE_CODE: {IX, VARCHAR(10), FK to CLS_JUDGEMENT_TYPE, classification=JudgementType} */
     protected String _judgementTypeCode;
-
-    /** (判決文)SENTENCE: {TEXT(65535)} */
-    protected String _sentence;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
     protected java.time.LocalDateTime _registerDatetime;
@@ -879,7 +874,6 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         sb.append(dm).append(xfND(_benchCode));
         sb.append(dm).append(xfND(_judgementResultCode));
         sb.append(dm).append(xfND(_judgementTypeCode));
-        sb.append(dm).append(xfND(_sentence));
         sb.append(dm).append(xfND(_registerDatetime));
         sb.append(dm).append(xfND(_registerUser));
         sb.append(dm).append(xfND(_updateDatetime));
@@ -933,6 +927,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     //                                                                            ========
     /**
      * [get] (判決ID)JUDGEMENT_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} <br>
+     * 判決ID e.g. 1
      * @return The value of the column 'JUDGEMENT_ID'. (basically NotNull if selected: for the constraint)
      */
     public Long getJudgementId() {
@@ -942,6 +937,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (判決ID)JUDGEMENT_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} <br>
+     * 判決ID e.g. 1
      * @param judgementId The value of the column 'JUDGEMENT_ID'. (basically NotNull if update: for the constraint)
      */
     public void setJudgementId(Long judgementId) {
@@ -951,7 +947,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)} <br>
-     * e.g. JID123456789
+     * 判決公開コード e.g. JID123456789
      * @return The value of the column 'JUDGEMENT_PUBLIC_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getJudgementPublicCode() {
@@ -961,7 +957,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (判決公開コード)JUDGEMENT_PUBLIC_CODE: {UQ, NotNull, VARCHAR(12)} <br>
-     * e.g. JID123456789
+     * 判決公開コード e.g. JID123456789
      * @param judgementPublicCode The value of the column 'JUDGEMENT_PUBLIC_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setJudgementPublicCode(String judgementPublicCode) {
@@ -971,6 +967,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (事件名)CASE_NAME: {TEXT(65535)} <br>
+     * 事件名 e.g. めっちゃ大変な事件
      * @return The value of the column 'CASE_NAME'. (NullAllowed even if selected: for no constraint)
      */
     public String getCaseName() {
@@ -980,6 +977,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (事件名)CASE_NAME: {TEXT(65535)} <br>
+     * 事件名 e.g. めっちゃ大変な事件
      * @param caseName The value of the column 'CASE_NAME'. (NullAllowed: null update allowed for no constraint)
      */
     public void setCaseName(String caseName) {
@@ -989,6 +987,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (裁判年月日)JUDGEMENT_DATE: {DATE(10)} <br>
+     * 裁判年月日 e.g. 2015-09-09
      * @return The value of the column 'JUDGEMENT_DATE'. (NullAllowed even if selected: for no constraint)
      */
     public java.time.LocalDate getJudgementDate() {
@@ -998,6 +997,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (裁判年月日)JUDGEMENT_DATE: {DATE(10)} <br>
+     * 裁判年月日 e.g. 2015-09-09
      * @param judgementDate The value of the column 'JUDGEMENT_DATE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setJudgementDate(java.time.LocalDate judgementDate) {
@@ -1007,6 +1007,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (原審判決ID)ORIGINAL_JUDGEMENT_ID: {IX, BIGINT UNSIGNED(20), FK to JUDGEMENT} <br>
+     * 原審判決ID e.g. 2
      * @return The value of the column 'ORIGINAL_JUDGEMENT_ID'. (NullAllowed even if selected: for no constraint)
      */
     public Long getOriginalJudgementId() {
@@ -1016,6 +1017,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (原審判決ID)ORIGINAL_JUDGEMENT_ID: {IX, BIGINT UNSIGNED(20), FK to JUDGEMENT} <br>
+     * 原審判決ID e.g. 2
      * @param originalJudgementId The value of the column 'ORIGINAL_JUDGEMENT_ID'. (NullAllowed: null update allowed for no constraint)
      */
     public void setOriginalJudgementId(Long originalJudgementId) {
@@ -1025,6 +1027,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (元号コード)CASE_NUMBER_ERA_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_ERA, classification=Era} <br>
+     * 元号コード e.g. HEISEI
      * @return The value of the column 'CASE_NUMBER_ERA_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getCaseNumberEraCode() {
@@ -1034,6 +1037,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (元号コード)CASE_NUMBER_ERA_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_ERA, classification=Era} <br>
+     * 元号コード e.g. HEISEI
      * @param caseNumberEraCode The value of the column 'CASE_NUMBER_ERA_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setCaseNumberEraCode(String caseNumberEraCode) {
@@ -1043,6 +1047,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (事件番号年)CASE_NUMBER_YEAR: {NotNull, INT UNSIGNED(10)} <br>
+     * 事件番号年 e.g. 20
      * @return The value of the column 'CASE_NUMBER_YEAR'. (basically NotNull if selected: for the constraint)
      */
     public Integer getCaseNumberYear() {
@@ -1052,6 +1057,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (事件番号年)CASE_NUMBER_YEAR: {NotNull, INT UNSIGNED(10)} <br>
+     * 事件番号年 e.g. 20
      * @param caseNumberYear The value of the column 'CASE_NUMBER_YEAR'. (basically NotNull if update: for the constraint)
      */
     public void setCaseNumberYear(Integer caseNumberYear) {
@@ -1061,6 +1067,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (事件符号ID)CASE_MARK_ID: {IX, NotNull, INT UNSIGNED(10), FK to CASE_MARK} <br>
+     * 事件符号ID e.g. 151
      * @return The value of the column 'CASE_MARK_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getCaseMarkId() {
@@ -1070,6 +1077,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (事件符号ID)CASE_MARK_ID: {IX, NotNull, INT UNSIGNED(10), FK to CASE_MARK} <br>
+     * 事件符号ID e.g. 151
      * @param caseMarkId The value of the column 'CASE_MARK_ID'. (basically NotNull if update: for the constraint)
      */
     public void setCaseMarkId(Integer caseMarkId) {
@@ -1079,6 +1087,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (事件番号連番)CASE_NUMBER_SERIAL_NUMBER: {NotNull, INT UNSIGNED(10)} <br>
+     * 事件番号連番 e.g. 123
      * @return The value of the column 'CASE_NUMBER_SERIAL_NUMBER'. (basically NotNull if selected: for the constraint)
      */
     public Integer getCaseNumberSerialNumber() {
@@ -1088,6 +1097,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (事件番号連番)CASE_NUMBER_SERIAL_NUMBER: {NotNull, INT UNSIGNED(10)} <br>
+     * 事件番号連番 e.g. 123
      * @param caseNumberSerialNumber The value of the column 'CASE_NUMBER_SERIAL_NUMBER'. (basically NotNull if update: for the constraint)
      */
     public void setCaseNumberSerialNumber(Integer caseNumberSerialNumber) {
@@ -1097,6 +1107,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (裁判所ID)COURT_ID: {IX, NotNull, INT UNSIGNED(10), FK to COURT} <br>
+     * 裁判所ID e.g. 161
      * @return The value of the column 'COURT_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getCourtId() {
@@ -1106,6 +1117,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (裁判所ID)COURT_ID: {IX, NotNull, INT UNSIGNED(10), FK to COURT} <br>
+     * 裁判所ID e.g. 161
      * @param courtId The value of the column 'COURT_ID'. (basically NotNull if update: for the constraint)
      */
     public void setCourtId(Integer courtId) {
@@ -1115,6 +1127,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (法廷種別コード)BENCH_CODE: {IX, VARCHAR(10), FK to CLS_BENCH, classification=Bench} <br>
+     * 法廷種別コード e.g. FULL
      * @return The value of the column 'BENCH_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getBenchCode() {
@@ -1124,6 +1137,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (法廷種別コード)BENCH_CODE: {IX, VARCHAR(10), FK to CLS_BENCH, classification=Bench} <br>
+     * 法廷種別コード e.g. FULL
      * @param benchCode The value of the column 'BENCH_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setBenchCode(String benchCode) {
@@ -1133,6 +1147,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (判決結果コード)JUDGEMENT_RESULT_CODE: {IX, VARCHAR(10), FK to CLS_JUDGEMENT_RESULT, classification=JudgementResult} <br>
+     * 判決結果コード e.g. DISMISSAL
      * @return The value of the column 'JUDGEMENT_RESULT_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getJudgementResultCode() {
@@ -1142,6 +1157,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (判決結果コード)JUDGEMENT_RESULT_CODE: {IX, VARCHAR(10), FK to CLS_JUDGEMENT_RESULT, classification=JudgementResult} <br>
+     * 判決結果コード e.g. DISMISSAL
      * @param judgementResultCode The value of the column 'JUDGEMENT_RESULT_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setJudgementResultCode(String judgementResultCode) {
@@ -1151,6 +1167,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (判決種別コード)JUDGEMENT_TYPE_CODE: {IX, VARCHAR(10), FK to CLS_JUDGEMENT_TYPE, classification=JudgementType} <br>
+     * 判決種別コード e.g. JUDGEMENT
      * @return The value of the column 'JUDGEMENT_TYPE_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getJudgementTypeCode() {
@@ -1160,6 +1177,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (判決種別コード)JUDGEMENT_TYPE_CODE: {IX, VARCHAR(10), FK to CLS_JUDGEMENT_TYPE, classification=JudgementType} <br>
+     * 判決種別コード e.g. JUDGEMENT
      * @param judgementTypeCode The value of the column 'JUDGEMENT_TYPE_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setJudgementTypeCode(String judgementTypeCode) {
@@ -1168,28 +1186,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
     }
 
     /**
-     * [get] (判決文)SENTENCE: {TEXT(65535)} <br>
-     * 取り込み時に判決文がないことを許容したい
-     * @return The value of the column 'SENTENCE'. (NullAllowed even if selected: for no constraint)
-     */
-    public String getSentence() {
-        checkSpecifiedProperty("sentence");
-        return convertEmptyToNull(_sentence);
-    }
-
-    /**
-     * [set] (判決文)SENTENCE: {TEXT(65535)} <br>
-     * 取り込み時に判決文がないことを許容したい
-     * @param sentence The value of the column 'SENTENCE'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setSentence(String sentence) {
-        registerModifiedProperty("sentence");
-        _sentence = sentence;
-    }
-
-    /**
      * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getRegisterDatetime() {
@@ -1199,7 +1197,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterDatetime(java.time.LocalDateTime registerDatetime) {
@@ -1209,7 +1207,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
@@ -1219,7 +1217,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterUser(String registerUser) {
@@ -1229,7 +1227,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getUpdateDatetime() {
@@ -1239,7 +1237,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateDatetime(java.time.LocalDateTime updateDatetime) {
@@ -1249,7 +1247,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
@@ -1259,7 +1257,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateUser(String updateUser) {
@@ -1269,7 +1267,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [get] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
      */
     public Long getVersionNo() {
@@ -1279,7 +1277,7 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
 
     /**
      * [set] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
      */
     public void setVersionNo(Long versionNo) {

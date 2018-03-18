@@ -1,0 +1,13 @@
+
+* * * * * * * * * *
+*                 *
+* Xls Data Result *
+*                 *
+* * * * * * * * * *
+data-directory: playsql/data/ut/xls
+
+[test.xls]
+  JUDGEMENT (7)
+  JUDGEMENT_SOURCE_REL (7)
+  JUDGEMENT_REPORT_REL (0)
+  COURT_JUDGEMENT (43)

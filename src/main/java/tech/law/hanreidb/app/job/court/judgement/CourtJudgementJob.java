@@ -40,6 +40,7 @@ import tech.law.hanreidb.dbflute.exentity.Court;
 import tech.law.hanreidb.dbflute.exentity.CourtJudgement;
 import tech.law.hanreidb.dbflute.exentity.Judgement;
 import tech.law.hanreidb.dbflute.exentity.JudgementReportRel;
+import tech.law.hanreidb.dbflute.exentity.JudgementSourceRel;
 
 public class CourtJudgementJob implements LaJob {
 
@@ -80,10 +81,10 @@ public class CourtJudgementJob implements LaJob {
         });
 
         List<Integer> alreadyPopulatedList = judgementSourceRelBhv.selectList(cb -> {
-            cb.specify().columnSourceJudgementId();
+            cb.specify().columnJudgementSourceId();
             cb.query().setSourceCode_Equal_裁判所裁判例();
         }).extractColumnList(entity -> {
-            return Integer.parseInt(entity.getSourceJudgementId());
+            return Integer.parseInt(entity.getJudgementSourceId());
         });
 
         ListResultBean<CourtJudgement> toBeMigratedList = courtJudgementBhv.selectList(cb -> {
@@ -103,11 +104,12 @@ public class CourtJudgementJob implements LaJob {
                 transactionStage.requiresNew(tx -> {
                     processMigrate(courtJudgement);
                 });
+                recorder.asSuccess();
             } catch (JobBusinessSkipException skip) {
-                logger.info("business skip court id {}", sourceOriginalId);
+                logger.info("business skip court_original_id {}", sourceOriginalId);
                 recorder.asBusinessSkip(recordMessage(pk, sourceOriginalId, skip.getMessage()));
             } catch (Exception error) {
-                logger.info("error court id {}", sourceOriginalId);
+                logger.info("error court_original_id {}", sourceOriginalId);
                 recorder.asError(recordMessage(pk, sourceOriginalId, error.getMessage()));
             }
         }
@@ -181,12 +183,22 @@ public class CourtJudgementJob implements LaJob {
                 cb.query().setReportName_Equal(value.substring(0, 2));
             }).ifPresent(entity -> {
                 insertJudgementReportRel(value, entity.getReportId());
+            }).orElse(() -> {
+                throw new JobBusinessSkipException(
+                        "判例集の取得に失敗 判例集:" + courtJudgement.getPrecedentReports() + " 最初の2文字:" + value.substring(0, 2));
             });
         });
 
-        // 判決 insert
+        // 判決, 判決取得元リレーション insert
         try {
             judgementBhv.insert(judgement);
+
+            JudgementSourceRel rel = new JudgementSourceRel();
+            rel.setJudgementId(judgement.getJudgementId());
+            rel.setSourceCode_裁判所裁判例();
+            rel.setJudgementSourceId(courtJudgement.getSourceOriginalId().toString());
+            // 判決文はinsertしない。PDFの処理が必要なので別のタイミングで。
+            judgementSourceRelBhv.insert(rel);
         } catch (EntityAlreadyExistsException e) {
             throw new JobBusinessSkipException("挿入に失敗しました。JID:" + makeNextPublicCode);
         }
@@ -338,6 +350,6 @@ public class CourtJudgementJob implements LaJob {
     }
 
     protected String makeNextPublicCode() {
-        return "JID" + RandomStringUtils.random(9, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        return "JID" + RandomStringUtils.random(3, "ABCDEFGHIJKLMNOPQRSTUVWXYZ") + RandomStringUtils.random(6, "0123456789");
     }
 }

@@ -383,6 +383,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
     //                                                                            ========
     /**
      * [get] (法廷種別コード)BENCH_CODE: {PK, NotNull, VARCHAR(10), classification=Bench} <br>
+     * 法廷種別コード e.g. FULL
      * @return The value of the column 'BENCH_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getBenchCode() {
@@ -392,6 +393,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (法廷種別コード)BENCH_CODE: {PK, NotNull, VARCHAR(10), classification=Bench} <br>
+     * 法廷種別コード e.g. FULL
      * @param benchCode The value of the column 'BENCH_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setBenchCode(String benchCode) {
@@ -401,6 +403,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (法廷種別名)BENCH_NAME: {UQ, NotNull, VARCHAR(10)} <br>
+     * 法廷種別名 e.g. 大法廷
      * @return The value of the column 'BENCH_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getBenchName() {
@@ -410,6 +413,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (法廷種別名)BENCH_NAME: {UQ, NotNull, VARCHAR(10)} <br>
+     * 法廷種別名 e.g. 大法廷
      * @param benchName The value of the column 'BENCH_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setBenchName(String benchName) {
@@ -419,6 +423,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (法廷種別別名)BENCH_ALIAS: {UQ, NotNull, VARCHAR(10)} <br>
+     * 法廷種別別名 e.g. 大法廷
      * @return The value of the column 'BENCH_ALIAS'. (basically NotNull if selected: for the constraint)
      */
     public String getBenchAlias() {
@@ -428,6 +433,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (法廷種別別名)BENCH_ALIAS: {UQ, NotNull, VARCHAR(10)} <br>
+     * 法廷種別別名 e.g. 大法廷
      * @param benchAlias The value of the column 'BENCH_ALIAS'. (basically NotNull if update: for the constraint)
      */
     public void setBenchAlias(String benchAlias) {
@@ -437,7 +443,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (説明)DESCRIPTION: {NotNull, TEXT(65535)} <br>
-     * 説明
+     * 説明 e.g. これこれするときのなになにです。
      * @return The value of the column 'DESCRIPTION'. (basically NotNull if selected: for the constraint)
      */
     public String getDescription() {
@@ -447,7 +453,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (説明)DESCRIPTION: {NotNull, TEXT(65535)} <br>
-     * 説明
+     * 説明 e.g. これこれするときのなになにです。
      * @param description The value of the column 'DESCRIPTION'. (basically NotNull if update: for the constraint)
      */
     public void setDescription(String description) {
@@ -457,7 +463,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)} <br>
-     * 順番
+     * 順番 e.g. 1
      * @return The value of the column 'DISPLAY_ORDER'. (basically NotNull if selected: for the constraint)
      */
     public Integer getDisplayOrder() {
@@ -467,7 +473,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (順番)DISPLAY_ORDER: {UQ, NotNull, INT UNSIGNED(10)} <br>
-     * 順番
+     * 順番 e.g. 1
      * @param displayOrder The value of the column 'DISPLAY_ORDER'. (basically NotNull if update: for the constraint)
      */
     public void setDisplayOrder(Integer displayOrder) {
@@ -477,7 +483,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getRegisterDatetime() {
@@ -487,7 +493,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterDatetime(java.time.LocalDateTime registerDatetime) {
@@ -497,7 +503,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
@@ -507,7 +513,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterUser(String registerUser) {
@@ -517,7 +523,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getUpdateDatetime() {
@@ -527,7 +533,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateDatetime(java.time.LocalDateTime updateDatetime) {
@@ -537,7 +543,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
@@ -547,7 +553,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateUser(String updateUser) {
@@ -557,7 +563,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [get] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
      */
     public Long getVersionNo() {
@@ -567,7 +573,7 @@ public abstract class BsClsBench extends AbstractEntity implements DomainEntity,
 
     /**
      * [set] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
      */
     public void setVersionNo(Long versionNo) {

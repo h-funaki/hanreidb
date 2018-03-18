@@ -129,7 +129,6 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     protected ConditionValue xgetCValueBenchCode() { return _myCQ.xdfgetBenchCode(); }
     protected ConditionValue xgetCValueJudgementResultCode() { return _myCQ.xdfgetJudgementResultCode(); }
     protected ConditionValue xgetCValueJudgementTypeCode() { return _myCQ.xdfgetJudgementTypeCode(); }
-    protected ConditionValue xgetCValueSentence() { return _myCQ.xdfgetSentence(); }
     protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
     protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }
     protected ConditionValue xgetCValueUpdateDatetime() { return _myCQ.xdfgetUpdateDatetime(); }

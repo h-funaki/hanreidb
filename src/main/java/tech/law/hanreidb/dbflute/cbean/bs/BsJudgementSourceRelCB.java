@@ -106,6 +106,19 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
         return (JudgementSourceRelCB)this;
     }
 
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source. (NotNull)
+     * @param judgementSourceId (判決取得元ID): +UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return this. (NotNull)
+     */
+    public JudgementSourceRelCB acceptUniqueOf(String sourceCode, String judgementSourceId) {
+        assertObjectNotNull("sourceCode", sourceCode);assertObjectNotNull("judgementSourceId", judgementSourceId);
+        BsJudgementSourceRelCB cb = this;
+        cb.query().setSourceCode_Equal(sourceCode);cb.query().setJudgementSourceId_Equal(judgementSourceId);
+        return (JudgementSourceRelCB)this;
+    }
+
     public ConditionBean addOrderBy_PK_Asc() {
         query().addOrderBy_JudgementSourceRelId_Asc();
         return this;
@@ -360,15 +373,20 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnJudgementId() { return doColumn("JUDGEMENT_ID"); }
         /**
-         * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+         * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceCode() { return doColumn("SOURCE_CODE"); }
         /**
-         * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
+         * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnSourceJudgementId() { return doColumn("SOURCE_JUDGEMENT_ID"); }
+        public SpecifiedColumn columnJudgementSourceId() { return doColumn("JUDGEMENT_SOURCE_ID"); }
+        /**
+         * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnJudgementSourceSentence() { return doColumn("JUDGEMENT_SOURCE_SENTENCE"); }
         /**
          * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)

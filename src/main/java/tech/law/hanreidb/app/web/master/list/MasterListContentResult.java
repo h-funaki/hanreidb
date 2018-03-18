@@ -44,6 +44,10 @@ public class MasterListContentResult {
     @Valid
     public List<LabelValuePart> case_mark_list;
 
+    @NotNull
+    @Valid
+    public List<LabelValuePart> report_list;
+
     public static class LabelValuePart {
 
         @Required

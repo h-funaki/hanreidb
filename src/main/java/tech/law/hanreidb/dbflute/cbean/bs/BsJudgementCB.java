@@ -550,11 +550,6 @@ public class BsJudgementCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnJudgementTypeCode() { return doColumn("JUDGEMENT_TYPE_CODE"); }
         /**
-         * (判決文)SENTENCE: {TEXT(65535)}
-         * @return The information object of specified column. (NotNull)
-         */
-        public SpecifiedColumn columnSentence() { return doColumn("SENTENCE"); }
-        /**
          * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */

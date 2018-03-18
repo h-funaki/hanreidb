@@ -136,37 +136,43 @@ public class BsJudgementSourceRelCQ extends AbstractBsJudgementSourceRelCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @return this. (NotNull)
      */
     public BsJudgementSourceRelCQ addOrderBy_SourceCode_Asc() { regOBA("SOURCE_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @return this. (NotNull)
      */
     public BsJudgementSourceRelCQ addOrderBy_SourceCode_Desc() { regOBD("SOURCE_CODE"); return this; }
 
-    protected ConditionValue _sourceJudgementId;
-    public ConditionValue xdfgetSourceJudgementId()
-    { if (_sourceJudgementId == null) { _sourceJudgementId = nCV(); }
-      return _sourceJudgementId; }
-    protected ConditionValue xgetCValueSourceJudgementId() { return xdfgetSourceJudgementId(); }
+    protected ConditionValue _judgementSourceId;
+    public ConditionValue xdfgetJudgementSourceId()
+    { if (_judgementSourceId == null) { _judgementSourceId = nCV(); }
+      return _judgementSourceId; }
+    protected ConditionValue xgetCValueJudgementSourceId() { return xdfgetJudgementSourceId(); }
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
      * @return this. (NotNull)
      */
-    public BsJudgementSourceRelCQ addOrderBy_SourceJudgementId_Asc() { regOBA("SOURCE_JUDGEMENT_ID"); return this; }
+    public BsJudgementSourceRelCQ addOrderBy_JudgementSourceId_Asc() { regOBA("JUDGEMENT_SOURCE_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
      * @return this. (NotNull)
      */
-    public BsJudgementSourceRelCQ addOrderBy_SourceJudgementId_Desc() { regOBD("SOURCE_JUDGEMENT_ID"); return this; }
+    public BsJudgementSourceRelCQ addOrderBy_JudgementSourceId_Desc() { regOBD("JUDGEMENT_SOURCE_ID"); return this; }
+
+    protected ConditionValue _judgementSourceSentence;
+    public ConditionValue xdfgetJudgementSourceSentence()
+    { if (_judgementSourceSentence == null) { _judgementSourceSentence = nCV(); }
+      return _judgementSourceSentence; }
+    protected ConditionValue xgetCValueJudgementSourceSentence() { return xdfgetJudgementSourceSentence(); }
 
     protected ConditionValue _registerDatetime;
     public ConditionValue xdfgetRegisterDatetime()

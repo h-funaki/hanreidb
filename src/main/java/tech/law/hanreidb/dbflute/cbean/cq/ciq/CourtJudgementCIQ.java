@@ -98,6 +98,7 @@ public class CourtJudgementCIQ extends AbstractBsCourtJudgementCQ {
     protected ConditionValue xgetCValueLawsuitType() { return _myCQ.xdfgetLawsuitType(); }
     protected ConditionValue xgetCValueCaseCategory() { return _myCQ.xdfgetCaseCategory(); }
     protected ConditionValue xgetCValueSourceOriginalId() { return _myCQ.xdfgetSourceOriginalId(); }
+    protected ConditionValue xgetCValueMemo() { return _myCQ.xdfgetMemo(); }
     protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
     protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }
     protected ConditionValue xgetCValueUpdateDatetime() { return _myCQ.xdfgetUpdateDatetime(); }

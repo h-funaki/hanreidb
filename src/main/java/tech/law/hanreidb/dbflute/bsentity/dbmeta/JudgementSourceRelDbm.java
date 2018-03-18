@@ -61,7 +61,8 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getJudgementSourceRelId(), (et, vl) -> ((JudgementSourceRel)et).setJudgementSourceRelId(ctl(vl)), "judgementSourceRelId");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getJudgementId(), (et, vl) -> ((JudgementSourceRel)et).setJudgementId(ctl(vl)), "judgementId");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getSourceCode(), (et, vl) -> ((JudgementSourceRel)et).setSourceCode((String)vl), "sourceCode");
-        setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getSourceJudgementId(), (et, vl) -> ((JudgementSourceRel)et).setSourceJudgementId((String)vl), "sourceJudgementId");
+        setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getJudgementSourceId(), (et, vl) -> ((JudgementSourceRel)et).setJudgementSourceId((String)vl), "judgementSourceId");
+        setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getJudgementSourceSentence(), (et, vl) -> ((JudgementSourceRel)et).setJudgementSourceSentence((String)vl), "judgementSourceSentence");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getRegisterDatetime(), (et, vl) -> ((JudgementSourceRel)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getRegisterUser(), (et, vl) -> ((JudgementSourceRel)et).setRegisterUser((String)vl), "registerUser");
         setupEpg(_epgMap, et -> ((JudgementSourceRel)et).getUpdateDatetime(), (et, vl) -> ((JudgementSourceRel)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
@@ -105,7 +106,8 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnJudgementSourceRelId = cci("JUDGEMENT_SOURCE_REL_ID", "JUDGEMENT_SOURCE_REL_ID", null, "判決取得元リレーションID", Long.class, "judgementSourceRelId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, false, false, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, "judgement", null, null, false);
     protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsSource", null, CDef.DefMeta.Source, false);
-    protected final ColumnInfo _columnSourceJudgementId = cci("SOURCE_JUDGEMENT_ID", "SOURCE_JUDGEMENT_ID", null, "取得元判決ID", String.class, "sourceJudgementId", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnJudgementSourceId = cci("JUDGEMENT_SOURCE_ID", "JUDGEMENT_SOURCE_ID", null, "判決取得元ID", String.class, "judgementSourceId", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnJudgementSourceSentence = cci("JUDGEMENT_SOURCE_SENTENCE", "JUDGEMENT_SOURCE_SENTENCE", null, "判決文", String.class, "judgementSourceSentence", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -123,15 +125,20 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnJudgementId() { return _columnJudgementId; }
     /**
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceCode() { return _columnSourceCode; }
     /**
-     * (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)}
+     * (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnSourceJudgementId() { return _columnSourceJudgementId; }
+    public ColumnInfo columnJudgementSourceId() { return _columnJudgementSourceId; }
+    /**
+     * (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnJudgementSourceSentence() { return _columnJudgementSourceSentence; }
     /**
      * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
@@ -163,7 +170,8 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
         ls.add(columnJudgementSourceRelId());
         ls.add(columnJudgementId());
         ls.add(columnSourceCode());
-        ls.add(columnSourceJudgementId());
+        ls.add(columnJudgementSourceId());
+        ls.add(columnJudgementSourceSentence());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());
         ls.add(columnUpdateDatetime());
@@ -183,6 +191,16 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
     protected UniqueInfo cpui() { return hpcpui(columnJudgementSourceRelId()); }
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
+
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() {
+        List<ColumnInfo> ls = newArrayListSized(4);
+        ls.add(columnSourceCode());
+        ls.add(columnJudgementSourceId());
+        return hpcui(ls);
+    }
 
     // ===================================================================================
     //                                                                       Relation Info

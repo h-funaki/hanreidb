@@ -11,6 +11,28 @@ public class JudgementListContentResult {
     /**  */
     public List<JudgementPart> judgement_list;
 
+    public PagingPart paging_part;
+
+    public static class PagingPart {
+
+        /**  */
+        public Integer all_record_count;
+
+        public Integer all_page_count;
+
+        public Integer current_page_number;
+
+        public Integer current_page_size;
+
+        public boolean exists_next_page;
+
+        public Integer next_page_number;
+
+        public boolean exists_previous_page;
+
+        public Integer previous_page_number;
+    }
+
     /**
      * @author h-funaki
      *
@@ -38,7 +60,6 @@ public class JudgementListContentResult {
         public String judgement_result_alias;
         public String judgement_type_code;
         public String judgement_type_alias;
-        public String sentence;
     }
 
     /**
@@ -46,6 +67,7 @@ public class JudgementListContentResult {
      *
      */
     public static class ReportPart {
+        public Integer report_id;
         public String report_name;
         public String report_alias;
         public Integer report_kan;

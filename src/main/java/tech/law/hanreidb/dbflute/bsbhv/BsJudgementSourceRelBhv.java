@@ -41,7 +41,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     JUDGEMENT_SOURCE_REL_ID
  *
  * [column]
- *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_CODE, SOURCE_JUDGEMENT_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_CODE, JUDGEMENT_SOURCE_ID, JUDGEMENT_SOURCE_SENTENCE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -197,6 +197,32 @@ public abstract class BsJudgementSourceRelBhv extends AbstractBehaviorWritable<J
     protected JudgementSourceRelCB xprepareCBAsPK(Long judgementSourceRelId) {
         assertObjectNotNull("judgementSourceRelId", judgementSourceRelId);
         return newConditionBean().acceptPK(judgementSourceRelId);
+    }
+
+    /**
+     * Select the entity by the unique-key value.
+     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source. (NotNull)
+     * @param judgementSourceId (判決取得元ID): +UQ, NotNull, VARCHAR(100). (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<JudgementSourceRel> selectByUniqueOf(String sourceCode, String judgementSourceId) {
+        return facadeSelectByUniqueOf(sourceCode, judgementSourceId);
+    }
+
+    protected OptionalEntity<JudgementSourceRel> facadeSelectByUniqueOf(String sourceCode, String judgementSourceId) {
+        return doSelectByUniqueOf(sourceCode, judgementSourceId, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends JudgementSourceRel> OptionalEntity<ENTITY> doSelectByUniqueOf(String sourceCode, String judgementSourceId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(sourceCode, judgementSourceId), tp), sourceCode, judgementSourceId);
+    }
+
+    protected JudgementSourceRelCB xprepareCBAsUniqueOf(String sourceCode, String judgementSourceId) {
+        assertObjectNotNull("sourceCode", sourceCode);assertObjectNotNull("judgementSourceId", judgementSourceId);
+        return newConditionBean().acceptUniqueOf(sourceCode, judgementSourceId);
     }
 
     // ===================================================================================

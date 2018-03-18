@@ -35,7 +35,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     JUDGEMENT_SOURCE_REL_ID
  *
  * [column]
- *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_CODE, SOURCE_JUDGEMENT_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     JUDGEMENT_SOURCE_REL_ID, JUDGEMENT_ID, SOURCE_CODE, JUDGEMENT_SOURCE_ID, JUDGEMENT_SOURCE_SENTENCE, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -63,7 +63,8 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * Long judgementSourceRelId = entity.getJudgementSourceRelId();
  * Long judgementId = entity.getJudgementId();
  * String sourceCode = entity.getSourceCode();
- * String sourceJudgementId = entity.getSourceJudgementId();
+ * String judgementSourceId = entity.getJudgementSourceId();
+ * String judgementSourceSentence = entity.getJudgementSourceSentence();
  * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
  * String registerUser = entity.getRegisterUser();
  * java.time.LocalDateTime updateDatetime = entity.getUpdateDatetime();
@@ -72,7 +73,8 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * entity.setJudgementSourceRelId(judgementSourceRelId);
  * entity.setJudgementId(judgementId);
  * entity.setSourceCode(sourceCode);
- * entity.setSourceJudgementId(sourceJudgementId);
+ * entity.setJudgementSourceId(judgementSourceId);
+ * entity.setJudgementSourceSentence(judgementSourceSentence);
  * entity.setRegisterDatetime(registerDatetime);
  * entity.setRegisterUser(registerUser);
  * entity.setUpdateDatetime(updateDatetime);
@@ -99,11 +101,14 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     /** (判決ID)JUDGEMENT_ID: {IX, NotNull, BIGINT UNSIGNED(20), FK to JUDGEMENT} */
     protected Long _judgementId;
 
-    /** (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} */
+    /** (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} */
     protected String _sourceCode;
 
-    /** (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)} */
-    protected String _sourceJudgementId;
+    /** (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)} */
+    protected String _judgementSourceId;
+
+    /** (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)} */
+    protected String _judgementSourceSentence;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
     protected java.time.LocalDateTime _registerDatetime;
@@ -142,12 +147,25 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
         return true;
     }
 
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source. (NotNull)
+     * @param judgementSourceId (判決取得元ID): +UQ, NotNull, VARCHAR(100). (NotNull)
+     */
+    public void uniqueBy(String sourceCode, String judgementSourceId) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("sourceCode");
+        __uniqueDrivenProperties.addPropertyName("judgementSourceId");
+        setSourceCode(sourceCode);setJudgementSourceId(judgementSourceId);
+    }
+
     // ===================================================================================
     //                                                             Classification Property
     //                                                             =======================
     /**
      * Get the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
      */
@@ -157,7 +175,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * Set the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
     public void setSourceCodeAsSource(CDef.Source cdef) {
@@ -282,7 +300,8 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
         sb.append(dm).append(xfND(_judgementSourceRelId));
         sb.append(dm).append(xfND(_judgementId));
         sb.append(dm).append(xfND(_sourceCode));
-        sb.append(dm).append(xfND(_sourceJudgementId));
+        sb.append(dm).append(xfND(_judgementSourceId));
+        sb.append(dm).append(xfND(_judgementSourceSentence));
         sb.append(dm).append(xfND(_registerDatetime));
         sb.append(dm).append(xfND(_registerUser));
         sb.append(dm).append(xfND(_updateDatetime));
@@ -336,6 +355,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [get] (判決ID)JUDGEMENT_ID: {IX, NotNull, BIGINT UNSIGNED(20), FK to JUDGEMENT} <br>
+     * 判決ID e.g. 1
      * @return The value of the column 'JUDGEMENT_ID'. (basically NotNull if selected: for the constraint)
      */
     public Long getJudgementId() {
@@ -345,6 +365,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [set] (判決ID)JUDGEMENT_ID: {IX, NotNull, BIGINT UNSIGNED(20), FK to JUDGEMENT} <br>
+     * 判決ID e.g. 1
      * @param judgementId The value of the column 'JUDGEMENT_ID'. (basically NotNull if update: for the constraint)
      */
     public void setJudgementId(Long judgementId) {
@@ -353,7 +374,8 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     }
 
     /**
-     * [get] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * [get] (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * 取得元コード e.g. COURT
      * @return The value of the column 'SOURCE_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getSourceCode() {
@@ -362,7 +384,8 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     }
 
     /**
-     * [set] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * [set] (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * 取得元コード e.g. COURT
      * @param sourceCode The value of the column 'SOURCE_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setSourceCode(String sourceCode) {
@@ -371,26 +394,48 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     }
 
     /**
-     * [get] (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)} <br>
-     * @return The value of the column 'SOURCE_JUDGEMENT_ID'. (basically NotNull if selected: for the constraint)
+     * [get] (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)} <br>
+     * @return The value of the column 'JUDGEMENT_SOURCE_ID'. (basically NotNull if selected: for the constraint)
      */
-    public String getSourceJudgementId() {
-        checkSpecifiedProperty("sourceJudgementId");
-        return convertEmptyToNull(_sourceJudgementId);
+    public String getJudgementSourceId() {
+        checkSpecifiedProperty("judgementSourceId");
+        return convertEmptyToNull(_judgementSourceId);
     }
 
     /**
-     * [set] (取得元判決ID)SOURCE_JUDGEMENT_ID: {NotNull, VARCHAR(100)} <br>
-     * @param sourceJudgementId The value of the column 'SOURCE_JUDGEMENT_ID'. (basically NotNull if update: for the constraint)
+     * [set] (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)} <br>
+     * @param judgementSourceId The value of the column 'JUDGEMENT_SOURCE_ID'. (basically NotNull if update: for the constraint)
      */
-    public void setSourceJudgementId(String sourceJudgementId) {
-        registerModifiedProperty("sourceJudgementId");
-        _sourceJudgementId = sourceJudgementId;
+    public void setJudgementSourceId(String judgementSourceId) {
+        registerModifiedProperty("judgementSourceId");
+        _judgementSourceId = judgementSourceId;
+    }
+
+    /**
+     * [get] (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)} <br>
+     * 取得元によって微妙に判決文が違いそうなので、判決に対して一対多。<br>
+     * 判決文がないことをあまり許容したくないが、ないかもしれないのでnull制約はつけない。
+     * @return The value of the column 'JUDGEMENT_SOURCE_SENTENCE'. (NullAllowed even if selected: for no constraint)
+     */
+    public String getJudgementSourceSentence() {
+        checkSpecifiedProperty("judgementSourceSentence");
+        return convertEmptyToNull(_judgementSourceSentence);
+    }
+
+    /**
+     * [set] (判決文)JUDGEMENT_SOURCE_SENTENCE: {TEXT(65535)} <br>
+     * 取得元によって微妙に判決文が違いそうなので、判決に対して一対多。<br>
+     * 判決文がないことをあまり許容したくないが、ないかもしれないのでnull制約はつけない。
+     * @param judgementSourceSentence The value of the column 'JUDGEMENT_SOURCE_SENTENCE'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setJudgementSourceSentence(String judgementSourceSentence) {
+        registerModifiedProperty("judgementSourceSentence");
+        _judgementSourceSentence = judgementSourceSentence;
     }
 
     /**
      * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getRegisterDatetime() {
@@ -400,7 +445,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterDatetime(java.time.LocalDateTime registerDatetime) {
@@ -410,7 +455,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [get] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
@@ -420,7 +465,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [set] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterUser(String registerUser) {
@@ -430,7 +475,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getUpdateDatetime() {
@@ -440,7 +485,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateDatetime(java.time.LocalDateTime updateDatetime) {
@@ -450,7 +495,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [get] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
@@ -460,7 +505,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [set] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateUser(String updateUser) {
@@ -470,7 +515,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [get] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
      */
     public Long getVersionNo() {
@@ -480,7 +525,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * [set] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
      */
     public void setVersionNo(Long versionNo) {

@@ -390,12 +390,6 @@ public class BsJudgementCQ extends AbstractBsJudgementCQ {
      */
     public BsJudgementCQ addOrderBy_JudgementTypeCode_Desc() { regOBD("JUDGEMENT_TYPE_CODE"); return this; }
 
-    protected ConditionValue _sentence;
-    public ConditionValue xdfgetSentence()
-    { if (_sentence == null) { _sentence = nCV(); }
-      return _sentence; }
-    protected ConditionValue xgetCValueSentence() { return xdfgetSentence(); }
-
     protected ConditionValue _registerDatetime;
     public ConditionValue xdfgetRegisterDatetime()
     { if (_registerDatetime == null) { _registerDatetime = nCV(); }

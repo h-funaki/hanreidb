@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.dbflute.optional.OptionalEntity;
 import org.lastaflute.job.mock.MockJobRuntime;
 
-import tech.law.hanreidb.app.base.job.JobRecorder;
 import tech.law.hanreidb.dbflute.allcommon.CDef;
 import tech.law.hanreidb.dbflute.allcommon.CDef.Bench;
 import tech.law.hanreidb.dbflute.allcommon.CDef.Era;
@@ -202,11 +201,11 @@ public class CourtJudgementJobTest extends NxJobTestCase {
         // ## Arrange ##
         CourtJudgementJob job = new CourtJudgementJob();
         inject(job);
-        String caseNumber1 = "平?15(ネ)1504";
-        String caseNumber2 = " 平成(行コ)14";
-        String caseNumber3 = " (行コ)14";
-        String caseNumber4 = " 平成16()14";
-        String caseNumber5 = " 平成16(行コ)14等";
+        //        String caseNumber1 = "平?15(ネ)1504";
+        //        String caseNumber2 = " 平成(行コ)14";
+        //        String caseNumber3 = " (行コ)14";
+        //        String caseNumber4 = " 平成16()14";
+        //        String caseNumber5 = " 平成16(行コ)14等";
 
         // ## Act ##
     }
@@ -218,7 +217,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                                                       Small Helper
     //                                                                       ============
     // NxBatchRecorderを取得する
-    private JobRecorder getRecorder(MockJobRuntime runtime) {
-        return (JobRecorder) runtime.getEndTitleRollMap().get("recorder");
-    }
+    //    private JobRecorder getRecorder(MockJobRuntime runtime) {
+    //        return (JobRecorder) runtime.getEndTitleRollMap().get("recorder");
+    //    }
 }

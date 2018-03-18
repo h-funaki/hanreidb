@@ -1,4 +1,73 @@
 map:{
+    ; 2018/03/18 19:49:25 = map:{
+        ; diffDate = 2018/03/18 19:49:25
+        ; tableDiff = map:{
+            ; COURT_JUDGEMENT = map:{
+                ; tableName = COURT_JUDGEMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; MEMO = map:{
+                        ; columnName = MEMO
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/03/18 19:37:54 = map:{
+        ; diffDate = 2018/03/18 19:37:54
+        ; tableDiff = map:{
+            ; JUDGEMENT_SOURCE_REL = map:{
+                ; tableName = JUDGEMENT_SOURCE_REL
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; UQ_JUDGEMENT_SOURCE_REL = map:{
+                        ; constraintName = UQ_JUDGEMENT_SOURCE_REL
+                        ; diffType = ADD
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_JUDGEMENT_SOURCE_REL_SOURCE = map:{
+                        ; constraintName = FK_JUDGEMENT_SOURCE_REL_SOURCE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/03/18 16:53:07 = map:{
+        ; diffDate = 2018/03/18 16:53:07
+        ; tableDiff = map:{
+            ; JUDGEMENT = map:{
+                ; tableName = JUDGEMENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SENTENCE = map:{
+                        ; columnName = SENTENCE
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; JUDGEMENT_SOURCE_REL = map:{
+                ; tableName = JUDGEMENT_SOURCE_REL
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; JUDGEMENT_SOURCE_ID = map:{
+                        ; columnName = JUDGEMENT_SOURCE_ID
+                        ; diffType = ADD
+                    }
+                    ; JUDGEMENT_SOURCE_SENTENCE = map:{
+                        ; columnName = JUDGEMENT_SOURCE_SENTENCE
+                        ; diffType = ADD
+                    }
+                    ; SOURCE_JUDGEMENT_ID = map:{
+                        ; columnName = SOURCE_JUDGEMENT_ID
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
     ; 2018/02/20 21:47:41 = map:{
         ; diffDate = 2018/02/20 21:47:41
         ; tableDiff = map:{

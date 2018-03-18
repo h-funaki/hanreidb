@@ -33,7 +33,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     COURT_JUDGEMENT_ID
  *
  * [column]
- *     COURT_JUDGEMENT_ID, CASE_NUMBER, CASE_NAME, JUDGEMENT_DATE, COURT_NAME, JUDGEMENT_TYPE, JUDGEMENT_RESULT, PRECEDENT_REPORTS, ORIGINAL_COURT_NAME, ORIGINAL_CASE_NUMBER, ORIGINAL_JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_RESULT, JUDGEMENT_CONTENT, JUDGEMENT_SUMMARY, LAW, TEXT_URL, HIGH_COURT_REPORTS, JUDGEMENT_CONTENT_SUMMARY, RIGHT_TYPE, LAWSUIT_TYPE, CASE_CATEGORY, SOURCE_ORIGINAL_ID, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
+ *     COURT_JUDGEMENT_ID, CASE_NUMBER, CASE_NAME, JUDGEMENT_DATE, COURT_NAME, JUDGEMENT_TYPE, JUDGEMENT_RESULT, PRECEDENT_REPORTS, ORIGINAL_COURT_NAME, ORIGINAL_CASE_NUMBER, ORIGINAL_JUDGEMENT_DATE, ORIGINAL_JUDGEMENT_RESULT, JUDGEMENT_CONTENT, JUDGEMENT_SUMMARY, LAW, TEXT_URL, HIGH_COURT_REPORTS, JUDGEMENT_CONTENT_SUMMARY, RIGHT_TYPE, LAWSUIT_TYPE, CASE_CATEGORY, SOURCE_ORIGINAL_ID, MEMO, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -80,6 +80,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * String lawsuitType = entity.getLawsuitType();
  * String caseCategory = entity.getCaseCategory();
  * Integer sourceOriginalId = entity.getSourceOriginalId();
+ * String memo = entity.getMemo();
  * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
  * String registerUser = entity.getRegisterUser();
  * java.time.LocalDateTime updateDatetime = entity.getUpdateDatetime();
@@ -107,6 +108,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * entity.setLawsuitType(lawsuitType);
  * entity.setCaseCategory(caseCategory);
  * entity.setSourceOriginalId(sourceOriginalId);
+ * entity.setMemo(memo);
  * entity.setRegisterDatetime(registerDatetime);
  * entity.setRegisterUser(registerUser);
  * entity.setUpdateDatetime(updateDatetime);
@@ -192,6 +194,9 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /** (取得元ID)SOURCE_ORIGINAL_ID: {UQ, NotNull, INT UNSIGNED(10)} */
     protected Integer _sourceOriginalId;
+
+    /** (備考)MEMO: {TEXT(65535)} */
+    protected String _memo;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
     protected java.time.LocalDateTime _registerDatetime;
@@ -314,6 +319,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
         sb.append(dm).append(xfND(_lawsuitType));
         sb.append(dm).append(xfND(_caseCategory));
         sb.append(dm).append(xfND(_sourceOriginalId));
+        sb.append(dm).append(xfND(_memo));
         sb.append(dm).append(xfND(_registerDatetime));
         sb.append(dm).append(xfND(_registerUser));
         sb.append(dm).append(xfND(_updateDatetime));
@@ -738,8 +744,26 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
+     * [get] (備考)MEMO: {TEXT(65535)} <br>
+     * @return The value of the column 'MEMO'. (NullAllowed even if selected: for no constraint)
+     */
+    public String getMemo() {
+        checkSpecifiedProperty("memo");
+        return convertEmptyToNull(_memo);
+    }
+
+    /**
+     * [set] (備考)MEMO: {TEXT(65535)} <br>
+     * @param memo The value of the column 'MEMO'. (NullAllowed: null update allowed for no constraint)
+     */
+    public void setMemo(String memo) {
+        registerModifiedProperty("memo");
+        _memo = memo;
+    }
+
+    /**
      * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getRegisterDatetime() {
@@ -749,7 +773,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが登録された日時
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
      * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterDatetime(java.time.LocalDateTime registerDatetime) {
@@ -759,7 +783,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [get] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getRegisterUser() {
@@ -769,7 +793,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [set] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを登録したユーザー
+     * レコードを登録したユーザー e.g. funa
      * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
      */
     public void setRegisterUser(String registerUser) {
@@ -779,7 +803,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
      */
     public java.time.LocalDateTime getUpdateDatetime() {
@@ -789,7 +813,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
-     * レコードが(最後に)更新された日時
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
      * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateDatetime(java.time.LocalDateTime updateDatetime) {
@@ -799,7 +823,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [get] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
      */
     public String getUpdateUser() {
@@ -809,7 +833,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [set] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
-     * レコードを(最後に)更新したユーザー
+     * レコードを(最後に)更新したユーザー e.g. funa
      * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
      */
     public void setUpdateUser(String updateUser) {
@@ -819,7 +843,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [get] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
      */
     public Long getVersionNo() {
@@ -829,7 +853,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
 
     /**
      * [set] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
-     * バージョン番号
+     * バージョン番号 e.g. 0
      * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
      */
     public void setVersionNo(Long versionNo) {

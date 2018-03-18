@@ -71,7 +71,6 @@ public class JudgementDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((Judgement)et).getBenchCode(), (et, vl) -> ((Judgement)et).setBenchCode((String)vl), "benchCode");
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementResultCode(), (et, vl) -> ((Judgement)et).setJudgementResultCode((String)vl), "judgementResultCode");
         setupEpg(_epgMap, et -> ((Judgement)et).getJudgementTypeCode(), (et, vl) -> ((Judgement)et).setJudgementTypeCode((String)vl), "judgementTypeCode");
-        setupEpg(_epgMap, et -> ((Judgement)et).getSentence(), (et, vl) -> ((Judgement)et).setSentence((String)vl), "sentence");
         setupEpg(_epgMap, et -> ((Judgement)et).getRegisterDatetime(), (et, vl) -> ((Judgement)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((Judgement)et).getRegisterUser(), (et, vl) -> ((Judgement)et).setRegisterUser((String)vl), "registerUser");
         setupEpg(_epgMap, et -> ((Judgement)et).getUpdateDatetime(), (et, vl) -> ((Judgement)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
@@ -130,7 +129,6 @@ public class JudgementDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnBenchCode = cci("BENCH_CODE", "BENCH_CODE", null, "法廷種別コード", String.class, "benchCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsBench", null, CDef.DefMeta.Bench, false);
     protected final ColumnInfo _columnJudgementResultCode = cci("JUDGEMENT_RESULT_CODE", "JUDGEMENT_RESULT_CODE", null, "判決結果コード", String.class, "judgementResultCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsJudgementResult", null, CDef.DefMeta.JudgementResult, false);
     protected final ColumnInfo _columnJudgementTypeCode = cci("JUDGEMENT_TYPE_CODE", "JUDGEMENT_TYPE_CODE", null, "判決種別コード", String.class, "judgementTypeCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsJudgementType", null, CDef.DefMeta.JudgementType, false);
-    protected final ColumnInfo _columnSentence = cci("SENTENCE", "SENTENCE", null, "判決文", String.class, "sentence", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -203,11 +201,6 @@ public class JudgementDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnJudgementTypeCode() { return _columnJudgementTypeCode; }
     /**
-     * (判決文)SENTENCE: {TEXT(65535)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnSentence() { return _columnSentence; }
-    /**
      * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
@@ -248,7 +241,6 @@ public class JudgementDbm extends AbstractDBMeta {
         ls.add(columnBenchCode());
         ls.add(columnJudgementResultCode());
         ls.add(columnJudgementTypeCode());
-        ls.add(columnSentence());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());
         ls.add(columnUpdateDatetime());

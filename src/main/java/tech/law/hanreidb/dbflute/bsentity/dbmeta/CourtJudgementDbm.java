@@ -79,6 +79,7 @@ public class CourtJudgementDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((CourtJudgement)et).getLawsuitType(), (et, vl) -> ((CourtJudgement)et).setLawsuitType((String)vl), "lawsuitType");
         setupEpg(_epgMap, et -> ((CourtJudgement)et).getCaseCategory(), (et, vl) -> ((CourtJudgement)et).setCaseCategory((String)vl), "caseCategory");
         setupEpg(_epgMap, et -> ((CourtJudgement)et).getSourceOriginalId(), (et, vl) -> ((CourtJudgement)et).setSourceOriginalId(cti(vl)), "sourceOriginalId");
+        setupEpg(_epgMap, et -> ((CourtJudgement)et).getMemo(), (et, vl) -> ((CourtJudgement)et).setMemo((String)vl), "memo");
         setupEpg(_epgMap, et -> ((CourtJudgement)et).getRegisterDatetime(), (et, vl) -> ((CourtJudgement)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
         setupEpg(_epgMap, et -> ((CourtJudgement)et).getRegisterUser(), (et, vl) -> ((CourtJudgement)et).setRegisterUser((String)vl), "registerUser");
         setupEpg(_epgMap, et -> ((CourtJudgement)et).getUpdateDatetime(), (et, vl) -> ((CourtJudgement)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
@@ -128,6 +129,7 @@ public class CourtJudgementDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnLawsuitType = cci("LAWSUIT_TYPE", "LAWSUIT_TYPE", null, "訴訟類型", String.class, "lawsuitType", null, false, false, false, "VARCHAR", 200, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnCaseCategory = cci("CASE_CATEGORY", "CASE_CATEGORY", null, "事件分野", String.class, "caseCategory", null, false, false, false, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnSourceOriginalId = cci("SOURCE_ORIGINAL_ID", "SOURCE_ORIGINAL_ID", null, "取得元ID", Integer.class, "sourceOriginalId", null, false, false, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnMemo = cci("MEMO", "MEMO", null, "備考", String.class, "memo", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -245,6 +247,11 @@ public class CourtJudgementDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnSourceOriginalId() { return _columnSourceOriginalId; }
     /**
+     * (備考)MEMO: {TEXT(65535)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnMemo() { return _columnMemo; }
+    /**
      * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
      * @return The information object of specified column. (NotNull)
      */
@@ -294,6 +301,7 @@ public class CourtJudgementDbm extends AbstractDBMeta {
         ls.add(columnLawsuitType());
         ls.add(columnCaseCategory());
         ls.add(columnSourceOriginalId());
+        ls.add(columnMemo());
         ls.add(columnRegisterDatetime());
         ls.add(columnRegisterUser());
         ls.add(columnUpdateDatetime());

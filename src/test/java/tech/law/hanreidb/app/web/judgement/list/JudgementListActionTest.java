@@ -36,18 +36,6 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         assertHasAnyElement(judgementList);
     }
 
-    public void test_正常に検索されること_目視() throws Exception {
-        // ## Arrange ##
-        JudgementListAction action = new JudgementListAction();
-        inject(action);
-        // ## Act ##
-
-        JudgementListBody body = new JudgementListBody();
-        body.judgement_public_code = "JID001";
-        List<JudgementPart> judgementList = action.index(body).getJsonResult().judgement_list;
-        log(judgementList.get(0).sentence);
-    }
-
     public void test_正常に検索されること_条件あり() throws Exception { // TODO h-funaki 指定する条件ごとにテストをわける (2018/02/04)
         // ## Arrange ##
         JudgementListAction action = new JudgementListAction();
@@ -62,15 +50,15 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         Integer caseNumberYear = 20;
         Integer courtId = 2;
         LocalDate judgementDate = LocalDate.of(2000, 1, 1);
-        Integer judgementReportsGo = 3;
-        Integer judgementReportsKo = 4;
+        //        Integer judgementReportsGo = 3;
+        //        Integer judgementReportsKo = 4;
         JudgementResult judgementResult = CDef.JudgementResult.却下;
         String judgementPublicCode = "TEST_CODE";
         JudgementType judgementType = CDef.JudgementType.判決;
         Integer precedentReportsKan = 5;
         Integer precedentReportsGo = 6;
         Integer precedentReportsKo = 7;
-        String sentence = "色々あって却下";
+        //String sentence = "色々あって却下";
         entity.setBenchCodeAsBench(bench);
         entity.setCaseMarkId(caseMarkId);
         entity.setCaseNumberEraCodeAsEra(era);
@@ -87,26 +75,25 @@ public class JudgementListActionTest extends UnitHanreidbTestCase {
         //        entity.setPrecedentReportsKan(precedentReportsKan);
         //        entity.setPrecedentReportsGo(precedentReportsGo);
         //        entity.setPrecedentReportsKo(precedentReportsKo);
-        entity.setSentence(sentence);
+        //entity.setSentence(sentence);
         judgementBhv.insert(entity);
 
         JudgementListBody body = new JudgementListBody();
-        body.bench = bench;
+        //        body.bench = bench;
         body.case_mark_id = caseMarkId;
         body.case_name = caseName;
         body.case_number_era = era;
         body.case_number_serial_number = caseNumberSerialNumber;
         body.case_number_year = caseNumberYear;
-        body.court_id = courtId;
+        //        body.court_id = courtId;
         body.judgement_date_from = judgementDate.minusDays(1L);
         body.judgement_date_to = judgementDate.plusDays(1L);
-        body.judgement_reports_go = judgementReportsGo;
-        body.judgement_reports_ko = judgementReportsKo;
-        body.judgement_result = judgementResult;
-        body.judgement_type = judgementType;
-        body.precedent_reports_go = precedentReportsGo;
-        body.precedent_reports_kan = precedentReportsKan;
-        body.precedent_reports_ko = precedentReportsKo;
+        //        body.judgement_result = judgementResult;
+        //        body.judgement_type = judgementType;
+        body.report_go = precedentReportsGo;
+        body.report_kan = precedentReportsKan;
+        body.report_ko = precedentReportsKo;
+        //        body.report_id = 
         // TODO h-funaki sentence condition (2018/02/10)
 
         // ## Act ##

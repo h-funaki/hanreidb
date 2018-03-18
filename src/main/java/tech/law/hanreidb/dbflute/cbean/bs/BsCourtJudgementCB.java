@@ -432,6 +432,11 @@ public class BsCourtJudgementCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnSourceOriginalId() { return doColumn("SOURCE_ORIGINAL_ID"); }
         /**
+         * (備考)MEMO: {TEXT(65535)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnMemo() { return doColumn("MEMO"); }
+        /**
          * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
          * @return The information object of specified column. (NotNull)
          */
