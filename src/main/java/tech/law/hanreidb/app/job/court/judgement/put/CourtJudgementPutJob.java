@@ -56,14 +56,18 @@ public class CourtJudgementPutJob implements LaJob {
             data.register("recorder", recorder);
         });
 
-        Integer beginId = selectMaxSourceOriginalId() + 1;
+        Integer beginId = null;
         if (runtime.getParameterMap().get(BEGIN_ID) != null) { // 引数があればそれを使う
             beginId = ((Double) runtime.getParameterMap().get(BEGIN_ID)).intValue();
+        } else {
+            beginId = selectMaxSourceOriginalId() + 1;
         }
 
-        Integer endId = 5;
+        Integer endId = null;
         if (runtime.getParameterMap().get(END_ID) != null) { // 引数があればそれを使う
             endId = ((Double) runtime.getParameterMap().get(END_ID)).intValue(); // なぜかObject => Doubleになる
+        } else {
+            endId = 5; // 99999;
         }
 
         logger.info("begin id:{}, end id:{}", beginId, endId);
