@@ -1,4 +1,4 @@
-package tech.law.hanreidb.app.job.court.judgement;
+package tech.law.hanreidb.app.job.court.judgement.migrate;
 
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotBlank;
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotEmpty;
@@ -42,12 +42,12 @@ import tech.law.hanreidb.dbflute.exentity.Judgement;
 import tech.law.hanreidb.dbflute.exentity.JudgementReportRel;
 import tech.law.hanreidb.dbflute.exentity.JudgementSourceRel;
 
-public class CourtJudgementJob implements LaJob {
+public class CourtJudgementMigrateJob implements LaJob {
 
     // ===================================================================================
     //                                                                          Definition
     //                                                                          ==========
-    private static final Logger logger = LoggerFactory.getLogger(CourtJudgementJob.class);
+    private static final Logger logger = LoggerFactory.getLogger(CourtJudgementMigrateJob.class);
 
     // ===================================================================================
     //                                                                           Attribute

@@ -11,7 +11,8 @@ import org.lastaflute.job.LaJobScheduler;
 
 import tech.law.hanreidb.app.base.web.context.AccessContextCreator;
 import tech.law.hanreidb.app.job.core.JobHookAssist;
-import tech.law.hanreidb.app.job.court.judgement.CourtJudgementJob;
+import tech.law.hanreidb.app.job.court.judgement.migrate.CourtJudgementMigrateJob;
+import tech.law.hanreidb.app.job.court.judgement.put.CourtJudgementPutJob;
 import tech.law.hanreidb.app.job.court.scrape.CourtScrapeJob;
 
 /**
@@ -32,8 +33,11 @@ public class AllJobScheduler implements LaJobScheduler {
         cron.registerNonCron(CourtScrapeJob.class, waitIfConcurrent(), op -> {
             op.uniqueBy("CourtScrape");
         });
-        cron.registerNonCron(CourtJudgementJob.class, waitIfConcurrent(), op -> {
-            op.uniqueBy("CourtJudgement");
+        cron.registerNonCron(CourtJudgementMigrateJob.class, waitIfConcurrent(), op -> {
+            op.uniqueBy("CourtJudgementMigrate");
+        });
+        cron.registerNonCron(CourtJudgementPutJob.class, waitIfConcurrent(), op -> {
+            op.uniqueBy("CourtJudgementPut");
         });
     }
 

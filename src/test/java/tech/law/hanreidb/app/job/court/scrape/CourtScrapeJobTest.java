@@ -39,7 +39,7 @@ public class CourtScrapeJobTest extends NxJobTestCase {
         assertPlannedSuccess(runtime); // 計画通りの成功であることをアサート
     }
 
-    public void test_processHanrei_real_access() {
+    public void test_processHanrei_real_access() throws IOException {
         // ## Arrange ##
         if (!REAL_ACCESS) {
             return;
@@ -48,8 +48,10 @@ public class CourtScrapeJobTest extends NxJobTestCase {
         inject(job);
 
         // ## Act ##
-        MockJobRuntime runtime = createMockJobRuntime(job, 1.0, 2.0);
-        job.run(runtime);
+        //        MockJobRuntime runtime = createMockJobRuntime(job, 1.0, 2.0);
+        //        job.run(runtime);
+        Document htmlDocument = job.getHtmlDocument(2, 2);
+        log(htmlDocument);
 
         // ## Assert ##
     }
@@ -80,7 +82,7 @@ public class CourtScrapeJobTest extends NxJobTestCase {
     private CourtScrapeJob prepareHtmlMockJob() {
         return new CourtScrapeJob() {
             @Override
-            protected Document getHtmlDocument(Integer detail, Integer targetId) throws IOException {
+            protected Document getHtmlDocument(Integer targetId, Integer detail) throws IOException {
                 return Jsoup.parse(new File("/Users/h-funaki/Documents/hanreidb/src/test/resources/job/scrape/court/court_hanrei_detail"
                         + detail.toString() + ".html"), "UTF-8");
             };

@@ -1,4 +1,4 @@
-package tech.law.hanreidb.app.job.court.judgement;
+package tech.law.hanreidb.app.job.court.judgement.migrate;
 
 import java.time.LocalDate;
 
@@ -17,7 +17,7 @@ import tech.law.hanreidb.dbflute.exentity.Court;
 import tech.law.hanreidb.dbflute.exentity.Judgement;
 import tech.law.hanreidb.unit.NxJobTestCase;
 
-public class CourtJudgementJobTest extends NxJobTestCase {
+public class CourtJudgementMigrateJobTest extends NxJobTestCase {
 
     // ===================================================================================
     //                                                                          Definition
@@ -38,7 +38,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                                                               =====
     public void test_正常に実行されること() throws Exception {
         // ## Arrange ##
-        CourtJudgementJob job = new CourtJudgementJob();
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
 
         // ## Act ##
@@ -55,7 +55,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                            ----------
     public void test_原審PKの取得() throws Exception {
         // ## Arrange ##
-        CourtJudgementJob job = new CourtJudgementJob();
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
         Judgement judgement = new Judgement();
         judgement.setJudgementId(1L);
@@ -78,7 +78,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                            ----------
     public void test_裁判所名の取得() throws Exception { // e.g. 最高裁判所第二小法廷, 千葉地方裁判所
         // ## Arrange ##
-        CourtJudgementJob job = new CourtJudgementJob();
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
         String courtName1 = "最高裁判所第二小法廷";
         String courtName2 = "千葉地方裁判所";
@@ -101,7 +101,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                              --------
     public void test_法廷の取得() throws Exception { // e.g. 最高裁判所第二小法廷
         // ## Arrange ##
-        CourtJudgementJob job = new CourtJudgementJob();
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
         String courtName1 = "最高裁判所大法廷";
         String courtName2 = "最高裁判所第一小法廷";
@@ -126,7 +126,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                              --------
     public void test_和暦の変換() throws Exception {
         // ## Arrange ##
-        CourtJudgementJob job = new CourtJudgementJob();
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
         String japaneseDate1 = "平成10年10月18日";
         String japaneseDate2 = "昭和64年1月1日";
@@ -145,7 +145,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                         -------------
     public void test_事件番号のパース() {
         // ## Arrange ##
-        CourtJudgementJob job = new CourtJudgementJob();
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
         String caseNumber1 = "平成15(ネ)1504";
         String caseNumber2 = "平成16(行コ)14";
@@ -181,7 +181,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                       ---------------
     public void test_PublicCode採番() {
         // ## Arrange ##
-        CourtJudgementJob job = new CourtJudgementJob();
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
 
         // ## Act ##
@@ -199,7 +199,7 @@ public class CourtJudgementJobTest extends NxJobTestCase {
     //                                         -------------
     public void test_事件番号のパースに失敗() {
         // ## Arrange ##
-        CourtJudgementJob job = new CourtJudgementJob();
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
         //        String caseNumber1 = "平?15(ネ)1504";
         //        String caseNumber2 = " 平成(行コ)14";

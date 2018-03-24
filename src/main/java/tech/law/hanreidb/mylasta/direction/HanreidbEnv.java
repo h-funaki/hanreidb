@@ -62,6 +62,12 @@ public interface HanreidbEnv {
     /** The key of the configuration. e.g. hanreidb-support@annie.example.com */
     String MAIL_ADDRESS_SUPPORT = "mail.address.support";
 
+    /** The key of the configuration. e.g. /Users/h-funaki/Documents/hanreidb_development/court/html/ */
+    String COURT_HTML_PATH = "court.html.path";
+
+    /** The key of the configuration. e.g. /Users/h-funaki/Documents/hanreidb_development/court/pdf/ */
+    String COURT_PDF_PATH = "court.pdf.path";
+
     /** The key of the configuration. e.g. com.mysql.jdbc.Driver */
     String JDBC_DRIVER = "jdbc.driver";
 
@@ -237,6 +243,21 @@ public interface HanreidbEnv {
     String getMailAddressSupport();
 
     /**
+     * Get the value for the key 'court.html.path'. <br>
+     * The value is, e.g. /Users/h-funaki/Documents/hanreidb_development/court/html/ <br>
+     * comment: ------
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getCourtHtmlPath();
+
+    /**
+     * Get the value for the key 'court.pdf.path'. <br>
+     * The value is, e.g. /Users/h-funaki/Documents/hanreidb_development/court/pdf/ <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getCourtPdfPath();
+
+    /**
      * Get the value for the key 'jdbc.driver'. <br>
      * The value is, e.g. com.mysql.jdbc.Driver <br>
      * comment: The driver FQCN to connect database for JDBC
@@ -384,6 +405,14 @@ public interface HanreidbEnv {
 
         public String getMailAddressSupport() {
             return get(HanreidbEnv.MAIL_ADDRESS_SUPPORT);
+        }
+
+        public String getCourtHtmlPath() {
+            return get(HanreidbEnv.COURT_HTML_PATH);
+        }
+
+        public String getCourtPdfPath() {
+            return get(HanreidbEnv.COURT_PDF_PATH);
         }
 
         public String getJdbcDriver() {

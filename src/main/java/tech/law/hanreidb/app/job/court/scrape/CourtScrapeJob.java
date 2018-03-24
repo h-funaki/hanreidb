@@ -2,6 +2,7 @@ package tech.law.hanreidb.app.job.court.scrape;
 
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotBlank;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import tech.law.hanreidb.app.base.job.JobRecorder;
 import tech.law.hanreidb.app.base.job.exception.JobBusinessSkipException;
 import tech.law.hanreidb.dbflute.exbhv.CourtJudgementBhv;
+import tech.law.hanreidb.mylasta.direction.HanreidbEnv;
 
 public class CourtScrapeJob implements LaJob {
 
@@ -43,6 +45,8 @@ public class CourtScrapeJob implements LaJob {
     private CourtJudgementBhv courtJudgementBhv;
     @Resource
     private TransactionStage transactionStage;
+    @Resource
+    private HanreidbEnv env;
 
     // ===================================================================================
     //                                                                             Execute
@@ -60,7 +64,7 @@ public class CourtScrapeJob implements LaJob {
             beginId = ((Double) runtime.getParameterMap().get(BEGIN_ID)).intValue();
         }
 
-        Integer endId = 50; // 99999;
+        Integer endId = 5; // 99999;
         if (runtime.getParameterMap().get(END_ID) != null) { // 引数があればそれを使う
             endId = ((Double) runtime.getParameterMap().get(END_ID)).intValue(); // なぜかObject => Doubleになる
         }
@@ -98,7 +102,7 @@ public class CourtScrapeJob implements LaJob {
 
     public void processHanrei2(Integer targetId, HashMap<Integer, String> contentMap)
             throws IOException, IndexOutOfBoundsException, JobBusinessSkipException {
-        Document document = getHtmlDocument(2, targetId);
+        Document document = getHtmlDocument(targetId, 2);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
         ifNotBlank(contentElements.get(0).text()).ifPresent(value -> {
             contentMap.put(CourtScrapeJobAssist.CASE_NUMBER, value);
@@ -121,26 +125,26 @@ public class CourtScrapeJob implements LaJob {
     }
 
     private void processHanrei3(Integer targetId, HashMap<Integer, String> contentMap) throws IOException, IndexOutOfBoundsException {
-        Document document = getHtmlDocument(3, targetId);
+        Document document = getHtmlDocument(targetId, 3);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
         contentMap.put(CourtScrapeJobAssist.HIGH_COURT_REPORTS, trimSpaces(contentElements.get(5).text()));
     }
 
     private void processHanrei4(Integer targetId, HashMap<Integer, String> contentMap) throws IOException, IndexOutOfBoundsException {
-        Document document = getHtmlDocument(4, targetId);
+        Document document = getHtmlDocument(targetId, 4);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
         contentMap.put(CourtScrapeJobAssist.ORIGINAL_JUDGEMENT_RESULT, trimSpaces(contentElements.get(7).text()));
         contentMap.put(CourtScrapeJobAssist.JUDGEMENT_CONTENT_SUMMARY, trimSpaces(contentElements.get(8).text()));
     }
 
     private void processHanrei5(Integer targetId, HashMap<Integer, String> contentMap) throws IOException, IndexOutOfBoundsException {
-        Document document = getHtmlDocument(5, targetId);
+        Document document = getHtmlDocument(targetId, 5);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
         contentMap.put(CourtScrapeJobAssist.CASE_CATEGORY, trimSpaces(contentElements.get(4).text()));
     }
 
     private void processHanrei7(Integer targetId, HashMap<Integer, String> contentMap) throws IOException, IndexOutOfBoundsException {
-        Document document = getHtmlDocument(7, targetId);
+        Document document = getHtmlDocument(targetId, 7);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
         contentMap.put(CourtScrapeJobAssist.RIGHT_TYPE, trimSpaces(contentElements.get(4).text()));
         contentMap.put(CourtScrapeJobAssist.LAWSUIT_TYPE, trimSpaces(contentElements.get(5).text()));
@@ -149,12 +153,12 @@ public class CourtScrapeJob implements LaJob {
     // ===================================================================================
     //                                                                        Assist Logic
     //                                                                        ============
-    protected Document getHtmlDocument(Integer detail, Integer targetId) throws IOException {
-        return Jsoup.connect(makeTargetUrl(detail, targetId)).get();
+    protected Document getHtmlDocument(Integer targetId, Integer detail) throws IOException {
+        return Jsoup.parse(new File(makeTargetUrl(targetId, detail)), "UTF-8");
     }
 
-    private String makeTargetUrl(Integer detail, Integer id) {
-        return BASE_URL.concat("detail").concat(detail.toString()).concat("?id=").concat(id.toString());
+    private String makeTargetUrl(Integer targetId, Integer detail) {
+        return env.getCourtHtmlPath().concat(targetId.toString()) + "_" + detail.toString() + ".html";
     }
 
     private Integer selectMaxSourceOriginalId() {
