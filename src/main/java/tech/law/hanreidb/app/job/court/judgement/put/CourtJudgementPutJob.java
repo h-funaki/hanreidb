@@ -85,7 +85,6 @@ public class CourtJudgementPutJob implements LaJob {
                 putHtmlDocument(targetId, 7);
                 putPdf(targetId);
                 recorder.asSuccess();
-
             } catch (JobBusinessSkipException continued) {
                 logger.info("skip! target id {}", targetId);
                 recorder.asBusinessSkip(recordMessage(targetId, continued.getMessage()));
@@ -120,10 +119,11 @@ public class CourtJudgementPutJob implements LaJob {
         // e.g. http://www.courts.go.jp/app/files/hanrei_jp/001/000001_hanrei.pdf
         String targetIdStr = String.format("%06d", targetId);
         String url = PDF_URL.concat(targetIdStr.substring(3)).concat("/").concat(targetIdStr).concat("_hanrei.pdf"); // 586/087586
+        String outputPath = env.getCourtPdfPath() + targetId + ".pdf";
         try {
-            fileLogic.getFile(url, env.getCourtPdfPath() + targetId + ".pdf");
+            fileLogic.getFile(url, outputPath);
         } catch (Exception ex) {
-            throw new JobBusinessSkipException("判決文のPDFファイルの取得に失敗。 targetId: " + targetId);
+            throw new JobBusinessSkipException("判決文のPDFファイルの取得に失敗。 targetId: " + targetId + " url:" + url + " outputpath:" + outputPath);
         }
     }
 

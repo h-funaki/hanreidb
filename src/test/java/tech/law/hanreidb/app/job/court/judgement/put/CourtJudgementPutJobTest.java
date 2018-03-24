@@ -32,7 +32,7 @@ public class CourtJudgementPutJobTest extends NxJobTestCase {
         inject(job);
 
         // ## Act ##
-        job.putPdf(87586);
+        job.putPdf(1);
 
         // ## Assert ##
     }
