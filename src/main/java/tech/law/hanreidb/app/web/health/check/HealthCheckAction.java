@@ -34,6 +34,8 @@ public class HealthCheckAction extends HanreidbBaseAction {
         result.env_title = env.getEnvironmentTitle();
         result.db_ip = env.getJdbcUrl();
         result.cors_url = env.getCorsUrl();
+        result.court_html_path = env.getCourtHtmlPath();
+        result.court_pdf_path = env.getCourtPdfPath();
 
         try {
             InetAddress addr = InetAddress.getLocalHost();
@@ -59,5 +61,9 @@ public class HealthCheckAction extends HanreidbBaseAction {
         public String local_host_name;
 
         public String ip_address;
+
+        public String court_html_path;
+
+        public String court_pdf_path;
     }
 }
