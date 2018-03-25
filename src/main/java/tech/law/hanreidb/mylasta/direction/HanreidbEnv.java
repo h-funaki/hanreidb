@@ -47,6 +47,9 @@ public interface HanreidbEnv {
     /** The key of the configuration. e.g. /tmp/lastaflute/hanreidb */
     String LOG_FILE_BASEDIR = "log.file.basedir";
 
+    /** The key of the configuration. e.g. /Users/h-funaki/Documents/hanreidb_development/court/recorder/ */
+    String LOG_COURT_JOB_RECORDER_FILE_BASEDIR = "log.court.job.recorder.file.basedir";
+
     /** The key of the configuration. e.g. true */
     String MAIL_SEND_MOCK = "mail.send.mock";
 
@@ -193,6 +196,13 @@ public interface HanreidbEnv {
      * @return The value of found property. (NotNull: if not found, exception but basically no way)
      */
     String getLogFileBasedir();
+
+    /**
+     * Get the value for the key 'log.court.job.recorder.file.basedir'. <br>
+     * The value is, e.g. /Users/h-funaki/Documents/hanreidb_development/court/recorder/ <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getLogCourtJobRecorderFileBasedir();
 
     /**
      * Get the value for the key 'mail.send.mock'. <br>
@@ -381,6 +391,10 @@ public interface HanreidbEnv {
 
         public String getLogFileBasedir() {
             return get(HanreidbEnv.LOG_FILE_BASEDIR);
+        }
+
+        public String getLogCourtJobRecorderFileBasedir() {
+            return get(HanreidbEnv.LOG_COURT_JOB_RECORDER_FILE_BASEDIR);
         }
 
         public String getMailSendMock() {

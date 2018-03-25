@@ -2,6 +2,8 @@ package tech.law.hanreidb.app.job.court.judgement.put;
 
 import javax.annotation.Resource;
 
+import org.lastaflute.job.mock.MockJobRuntime;
+
 import tech.law.hanreidb.dbflute.exbhv.CaseMarkBhv;
 import tech.law.hanreidb.dbflute.exbhv.CourtJudgementBhv;
 import tech.law.hanreidb.dbflute.exbhv.JudgementBhv;
@@ -32,7 +34,9 @@ public class CourtJudgementPutJobTest extends NxJobTestCase {
         inject(job);
 
         // ## Act ##
-        job.putPdf(1);
+        MockJobRuntime runtime = mockRuntime(job);
+
+        job.run(runtime);
 
         // ## Assert ##
     }

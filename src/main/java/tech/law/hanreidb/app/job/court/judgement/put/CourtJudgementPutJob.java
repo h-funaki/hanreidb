@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import javax.annotation.Resource;
 
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.lastaflute.job.LaJob;
@@ -95,6 +94,7 @@ public class CourtJudgementPutJob implements LaJob {
                 targetId += 1;
             }
         }
+        fileLogic.outputRecorder(recorder, getClass().getSimpleName(), beginId, endId);
     }
 
     protected void putHtmlDocument(Integer targetId, Integer detail) {
@@ -108,10 +108,8 @@ public class CourtJudgementPutJob implements LaJob {
             FileWriter htmlFile = new FileWriter(htmlFileName);
             htmlFile.write(document.outerHtml());
             htmlFile.close();
-        } catch (HttpStatusException ex) {
-            throw new JobBusinessSkipException("");
         } catch (IOException ex) {
-            throw new JobBusinessSkipException("");
+            throw new JobBusinessSkipException("HTMLの取得に失敗。" + ex.getMessage());
         }
     }
 

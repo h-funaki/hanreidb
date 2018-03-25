@@ -1,4 +1,4 @@
-package tech.law.hanreidb.app.job.court.scrape;
+package tech.law.hanreidb.app.job.court.judgement.set;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,9 +9,10 @@ import org.jsoup.nodes.Document;
 import org.lastaflute.job.mock.MockJobRuntime;
 
 import tech.law.hanreidb.app.base.job.JobRecorder;
+import tech.law.hanreidb.app.job.court.judgement.set.CourtJudgementSetJob;
 import tech.law.hanreidb.unit.NxJobTestCase;
 
-public class CourtScrapeJobTest extends NxJobTestCase {
+public class CourtJudgementSetJobTest extends NxJobTestCase {
 
     // ===================================================================================
     //                                                                          Definition
@@ -27,7 +28,7 @@ public class CourtScrapeJobTest extends NxJobTestCase {
     //                                                                               =====
     public void test_processHanrei_mock() throws IOException {
         // ## Arrange ##
-        CourtScrapeJob job = prepareHtmlMockJob();
+        CourtJudgementSetJob job = prepareHtmlMockJob();
         inject(job);
 
         // ## Act ##
@@ -44,7 +45,7 @@ public class CourtScrapeJobTest extends NxJobTestCase {
         if (!REAL_ACCESS) {
             return;
         }
-        CourtScrapeJob job = new CourtScrapeJob();
+        CourtJudgementSetJob job = new CourtJudgementSetJob();
         inject(job);
 
         // ## Act ##
@@ -61,7 +62,7 @@ public class CourtScrapeJobTest extends NxJobTestCase {
     //                                                                               =====
     public void test_指定したidのページがない() throws Exception {
         // ## Arrange ##
-        CourtScrapeJob job = new CourtScrapeJob();
+        CourtJudgementSetJob job = new CourtJudgementSetJob();
         inject(job);
 
         // ## Act ##
@@ -79,8 +80,8 @@ public class CourtScrapeJobTest extends NxJobTestCase {
     // ===================================================================================
     //                                                                                Mock
     //                                                                                ====
-    private CourtScrapeJob prepareHtmlMockJob() {
-        return new CourtScrapeJob() {
+    private CourtJudgementSetJob prepareHtmlMockJob() {
+        return new CourtJudgementSetJob() {
             @Override
             protected Document getHtmlDocument(Integer targetId, Integer detail) throws IOException {
                 return Jsoup.parse(new File("/Users/h-funaki/Documents/hanreidb/src/test/resources/job/scrape/court/court_hanrei_detail"
@@ -89,11 +90,11 @@ public class CourtScrapeJobTest extends NxJobTestCase {
         };
     }
 
-    private MockJobRuntime createMockJobRuntime(CourtScrapeJob job, Double beginId, Double endId) { // Object -> Double になるので
+    private MockJobRuntime createMockJobRuntime(CourtJudgementSetJob job, Double beginId, Double endId) { // Object -> Double になるので
         return mockRuntime(job, op -> op.params(() -> {
             Map<String, Object> map = newHashMap();
-            map.put(CourtScrapeJob.BEGIN_ID, beginId);
-            map.put(CourtScrapeJob.END_ID, endId);
+            map.put(CourtJudgementSetJob.BEGIN_ID, beginId);
+            map.put(CourtJudgementSetJob.END_ID, endId);
             return map;
         }));
     }

@@ -13,7 +13,7 @@ import tech.law.hanreidb.app.base.web.context.AccessContextCreator;
 import tech.law.hanreidb.app.job.core.JobHookAssist;
 import tech.law.hanreidb.app.job.court.judgement.migrate.CourtJudgementMigrateJob;
 import tech.law.hanreidb.app.job.court.judgement.put.CourtJudgementPutJob;
-import tech.law.hanreidb.app.job.court.scrape.CourtScrapeJob;
+import tech.law.hanreidb.app.job.court.judgement.set.CourtJudgementSetJob;
 
 /**
  * @author jflute
@@ -30,8 +30,8 @@ public class AllJobScheduler implements LaJobScheduler {
 
     @Override
     public void schedule(LaCron cron) {
-        cron.registerNonCron(CourtScrapeJob.class, waitIfConcurrent(), op -> {
-            op.uniqueBy("CourtScrape");
+        cron.registerNonCron(CourtJudgementSetJob.class, waitIfConcurrent(), op -> {
+            op.uniqueBy("CourtJudgementSet");
         });
         cron.registerNonCron(CourtJudgementMigrateJob.class, waitIfConcurrent(), op -> {
             op.uniqueBy("CourtJudgementMigrate");
