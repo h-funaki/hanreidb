@@ -1,10 +1,12 @@
 package tech.law.hanreidb.app.job.court.judgement.set;
 
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotBlank;
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.newArrayList;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -18,6 +20,7 @@ import org.lastaflute.job.LaJobRuntime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import tech.law.hanreidb.app.base.job.JobRecorder;
 import tech.law.hanreidb.app.base.job.exception.JobBusinessSkipException;
 import tech.law.hanreidb.app.logic.FileLogic;
@@ -73,23 +76,15 @@ public class CourtJudgementSetJob implements LaJob {
         if (runtime.getParameterMap().get(END_ID) != null) { // 引数があればそれを使う
             endId = ((Double) runtime.getParameterMap().get(END_ID)).intValue(); // なぜかObject => Doubleになる
         } else {
-            endId = 5; // 99999;
+            endId = beginId + 1000; // as default
         }
 
-        logger.info("begin id:{}, end id:{}", beginId, endId);
+        List<Integer> targetIdList = getTargetIdList(beginId, endId);
+        logger.info("begin id:{}, end id:{}, planCount:{}", beginId, endId, targetIdList.size());
 
-        //存在するHTMLファイルのみを対象にする
-        File htmlDir = new File(env.getCourtHtmlPath());
-        String[] htmlList = htmlDir.list();
-        for (String fileName : htmlList) { // e.g. 100_3.html, 100-7.htmlfileName
-            String substring = fileName.substring(0, fileName.indexOf("_"));
-        }
+        recorder.planBatch(targetIdList.size());
 
-        recorder.planBatch(endId - beginId + 1);
-
-        Integer targetId = beginId;
-
-        while (targetId <= endId) {
+        for (Integer targetId : targetIdList) {
             recorder.asProcessed();
             logger.info("target id:{}", targetId);
             HashMap<Integer, String> contentMap = new HashMap<>();
@@ -117,12 +112,34 @@ public class CourtJudgementSetJob implements LaJob {
         fileLogic.outputRecorder(recorder, getClass().getSimpleName(), beginId, endId);
     }
 
+    protected List<Integer> getTargetIdList(Integer beginId, Integer endId) {
+        //存在するHTMLファイルのみを対象にする
+        File htmlDir = new File(env.getCourtHtmlPath());
+        @SuppressWarnings("unchecked")
+        List<String> htmlList = Arrays.asList(htmlDir.list());
+
+        List<Integer> targetIdList = newArrayList();
+        for (Integer targetId = beginId; targetId <= endId; targetId++) { // e.g. 100_3.html, 100-7.htmlfileName
+            boolean containsHtml2 = htmlList.contains(targetId.toString().concat("_").concat("2.html"));
+            boolean containsHtml3 = htmlList.contains(targetId.toString().concat("_").concat("3.html"));
+            boolean containsHtml4 = htmlList.contains(targetId.toString().concat("_").concat("4.html"));
+            boolean containsHtml5 = htmlList.contains(targetId.toString().concat("_").concat("5.html"));
+            boolean containsHtml7 = htmlList.contains(targetId.toString().concat("_").concat("7.html"));
+            if (containsHtml2 && containsHtml3 && containsHtml4 && containsHtml5 && containsHtml7) {
+                targetIdList.add(targetId);
+            } else {
+                logger.info("htmlファイルなし。targetId:{}", targetId);
+            }
+        }
+        return targetIdList;
+    }
+
     public void processHanrei2(Integer targetId, HashMap<Integer, String> contentMap)
             throws IOException, IndexOutOfBoundsException, JobBusinessSkipException {
         Document document = getHtmlDocument(targetId, 2);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
         ifNotBlank(contentElements.get(0).text()).ifPresent(value -> {
-            contentMap.put(CourtJudgementSetJobAssist.CASE_NUMBER, value);
+            contentMap.put(CourtJudgementSetJobAssist.CASE_NUMBER, trimSpaces(value));
         }).orElse(() -> {
             throw new JobBusinessSkipException("事件番号が空白");
         });
@@ -193,11 +210,16 @@ public class CourtJudgementSetJob implements LaJob {
     }
 
     private String trimSpaces(String string) {
-        while (string.startsWith(" ")) {
-            string.replaceFirst(" ", "");
+        while (string.startsWith(" ") || string.startsWith("　")) { //|| string.startsWith(" ")
+            while (string.startsWith(" ")) {
+                string.replaceFirst(" ", "");
+            }
+            while (string.startsWith("　")) {
+                string.replaceFirst("　", "");
+            }
         }
-        while (string.startsWith("　")) {
-            string.replaceFirst("　", "");
+        while (string.startsWith(" ")) { // よくわからないが半スペではない。
+            string = string.substring(1);
         }
         return string;
     }

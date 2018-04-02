@@ -39,6 +39,7 @@ public class CourtJudgementSetJobAssist {
     public static final Integer LAWSUIT_TYPE = 19;
     public static final Integer CASE_CATEGORY = 20;
     public static final Integer SOURCE_ORIGINAL_ID = 21;
+    public static final Integer SENTENCE = 22;
 
     private static final Logger logger = LoggerFactory.getLogger(CourtJudgementSetJob.class);
 
@@ -77,9 +78,9 @@ public class CourtJudgementSetJobAssist {
         try {
             courtJudgementBhv.insertOrUpdateNonstrict(entity);
         } catch (EntityDuplicatedException continued) {
-            throw new JobBusinessSkipException("裁判所判決エンティティの挿入に失敗。" + continued.getMessage());
+            throw new JobBusinessSkipException("裁判所判決エンティティが重複。" + continued.getMessage());
         } catch (EntityAlreadyExistsException continued) {
-            throw new JobBusinessSkipException("裁判所判決エンティティの挿入に失敗。" + continued.getMessage());
+            throw new JobBusinessSkipException("裁判所判決エンティティがすでに存在。" + continued.getMessage());
         } catch (Exception continued) {
             throw new JobBusinessSkipException("裁判所判決エンティティの挿入に失敗。" + continued.getMessage());
         }
@@ -98,5 +99,10 @@ public class CourtJudgementSetJobAssist {
                 map.get(JUDGEMENT_RESULT), map.get(PRECEDENT_REPORTS), map.get(ORIGINAL_COURT_NAME), map.get(ORIGINAL_JUDGEMENT_DATE), //
                 map.get(ORIGINAL_JUDGEMENT_RESULT), map.get(TEXT_URL), map.get(HIGH_COURT_REPORTS), map.get(RIGHT_TYPE), //
                 map.get(LAWSUIT_TYPE), map.get(CASE_CATEGORY), map.get(SOURCE_ORIGINAL_ID));
+    }
+
+    public void insertMemo() {
+        // TODO Auto-generated method stub
+
     }
 }

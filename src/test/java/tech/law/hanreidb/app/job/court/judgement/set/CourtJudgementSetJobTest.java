@@ -2,6 +2,7 @@ package tech.law.hanreidb.app.job.court.judgement.set;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.jsoup.Jsoup;
@@ -9,7 +10,6 @@ import org.jsoup.nodes.Document;
 import org.lastaflute.job.mock.MockJobRuntime;
 
 import tech.law.hanreidb.app.base.job.JobRecorder;
-import tech.law.hanreidb.app.job.court.judgement.set.CourtJudgementSetJob;
 import tech.law.hanreidb.unit.NxJobTestCase;
 
 public class CourtJudgementSetJobTest extends NxJobTestCase {
@@ -55,6 +55,24 @@ public class CourtJudgementSetJobTest extends NxJobTestCase {
         log(htmlDocument);
 
         // ## Assert ##
+    }
+
+    public void test_getTargetIdList() throws Exception {
+        // ## Arrange ##
+        CourtJudgementSetJob job = new CourtJudgementSetJob();
+        inject(job);
+        Integer beginId = 1;
+        Integer endId = 5;
+
+        // ## Act ##
+        List<Integer> targetIdList = job.getTargetIdList(beginId, endId);
+
+        // ## Assert ##
+        targetIdList.forEach(targetId -> {
+            log(targetId);
+            softly.then(targetId >= beginId).as("").isTrue();
+            softly.then(targetId <= endId).as("").isTrue();
+        });
     }
 
     // ===================================================================================

@@ -13,6 +13,7 @@ import tech.law.hanreidb.app.base.web.context.AccessContextCreator;
 import tech.law.hanreidb.app.job.core.JobHookAssist;
 import tech.law.hanreidb.app.job.court.judgement.migrate.CourtJudgementMigrateJob;
 import tech.law.hanreidb.app.job.court.judgement.put.CourtJudgementPutJob;
+import tech.law.hanreidb.app.job.court.judgement.sentence.set.CourtJudgementSentenceSetJob;
 import tech.law.hanreidb.app.job.court.judgement.set.CourtJudgementSetJob;
 
 /**
@@ -38,6 +39,9 @@ public class AllJobScheduler implements LaJobScheduler {
         });
         cron.registerNonCron(CourtJudgementPutJob.class, waitIfConcurrent(), op -> {
             op.uniqueBy("CourtJudgementPut");
+        });
+        cron.registerNonCron(CourtJudgementSentenceSetJob.class, waitIfConcurrent(), op -> {
+            op.uniqueBy("CourtJudgementSentenceSet");
         });
     }
 

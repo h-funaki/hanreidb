@@ -89,7 +89,9 @@ public class CourtJudgementMigrateJob implements LaJob {
 
         ListResultBean<CourtJudgement> toBeMigratedList = courtJudgementBhv.selectList(cb -> {
             cb.specify().everyColumn();
-            cb.query().setSourceOriginalId_NotInScope(alreadyPopulatedList);
+            ifNotEmpty(alreadyPopulatedList).ifPresent(list -> {
+                cb.query().setSourceOriginalId_NotInScope(list);
+            });
         });
 
         logger.info("データ移行対象件数:{}", toBeMigratedList.size());

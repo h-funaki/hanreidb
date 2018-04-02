@@ -28,6 +28,9 @@ public class JudgementGetContentResult {
     /** 原審判決ID e.g. null (NullAllowed)*/
     public Long original_judgement_id;
 
+    /** 原審判決事件番号 (NullAllowed)*/
+    public CaseMarkPart original_judgement_case_mark_part;
+
     /** 裁判所ID e.g. 1 */
     @Required
     public Integer court_id;
@@ -72,27 +75,21 @@ public class JudgementGetContentResult {
     public static class CaseMarkPart {
 
         /** 事件符号ID e.g. null */
-        @Required
         public Integer case_mark_id;
 
         /** 事件符号別名 e.g. null */
-        @Required
         public String case_mark_alias;
 
         /** 元号コード e.g. null */
-        @Required
         public String case_number_era_code;
 
         /** 元号別名 e.g. null */
-        @Required
         public String case_number_era_alias;
 
         /** 事件番号年 e.g. null */
-        @Required
         public Integer case_number_year;
 
         /** 事件番号連番 e.g. null */
-        @Required
         public Integer case_number_serial_number;
     }
 }

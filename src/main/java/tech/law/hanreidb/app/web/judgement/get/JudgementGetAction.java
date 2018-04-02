@@ -55,6 +55,8 @@ public class JudgementGetAction extends HanreidbBaseAction {
             cb.setupSelect_ClsJudgementType();
 
             cb.setupSelect_ClsBench();
+
+            cb.setupSelect_JudgementSelf().withCaseMark();
         });
         judgementBhv.load(judgement, baseLoader -> {
             baseLoader.loadJudgementReportRel(reportRelCB -> {
@@ -77,6 +79,9 @@ public class JudgementGetAction extends HanreidbBaseAction {
         content.case_name = judgement.getCaseName();
         content.judgement_date = judgement.getJudgementDate();
         content.original_judgement_id = judgement.getOriginalJudgementId();
+        judgement.getJudgementSelf().ifPresent(self -> {
+            content.original_judgement_case_mark_part = convertToCaseMarkPart(self);
+        });
         content.court_id = judgement.getCourtId();
         content.court_name = judgement.getCourt().get().getCourtName();
         ifNotNull(judgement.getBenchCodeAsBench()).ifPresent(bench -> {
