@@ -101,10 +101,12 @@ public class CourtJudgementSetJob implements LaJob {
                 recorder.asSuccess();
             } catch (IndexOutOfBoundsException | JobBusinessSkipException | EntityAlreadyExistsException ex) {
                 logger.info("skip target id {}", targetId);
-                recorder.asBusinessSkip(recordMessage(targetId, ex.getMessage() + "\n" + assist.recordEntityDetail(contentMap)));
+                recorder.asBusinessSkip(recordMessage(targetId, ex.getMessage().substring(0, 30)));
+                // recordMessage(targetId, ex.getMessage() + "\n" + assist.recordEntityDetail(contentMap)));
             } catch (Exception exception) {
                 logger.info("error target id {}", targetId);
-                recorder.asError(recordMessage(targetId, exception.getMessage() + "\n" + assist.recordEntityDetail(contentMap)));
+                recorder.asError(recordMessage(targetId, exception.getMessage()));
+                //recorder.asError(recordMessage(targetId, exception.getMessage() + "\n" + assist.recordEntityDetail(contentMap)));
             } finally {
                 targetId += 1;
             }
@@ -225,6 +227,6 @@ public class CourtJudgementSetJob implements LaJob {
     }
 
     private String recordMessage(Integer id, String message) {
-        return String.format("id:\"%s\"\n message:\"%s\"\n", id, message);
+        return String.format("id:\"%s\" message:\"%s\"", id, message);
     }
 }
