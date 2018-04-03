@@ -80,9 +80,9 @@ public class CourtJudgementSetJobAssist {
         try {
             courtJudgementBhv.insertOrUpdateNonstrict(entity);
         } catch (EntityDuplicatedException continued) {
-            throw new JobBusinessSkipException("裁判所判決エンティティが重複。" + continued.getMessage());
+            throw new JobBusinessSkipException("裁判所判決エンティティが重複。");
         } catch (EntityAlreadyExistsException continued) {
-            throw new JobBusinessSkipException("裁判所判決エンティティがすでに存在。" + continued.getMessage());
+            throw new JobBusinessSkipException("裁判所判決エンティティがすでに存在。");
         } catch (Exception continued) {
             if (isBlank(map.get(CASE_NUMBER))) {
                 throw new JobBusinessSkipException("事件番号が空白。");

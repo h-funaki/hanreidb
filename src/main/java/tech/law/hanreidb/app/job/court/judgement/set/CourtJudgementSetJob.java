@@ -101,7 +101,7 @@ public class CourtJudgementSetJob implements LaJob {
                 recorder.asSuccess();
             } catch (IndexOutOfBoundsException | JobBusinessSkipException | EntityAlreadyExistsException ex) {
                 logger.info("skip target id {}", targetId);
-                recorder.asBusinessSkip(recordMessage(targetId, ex.getMessage().substring(0, 30)));
+                recorder.asBusinessSkip(recordMessage(targetId, ex.getMessage()));
                 // recordMessage(targetId, ex.getMessage() + "\n" + assist.recordEntityDetail(contentMap)));
             } catch (Exception exception) {
                 logger.info("error target id {}", targetId);
