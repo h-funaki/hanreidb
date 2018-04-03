@@ -1,5 +1,7 @@
 package tech.law.hanreidb.app.job.court.judgement.set;
 
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.isBlank;
+
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -82,7 +84,11 @@ public class CourtJudgementSetJobAssist {
         } catch (EntityAlreadyExistsException continued) {
             throw new JobBusinessSkipException("裁判所判決エンティティがすでに存在。" + continued.getMessage());
         } catch (Exception continued) {
-            throw new JobBusinessSkipException("裁判所判決エンティティの挿入に失敗。" + continued.getMessage());
+            if (isBlank(map.get(CASE_NUMBER))) {
+                throw new JobBusinessSkipException("事件番号が空白。");
+            } else {
+                throw new JobBusinessSkipException("裁判所判決エンティティの挿入に失敗。" + continued.getMessage());
+            }
         }
     }
 
