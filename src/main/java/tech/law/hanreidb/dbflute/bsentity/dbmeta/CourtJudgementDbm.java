@@ -142,7 +142,7 @@ public class CourtJudgementDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnCourtJudgementId() { return _columnCourtJudgementId; }
     /**
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnCaseNumber() { return _columnCaseNumber; }
@@ -325,8 +325,7 @@ public class CourtJudgementDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                        Unique Element
     //                                        --------------
-    public UniqueInfo uniqueOfCaseNumber() { return hpcui(columnCaseNumber()); }
-    public UniqueInfo uniqueOfSourceOriginalId() { return hpcui(columnSourceOriginalId()); }
+    public UniqueInfo uniqueOf() { return hpcui(columnSourceOriginalId()); }
 
     // ===================================================================================
     //                                                                       Relation Info

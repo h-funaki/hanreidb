@@ -201,52 +201,27 @@ public abstract class BsCourtJudgementBhv extends AbstractBehaviorWritable<Court
 
     /**
      * Select the entity by the unique-key value.
-     * @param caseNumber (事件番号): UQ, NotNull, VARCHAR(50). (NotNull)
-     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
-     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
-     * @throws EntityDuplicatedException When the entity has been duplicated.
-     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
-     */
-    public OptionalEntity<CourtJudgement> selectByUniqueOfCaseNumber(String caseNumber) {
-        return facadeSelectByUniqueOfCaseNumber(caseNumber);
-    }
-
-    protected OptionalEntity<CourtJudgement> facadeSelectByUniqueOfCaseNumber(String caseNumber) {
-        return doSelectByUniqueOfCaseNumber(caseNumber, typeOfSelectedEntity());
-    }
-
-    protected <ENTITY extends CourtJudgement> OptionalEntity<ENTITY> doSelectByUniqueOfCaseNumber(String caseNumber, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOfCaseNumber(caseNumber), tp), caseNumber);
-    }
-
-    protected CourtJudgementCB xprepareCBAsUniqueOfCaseNumber(String caseNumber) {
-        assertObjectNotNull("caseNumber", caseNumber);
-        return newConditionBean().acceptUniqueOfCaseNumber(caseNumber);
-    }
-
-    /**
-     * Select the entity by the unique-key value.
      * @param sourceOriginalId (取得元ID): UQ, NotNull, INT UNSIGNED(10). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<CourtJudgement> selectByUniqueOfSourceOriginalId(Integer sourceOriginalId) {
-        return facadeSelectByUniqueOfSourceOriginalId(sourceOriginalId);
+    public OptionalEntity<CourtJudgement> selectByUniqueOf(Integer sourceOriginalId) {
+        return facadeSelectByUniqueOf(sourceOriginalId);
     }
 
-    protected OptionalEntity<CourtJudgement> facadeSelectByUniqueOfSourceOriginalId(Integer sourceOriginalId) {
-        return doSelectByUniqueOfSourceOriginalId(sourceOriginalId, typeOfSelectedEntity());
+    protected OptionalEntity<CourtJudgement> facadeSelectByUniqueOf(Integer sourceOriginalId) {
+        return doSelectByUniqueOf(sourceOriginalId, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends CourtJudgement> OptionalEntity<ENTITY> doSelectByUniqueOfSourceOriginalId(Integer sourceOriginalId, Class<? extends ENTITY> tp) {
-        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOfSourceOriginalId(sourceOriginalId), tp), sourceOriginalId);
+    protected <ENTITY extends CourtJudgement> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer sourceOriginalId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(sourceOriginalId), tp), sourceOriginalId);
     }
 
-    protected CourtJudgementCB xprepareCBAsUniqueOfSourceOriginalId(Integer sourceOriginalId) {
+    protected CourtJudgementCB xprepareCBAsUniqueOf(Integer sourceOriginalId) {
         assertObjectNotNull("sourceOriginalId", sourceOriginalId);
-        return newConditionBean().acceptUniqueOfSourceOriginalId(sourceOriginalId);
+        return newConditionBean().acceptUniqueOf(sourceOriginalId);
     }
 
     // ===================================================================================
@@ -437,14 +412,6 @@ public abstract class BsCourtJudgementBhv extends AbstractBehaviorWritable<Court
      */
     public List<Long> extractCourtJudgementIdList(List<CourtJudgement> courtJudgementList)
     { return helpExtractListInternally(courtJudgementList, "courtJudgementId"); }
-
-    /**
-     * Extract the value list of (single) unique key caseNumber.
-     * @param courtJudgementList The list of courtJudgement. (NotNull, EmptyAllowed)
-     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
-     */
-    public List<String> extractCaseNumberList(List<CourtJudgement> courtJudgementList)
-    { return helpExtractListInternally(courtJudgementList, "caseNumber"); }
 
     /**
      * Extract the value list of (single) unique key sourceOriginalId.

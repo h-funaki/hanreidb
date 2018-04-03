@@ -132,7 +132,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     /** (裁判所判決ID)COURT_JUDGEMENT_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} */
     protected Long _courtJudgementId;
 
-    /** (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)} */
+    /** (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} */
     protected String _caseNumber;
 
     /** (事件名)CASE_NAME: {TEXT(65535)} */
@@ -238,20 +238,9 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param caseNumber (事件番号): UQ, NotNull, VARCHAR(50). (NotNull)
-     */
-    public void uniqueByCaseNumber(String caseNumber) {
-        __uniqueDrivenProperties.clear();
-        __uniqueDrivenProperties.addPropertyName("caseNumber");
-        setCaseNumber(caseNumber);
-    }
-
-    /**
-     * To be unique by the unique column. <br>
-     * You can update the entity by the key when entity update (NOT batch update).
      * @param sourceOriginalId (取得元ID): UQ, NotNull, INT UNSIGNED(10). (NotNull)
      */
-    public void uniqueBySourceOriginalId(Integer sourceOriginalId) {
+    public void uniqueBy(Integer sourceOriginalId) {
         __uniqueDrivenProperties.clear();
         __uniqueDrivenProperties.addPropertyName("sourceOriginalId");
         setSourceOriginalId(sourceOriginalId);
@@ -364,7 +353,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [get] (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)} <br>
+     * [get] (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} <br>
      * @return The value of the column 'CASE_NUMBER'. (basically NotNull if selected: for the constraint)
      */
     public String getCaseNumber() {
@@ -373,7 +362,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [set] (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)} <br>
+     * [set] (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} <br>
      * @param caseNumber The value of the column 'CASE_NUMBER'. (basically NotNull if update: for the constraint)
      */
     public void setCaseNumber(String caseNumber) {

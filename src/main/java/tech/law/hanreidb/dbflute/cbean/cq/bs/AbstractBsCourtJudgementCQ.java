@@ -189,7 +189,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @param caseNumber The value of caseNumber as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseNumber_Equal(String caseNumber) {
@@ -202,7 +202,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @param caseNumber The value of caseNumber as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseNumber_NotEqual(String caseNumber) {
@@ -215,7 +215,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @param caseNumberList The collection of caseNumber as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseNumber_InScope(Collection<String> caseNumberList) {
@@ -228,7 +228,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @param caseNumberList The collection of caseNumber as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseNumber_NotInScope(Collection<String> caseNumberList) {
@@ -241,7 +241,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)} <br>
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setCaseNumber_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param caseNumber The value of caseNumber as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -252,7 +252,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)} <br>
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setCaseNumber_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param caseNumber The value of caseNumber as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -264,7 +264,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @param caseNumber The value of caseNumber as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -275,7 +275,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @param caseNumber The value of caseNumber as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */

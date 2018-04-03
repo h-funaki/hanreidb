@@ -107,22 +107,10 @@ public class BsCourtJudgementCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param caseNumber (事件番号): UQ, NotNull, VARCHAR(50). (NotNull)
-     * @return this. (NotNull)
-     */
-    public CourtJudgementCB acceptUniqueOfCaseNumber(String caseNumber) {
-        assertObjectNotNull("caseNumber", caseNumber);
-        BsCourtJudgementCB cb = this;
-        cb.query().setCaseNumber_Equal(caseNumber);
-        return (CourtJudgementCB)this;
-    }
-
-    /**
-     * Accept the query condition of unique key as equal.
      * @param sourceOriginalId (取得元ID): UQ, NotNull, INT UNSIGNED(10). (NotNull)
      * @return this. (NotNull)
      */
-    public CourtJudgementCB acceptUniqueOfSourceOriginalId(Integer sourceOriginalId) {
+    public CourtJudgementCB acceptUniqueOf(Integer sourceOriginalId) {
         assertObjectNotNull("sourceOriginalId", sourceOriginalId);
         BsCourtJudgementCB cb = this;
         cb.query().setSourceOriginalId_Equal(sourceOriginalId);
@@ -327,7 +315,7 @@ public class BsCourtJudgementCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnCourtJudgementId() { return doColumn("COURT_JUDGEMENT_ID"); }
         /**
-         * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+         * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnCaseNumber() { return doColumn("CASE_NUMBER"); }

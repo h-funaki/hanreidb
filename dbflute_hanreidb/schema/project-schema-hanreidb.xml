@@ -502,9 +502,6 @@
         <column comment="バージョン番号 : バージョン番号 e.g. 0"
             dbType="BIGINT UNSIGNED" default="0" javaType="Long"
             name="VERSION_NO" required="true" size="20" type="BIGINT"/>
-        <unique name="CASE_NUMBER">
-            <unique-column name="CASE_NUMBER" position="1"/>
-        </unique>
         <unique name="SOURCE_ORIGINAL_ID">
             <unique-column name="SOURCE_ORIGINAL_ID" position="1"/>
         </unique>

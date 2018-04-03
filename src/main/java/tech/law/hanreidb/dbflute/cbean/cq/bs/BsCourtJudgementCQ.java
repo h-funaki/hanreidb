@@ -116,14 +116,14 @@ public class BsCourtJudgementCQ extends AbstractBsCourtJudgementCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_CaseNumber_Asc() { regOBA("CASE_NUMBER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (事件番号)CASE_NUMBER: {UQ, NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_CaseNumber_Desc() { regOBD("CASE_NUMBER"); return this; }
