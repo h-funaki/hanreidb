@@ -195,7 +195,6 @@
 					<physical_name>CASE_CATEGORY_CODE</physical_name>
 					<referred_column>table.CLS_CASE_CATEGORY.CASE_CATEGORY_CODE</referred_column>
 					<relationship>FK_CASE_MARK_CLS_CASE_CATEGORY</relationship>
-					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
 					<physical_name>COURT_TYPE_CODE</physical_name>

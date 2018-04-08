@@ -2,6 +2,8 @@ package tech.law.hanreidb.app.job.court.judgement.migrate;
 
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotBlank;
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotEmpty;
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.isNotBlank;
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.newImmutableList;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -11,6 +13,8 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
@@ -18,12 +22,14 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.dbflute.cbean.result.ListResultBean;
 import org.dbflute.exception.EntityAlreadyExistsException;
 import org.dbflute.optional.OptionalEntity;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.lastaflute.db.jta.stage.TransactionStage;
 import org.lastaflute.job.LaJob;
 import org.lastaflute.job.LaJobRuntime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tech.law.hanreidb.app.base.exception.HanreidbSystemException;
 import tech.law.hanreidb.app.base.job.JobRecorder;
 import tech.law.hanreidb.app.base.job.exception.JobBusinessSkipException;
 import tech.law.hanreidb.dbflute.allcommon.CDef;
@@ -48,6 +54,18 @@ public class CourtJudgementMigrateJob implements LaJob {
     //                                                                          Definition
     //                                                                          ==========
     private static final Logger logger = LoggerFactory.getLogger(CourtJudgementMigrateJob.class);
+
+    public static final String REPORT_PATTERN = "(\\S){2}[　|\\s]第(\\d{0,5}巻)?\\d{0,5}号\\d{0,5}頁";
+
+    public static final String CASE_NUMBER_PATTERN = "(?<ERA>昭和|平成)(\\d{1,2})(\\D)?\\((.{1,2})\\)(\\D)?(\\d{1,6})等?"; // e.g. 平成16(ネ)3324等
+
+    private static final Integer ERA_GOURP = 1;
+
+    private static final Integer YEAR_GOURP = 2;
+
+    private static final ImmutableList<Integer> CASE_MARK_GOURP = newImmutableList(3, 4, 5);
+
+    private static final Integer SERINAL_NUMBER_GOURP = 6;
 
     // ===================================================================================
     //                                                                           Attribute
@@ -103,6 +121,9 @@ public class CourtJudgementMigrateJob implements LaJob {
             Integer sourceOriginalId = courtJudgement.getSourceOriginalId();
             logger.info("target court id:{}", sourceOriginalId);
             try {
+                if (!isPatternOfCaseNumber(courtJudgement.getCaseNumber())) {
+                    throw new JobBusinessSkipException("事件番号が正規表現に一致しない：" + courtJudgement.getCaseNumber());
+                }
                 transactionStage.requiresNew(tx -> {
                     processMigrate(courtJudgement);
                 });
@@ -110,9 +131,13 @@ public class CourtJudgementMigrateJob implements LaJob {
             } catch (JobBusinessSkipException skip) {
                 logger.info("business skip court_original_id {}", sourceOriginalId);
                 recorder.asBusinessSkip(recordMessage(pk, sourceOriginalId, skip.getMessage()));
+                courtJudgement.setMemo(skip.getMessage()); // 備考欄にメモ
+                courtJudgementBhv.updateNonstrict(courtJudgement);
             } catch (Exception error) {
                 logger.info("error court_original_id {}", sourceOriginalId);
                 recorder.asError(recordMessage(pk, sourceOriginalId, error.getMessage()));
+                courtJudgement.setMemo(error.getMessage()); // 備考欄にメモ
+                courtJudgementBhv.updateNonstrict(courtJudgement);
             }
         }
     }
@@ -121,14 +146,16 @@ public class CourtJudgementMigrateJob implements LaJob {
         Judgement judgement = new Judgement();
 
         // 裁判所名、法廷名
-        selectCourtOpt(courtJudgement.getCourtName()).ifPresent(entity -> { //  e.g. 千葉地方裁判所
-            if (entity.isCourtTypeCode最高裁判所()) {
-                judgement.setBenchCodeAsBench(extractBench(courtJudgement.getCourtName())); // e.g. 最高裁判所第二小法廷
-            }
-            judgement.setCourtId(entity.getCourtId());
-        }).orElse(() -> {
+        try {
+            selectCourtOpt(courtJudgement.getCourtName()).ifPresent(entity -> { //  e.g. 千葉地方裁判所
+                if (entity.isCourtTypeCode最高裁判所()) {
+                    judgement.setBenchCodeAsBench(extractBench(courtJudgement.getCourtName())); // e.g. 最高裁判所第二小法廷
+                }
+                judgement.setCourtId(entity.getCourtId());
+            });
+        } catch (Exception e) {
             throw new JobBusinessSkipException("裁判所名の取得に失敗:" + courtJudgement.getCourtName());
-        });
+        }
 
         // 事件名
         ifNotBlank(courtJudgement.getCaseName()).ifPresent(value -> {
@@ -173,34 +200,30 @@ public class CourtJudgementMigrateJob implements LaJob {
             }
         });
 
-        // 原審判決ID
-        ifNotBlank(courtJudgement.getOriginalCaseNumber()).ifPresent(value -> {
-            judgement.setOriginalJudgementId(selectOriginalJudgementId(value));
-        });
+        // 原審判決ID。挿入の順序のタイミングでひっかからない原審があるので、どうするか考える。
+        String originalCaseNumber = courtJudgement.getOriginalCaseNumber();
+        String originalCourtName = courtJudgement.getOriginalCourtName();
+        if (isPatternOfCaseNumber(originalCaseNumber) && isNotBlank(originalCourtName)) {
+            judgement.setOriginalJudgementId(selectOriginalJudgementId(originalCaseNumber, originalCourtName));
+        }
 
-        // 判例集
-        ifNotBlank(courtJudgement.getPrecedentReports()).ifPresent(value -> {
-            reportBhv.selectEntity(cb -> {
-                cb.specify().columnReportId();
-                cb.query().setReportName_Equal(value.substring(0, 2));
-            }).ifPresent(entity -> {
-                insertJudgementReportRel(value, entity.getReportId());
-            }).orElse(() -> {
-                throw new JobBusinessSkipException(
-                        "判例集の取得に失敗 判例集:" + courtJudgement.getPrecedentReports() + " 最初の2文字:" + value.substring(0, 2));
-            });
-        });
-
-        // 判決, 判決取得元リレーション insert
+        // 判決, 判決取得元リレーション, 判決判例集リレーション insert
         try {
+            // 判決
             judgementBhv.insert(judgement);
+            Long judgementId = judgement.getJudgementId();
 
+            // 判決判例集リレーション
+            insertJudgementReportRel(courtJudgement, judgementId);
+
+            // 判決取得元リレーション
             JudgementSourceRel rel = new JudgementSourceRel();
-            rel.setJudgementId(judgement.getJudgementId());
+            rel.setJudgementId(judgementId);
             rel.setSourceCode_裁判所裁判例();
             rel.setJudgementSourceId(courtJudgement.getSourceOriginalId().toString());
             // 判決文はinsertしない。PDFの処理が必要なので別のタイミングで。
             judgementSourceRelBhv.insert(rel);
+
         } catch (EntityAlreadyExistsException e) {
             throw new JobBusinessSkipException("挿入に失敗しました。JID:" + makeNextPublicCode);
         }
@@ -209,16 +232,40 @@ public class CourtJudgementMigrateJob implements LaJob {
     // -------------------------------------------------
     //                                             判例集
     //                                             -----
-    protected void insertJudgementReportRel(String value, Integer reportId) {
+    private JudgementReportRel insertJudgementReportRel(CourtJudgement courtJudgement, Long judgementId) {
+        JudgementReportRel rel = new JudgementReportRel();
+        ifNotBlank(courtJudgement.getPrecedentReports()).ifPresent(value -> {
+            if (value.matches(REPORT_PATTERN)) {
+                reportBhv.selectEntity(cb -> {
+                    cb.specify().columnReportId();
+                    cb.query().setReportAlias_Equal(value.substring(0, 2));
+                }).ifPresent(entity -> {
+                    rel.setReportId(entity.getReportId());
+                    rel.setJudgementId(judgementId);
+                    parseReport(rel, value);
+                    judgementReportRelBhv.insertOrUpdateNonstrict(rel);
+                }).orElse(() -> {
+                    throw new JobBusinessSkipException(
+                            "判例集の取得に失敗 判例集:" + courtJudgement.getPrecedentReports() + " 最初の2文字:" + value.substring(0, 2));
+                });
+            }
+        });
+        return rel;
+    }
+
+    protected void parseReport(JudgementReportRel rel, String value) {
         try {
-            JudgementReportRel rel = new JudgementReportRel();
-            rel.setReportId(reportId);
-            rel.setReportGo(Integer.parseInt(value.substring(value.indexOf("第") + 1, value.indexOf("巻"))));
-            rel.setReportKan(Integer.parseInt(value.substring(value.indexOf("巻") + 1, value.indexOf("号"))));
             rel.setReportKo(Integer.parseInt(value.substring(value.indexOf("号") + 1, value.indexOf("頁"))));
-            judgementReportRelBhv.insert(rel);
+            if (value.contains("第") && value.contains("巻")) {
+                rel.setReportKan(Integer.parseInt(value.substring(value.indexOf("第") + 1, value.indexOf("巻"))));
+            }
+            if (value.contains("巻")) {
+                rel.setReportGo(Integer.parseInt(value.substring(value.indexOf("巻") + 1, value.indexOf("号"))));
+            } else {
+                rel.setReportGo(Integer.parseInt(value.substring(value.indexOf("第") + 1, value.indexOf("号"))));
+            }
         } catch (NumberFormatException e) {
-            throw new JobBusinessSkipException("判例集のパースに失敗");
+            throw new JobBusinessSkipException("判例集のパースに失敗。判例集：" + value);
         }
     }
 
@@ -236,27 +283,32 @@ public class CourtJudgementMigrateJob implements LaJob {
      * @param originalCaseNumber 原審事件番号 (NotNull)
      * @return 原審PK (NotNull)
      */
-    protected Long selectOriginalJudgementId(String originalCaseNumber) {
-        return judgementBhv.selectEntity(cb -> {
-            cb.specify().columnJudgementId();
-            cb.query().setCaseNumberEraCode_Equal_AsEra(extractEra(originalCaseNumber));
-            cb.query().setCaseNumberYear_Equal(extractYear(originalCaseNumber));
-            cb.query().setCaseMarkId_Equal(extractCaseMarkId(originalCaseNumber));
-            cb.query().setCaseNumberSerialNumber_Equal(extractSerialNumber(originalCaseNumber));
-        }).map(entity -> {
-            return entity.getJudgementId();
+    protected Long selectOriginalJudgementId(String originalCaseNumber, String originalCourtName) {
+        return selectCourtOpt(originalCourtName).map(court -> {
+            return judgementBhv.selectEntity(cb -> {
+                cb.specify().columnJudgementId();
+                cb.query().setCaseNumberEraCode_Equal_AsEra(extractEra(originalCaseNumber));
+                cb.query().setCaseNumberYear_Equal(extractYear(originalCaseNumber));
+                cb.query().setCaseMarkId_Equal(extractCaseMarkId(originalCaseNumber));
+                cb.query().setCaseNumberSerialNumber_Equal(extractSerialNumber(originalCaseNumber));
+                cb.query().setCourtId_Equal(court.getCourtId());
+            }).map(entity -> {
+                return entity.getJudgementId();
+            }).orElse(null);
         }).orElse(null);
     }
 
     // -----------------------------------------------------
     //                                            裁判所名取得
     //                                            ----------
-    protected OptionalEntity<Court> selectCourtOpt(String courtName) { //  e.g. 千葉地方裁判所
+    protected OptionalEntity<Court> selectCourtOpt(String courtName) { //  e.g. 千葉地方裁判所, 大分地方裁判所 　中津支部
         return courtBhv.selectEntity(cb -> {
             cb.specify().columnCourtId();
             cb.specify().columnCourtTypeCode(); // 最高裁判所かどうか判別
             if (courtName.startsWith("最高裁判所")) { // 最高裁判所の場合、法廷名が入っているので e.g. 最高裁判所第二小法廷
                 cb.query().setCourtName_Equal("最高裁判所");
+            } else if (courtName.endsWith("部")) {
+                cb.query().setCourtName_LikeSearch(courtName.substring(0, courtName.indexOf(" ")), op -> op.likePrefix());
             } else {
                 cb.query().setCourtName_Equal(courtName);
             }
@@ -305,48 +357,79 @@ public class CourtJudgementMigrateJob implements LaJob {
     // -----------------------------------------------------
     //                                         事件番号のパース
     //                                         -------------
-    protected Era extractEra(String caseNumber) { // e.g. 平成16(ネ)3324
-        String substring = caseNumber.substring(0, 2);
+    protected boolean isPatternOfCaseNumber(String caseNumber) {
+        return getMatcherOfCaseNumber(caseNumber).matches();
+    }
+
+    private Matcher getMatcherOfCaseNumber(String caseNumber) {
+        Pattern pattern = Pattern.compile(CASE_NUMBER_PATTERN);
+        return pattern.matcher(caseNumber);
+    }
+
+    private String getGroupOfCaseNumber(String caseNumber, Integer group) {
+        Matcher m = getMatcherOfCaseNumber(caseNumber);
+        if (m.find()) {
+            return m.group(group);
+        } else {
+            throw new HanreidbSystemException("事件番号から元号の取得に失敗");
+        }
+    }
+
+    protected Era extractEra(String caseNumber) { // e.g. 平成16(ネ)3324, 平成17特(わ)3838
+        String substring = getGroupOfCaseNumber(caseNumber, ERA_GOURP);
         return CDef.Era.byName(substring).map(value -> {
             return value;
         }).orElseThrow(() -> {
-            return new JobBusinessSkipException("事件番号から元号の取得に失敗:" + substring);
+            return new HanreidbSystemException("事件番号から元号の取得に失敗:" + substring);
         });
     }
 
-    protected Integer extractYear(String caseNumber) { // e.g. 平成16(ネ)3324
+    protected Integer extractYear(String caseNumber) { // e.g. 平成16(ネ)3324, 平成17特(わ)3838等
         Integer result = null;
-        String substring = caseNumber.substring(2, caseNumber.indexOf("("));
+        String substring = getGroupOfCaseNumber(caseNumber, YEAR_GOURP);
         try {
             result = Integer.parseInt(substring);
         } catch (NumberFormatException e) {
-            throw new JobBusinessSkipException("事件番号から年の取得に失敗:" + substring);
+            throw new HanreidbSystemException("事件番号から年の取得に失敗:" + substring);
         }
         if (result > 64 || result < 1) {
-            throw new JobBusinessSkipException("事件番号から年の取得に失敗:" + substring);
+            throw new HanreidbSystemException("事件番号の年の数値が異常:" + substring);
         }
         return result;
     }
 
-    protected Integer extractCaseMarkId(String caseNumber) { // e.g. 平成16(ネ)3324
-        String substring = caseNumber.substring(caseNumber.indexOf("(") + 1, caseNumber.indexOf(")"));
+    protected Integer extractCaseMarkId(String caseNumber) { // e.g. 平成16(ネ)3324, 平成17特(わ)3838等
+        String substring = "";
+        for (Integer integer : CASE_MARK_GOURP) {
+            String str = getGroupOfCaseNumber(caseNumber, integer);
+            if (isNotBlank(str)) {
+                substring = substring.concat(str);
+            }
+        }
+        String caseMark = substring;
         return caseMarkBhv.selectEntity(cb -> {
             cb.specify().columnCaseMarkId();
-            cb.query().setCaseMarkName_Equal(substring);
+            cb.query().setCaseMarkName_Equal(caseMark);
         }).map(value -> {
             return value.getCaseMarkId();
         }).orElseThrow(() -> {
-            return new JobBusinessSkipException("事件番号から符号の取得に失敗:" + substring);
+            return new HanreidbSystemException("事件番号から符号の取得に失敗:" + caseMark);
         });
     }
 
-    protected Integer extractSerialNumber(String caseNumber) { // e.g. 平成16(ネ)3324
+    protected Integer extractSerialNumber(String caseNumber) { // e.g. 平成16(ネ)3324, 平成17特(わ)新3838等
         Integer result = null;
-        String substring = caseNumber.substring(caseNumber.indexOf(")") + 1);
+        String substring = getGroupOfCaseNumber(caseNumber, SERINAL_NUMBER_GOURP);
+        if (substring.endsWith("等")) {
+            substring = substring.substring(0, substring.length() - 1); // e.g. 平成16(ネ)3324等
+        }
+        if (substring.startsWith("新")) {
+            substring = substring.substring(1, substring.length() - 1);
+        }
         try {
             result = Integer.parseInt(substring);
         } catch (NumberFormatException e) {
-            throw new JobBusinessSkipException("事件番号から連番の取得に失敗:" + substring);
+            throw new HanreidbSystemException("事件番号から連番の取得に失敗:" + substring);
         }
         return result;
     }

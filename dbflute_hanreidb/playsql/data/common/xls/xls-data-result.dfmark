@@ -9,8 +9,8 @@ data-directory: playsql/data/common/xls
 [10-master.xls]
   CLS_COURT_TYPE (5)
   CLS_CASE_CATEGORY (7)
-  CASE_MARK (156)
-  COURT (161)
+  CASE_MARK (185)
+  COURT (175)
   CLS_ERA (4)
   CLS_BENCH (4)
   CLS_JUDGEMENT_TYPE (2)

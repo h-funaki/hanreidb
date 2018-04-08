@@ -1,10 +1,13 @@
 package tech.law.hanreidb.app.job.court.judgement.migrate;
 
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.newImmutableList;
+
 import java.time.LocalDate;
 
 import javax.annotation.Resource;
 
 import org.dbflute.optional.OptionalEntity;
+import org.eclipse.collections.api.list.ImmutableList;
 import org.lastaflute.job.mock.MockJobRuntime;
 
 import tech.law.hanreidb.dbflute.allcommon.CDef;
@@ -14,7 +17,9 @@ import tech.law.hanreidb.dbflute.exbhv.CaseMarkBhv;
 import tech.law.hanreidb.dbflute.exbhv.CourtJudgementBhv;
 import tech.law.hanreidb.dbflute.exbhv.JudgementBhv;
 import tech.law.hanreidb.dbflute.exentity.Court;
+import tech.law.hanreidb.dbflute.exentity.CourtJudgement;
 import tech.law.hanreidb.dbflute.exentity.Judgement;
+import tech.law.hanreidb.dbflute.exentity.JudgementReportRel;
 import tech.law.hanreidb.unit.NxJobTestCase;
 
 public class CourtJudgementMigrateJobTest extends NxJobTestCase {
@@ -64,10 +69,11 @@ public class CourtJudgementMigrateJobTest extends NxJobTestCase {
         judgement.setCaseNumberYear(12);
         judgement.setCaseMarkId(29);
         judgement.setCaseNumberSerialNumber(239);
-        judgementBhv.updateNonstrict(judgement);
+        String courtName = "東京高等裁判所";
+        judgement.setCourtId(job.selectCourtOpt(courtName).get().getCourtId());
 
         // ## Act ##
-        Long originalPk = job.selectOriginalJudgementId(originalCaseNumber);
+        Long originalPk = job.selectOriginalJudgementId(originalCaseNumber, courtName);
 
         // ## Assert ##
         softly.then(originalPk).as("").isEqualTo(1L);
@@ -80,20 +86,19 @@ public class CourtJudgementMigrateJobTest extends NxJobTestCase {
         // ## Arrange ##
         CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
-        String courtName1 = "最高裁判所第二小法廷";
-        String courtName2 = "千葉地方裁判所";
-        String courtName3 = "裁判所";
 
         // ## Act ##
-        OptionalEntity<Court> courtOpt1 = job.selectCourtOpt(courtName1);
-        OptionalEntity<Court> courtOpt2 = job.selectCourtOpt(courtName2);
-        OptionalEntity<Court> courtOpt3 = job.selectCourtOpt(courtName3);
+        OptionalEntity<Court> courtOpt1 = job.selectCourtOpt("最高裁判所第二小法廷");
+        OptionalEntity<Court> courtOpt2 = job.selectCourtOpt("千葉地方裁判所 　刑事第2部");
+        OptionalEntity<Court> courtOpt3 = job.selectCourtOpt("大分地方裁判所 　中津支部");
+        OptionalEntity<Court> courtOpt4 = job.selectCourtOpt("裁判所");
 
         // ## Assert ##
 
         softly.then(courtOpt1.isPresent()).as("").isTrue();
         softly.then(courtOpt2.isPresent()).as("").isTrue();
-        softly.then(courtOpt3.isPresent()).as("").isFalse();
+        softly.then(courtOpt3.isPresent()).as("").isTrue();
+        softly.then(courtOpt4.isPresent()).as("").isFalse();
     }
 
     // -----------------------------------------------------
@@ -143,37 +148,59 @@ public class CourtJudgementMigrateJobTest extends NxJobTestCase {
     // -----------------------------------------------------
     //                                         事件番号のパース
     //                                         -------------
+    public void test_事件番号正規表現() {
+        // ## Assert ##
+        softly.then("平成16(ネ)3324".matches(CourtJudgementMigrateJob.CASE_NUMBER_PATTERN)).isTrue();
+        softly.then("平成17特(わ)3838".matches(CourtJudgementMigrateJob.CASE_NUMBER_PATTERN)).isTrue();
+        softly.then("昭和16(ネ)3324等".matches(CourtJudgementMigrateJob.CASE_NUMBER_PATTERN)).isTrue();
+        softly.then("平成17特(わ)3838等".matches(CourtJudgementMigrateJob.CASE_NUMBER_PATTERN)).isTrue();
+        softly.then("平成17特(わ)新3838等".matches(CourtJudgementMigrateJob.CASE_NUMBER_PATTERN)).isTrue();
+    }
+
     public void test_事件番号のパース() {
         // ## Arrange ##
         CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
         inject(job);
-        String caseNumber1 = "平成15(ネ)1504";
-        String caseNumber2 = "平成16(行コ)14";
+        ImmutableList<String> list = newImmutableList("平成15(ネ)123", "平成15(行コ)123等", "平成15特(わ)123", "平成15(を)新123");
 
         // ## Act ##
-        Era era1 = job.extractEra(caseNumber1);
-        Integer year1 = job.extractYear(caseNumber1);
-        Integer caseMarkId1 = job.extractCaseMarkId(caseNumber1);
-        Integer serialNumber1 = job.extractSerialNumber(caseNumber1);
+        for (String caseNumber : list) {
+            softly.then(job.isPatternOfCaseNumber(caseNumber)).as("").isTrue();
+            Era era = job.extractEra(caseNumber);
+            Integer year = job.extractYear(caseNumber);
+            Integer caseMarkId = job.extractCaseMarkId(caseNumber);
+            Integer serialNumber = job.extractSerialNumber(caseNumber);
+            caseMarkBhv.selectByPK(caseMarkId).alwaysPresent(caseMark -> {
+                softly.then(newImmutableList("ネ", "行コ", "特わ", "を新")).as("").contains(caseMark.getCaseMarkName());
+            });
 
-        Era era2 = job.extractEra(caseNumber2);
-        Integer year2 = job.extractYear(caseNumber2);
-        Integer caseMarkId2 = job.extractCaseMarkId(caseNumber2);
-        Integer serialNumber2 = job.extractSerialNumber(caseNumber2);
+            // ## Assert ##
+            softly.then(era).as("").isEqualTo(CDef.Era.平成);
+            softly.then(year).as("").isEqualTo(15);
+            softly.then(serialNumber).as("").isEqualTo(123);
+        }
+    }
 
-        // ## Assert ##
-        String caseMarkName1 = caseMarkBhv.selectByPK(caseMarkId1).get().getCaseMarkName();
-        String caseMarkName2 = caseMarkBhv.selectByPK(caseMarkId2).get().getCaseMarkName();
+    // -----------------------------------------------------
+    //                                                 判例集
+    //                                                 -----
+    public void test_判例集のパース() {
+        // ## Arrange ##
+        CourtJudgementMigrateJob job = new CourtJudgementMigrateJob();
+        inject(job);
 
-        softly.then(era1).as("").isEqualTo(CDef.Era.平成);
-        softly.then(year1).as("").isEqualTo(15);
-        softly.then(caseMarkName1).as("").isEqualTo("ネ");
-        softly.then(serialNumber1).as("").isEqualTo(1504);
+        // ## Act ##
+        job.parseReport(new JudgementReportRel(), "集民　第28号407頁");
+        job.parseReport(new JudgementReportRel(), "第62巻4号1頁");
+    }
 
-        softly.then(era2).as("").isEqualTo(CDef.Era.平成);
-        softly.then(year2).as("").isEqualTo(16);
-        softly.then(caseMarkName2).as("").isEqualTo("行コ");
-        softly.then(serialNumber2).as("").isEqualTo(14);
+    public void test_判例集正規表現() {
+        softly.then("集民　第28号407頁".matches(CourtJudgementMigrateJob.REPORT_PATTERN)).isTrue();
+        softly.then("集民 第28号407頁".matches(CourtJudgementMigrateJob.REPORT_PATTERN)).isTrue();
+        softly.then("民集　第70巻2号470頁".matches(CourtJudgementMigrateJob.REPORT_PATTERN)).isTrue();
+        softly.then("第70巻2号470頁".matches(CourtJudgementMigrateJob.REPORT_PATTERN)).isFalse();
+        softly.then("民集　2号470頁".matches(CourtJudgementMigrateJob.REPORT_PATTERN)).isFalse();
+        softly.then("民集第700012号123頁".matches(CourtJudgementMigrateJob.REPORT_PATTERN)).isFalse();
     }
 
     // -----------------------------------------------------
@@ -208,6 +235,28 @@ public class CourtJudgementMigrateJobTest extends NxJobTestCase {
         //        String caseNumber5 = " 平成16(行コ)14等";
 
         // ## Act ##
+    }
+
+    // ===================================================================================
+    //                                                                             Prepare
+    //                                                                             =======
+    private Judgement prepareJudgement(String publicCode) {
+        Judgement judgement = new Judgement();
+        judgement.setJudgementPublicCode(publicCode);
+        judgement.setCaseNumberEraCode_平成();
+        judgement.setCaseNumberYear(25);
+        judgement.setCaseMarkId(1);
+        judgement.setCaseNumberSerialNumber(123);
+        judgement.setCourtId(1);
+        judgementBhv.insert(judgement);
+        return judgement;
+    }
+
+    private CourtJudgement createCourtJudgement() {
+        CourtJudgement courtJudgement = new CourtJudgement();
+        courtJudgement.setCaseNumber("CASE_NUMBER");
+        courtJudgement.setSourceOriginalId(1);
+        return courtJudgement;
     }
 
     // ===================================================================================
