@@ -232,7 +232,7 @@ public class CourtJudgementMigrateJob implements LaJob {
             judgementSourceRelBhv.insert(rel);
 
             courtJudgement.setMemo(null);
-            courtJudgementBhv.update(courtJudgement);
+            courtJudgementBhv.updateNonstrict(courtJudgement);
         } catch (EntityAlreadyExistsException e) {
             throw new JobBusinessSkipException("挿入に失敗しました。JID:" + makeNextPublicCode);
         }
@@ -370,7 +370,7 @@ public class CourtJudgementMigrateJob implements LaJob {
     //                                         事件番号のパース
     //                                         -------------
     protected boolean isPatternOfCaseNumber(String caseNumber) {
-        return getMatcherOfCaseNumber(caseNumber).matches();
+        return isNotBlank(caseNumber) && getMatcherOfCaseNumber(caseNumber).matches();
     }
 
     private Matcher getMatcherOfCaseNumber(String caseNumber) {
