@@ -2,6 +2,7 @@ package tech.law.hanreidb.app.job.court.judgement.migrate;
 
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotBlank;
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotEmpty;
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.isBlank;
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.isNotBlank;
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.newImmutableList;
 
@@ -150,16 +151,18 @@ public class CourtJudgementMigrateJob implements LaJob {
         Judgement judgement = new Judgement();
 
         // 裁判所名、法廷名
-        try {
-            selectCourtOpt(courtJudgement.getCourtName()).ifPresent(entity -> { //  e.g. 千葉地方裁判所
-                if (entity.isCourtTypeCode最高裁判所()) {
-                    judgement.setBenchCodeAsBench(extractBench(courtJudgement.getCourtName())); // e.g. 最高裁判所第二小法廷
-                }
-                judgement.setCourtId(entity.getCourtId());
-            });
-        } catch (Exception e) {
-            throw new JobBusinessSkipException("裁判所名の取得に失敗:" + courtJudgement.getCourtName());
-        }
+        ifNotBlank(courtJudgement.getCourtName()).ifPresent(value -> {
+            try {
+                selectCourtOpt(value).ifPresent(entity -> { //  e.g. 千葉地方裁判所
+                    if (entity.isCourtTypeCode最高裁判所()) {
+                        judgement.setBenchCodeAsBench(extractBench(courtJudgement.getCourtName())); // e.g. 最高裁判所第二小法廷
+                    }
+                    judgement.setCourtId(entity.getCourtId());
+                });
+            } catch (Exception e) {
+                throw new JobBusinessSkipException("裁判所名の取得に失敗:" + courtJudgement.getCourtName());
+            }
+        });
 
         // 事件名
         ifNotBlank(courtJudgement.getCaseName()).ifPresent(value -> {
@@ -228,6 +231,8 @@ public class CourtJudgementMigrateJob implements LaJob {
             // 判決文はinsertしない。PDFの処理が必要なので別のタイミングで。
             judgementSourceRelBhv.insert(rel);
 
+            courtJudgement.setMemo(null);
+            courtJudgementBhv.update(courtJudgement);
         } catch (EntityAlreadyExistsException e) {
             throw new JobBusinessSkipException("挿入に失敗しました。JID:" + makeNextPublicCode);
         }
@@ -306,6 +311,9 @@ public class CourtJudgementMigrateJob implements LaJob {
     //                                            裁判所名取得
     //                                            ----------
     protected OptionalEntity<Court> selectCourtOpt(String courtName) { //  e.g. 千葉地方裁判所, 大分地方裁判所 　中津支部
+        if (isBlank(courtName)) {
+            throw new HanreidbSystemException("裁判所名がnullもしくは空白 courtName:" + courtName);
+        }
         return courtBhv.selectEntity(cb -> {
             cb.specify().columnCourtId();
             cb.specify().columnCourtTypeCode(); // 最高裁判所かどうか判別
