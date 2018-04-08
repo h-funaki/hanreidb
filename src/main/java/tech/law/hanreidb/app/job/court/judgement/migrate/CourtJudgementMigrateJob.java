@@ -131,13 +131,17 @@ public class CourtJudgementMigrateJob implements LaJob {
             } catch (JobBusinessSkipException skip) {
                 logger.info("business skip court_original_id {}", sourceOriginalId);
                 recorder.asBusinessSkip(recordMessage(pk, sourceOriginalId, skip.getMessage()));
-                courtJudgement.setMemo(skip.getMessage()); // 備考欄にメモ
-                courtJudgementBhv.updateNonstrict(courtJudgement);
+                transactionStage.requiresNew(tx -> {
+                    courtJudgement.setMemo(skip.getMessage()); // 備考欄にメモ
+                    courtJudgementBhv.updateNonstrict(courtJudgement);
+                });
             } catch (Exception error) {
                 logger.info("error court_original_id {}", sourceOriginalId);
                 recorder.asError(recordMessage(pk, sourceOriginalId, error.getMessage()));
-                courtJudgement.setMemo(error.getMessage()); // 備考欄にメモ
-                courtJudgementBhv.updateNonstrict(courtJudgement);
+                transactionStage.requiresNew(tx -> {
+                    courtJudgement.setMemo(error.getMessage()); // 備考欄にメモ
+                    courtJudgementBhv.updateNonstrict(courtJudgement);
+                });
             }
         }
     }
