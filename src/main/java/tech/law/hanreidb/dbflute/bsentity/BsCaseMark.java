@@ -106,7 +106,7 @@ public abstract class BsCaseMark extends AbstractEntity implements DomainEntity,
     /** (事件符号別名)CASE_MARK_ALIAS: {NotNull, VARCHAR(10)} */
     protected String _caseMarkAlias;
 
-    /** (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} */
+    /** (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} */
     protected String _caseCategoryCode;
 
     /** (裁判所種別コード)COURT_TYPE_CODE: {IX, VARCHAR(10), FK to CLS_COURT_TYPE, classification=CourtType} */
@@ -157,7 +157,7 @@ public abstract class BsCaseMark extends AbstractEntity implements DomainEntity,
     //                                                             =======================
     /**
      * Get the value of caseCategoryCode as the classification of CaseCategory. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
      */
@@ -167,7 +167,7 @@ public abstract class BsCaseMark extends AbstractEntity implements DomainEntity,
 
     /**
      * Set the value of caseCategoryCode as the classification of CaseCategory. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
     public void setCaseCategoryCodeAsCaseCategory(CDef.CaseCategory cdef) {
@@ -641,9 +641,9 @@ public abstract class BsCaseMark extends AbstractEntity implements DomainEntity,
     }
 
     /**
-     * [get] (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
+     * [get] (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
      * 事件カテゴリーコード e.g. MIN
-     * @return The value of the column 'CASE_CATEGORY_CODE'. (basically NotNull if selected: for the constraint)
+     * @return The value of the column 'CASE_CATEGORY_CODE'. (NullAllowed even if selected: for no constraint)
      */
     public String getCaseCategoryCode() {
         checkSpecifiedProperty("caseCategoryCode");
@@ -651,9 +651,9 @@ public abstract class BsCaseMark extends AbstractEntity implements DomainEntity,
     }
 
     /**
-     * [set] (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
+     * [set] (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
      * 事件カテゴリーコード e.g. MIN
-     * @param caseCategoryCode The value of the column 'CASE_CATEGORY_CODE'. (basically NotNull if update: for the constraint)
+     * @param caseCategoryCode The value of the column 'CASE_CATEGORY_CODE'. (NullAllowed: null update allowed for no constraint)
      */
     public void setCaseCategoryCode(String caseCategoryCode) {
         registerModifiedProperty("caseCategoryCode");

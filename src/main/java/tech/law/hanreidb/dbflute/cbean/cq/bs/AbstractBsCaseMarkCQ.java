@@ -421,7 +421,7 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
      * @param caseCategoryCode The value of caseCategoryCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseCategoryCode_Equal(String caseCategoryCode) {
@@ -430,7 +430,7 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). As CaseCategory. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setCaseCategoryCode_Equal_AsCaseCategory(CDef.CaseCategory cdef) {
@@ -499,7 +499,7 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
      * @param caseCategoryCode The value of caseCategoryCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseCategoryCode_NotEqual(String caseCategoryCode) {
@@ -508,7 +508,7 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). As CaseCategory. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setCaseCategoryCode_NotEqual_AsCaseCategory(CDef.CaseCategory cdef) {
@@ -577,7 +577,7 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
      * @param caseCategoryCodeList The collection of caseCategoryCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseCategoryCode_InScope(Collection<String> caseCategoryCodeList) {
@@ -586,7 +586,7 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. As CaseCategory. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseCategoryCode_InScope_AsCaseCategory(Collection<CDef.CaseCategory> cdefList) {
@@ -599,7 +599,7 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
      * @param caseCategoryCodeList The collection of caseCategoryCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseCategoryCode_NotInScope(Collection<String> caseCategoryCodeList) {
@@ -608,7 +608,7 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. As CaseCategory. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseCategoryCode_NotInScope_AsCaseCategory(Collection<CDef.CaseCategory> cdefList) {
@@ -618,6 +618,24 @@ public abstract class AbstractBsCaseMarkCQ extends AbstractConditionQuery {
     protected void doSetCaseCategoryCode_NotInScope(Collection<String> caseCategoryCodeList) {
         regINS(CK_NINS, cTL(caseCategoryCodeList), xgetCValueCaseCategoryCode(), "CASE_CATEGORY_CODE");
     }
+
+    /**
+     * IsNull {is null}. And OnlyOnceRegistered. <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     */
+    public void setCaseCategoryCode_IsNull() { regCaseCategoryCode(CK_ISN, DOBJ); }
+
+    /**
+     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     */
+    public void setCaseCategoryCode_IsNullOrEmpty() { regCaseCategoryCode(CK_ISNOE, DOBJ); }
+
+    /**
+     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     */
+    public void setCaseCategoryCode_IsNotNull() { regCaseCategoryCode(CK_ISNN, DOBJ); }
 
     protected void regCaseCategoryCode(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueCaseCategoryCode(), "CASE_CATEGORY_CODE"); }
     protected abstract ConditionValue xgetCValueCaseCategoryCode();

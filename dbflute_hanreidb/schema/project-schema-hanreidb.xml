@@ -16,7 +16,7 @@
             size="10" type="VARCHAR"/>
         <column comment="事件カテゴリーコード : 事件カテゴリーコード e.g. MIN"
             dbType="VARCHAR" javaType="String" name="CASE_CATEGORY_CODE"
-            required="true" size="10" type="VARCHAR"/>
+            size="10" type="VARCHAR"/>
         <column comment="裁判所種別コード : 裁判所種別コード e.g. SUPREME"
             dbType="VARCHAR" javaType="String" name="COURT_TYPE_CODE"
             size="10" type="VARCHAR"/>

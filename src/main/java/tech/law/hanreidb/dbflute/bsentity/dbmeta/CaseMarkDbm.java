@@ -107,7 +107,7 @@ public class CaseMarkDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnCaseMarkId = cci("CASE_MARK_ID", "CASE_MARK_ID", null, "事件符号ID", Integer.class, "caseMarkId", null, true, true, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, "judgementList", null, false);
     protected final ColumnInfo _columnCaseMarkName = cci("CASE_MARK_NAME", "CASE_MARK_NAME", null, "事件符号名", String.class, "caseMarkName", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnCaseMarkAlias = cci("CASE_MARK_ALIAS", "CASE_MARK_ALIAS", null, "事件符号別名", String.class, "caseMarkAlias", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnCaseCategoryCode = cci("CASE_CATEGORY_CODE", "CASE_CATEGORY_CODE", null, "事件カテゴリーコード", String.class, "caseCategoryCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsCaseCategory", null, CDef.DefMeta.CaseCategory, false);
+    protected final ColumnInfo _columnCaseCategoryCode = cci("CASE_CATEGORY_CODE", "CASE_CATEGORY_CODE", null, "事件カテゴリーコード", String.class, "caseCategoryCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsCaseCategory", null, CDef.DefMeta.CaseCategory, false);
     protected final ColumnInfo _columnCourtTypeCode = cci("COURT_TYPE_CODE", "COURT_TYPE_CODE", null, "裁判所種別コード", String.class, "courtTypeCode", null, false, false, false, "VARCHAR", 10, 0, null, false, null, null, "clsCourtType", null, CDef.DefMeta.CourtType, false);
     protected final ColumnInfo _columnCaseMarkDetail = cci("CASE_MARK_DETAIL", "CASE_MARK_DETAIL", null, "事件符号詳細", String.class, "caseMarkDetail", null, false, false, false, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -132,7 +132,7 @@ public class CaseMarkDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnCaseMarkAlias() { return _columnCaseMarkAlias; }
     /**
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnCaseCategoryCode() { return _columnCaseCategoryCode; }

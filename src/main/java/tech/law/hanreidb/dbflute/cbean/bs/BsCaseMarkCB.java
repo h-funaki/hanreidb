@@ -355,7 +355,7 @@ public class BsCaseMarkCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnCaseMarkAlias() { return doColumn("CASE_MARK_ALIAS"); }
         /**
-         * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+         * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnCaseCategoryCode() { return doColumn("CASE_CATEGORY_CODE"); }

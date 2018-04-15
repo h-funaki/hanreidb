@@ -170,14 +170,14 @@ public class BsCaseMarkCQ extends AbstractBsCaseMarkCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
      * @return this. (NotNull)
      */
     public BsCaseMarkCQ addOrderBy_CaseCategoryCode_Asc() { regOBA("CASE_CATEGORY_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
+     * (事件カテゴリーコード)CASE_CATEGORY_CODE: {IX, VARCHAR(10), FK to CLS_CASE_CATEGORY, classification=CaseCategory}
      * @return this. (NotNull)
      */
     public BsCaseMarkCQ addOrderBy_CaseCategoryCode_Desc() { regOBD("CASE_CATEGORY_CODE"); return this; }
