@@ -11,6 +11,8 @@ import org.dbflute.cbean.result.PagingResultBean;
 import org.lastaflute.web.Execute;
 import org.lastaflute.web.login.AllowAnyoneAccess;
 import org.lastaflute.web.response.JsonResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import tech.law.hanreidb.app.base.HanreidbBaseAction;
 import tech.law.hanreidb.app.web.judgement.list.JudgementListContentResult.JudgementPart;
@@ -26,6 +28,11 @@ import tech.law.hanreidb.dbflute.exentity.JudgementReportRel;
  */
 @AllowAnyoneAccess
 public class JudgementListAction extends HanreidbBaseAction {
+
+    // ===================================================================================
+    //                                                                          Definition
+    //                                                                          ==========
+    private static final Logger logger = LoggerFactory.getLogger(JudgementListAction.class);
 
     // ===================================================================================
     //                                                                           Attribute
@@ -44,6 +51,7 @@ public class JudgementListAction extends HanreidbBaseAction {
     }
 
     private PagingResultBean<Judgement> selectJudgementPage(JudgementListBody body) {
+        logger.info(body.toString());
         PagingResultBean<Judgement> page = judgementBhv.selectPage(cb -> {
             cb.specify().columnBenchCode();
             cb.specify().columnCaseMarkId();
@@ -141,6 +149,11 @@ public class JudgementListAction extends HanreidbBaseAction {
         ifNotNull(body.report_go).ifPresent(value -> {
             cb.query().existsJudgementReportRel(reportRelCB -> {
                 reportRelCB.query().setReportGo_Equal(value);
+            });
+        });
+        ifNotBlank(body.search_word).ifPresent(value -> {
+            cb.query().existsJudgementSourceRel(sourceRelCB -> {
+                sourceRelCB.query().setJudgementSourceSentence_LikeSearch(value, op -> op.likeContain());
             });
         });
     }

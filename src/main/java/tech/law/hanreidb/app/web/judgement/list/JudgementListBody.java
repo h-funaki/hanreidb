@@ -13,6 +13,9 @@ public class JudgementListBody {
     /** 事件名 (NullAllowed)*/
     public String case_name;
 
+    /** 検索ワード (NullAllowed)*/
+    public String search_word;
+
     /** 判例集巻 (NullAllowed)*/
     public Integer report_kan;
 

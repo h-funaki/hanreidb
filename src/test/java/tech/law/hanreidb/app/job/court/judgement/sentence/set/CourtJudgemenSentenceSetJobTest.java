@@ -22,7 +22,7 @@ public class CourtJudgemenSentenceSetJobTest extends NxJobTestCase {
         inject(job);
 
         // ## Act ##
-        job.processSentence(85100);
+        job.processSentence(35000); //85100 
 
         // ## Assert ##
     }

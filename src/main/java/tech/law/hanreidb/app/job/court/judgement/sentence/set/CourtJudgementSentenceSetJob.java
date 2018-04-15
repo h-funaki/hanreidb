@@ -87,7 +87,6 @@ public class CourtJudgementSentenceSetJob implements LaJob {
 
         for (Integer targetId : targetIdList) {
             recorder.asProcessed();
-            logger.info("target id:{}", targetId);
             try {
                 int id = targetId;
                 transactionStage.requiresNew(tx -> {
@@ -107,32 +106,15 @@ public class CourtJudgementSentenceSetJob implements LaJob {
         fileLogic.outputRecorder(recorder, getClass().getSimpleName(), beginId, endId);
     }
 
-    public void processSentence(Integer targetId) {
+    protected void processSentence(Integer targetId) {
         PDDocument document = null;
         StringWriter output = null;
         try {
             document = PDDocument.load(new File(env.getCourtPdfPath() + targetId + ".pdf"));
-            PDFTextStripper stripper = new PDFTextStripper();
-            //            String[] split = stripper.getText(document).split(stripper.getLineSeparator());
-            //            for (String string : split) {
-            //                if (string.startsWith("\\s")) {
-            //                    logger.debug("ここ");
-            //                }
-            //                logger.debug(string);
-            //            }
-            String text = stripper.getText(document).replaceAll(stripper.getLineSeparator(), "");
-            text = text.replaceAll("。(　)", "。\n$1");
-            text = text.replaceAll("。( )", "。\n$1");
-            text = text.replaceAll("　([１-９]　)", "\n$1");
-            text = text.replaceAll("第([１-９]　)", "\n第$1");
-            text = text.replaceFirst("事　実　及　び　理　由", "\n事　実　及　び　理　由\n"); // .replaceAll("\\s{2,}", "")
-            text = text.replaceAll("- \\d{1,} - ", "");
-            //text = text.replaceAll("", "");
-            //text = text.replaceAll("", "");
-
-            logger.debug(text);
-
-            // updateJudgementSourceRel(targetId, stripper.getText(document));
+            String formattedSentence = formatPdfTextForViewing(document);
+            //            PDFTextStripper stripper = new PDFTextStripper();
+            //            String formattedSentence = stripper.getText(document);
+            updateJudgementSourceRel(targetId, formattedSentence);
         } catch (IOException e) {
             throw new JobBusinessSkipException("PDFファイルの取得に失敗。targetId:" + targetId);
         } catch (EntityAlreadyDeletedException | EntityDuplicatedException | EntityAlreadyExistsException e) {
@@ -141,6 +123,32 @@ public class CourtJudgementSentenceSetJob implements LaJob {
             IOUtils.closeQuietly(output);
             IOUtils.closeQuietly(document);
         }
+    }
+
+    protected String formatPdfTextForViewing(PDDocument document) throws IOException {
+        PDFTextStripper stripper = new PDFTextStripper();
+        String text = stripper.getText(document);
+
+        // 無駄な改行を削除
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append("([\\S&&[^。　]])"); // 句点、全スペ、空白文字のどれでもない文字があって
+        sb1.append("\n"); // 次の文字が消したい改行で
+        sb1.append("([^　\\s(第?[\\d０-９]{1,2}[ \\s　[^条]]+)])"); // 次の文字が全スペ、空白文字、 (第)◯◯、のどれでもない。
+        text = text.replaceAll(sb1.toString(), "$1$2"); // 改行だけ削除する。
+
+        // 改行すべき箇所で改行するよう調整
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append("(\n第[0-9０-９][　\\s]+\\S[^　１-９]+)"); // 文頭から、"第４　当裁判所の判断"
+        sb2.append("(\\s*)"); // 空白文字
+        sb2.append("(\\S*)"); // １　現行の法は，・・・
+        text = text.replaceAll(sb2.toString(), "$1\n$2$3");
+
+        // なぜか主文のところだけおかしいので修正。
+        text = text.replaceFirst("([　\\s]*主[　\\s]*文[　\\s]*)(第?[\\d０-９]{1,2}[ \\s　]+)", "$1\n$2");
+
+        // ページ番号
+        text = text.replaceAll("- \\d{1,3} - \n", "");
+        return text;
     }
 
     private void updateJudgementSourceRel(Integer targetId, String sentence) {
@@ -164,8 +172,6 @@ public class CourtJudgementSentenceSetJob implements LaJob {
             if (pdfList.contains(targetId.toString().concat(".pdf"))) {
                 logger.debug(targetId.toString());
                 targetIdList.add(targetId);
-            } else {
-                logger.info("pdfファイルなし。targetId:{}", targetId);
             }
         }
         return targetIdList;

@@ -162,6 +162,8 @@ public class CourtJudgementMigrateJob implements LaJob {
             } catch (Exception e) {
                 throw new JobBusinessSkipException("裁判所名の取得に失敗:" + courtJudgement.getCourtName());
             }
+        }).orElse(() -> {
+            throw new JobBusinessSkipException("裁判所名がBlank");
         });
 
         // 事件名
