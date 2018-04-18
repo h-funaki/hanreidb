@@ -138,7 +138,7 @@ public class JudgementListAction extends HanreidbBaseAction {
         });
         ifNotNull(body.report_kan).ifPresent(value -> {
             cb.query().existsJudgementReportRel(reportRelCB -> {
-                reportRelCB.query().setReportGo_Equal(value);
+                reportRelCB.query().setReportKan_Equal(value);
             });
         });
         ifNotNull(body.report_ko).ifPresent(value -> {
