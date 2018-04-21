@@ -33,40 +33,7 @@ public class JudgementGetAction extends HanreidbBaseAction {
     //                                                                             =======
     @Execute
     public JsonResponse<JudgementGetContentResult> index(String judgementPublicCode) {
-        return asJson(mappingToContent(selectJudgement(judgementPublicCode)));
-    }
-
-    // ===================================================================================
-    //                                                                              Select
-    //                                                                              ======
-    private Judgement selectJudgement(String judgementPublicCode) {
-        Judgement judgement = judgementBhv.selectEntityWithDeletedCheck(cb -> {
-            cb.acceptUniqueOf(judgementPublicCode);
-            cb.setupSelect_CaseMark();
-
-            cb.setupSelect_CaseMark().withClsCaseCategory();
-
-            cb.setupSelect_CaseMark().withClsCourtType();
-
-            cb.setupSelect_Court();
-
-            cb.setupSelect_ClsJudgementResult();
-
-            cb.setupSelect_ClsJudgementType();
-
-            cb.setupSelect_ClsBench();
-
-            cb.setupSelect_JudgementSelf().withCaseMark();
-        });
-        judgementBhv.load(judgement, baseLoader -> {
-            baseLoader.loadJudgementReportRel(reportRelCB -> {
-                reportRelCB.setupSelect_Report();
-            });
-            baseLoader.loadJudgementSourceRel(sourceRelCB -> {
-                sourceRelCB.setupSelect_ClsSource();
-            });
-        });
-        return judgement;
+        return asJson(mappingToContent(judgementBhv.selectJudgement(judgementPublicCode)));
     }
 
     // ===================================================================================
@@ -78,10 +45,16 @@ public class JudgementGetAction extends HanreidbBaseAction {
         content.judgement_public_code = judgement.getJudgementPublicCode();
         content.case_name = judgement.getCaseName();
         content.judgement_date = judgement.getJudgementDate();
-        content.original_judgement_id = judgement.getOriginalJudgementId();
         judgement.getJudgementSelf().ifPresent(self -> {
+            content.original_judgement_public_code = judgementBhv.selectJudgementPublicCode(self.getJudgementId());
             content.original_judgement_case_mark_part = convertToCaseMarkPart(self);
         });
+
+        judgementBhv.selectAppealJudgementPublicCode(judgement.getJudgementPublicCode()).ifPresent(appeal -> {
+            content.appeal_judgement_public_code = appeal.getJudgementPublicCode();
+            content.appeal_judgement_case_mark_part = convertToCaseMarkPart(appeal);
+        });
+
         content.court_id = judgement.getCourtId();
         content.court_name = judgement.getCourt().get().getCourtName();
         ifNotNull(judgement.getBenchCodeAsBench()).ifPresent(bench -> {

@@ -25,11 +25,19 @@ public class JudgementGetContentResult {
     /** 裁判年月日 e.g. null (NullAllowed)*/
     public LocalDate judgement_date;
 
-    /** 原審判決ID e.g. null (NullAllowed)*/
-    public Long original_judgement_id;
+    /** 原審判決公開コード e.g. JIDXXX123456 (NullAllowed)*/
+    public String original_judgement_public_code;
 
     /** 原審判決事件番号 (NullAllowed)*/
     public CaseMarkPart original_judgement_case_mark_part;
+
+    /** 判決公開コード e.g. JIDXXX123456 (NullAllowed)*/
+    public String appeal_judgement_public_code;
+
+    /** 原審判決事件番号 (NullAllowed)*/
+    public CaseMarkPart appeal_judgement_case_mark_part;
+
+    // TODO h-funaki どうせ原審や控訴審の判決も取得するので、詳細取得はやめて一覧取得にしたい (2018/04/21)
 
     /** 裁判所ID e.g. 1 */
     @Required

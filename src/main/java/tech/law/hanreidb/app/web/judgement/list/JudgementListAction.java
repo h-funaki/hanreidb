@@ -105,7 +105,7 @@ public class JudgementListAction extends HanreidbBaseAction {
             cb.query().setCaseMarkId_Equal(value);
         });
         ifNotBlank(body.case_name).ifPresent(value -> {
-            cb.query().setCaseName_LikeSearch(value, op -> op.likeContain());
+            cb.query().setCaseName_LikeSearch(value, op -> op.splitBySpaceContainsDoubleByte().likeContain());
         });
         ifNotNull(body.case_number_era).ifPresent(value -> {
             cb.query().setCaseNumberEraCode_Equal_AsEra(value);
@@ -153,7 +153,7 @@ public class JudgementListAction extends HanreidbBaseAction {
         });
         ifNotBlank(body.search_word).ifPresent(value -> {
             cb.query().existsJudgementSourceRel(sourceRelCB -> {
-                sourceRelCB.query().setJudgementSourceSentence_LikeSearch(value, op -> op.likeContain());
+                sourceRelCB.query().setJudgementSourceSentence_LikeSearch(value, op -> op.splitBySpaceContainsDoubleByte().likeContain());
             });
         });
     }
@@ -195,7 +195,7 @@ public class JudgementListAction extends HanreidbBaseAction {
             judgementPart.judgement_type_alias = value.alias();
             judgementPart.judgement_type_code = value.code();
         });
-        judgementPart.original_judgement_id = judgement.getJudgementId();
+        judgementPart.original_judgement_public_code = judgementBhv.selectJudgementPublicCode(judgement.getJudgementId());
 
         judgementPart.report_part_list = toImmutable(judgement.getJudgementReportRelList()).collect(this::convertToReportPart).castToList();
         return judgementPart;

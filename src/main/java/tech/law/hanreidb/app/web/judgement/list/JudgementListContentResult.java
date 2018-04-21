@@ -44,7 +44,7 @@ public class JudgementListContentResult {
         public String case_name;
         public List<ReportPart> report_part_list;
         public LocalDate judgement_date;
-        public Long original_judgement_id;
+        public String original_judgement_public_code;
         public String case_number_era_code;
         public String case_number_era_alias;
         public Integer case_number_year;
