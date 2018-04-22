@@ -62,5 +62,8 @@ public class JudgementListBody {
     public List<CDef.JudgementType> judgement_type_list;
 
     /** page number */
-    public Integer page_number;
+    public int page_number;
+
+    /** page size */
+    public int page_size;
 }

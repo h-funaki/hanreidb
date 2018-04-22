@@ -3,6 +3,10 @@ package tech.law.hanreidb.app.web.judgement.list;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.Valid;
+
+import tech.law.hanreidb.app.web.base.paging.PagingPart;
+
 /**
  * @author h-funaki
  */
@@ -11,27 +15,8 @@ public class JudgementListContentResult {
     /**  */
     public List<JudgementPart> judgement_list;
 
+    @Valid
     public PagingPart paging_part;
-
-    public static class PagingPart {
-
-        /**  */
-        public Integer all_record_count;
-
-        public Integer all_page_count;
-
-        public Integer current_page_number;
-
-        public Integer current_page_size;
-
-        public boolean exists_next_page;
-
-        public Integer next_page_number;
-
-        public boolean exists_previous_page;
-
-        public Integer previous_page_number;
-    }
 
     /**
      * @author h-funaki

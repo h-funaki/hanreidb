@@ -15,8 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import tech.law.hanreidb.app.base.HanreidbBaseAction;
+import tech.law.hanreidb.app.web.base.paging.PagingPart;
 import tech.law.hanreidb.app.web.judgement.list.JudgementListContentResult.JudgementPart;
-import tech.law.hanreidb.app.web.judgement.list.JudgementListContentResult.PagingPart;
 import tech.law.hanreidb.app.web.judgement.list.JudgementListContentResult.ReportPart;
 import tech.law.hanreidb.dbflute.cbean.JudgementCB;
 import tech.law.hanreidb.dbflute.exbhv.JudgementBhv;
@@ -52,6 +52,7 @@ public class JudgementListAction extends HanreidbBaseAction {
 
     private PagingResultBean<Judgement> selectJudgementPage(JudgementListBody body) {
         logger.info(body.toString());
+
         PagingResultBean<Judgement> page = judgementBhv.selectPage(cb -> {
             cb.specify().columnBenchCode();
             cb.specify().columnCaseMarkId();
@@ -77,8 +78,7 @@ public class JudgementListAction extends HanreidbBaseAction {
             cb.specify().specifyCourt().columnCourtAlias();
 
             conditionBean(body, cb);
-
-            cb.paging(30, body.page_number);
+            cb.paging(body.page_size, body.page_number);
 
             cb.addOrderBy_PK_Asc();
         });
@@ -164,7 +164,7 @@ public class JudgementListAction extends HanreidbBaseAction {
     private JudgementListContentResult mappingToContent(PagingResultBean<Judgement> page) {
         JudgementListContentResult result = new JudgementListContentResult();
         result.judgement_list = toImmutable(page).collect(this::convertToJudgementPart).castToList();
-        result.paging_part = createPagingPart(page);
+        result.paging_part = new PagingPart(page);
         return result;
     }
 
@@ -199,23 +199,6 @@ public class JudgementListAction extends HanreidbBaseAction {
 
         judgementPart.report_part_list = toImmutable(judgement.getJudgementReportRelList()).collect(this::convertToReportPart).castToList();
         return judgementPart;
-    }
-
-    private PagingPart createPagingPart(PagingResultBean<Judgement> page) {
-        PagingPart pagingPart = new PagingPart();
-        pagingPart.all_record_count = page.getAllRecordCount();
-        pagingPart.exists_next_page = page.existsNextPage();
-        pagingPart.exists_previous_page = page.existsPreviousPage();
-        pagingPart.all_page_count = page.getAllPageCount();
-        pagingPart.current_page_number = page.getCurrentPageNumber();
-        pagingPart.current_page_size = page.getPageSize();
-        if (page.existsNextPage()) {
-            pagingPart.next_page_number = page.getNextPageNumber();
-        }
-        if (page.existsPreviousPage()) {
-            pagingPart.previous_page_number = page.getPreviousPageNumber();
-        }
-        return pagingPart;
     }
 
     private ReportPart convertToReportPart(JudgementReportRel rel) {
