@@ -895,6 +895,46 @@
 				<column_group>共通カラム</column_group>
 			</columns>
 			<indexes>
+				<index>
+					<name>IX_COURT_JUDGEMENT_COURT_NAME</name>
+					<type>BTREE</type>
+					<non_unique>true</non_unique>
+					<columns>
+						<column>
+							<column_id>table.COURT_JUDGEMENT.COURT_NAME</column_id>
+						</column>
+					</columns>
+				</index>
+				<index>
+					<name>IX_COURT_JUDGEMENT_CASE_NUMBER</name>
+					<type>BTREE</type>
+					<non_unique>true</non_unique>
+					<columns>
+						<column>
+							<column_id>table.COURT_JUDGEMENT.CASE_NUMBER</column_id>
+						</column>
+					</columns>
+				</index>
+				<index>
+					<name>IX_COURT_JUDGEMENT_ORIGINAL_COURT_NAME</name>
+					<type>BTREE</type>
+					<non_unique>true</non_unique>
+					<columns>
+						<column>
+							<column_id>table.COURT_JUDGEMENT.ORIGINAL_COURT_NAME</column_id>
+						</column>
+					</columns>
+				</index>
+				<index>
+					<name>IX_COURT_JUDGEMENT_ORIGINAL_CASE_NUMBER</name>
+					<type>BTREE</type>
+					<non_unique>true</non_unique>
+					<columns>
+						<column>
+							<column_id>table.COURT_JUDGEMENT.ORIGINAL_CASE_NUMBER</column_id>
+						</column>
+					</columns>
+				</index>
 			</indexes>
 			<compound_unique_key_list>
 			</compound_unique_key_list>
