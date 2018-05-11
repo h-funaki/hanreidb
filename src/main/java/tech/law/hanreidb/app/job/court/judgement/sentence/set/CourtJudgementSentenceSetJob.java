@@ -37,8 +37,6 @@ public class CourtJudgementSentenceSetJob implements LaJob {
     //                                                                          ==========
     private static final Logger logger = LoggerFactory.getLogger(CourtJudgementSetJob.class);
 
-    public static final String BASE_URL = "http://www.courts.go.jp/app/hanrei_jp/";
-
     public static final String BEGIN_ID = "begin_id";
 
     public static final String END_ID = "end_id";

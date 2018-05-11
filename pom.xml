@@ -366,6 +366,13 @@
             <artifactId>pdfbox</artifactId>
             <version>${pdfbox.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/stax/stax-api -->
+		<dependency>
+		    <groupId>stax</groupId>
+		    <artifactId>stax-api</artifactId>
+		    <version>1.0.1</version>
+		</dependency>
+        
 		<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
 		<!--                                                                       Testing -->
 		<!--                                                                       = = = = -->
