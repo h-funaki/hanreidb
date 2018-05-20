@@ -142,7 +142,7 @@ public class CourtJudgementDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnCourtJudgementId() { return _columnCourtJudgementId; }
     /**
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnCaseNumber() { return _columnCaseNumber; }
@@ -157,7 +157,7 @@ public class CourtJudgementDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnJudgementDate() { return _columnJudgementDate; }
     /**
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnCourtName() { return _columnCourtName; }
@@ -177,12 +177,12 @@ public class CourtJudgementDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnPrecedentReports() { return _columnPrecedentReports; }
     /**
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnOriginalCourtName() { return _columnOriginalCourtName; }
     /**
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnOriginalCaseNumber() { return _columnOriginalCaseNumber; }

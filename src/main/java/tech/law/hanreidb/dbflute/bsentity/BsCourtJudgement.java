@@ -132,7 +132,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     /** (裁判所判決ID)COURT_JUDGEMENT_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} */
     protected Long _courtJudgementId;
 
-    /** (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} */
+    /** (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)} */
     protected String _caseNumber;
 
     /** (事件名)CASE_NAME: {TEXT(65535)} */
@@ -141,7 +141,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     /** (裁判年月日)JUDGEMENT_DATE: {VARCHAR(50)} */
     protected String _judgementDate;
 
-    /** (裁判所名)COURT_NAME: {VARCHAR(50)} */
+    /** (裁判所名)COURT_NAME: {IX, VARCHAR(50)} */
     protected String _courtName;
 
     /** (裁判種別)JUDGEMENT_TYPE: {VARCHAR(50)} */
@@ -153,10 +153,10 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     /** (判例集)PRECEDENT_REPORTS: {VARCHAR(50)} */
     protected String _precedentReports;
 
-    /** (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)} */
+    /** (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)} */
     protected String _originalCourtName;
 
-    /** (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)} */
+    /** (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)} */
     protected String _originalCaseNumber;
 
     /** (原審裁判年月日)ORIGINAL_JUDGEMENT_DATE: {VARCHAR(50)} */
@@ -353,7 +353,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [get] (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} <br>
+     * [get] (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)} <br>
      * @return The value of the column 'CASE_NUMBER'. (basically NotNull if selected: for the constraint)
      */
     public String getCaseNumber() {
@@ -362,7 +362,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [set] (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} <br>
+     * [set] (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)} <br>
      * @param caseNumber The value of the column 'CASE_NUMBER'. (basically NotNull if update: for the constraint)
      */
     public void setCaseNumber(String caseNumber) {
@@ -407,7 +407,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [get] (裁判所名)COURT_NAME: {VARCHAR(50)} <br>
+     * [get] (裁判所名)COURT_NAME: {IX, VARCHAR(50)} <br>
      * @return The value of the column 'COURT_NAME'. (NullAllowed even if selected: for no constraint)
      */
     public String getCourtName() {
@@ -416,7 +416,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [set] (裁判所名)COURT_NAME: {VARCHAR(50)} <br>
+     * [set] (裁判所名)COURT_NAME: {IX, VARCHAR(50)} <br>
      * @param courtName The value of the column 'COURT_NAME'. (NullAllowed: null update allowed for no constraint)
      */
     public void setCourtName(String courtName) {
@@ -479,7 +479,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [get] (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)} <br>
+     * [get] (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)} <br>
      * @return The value of the column 'ORIGINAL_COURT_NAME'. (NullAllowed even if selected: for no constraint)
      */
     public String getOriginalCourtName() {
@@ -488,7 +488,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [set] (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)} <br>
+     * [set] (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)} <br>
      * @param originalCourtName The value of the column 'ORIGINAL_COURT_NAME'. (NullAllowed: null update allowed for no constraint)
      */
     public void setOriginalCourtName(String originalCourtName) {
@@ -497,7 +497,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [get] (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)} <br>
+     * [get] (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)} <br>
      * @return The value of the column 'ORIGINAL_CASE_NUMBER'. (NullAllowed even if selected: for no constraint)
      */
     public String getOriginalCaseNumber() {
@@ -506,7 +506,7 @@ public abstract class BsCourtJudgement extends AbstractEntity implements DomainE
     }
 
     /**
-     * [set] (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)} <br>
+     * [set] (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)} <br>
      * @param originalCaseNumber The value of the column 'ORIGINAL_CASE_NUMBER'. (NullAllowed: null update allowed for no constraint)
      */
     public void setOriginalCaseNumber(String originalCaseNumber) {

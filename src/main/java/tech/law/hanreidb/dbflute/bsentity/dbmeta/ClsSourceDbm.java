@@ -89,7 +89,7 @@ public class ClsSourceDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, true, false, true, "VARCHAR", 10, 0, null, false, null, null, null, "judgementSourceRelList", CDef.DefMeta.Source, false);
+    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, true, false, true, "VARCHAR", 10, 0, null, false, null, null, null, "judgementSourceRelList,lawSourceRelList,sourceLawCategoryList", CDef.DefMeta.Source, false);
     protected final ColumnInfo _columnSourceName = cci("SOURCE_NAME", "SOURCE_NAME", null, "取得元名", String.class, "sourceName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnSourceAlias = cci("SOURCE_ALIAS", "SOURCE_ALIAS", null, "取得元別名", String.class, "sourceAlias", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDescription = cci("DESCRIPTION", "DESCRIPTION", null, "説明", String.class, "description", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
@@ -204,6 +204,22 @@ public class ClsSourceDbm extends AbstractDBMeta {
     public ReferrerInfo referrerJudgementSourceRelList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnSourceCode(), JudgementSourceRelDbm.getInstance().columnSourceCode());
         return cri("FK_JUDGEMENT_SOURCE_REL_SOURCE", "judgementSourceRelList", this, JudgementSourceRelDbm.getInstance(), mp, false, "clsSource");
+    }
+    /**
+     * (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerLawSourceRelList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnSourceCode(), LawSourceRelDbm.getInstance().columnSourceCode());
+        return cri("FK_LAW_SOURCE_REL_CLS_SOURCE", "lawSourceRelList", this, LawSourceRelDbm.getInstance(), mp, false, "clsSource");
+    }
+    /**
+     * (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerSourceLawCategoryList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnSourceCode(), SourceLawCategoryDbm.getInstance().columnSourceCode());
+        return cri("FK_SOURCE_LAW_CATEGORY_CLS_SOURCE", "sourceLawCategoryList", this, SourceLawCategoryDbm.getInstance(), mp, false, "clsSource");
     }
 
     // ===================================================================================

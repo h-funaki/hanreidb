@@ -1,18 +1,27 @@
-[Saved Previous Resources]: 2018/04/08 14:41:27
+[Saved Previous Resources]: 2018/05/20 12:19:50
 playsql/migration/previous/replace-schema-00-system.sql
 playsql/migration/previous/replace-schema-10-basic.sql
 playsql/migration/previous/take-finally.sql
-playsql/migration/previous/data/common/xls/10-master.xls
+playsql/migration/previous/data/common/xls/.DS_Store
+playsql/migration/previous/data/common/xls/1-hanrei_master.xls
+playsql/migration/previous/data/common/xls/2-law_master.xls
 playsql/migration/previous/data/common/xls/defaultValueMap.dataprop
 playsql/migration/previous/data/common/xls/xls-data-result.dfmark
+playsql/migration/previous/data/common/.DS_Store
 playsql/migration/previous/data/ut/reversexls/.gitignore
 playsql/migration/previous/data/ut/reversexls/defaultValueMap.dataprop
 playsql/migration/previous/data/ut/reversexls/loadingControlMap.dataprop
 playsql/migration/previous/data/ut/reversexls/reverse-data-result.dfmark
 playsql/migration/previous/data/ut/reversexls/xls-data-result.dfmark
+playsql/migration/previous/data/ut/xls/1-hanreidb_test.xls
+playsql/migration/previous/data/ut/xls/2-law_test.xls
+playsql/migration/previous/data/ut/xls/3-article_test.xls
 playsql/migration/previous/data/ut/xls/defaultValueMap.dataprop
-playsql/migration/previous/data/ut/xls/test.xls
 playsql/migration/previous/data/ut/xls/xls-data-result.dfmark
-(14 files)
+playsql/migration/previous/data/ut/xml/lawlist.xml
+playsql/migration/previous/data/ut/insertLawAlias.xlsx
+playsql/migration/previous/data/ut/law_alias.tsv
+playsql/migration/previous/data/.DS_Store
+(23 files)
 
 Look at the log for detail.

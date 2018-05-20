@@ -84,6 +84,14 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
         setSourceCode_Equal_AsSource(CDef.Source.裁判所裁判例);
     }
 
+    /**
+     * Equal(=). As Egov (EGOV). And OnlyOnceRegistered. <br>
+     * e-Gov: e-Gov
+     */
+    public void setSourceCode_Equal_Egov() {
+        setSourceCode_Equal_AsSource(CDef.Source.Egov);
+    }
+
     protected void doSetSourceCode_Equal(String sourceCode) {
         regSourceCode(CK_EQ, sourceCode);
     }
@@ -112,6 +120,14 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
      */
     public void setSourceCode_NotEqual_裁判所裁判例() {
         setSourceCode_NotEqual_AsSource(CDef.Source.裁判所裁判例);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Egov (EGOV). And OnlyOnceRegistered. <br>
+     * e-Gov: e-Gov
+     */
+    public void setSourceCode_NotEqual_Egov() {
+        setSourceCode_NotEqual_AsSource(CDef.Source.Egov);
     }
 
     protected void doSetSourceCode_NotEqual(String sourceCode) {
@@ -182,6 +198,44 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
     public abstract String keepSourceCode_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq);
 
     /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select SOURCE_CODE from LAW_SOURCE_REL where ...)} <br>
+     * (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsLawSourceRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of LawSourceRelList for 'exists'. (NotNull)
+     */
+    public void existsLawSourceRel(SubQuery<LawSourceRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        LawSourceRelCB cb = new LawSourceRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepSourceCode_ExistsReferrer_LawSourceRelList(cb.query());
+        registerExistsReferrer(cb.query(), "SOURCE_CODE", "SOURCE_CODE", pp, "lawSourceRelList");
+    }
+    public abstract String keepSourceCode_ExistsReferrer_LawSourceRelList(LawSourceRelCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select SOURCE_CODE from SOURCE_LAW_CATEGORY where ...)} <br>
+     * (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsSourceLawCategory</span>(categoryCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     categoryCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of SourceLawCategoryList for 'exists'. (NotNull)
+     */
+    public void existsSourceLawCategory(SubQuery<SourceLawCategoryCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        SourceLawCategoryCB cb = new SourceLawCategoryCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepSourceCode_ExistsReferrer_SourceLawCategoryList(cb.query());
+        registerExistsReferrer(cb.query(), "SOURCE_CODE", "SOURCE_CODE", pp, "sourceLawCategoryList");
+    }
+    public abstract String keepSourceCode_ExistsReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq);
+
+    /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
      * {not exists (select SOURCE_CODE from JUDGEMENT_SOURCE_REL where ...)} <br>
      * (判決取得元リレーション)JUDGEMENT_SOURCE_REL by SOURCE_CODE, named 'judgementSourceRelAsOne'.
@@ -200,6 +254,44 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
     }
     public abstract String keepSourceCode_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq);
 
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select SOURCE_CODE from LAW_SOURCE_REL where ...)} <br>
+     * (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsLawSourceRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of SourceCode_NotExistsReferrer_LawSourceRelList for 'not exists'. (NotNull)
+     */
+    public void notExistsLawSourceRel(SubQuery<LawSourceRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        LawSourceRelCB cb = new LawSourceRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepSourceCode_NotExistsReferrer_LawSourceRelList(cb.query());
+        registerNotExistsReferrer(cb.query(), "SOURCE_CODE", "SOURCE_CODE", pp, "lawSourceRelList");
+    }
+    public abstract String keepSourceCode_NotExistsReferrer_LawSourceRelList(LawSourceRelCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select SOURCE_CODE from SOURCE_LAW_CATEGORY where ...)} <br>
+     * (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsSourceLawCategory</span>(categoryCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     categoryCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of SourceCode_NotExistsReferrer_SourceLawCategoryList for 'not exists'. (NotNull)
+     */
+    public void notExistsSourceLawCategory(SubQuery<SourceLawCategoryCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        SourceLawCategoryCB cb = new SourceLawCategoryCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepSourceCode_NotExistsReferrer_SourceLawCategoryList(cb.query());
+        registerNotExistsReferrer(cb.query(), "SOURCE_CODE", "SOURCE_CODE", pp, "sourceLawCategoryList");
+    }
+    public abstract String keepSourceCode_NotExistsReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq);
+
     public void xsderiveJudgementSourceRelList(String fn, SubQuery<JudgementSourceRelCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         JudgementSourceRelCB cb = new JudgementSourceRelCB(); cb.xsetupForDerivedReferrer(this);
@@ -207,6 +299,22 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "SOURCE_CODE", "SOURCE_CODE", pp, "judgementSourceRelList", al, op);
     }
     public abstract String keepSourceCode_SpecifyDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq);
+
+    public void xsderiveLawSourceRelList(String fn, SubQuery<LawSourceRelCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        LawSourceRelCB cb = new LawSourceRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepSourceCode_SpecifyDerivedReferrer_LawSourceRelList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "SOURCE_CODE", "SOURCE_CODE", pp, "lawSourceRelList", al, op);
+    }
+    public abstract String keepSourceCode_SpecifyDerivedReferrer_LawSourceRelList(LawSourceRelCQ sq);
+
+    public void xsderiveSourceLawCategoryList(String fn, SubQuery<SourceLawCategoryCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        SourceLawCategoryCB cb = new SourceLawCategoryCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepSourceCode_SpecifyDerivedReferrer_SourceLawCategoryList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "SOURCE_CODE", "SOURCE_CODE", pp, "sourceLawCategoryList", al, op);
+    }
+    public abstract String keepSourceCode_SpecifyDerivedReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
@@ -234,6 +342,60 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
     }
     public abstract String keepSourceCode_QueryDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq);
     public abstract String keepSourceCode_QueryDerivedReferrer_JudgementSourceRelListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from LAW_SOURCE_REL where ...)} <br>
+     * (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedLawSourceRel()</span>.<span style="color: #CC4747">max</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     relCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<LawSourceRelCB> derivedLawSourceRel() {
+        return xcreateQDRFunctionLawSourceRelList();
+    }
+    protected HpQDRFunction<LawSourceRelCB> xcreateQDRFunctionLawSourceRelList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveLawSourceRelList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveLawSourceRelList(String fn, SubQuery<LawSourceRelCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        LawSourceRelCB cb = new LawSourceRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepSourceCode_QueryDerivedReferrer_LawSourceRelList(cb.query()); String prpp = keepSourceCode_QueryDerivedReferrer_LawSourceRelListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "SOURCE_CODE", "SOURCE_CODE", sqpp, "lawSourceRelList", rd, vl, prpp, op);
+    }
+    public abstract String keepSourceCode_QueryDerivedReferrer_LawSourceRelList(LawSourceRelCQ sq);
+    public abstract String keepSourceCode_QueryDerivedReferrer_LawSourceRelListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from SOURCE_LAW_CATEGORY where ...)} <br>
+     * (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedSourceLawCategory()</span>.<span style="color: #CC4747">max</span>(categoryCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     categoryCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     categoryCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<SourceLawCategoryCB> derivedSourceLawCategory() {
+        return xcreateQDRFunctionSourceLawCategoryList();
+    }
+    protected HpQDRFunction<SourceLawCategoryCB> xcreateQDRFunctionSourceLawCategoryList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveSourceLawCategoryList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveSourceLawCategoryList(String fn, SubQuery<SourceLawCategoryCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        SourceLawCategoryCB cb = new SourceLawCategoryCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepSourceCode_QueryDerivedReferrer_SourceLawCategoryList(cb.query()); String prpp = keepSourceCode_QueryDerivedReferrer_SourceLawCategoryListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "SOURCE_CODE", "SOURCE_CODE", sqpp, "sourceLawCategoryList", rd, vl, prpp, op);
+    }
+    public abstract String keepSourceCode_QueryDerivedReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq);
+    public abstract String keepSourceCode_QueryDerivedReferrer_SourceLawCategoryListParameter(Object vl);
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>

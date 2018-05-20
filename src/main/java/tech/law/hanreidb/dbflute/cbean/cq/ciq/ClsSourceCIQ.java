@@ -79,13 +79,33 @@ public class ClsSourceCIQ extends AbstractBsClsSourceCQ {
     protected ConditionValue xgetCValueSourceCode() { return _myCQ.xdfgetSourceCode(); }
     public String keepSourceCode_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepSourceCode_ExistsReferrer_LawSourceRelList(LawSourceRelCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepSourceCode_ExistsReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepSourceCode_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepSourceCode_NotExistsReferrer_LawSourceRelList(LawSourceRelCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepSourceCode_NotExistsReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepSourceCode_SpecifyDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepSourceCode_SpecifyDerivedReferrer_LawSourceRelList(LawSourceRelCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepSourceCode_SpecifyDerivedReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepSourceCode_QueryDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepSourceCode_QueryDerivedReferrer_JudgementSourceRelListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepSourceCode_QueryDerivedReferrer_LawSourceRelList(LawSourceRelCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepSourceCode_QueryDerivedReferrer_LawSourceRelListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepSourceCode_QueryDerivedReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepSourceCode_QueryDerivedReferrer_SourceLawCategoryListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     protected ConditionValue xgetCValueSourceName() { return _myCQ.xdfgetSourceName(); }
     protected ConditionValue xgetCValueSourceAlias() { return _myCQ.xdfgetSourceAlias(); }

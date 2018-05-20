@@ -189,7 +189,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @param caseNumber The value of caseNumber as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseNumber_Equal(String caseNumber) {
@@ -202,7 +202,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @param caseNumber The value of caseNumber as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseNumber_NotEqual(String caseNumber) {
@@ -215,7 +215,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @param caseNumberList The collection of caseNumber as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseNumber_InScope(Collection<String> caseNumberList) {
@@ -228,7 +228,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @param caseNumberList The collection of caseNumber as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setCaseNumber_NotInScope(Collection<String> caseNumberList) {
@@ -241,7 +241,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} <br>
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setCaseNumber_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param caseNumber The value of caseNumber as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -252,7 +252,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)} <br>
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setCaseNumber_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param caseNumber The value of caseNumber as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -264,7 +264,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @param caseNumber The value of caseNumber as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -275,7 +275,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @param caseNumber The value of caseNumber as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -483,7 +483,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      * @param courtName The value of courtName as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setCourtName_Equal(String courtName) {
@@ -496,7 +496,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)} <br>
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)} <br>
      * <pre>e.g. setCourtName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param courtName The value of courtName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -507,7 +507,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)} <br>
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)} <br>
      * <pre>e.g. setCourtName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param courtName The value of courtName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -519,7 +519,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      * @param courtName The value of courtName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -530,7 +530,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      * @param courtName The value of courtName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -540,19 +540,19 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      */
     public void setCourtName_IsNull() { regCourtName(CK_ISN, DOBJ); }
 
     /**
      * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      */
     public void setCourtName_IsNullOrEmpty() { regCourtName(CK_ISNOE, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      */
     public void setCourtName_IsNotNull() { regCourtName(CK_ISNN, DOBJ); }
 
@@ -912,7 +912,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      * @param originalCourtName The value of originalCourtName as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setOriginalCourtName_Equal(String originalCourtName) {
@@ -925,7 +925,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)} <br>
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)} <br>
      * <pre>e.g. setOriginalCourtName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param originalCourtName The value of originalCourtName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -936,7 +936,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)} <br>
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)} <br>
      * <pre>e.g. setOriginalCourtName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param originalCourtName The value of originalCourtName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -948,7 +948,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      * @param originalCourtName The value of originalCourtName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -959,7 +959,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      * @param originalCourtName The value of originalCourtName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -969,19 +969,19 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      */
     public void setOriginalCourtName_IsNull() { regOriginalCourtName(CK_ISN, DOBJ); }
 
     /**
      * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      */
     public void setOriginalCourtName_IsNullOrEmpty() { regOriginalCourtName(CK_ISNOE, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      */
     public void setOriginalCourtName_IsNotNull() { regOriginalCourtName(CK_ISNN, DOBJ); }
 
@@ -990,7 +990,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @param originalCaseNumber The value of originalCaseNumber as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setOriginalCaseNumber_Equal(String originalCaseNumber) {
@@ -1003,7 +1003,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @param originalCaseNumber The value of originalCaseNumber as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setOriginalCaseNumber_NotEqual(String originalCaseNumber) {
@@ -1016,7 +1016,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @param originalCaseNumberList The collection of originalCaseNumber as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setOriginalCaseNumber_InScope(Collection<String> originalCaseNumberList) {
@@ -1029,7 +1029,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @param originalCaseNumberList The collection of originalCaseNumber as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setOriginalCaseNumber_NotInScope(Collection<String> originalCaseNumberList) {
@@ -1042,7 +1042,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)} <br>
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)} <br>
      * <pre>e.g. setOriginalCaseNumber_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param originalCaseNumber The value of originalCaseNumber as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -1053,7 +1053,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)} <br>
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)} <br>
      * <pre>e.g. setOriginalCaseNumber_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param originalCaseNumber The value of originalCaseNumber as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -1065,7 +1065,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @param originalCaseNumber The value of originalCaseNumber as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -1076,7 +1076,7 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @param originalCaseNumber The value of originalCaseNumber as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -1086,19 +1086,19 @@ public abstract class AbstractBsCourtJudgementCQ extends AbstractConditionQuery 
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      */
     public void setOriginalCaseNumber_IsNull() { regOriginalCaseNumber(CK_ISN, DOBJ); }
 
     /**
      * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      */
     public void setOriginalCaseNumber_IsNullOrEmpty() { regOriginalCaseNumber(CK_ISNOE, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      */
     public void setOriginalCaseNumber_IsNotNull() { regOriginalCaseNumber(CK_ISNN, DOBJ); }
 

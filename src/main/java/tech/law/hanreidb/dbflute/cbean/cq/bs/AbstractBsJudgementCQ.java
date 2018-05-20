@@ -193,6 +193,25 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select JUDGEMENT_ID from JUDGEMENT_ARTICLE_REL where ...)} <br>
+     * (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsJudgementArticleRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of JudgementArticleRelList for 'exists'. (NotNull)
+     */
+    public void existsJudgementArticleRel(SubQuery<JudgementArticleRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        JudgementArticleRelCB cb = new JudgementArticleRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepJudgementId_ExistsReferrer_JudgementArticleRelList(cb.query());
+        registerExistsReferrer(cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementArticleRelList");
+    }
+    public abstract String keepJudgementId_ExistsReferrer_JudgementArticleRelList(JudgementArticleRelCQ sq);
+
+    /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
      * {exists (select JUDGEMENT_ID from JUDGEMENT_REPORT_REL where ...)} <br>
      * (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelAsOne'.
      * <pre>
@@ -269,6 +288,25 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select JUDGEMENT_ID from JUDGEMENT_ARTICLE_REL where ...)} <br>
+     * (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsJudgementArticleRel</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of JudgementId_NotExistsReferrer_JudgementArticleRelList for 'not exists'. (NotNull)
+     */
+    public void notExistsJudgementArticleRel(SubQuery<JudgementArticleRelCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        JudgementArticleRelCB cb = new JudgementArticleRelCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepJudgementId_NotExistsReferrer_JudgementArticleRelList(cb.query());
+        registerNotExistsReferrer(cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementArticleRelList");
+    }
+    public abstract String keepJudgementId_NotExistsReferrer_JudgementArticleRelList(JudgementArticleRelCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
      * {not exists (select JUDGEMENT_ID from JUDGEMENT_REPORT_REL where ...)} <br>
      * (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelAsOne'.
      * <pre>
@@ -332,6 +370,14 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     }
     public abstract String keepJudgementId_SpecifyDerivedReferrer_JudgementSelfList(JudgementCQ sq);
 
+    public void xsderiveJudgementArticleRelList(String fn, SubQuery<JudgementArticleRelCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        JudgementArticleRelCB cb = new JudgementArticleRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepJudgementId_SpecifyDerivedReferrer_JudgementArticleRelList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", pp, "judgementArticleRelList", al, op);
+    }
+    public abstract String keepJudgementId_SpecifyDerivedReferrer_JudgementArticleRelList(JudgementArticleRelCQ sq);
+
     public void xsderiveJudgementReportRelList(String fn, SubQuery<JudgementReportRelCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
         JudgementReportRelCB cb = new JudgementReportRelCB(); cb.xsetupForDerivedReferrer(this);
@@ -382,6 +428,33 @@ public abstract class AbstractBsJudgementCQ extends AbstractConditionQuery {
     }
     public abstract String keepJudgementId_QueryDerivedReferrer_JudgementSelfList(JudgementCQ sq);
     public abstract String keepJudgementId_QueryDerivedReferrer_JudgementSelfListParameter(Object vl);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from JUDGEMENT_ARTICLE_REL where ...)} <br>
+     * (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedJudgementArticleRel()</span>.<span style="color: #CC4747">max</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     relCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     relCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<JudgementArticleRelCB> derivedJudgementArticleRel() {
+        return xcreateQDRFunctionJudgementArticleRelList();
+    }
+    protected HpQDRFunction<JudgementArticleRelCB> xcreateQDRFunctionJudgementArticleRelList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveJudgementArticleRelList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveJudgementArticleRelList(String fn, SubQuery<JudgementArticleRelCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        JudgementArticleRelCB cb = new JudgementArticleRelCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepJudgementId_QueryDerivedReferrer_JudgementArticleRelList(cb.query()); String prpp = keepJudgementId_QueryDerivedReferrer_JudgementArticleRelListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "JUDGEMENT_ID", "JUDGEMENT_ID", sqpp, "judgementArticleRelList", rd, vl, prpp, op);
+    }
+    public abstract String keepJudgementId_QueryDerivedReferrer_JudgementArticleRelList(JudgementArticleRelCQ sq);
+    public abstract String keepJudgementId_QueryDerivedReferrer_JudgementArticleRelListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.lastaflute.db.jta.stage.TransactionStage;
 import org.lastaflute.job.LaJob;
 import org.lastaflute.job.LaJobRuntime;
@@ -91,8 +90,4 @@ public class egovLawPutJob implements LaJob {
     //                                              
     //                                              --------
 
-    // TODO h-funaki JIDと共通化する (2018/05/07)
-    protected String makeNextPublicCode() {
-        return "LAW" + RandomStringUtils.random(3, "ABCDEFGHIJKLMNOPQRSTUVWXYZ") + RandomStringUtils.random(6, "0123456789");
-    }
 }

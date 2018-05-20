@@ -97,16 +97,44 @@ public class BsClsSourceCQ extends AbstractBsClsSourceCQ {
     public Map<String, JudgementSourceRelCQ> xdfgetSourceCode_ExistsReferrer_JudgementSourceRelList() { return xgetSQueMap("sourceCode_ExistsReferrer_JudgementSourceRelList"); }
     public String keepSourceCode_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("sourceCode_ExistsReferrer_JudgementSourceRelList", sq); }
 
+    public Map<String, LawSourceRelCQ> xdfgetSourceCode_ExistsReferrer_LawSourceRelList() { return xgetSQueMap("sourceCode_ExistsReferrer_LawSourceRelList"); }
+    public String keepSourceCode_ExistsReferrer_LawSourceRelList(LawSourceRelCQ sq) { return xkeepSQue("sourceCode_ExistsReferrer_LawSourceRelList", sq); }
+
+    public Map<String, SourceLawCategoryCQ> xdfgetSourceCode_ExistsReferrer_SourceLawCategoryList() { return xgetSQueMap("sourceCode_ExistsReferrer_SourceLawCategoryList"); }
+    public String keepSourceCode_ExistsReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq) { return xkeepSQue("sourceCode_ExistsReferrer_SourceLawCategoryList", sq); }
+
     public Map<String, JudgementSourceRelCQ> xdfgetSourceCode_NotExistsReferrer_JudgementSourceRelList() { return xgetSQueMap("sourceCode_NotExistsReferrer_JudgementSourceRelList"); }
     public String keepSourceCode_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("sourceCode_NotExistsReferrer_JudgementSourceRelList", sq); }
 
+    public Map<String, LawSourceRelCQ> xdfgetSourceCode_NotExistsReferrer_LawSourceRelList() { return xgetSQueMap("sourceCode_NotExistsReferrer_LawSourceRelList"); }
+    public String keepSourceCode_NotExistsReferrer_LawSourceRelList(LawSourceRelCQ sq) { return xkeepSQue("sourceCode_NotExistsReferrer_LawSourceRelList", sq); }
+
+    public Map<String, SourceLawCategoryCQ> xdfgetSourceCode_NotExistsReferrer_SourceLawCategoryList() { return xgetSQueMap("sourceCode_NotExistsReferrer_SourceLawCategoryList"); }
+    public String keepSourceCode_NotExistsReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq) { return xkeepSQue("sourceCode_NotExistsReferrer_SourceLawCategoryList", sq); }
+
     public Map<String, JudgementSourceRelCQ> xdfgetSourceCode_SpecifyDerivedReferrer_JudgementSourceRelList() { return xgetSQueMap("sourceCode_SpecifyDerivedReferrer_JudgementSourceRelList"); }
     public String keepSourceCode_SpecifyDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("sourceCode_SpecifyDerivedReferrer_JudgementSourceRelList", sq); }
+
+    public Map<String, LawSourceRelCQ> xdfgetSourceCode_SpecifyDerivedReferrer_LawSourceRelList() { return xgetSQueMap("sourceCode_SpecifyDerivedReferrer_LawSourceRelList"); }
+    public String keepSourceCode_SpecifyDerivedReferrer_LawSourceRelList(LawSourceRelCQ sq) { return xkeepSQue("sourceCode_SpecifyDerivedReferrer_LawSourceRelList", sq); }
+
+    public Map<String, SourceLawCategoryCQ> xdfgetSourceCode_SpecifyDerivedReferrer_SourceLawCategoryList() { return xgetSQueMap("sourceCode_SpecifyDerivedReferrer_SourceLawCategoryList"); }
+    public String keepSourceCode_SpecifyDerivedReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq) { return xkeepSQue("sourceCode_SpecifyDerivedReferrer_SourceLawCategoryList", sq); }
 
     public Map<String, JudgementSourceRelCQ> xdfgetSourceCode_QueryDerivedReferrer_JudgementSourceRelList() { return xgetSQueMap("sourceCode_QueryDerivedReferrer_JudgementSourceRelList"); }
     public String keepSourceCode_QueryDerivedReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq) { return xkeepSQue("sourceCode_QueryDerivedReferrer_JudgementSourceRelList", sq); }
     public Map<String, Object> xdfgetSourceCode_QueryDerivedReferrer_JudgementSourceRelListParameter() { return xgetSQuePmMap("sourceCode_QueryDerivedReferrer_JudgementSourceRelList"); }
     public String keepSourceCode_QueryDerivedReferrer_JudgementSourceRelListParameter(Object pm) { return xkeepSQuePm("sourceCode_QueryDerivedReferrer_JudgementSourceRelList", pm); }
+
+    public Map<String, LawSourceRelCQ> xdfgetSourceCode_QueryDerivedReferrer_LawSourceRelList() { return xgetSQueMap("sourceCode_QueryDerivedReferrer_LawSourceRelList"); }
+    public String keepSourceCode_QueryDerivedReferrer_LawSourceRelList(LawSourceRelCQ sq) { return xkeepSQue("sourceCode_QueryDerivedReferrer_LawSourceRelList", sq); }
+    public Map<String, Object> xdfgetSourceCode_QueryDerivedReferrer_LawSourceRelListParameter() { return xgetSQuePmMap("sourceCode_QueryDerivedReferrer_LawSourceRelList"); }
+    public String keepSourceCode_QueryDerivedReferrer_LawSourceRelListParameter(Object pm) { return xkeepSQuePm("sourceCode_QueryDerivedReferrer_LawSourceRelList", pm); }
+
+    public Map<String, SourceLawCategoryCQ> xdfgetSourceCode_QueryDerivedReferrer_SourceLawCategoryList() { return xgetSQueMap("sourceCode_QueryDerivedReferrer_SourceLawCategoryList"); }
+    public String keepSourceCode_QueryDerivedReferrer_SourceLawCategoryList(SourceLawCategoryCQ sq) { return xkeepSQue("sourceCode_QueryDerivedReferrer_SourceLawCategoryList", sq); }
+    public Map<String, Object> xdfgetSourceCode_QueryDerivedReferrer_SourceLawCategoryListParameter() { return xgetSQuePmMap("sourceCode_QueryDerivedReferrer_SourceLawCategoryList"); }
+    public String keepSourceCode_QueryDerivedReferrer_SourceLawCategoryListParameter(Object pm) { return xkeepSQuePm("sourceCode_QueryDerivedReferrer_SourceLawCategoryList", pm); }
 
     /** 
      * Add order-by as ascend. <br>

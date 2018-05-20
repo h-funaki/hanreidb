@@ -409,6 +409,40 @@ public class BsClsSourceCB extends AbstractConditionBean {
                     -> cq.xsderiveJudgementSourceRelList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from LAW_SOURCE_REL where ...) as FOO_MAX} <br>
+         * (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(relCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     relCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     relCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, LawSourceRel.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<LawSourceRelCB, ClsSourceCQ> derivedLawSourceRel() {
+            assertDerived("lawSourceRelList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<LawSourceRelCB> sq, ClsSourceCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveLawSourceRelList(fn, sq, al, op), _dbmetaProvider);
+        }
+        /**
+         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
+         * {select max(FOO) from SOURCE_LAW_CATEGORY where ...) as FOO_MAX} <br>
+         * (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryList'.
+         * <pre>
+         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(categoryCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+         *     categoryCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
+         *     categoryCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
+         * }, SourceLawCategory.<span style="color: #CC4747">ALIAS_foo...</span>);
+         * </pre>
+         * @return The object to set up a function for referrer table. (NotNull)
+         */
+        public HpSDRFunction<SourceLawCategoryCB, ClsSourceCQ> derivedSourceLawCategory() {
+            assertDerived("sourceLawCategoryList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<SourceLawCategoryCB> sq, ClsSourceCQ cq, String al, DerivedReferrerOption op)
+                    -> cq.xsderiveSourceLawCategoryList(fn, sq, al, op), _dbmetaProvider);
+        }
+        /**
          * Prepare for (Specify)MyselfDerived (SubQuery).
          * @return The object to set up a function for myself table. (NotNull)
          */

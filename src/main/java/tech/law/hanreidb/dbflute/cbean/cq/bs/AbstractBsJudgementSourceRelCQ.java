@@ -330,6 +330,14 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
         setSourceCode_Equal_AsSource(CDef.Source.裁判所裁判例);
     }
 
+    /**
+     * Equal(=). As Egov (EGOV). And OnlyOnceRegistered. <br>
+     * e-Gov: e-Gov
+     */
+    public void setSourceCode_Equal_Egov() {
+        setSourceCode_Equal_AsSource(CDef.Source.Egov);
+    }
+
     protected void doSetSourceCode_Equal(String sourceCode) {
         regSourceCode(CK_EQ, sourceCode);
     }
@@ -358,6 +366,14 @@ public abstract class AbstractBsJudgementSourceRelCQ extends AbstractConditionQu
      */
     public void setSourceCode_NotEqual_裁判所裁判例() {
         setSourceCode_NotEqual_AsSource(CDef.Source.裁判所裁判例);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As Egov (EGOV). And OnlyOnceRegistered. <br>
+     * e-Gov: e-Gov
+     */
+    public void setSourceCode_NotEqual_Egov() {
+        setSourceCode_NotEqual_AsSource(CDef.Source.Egov);
     }
 
     protected void doSetSourceCode_NotEqual(String sourceCode) {

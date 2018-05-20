@@ -48,13 +48,13 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     
  *
  * [referrer table]
- *     JUDGEMENT_SOURCE_REL
+ *     JUDGEMENT_SOURCE_REL, LAW_SOURCE_REL, SOURCE_LAW_CATEGORY
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     judgementSourceRelList
+ *     judgementSourceRelList, lawSourceRelList, sourceLawCategoryList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -211,6 +211,14 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
         setSourceCodeAsSource(CDef.Source.裁判所裁判例);
     }
 
+    /**
+     * Set the value of sourceCode as Egov (EGOV). <br>
+     * e-Gov: e-Gov
+     */
+    public void setSourceCode_Egov() {
+        setSourceCodeAsSource(CDef.Source.Egov);
+    }
+
     // ===================================================================================
     //                                                        Classification Determination
     //                                                        ============================
@@ -223,6 +231,17 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     public boolean isSourceCode裁判所裁判例() {
         CDef.Source cdef = getSourceCodeAsSource();
         return cdef != null ? cdef.equals(CDef.Source.裁判所裁判例) : false;
+    }
+
+    /**
+     * Is the value of sourceCode Egov? <br>
+     * e-Gov: e-Gov
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isSourceCodeEgov() {
+        CDef.Source cdef = getSourceCodeAsSource();
+        return cdef != null ? cdef.equals(CDef.Source.Egov) : false;
     }
 
     // ===================================================================================
@@ -249,6 +268,46 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
      */
     public void setJudgementSourceRelList(List<JudgementSourceRel> judgementSourceRelList) {
         _judgementSourceRelList = judgementSourceRelList;
+    }
+
+    /** (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelList'. */
+    protected List<LawSourceRel> _lawSourceRelList;
+
+    /**
+     * [get] (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelList'.
+     * @return The entity list of referrer property 'lawSourceRelList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<LawSourceRel> getLawSourceRelList() {
+        if (_lawSourceRelList == null) { _lawSourceRelList = newReferrerList(); }
+        return _lawSourceRelList;
+    }
+
+    /**
+     * [set] (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelList'.
+     * @param lawSourceRelList The entity list of referrer property 'lawSourceRelList'. (NullAllowed)
+     */
+    public void setLawSourceRelList(List<LawSourceRel> lawSourceRelList) {
+        _lawSourceRelList = lawSourceRelList;
+    }
+
+    /** (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryList'. */
+    protected List<SourceLawCategory> _sourceLawCategoryList;
+
+    /**
+     * [get] (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryList'.
+     * @return The entity list of referrer property 'sourceLawCategoryList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<SourceLawCategory> getSourceLawCategoryList() {
+        if (_sourceLawCategoryList == null) { _sourceLawCategoryList = newReferrerList(); }
+        return _sourceLawCategoryList;
+    }
+
+    /**
+     * [set] (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryList'.
+     * @param sourceLawCategoryList The entity list of referrer property 'sourceLawCategoryList'. (NullAllowed)
+     */
+    public void setSourceLawCategoryList(List<SourceLawCategory> sourceLawCategoryList) {
+        _sourceLawCategoryList = sourceLawCategoryList;
     }
 
     protected <ELEMENT> List<ELEMENT> newReferrerList() { // overriding to import
@@ -282,6 +341,10 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
         StringBuilder sb = new StringBuilder();
         if (_judgementSourceRelList != null) { for (JudgementSourceRel et : _judgementSourceRelList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "judgementSourceRelList")); } } }
+        if (_lawSourceRelList != null) { for (LawSourceRel et : _lawSourceRelList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "lawSourceRelList")); } } }
+        if (_sourceLawCategoryList != null) { for (SourceLawCategory et : _sourceLawCategoryList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "sourceLawCategoryList")); } } }
         return sb.toString();
     }
 
@@ -310,6 +373,10 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
         StringBuilder sb = new StringBuilder();
         if (_judgementSourceRelList != null && !_judgementSourceRelList.isEmpty())
         { sb.append(dm).append("judgementSourceRelList"); }
+        if (_lawSourceRelList != null && !_lawSourceRelList.isEmpty())
+        { sb.append(dm).append("lawSourceRelList"); }
+        if (_sourceLawCategoryList != null && !_sourceLawCategoryList.isEmpty())
+        { sb.append(dm).append("sourceLawCategoryList"); }
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length()).insert(0, "(").append(")");
         }

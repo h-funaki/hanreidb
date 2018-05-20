@@ -24,6 +24,7 @@ import edu.emory.mathcs.backport.java.util.Arrays;
 import tech.law.hanreidb.app.base.job.JobRecorder;
 import tech.law.hanreidb.app.base.job.exception.JobBusinessSkipException;
 import tech.law.hanreidb.app.logic.FileLogic;
+import tech.law.hanreidb.app.logic.FormatLogic;
 import tech.law.hanreidb.dbflute.exbhv.CourtJudgementBhv;
 import tech.law.hanreidb.mylasta.direction.HanreidbEnv;
 
@@ -53,6 +54,8 @@ public class CourtJudgementSetJob implements LaJob {
     private HanreidbEnv env;
     @Resource
     private FileLogic fileLogic;
+    @Resource
+    private FormatLogic formatLogic;
 
     // ===================================================================================
     //                                                                             Execute
@@ -141,49 +144,49 @@ public class CourtJudgementSetJob implements LaJob {
         Document document = getHtmlDocument(targetId, 2);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
         ifNotBlank(contentElements.get(0).text()).ifPresent(value -> {
-            contentMap.put(CourtJudgementSetJobAssist.CASE_NUMBER, trimSpaces(value));
+            contentMap.put(CourtJudgementSetJobAssist.CASE_NUMBER, formatLogic.trimPrefixSpaces(value));
         }).orElse(() -> {
             throw new JobBusinessSkipException("事件番号が空白");
         });
-        contentMap.put(CourtJudgementSetJobAssist.CASE_NAME, trimSpaces(contentElements.get(1).text()));
-        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_DATE, trimSpaces(contentElements.get(2).text()));
-        contentMap.put(CourtJudgementSetJobAssist.COURT_NAME, trimSpaces(contentElements.get(3).text()));
-        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_TYPE, trimSpaces(contentElements.get(4).text()));
-        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_RESULT, trimSpaces(contentElements.get(5).text()));
-        contentMap.put(CourtJudgementSetJobAssist.PRECEDENT_REPORTS, trimSpaces(contentElements.get(6).text()));
-        contentMap.put(CourtJudgementSetJobAssist.ORIGINAL_COURT_NAME, trimSpaces(contentElements.get(7).text()));
-        contentMap.put(CourtJudgementSetJobAssist.ORIGINAL_CASE_NUMBER, trimSpaces(contentElements.get(8).text()));
-        contentMap.put(CourtJudgementSetJobAssist.ORIGINAL_JUDGEMENT_DATE, trimSpaces(contentElements.get(9).text()));
-        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_CONTENT, trimSpaces(contentElements.get(10).text()));
-        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_SUMMARY, trimSpaces(contentElements.get(11).text()));
-        contentMap.put(CourtJudgementSetJobAssist.LAW, trimSpaces(contentElements.get(12).text()));
-        contentMap.put(CourtJudgementSetJobAssist.TEXT_URL, trimSpaces(contentElements.get(13).child(1).attr("href")));
+        contentMap.put(CourtJudgementSetJobAssist.CASE_NAME, formatLogic.trimPrefixSpaces(contentElements.get(1).text()));
+        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_DATE, formatLogic.trimPrefixSpaces(contentElements.get(2).text()));
+        contentMap.put(CourtJudgementSetJobAssist.COURT_NAME, formatLogic.trimPrefixSpaces(contentElements.get(3).text()));
+        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_TYPE, formatLogic.trimPrefixSpaces(contentElements.get(4).text()));
+        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_RESULT, formatLogic.trimPrefixSpaces(contentElements.get(5).text()));
+        contentMap.put(CourtJudgementSetJobAssist.PRECEDENT_REPORTS, formatLogic.trimPrefixSpaces(contentElements.get(6).text()));
+        contentMap.put(CourtJudgementSetJobAssist.ORIGINAL_COURT_NAME, formatLogic.trimPrefixSpaces(contentElements.get(7).text()));
+        contentMap.put(CourtJudgementSetJobAssist.ORIGINAL_CASE_NUMBER, formatLogic.trimPrefixSpaces(contentElements.get(8).text()));
+        contentMap.put(CourtJudgementSetJobAssist.ORIGINAL_JUDGEMENT_DATE, formatLogic.trimPrefixSpaces(contentElements.get(9).text()));
+        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_CONTENT, formatLogic.trimPrefixSpaces(contentElements.get(10).text()));
+        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_SUMMARY, formatLogic.trimPrefixSpaces(contentElements.get(11).text()));
+        contentMap.put(CourtJudgementSetJobAssist.LAW, formatLogic.trimPrefixSpaces(contentElements.get(12).text()));
+        contentMap.put(CourtJudgementSetJobAssist.TEXT_URL, formatLogic.trimPrefixSpaces(contentElements.get(13).child(1).attr("href")));
     }
 
     private void processHanrei3(Integer targetId, HashMap<Integer, String> contentMap) throws IOException, IndexOutOfBoundsException {
         Document document = getHtmlDocument(targetId, 3);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
-        contentMap.put(CourtJudgementSetJobAssist.HIGH_COURT_REPORTS, trimSpaces(contentElements.get(5).text()));
+        contentMap.put(CourtJudgementSetJobAssist.HIGH_COURT_REPORTS, formatLogic.trimPrefixSpaces(contentElements.get(5).text()));
     }
 
     private void processHanrei4(Integer targetId, HashMap<Integer, String> contentMap) throws IOException, IndexOutOfBoundsException {
         Document document = getHtmlDocument(targetId, 4);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
-        contentMap.put(CourtJudgementSetJobAssist.ORIGINAL_JUDGEMENT_RESULT, trimSpaces(contentElements.get(7).text()));
-        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_CONTENT_SUMMARY, trimSpaces(contentElements.get(8).text()));
+        contentMap.put(CourtJudgementSetJobAssist.ORIGINAL_JUDGEMENT_RESULT, formatLogic.trimPrefixSpaces(contentElements.get(7).text()));
+        contentMap.put(CourtJudgementSetJobAssist.JUDGEMENT_CONTENT_SUMMARY, formatLogic.trimPrefixSpaces(contentElements.get(8).text()));
     }
 
     private void processHanrei5(Integer targetId, HashMap<Integer, String> contentMap) throws IOException, IndexOutOfBoundsException {
         Document document = getHtmlDocument(targetId, 5);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
-        contentMap.put(CourtJudgementSetJobAssist.CASE_CATEGORY, trimSpaces(contentElements.get(4).text()));
+        contentMap.put(CourtJudgementSetJobAssist.CASE_CATEGORY, formatLogic.trimPrefixSpaces(contentElements.get(4).text()));
     }
 
     private void processHanrei7(Integer targetId, HashMap<Integer, String> contentMap) throws IOException, IndexOutOfBoundsException {
         Document document = getHtmlDocument(targetId, 7);
         Elements contentElements = document.getElementsByAttributeValueStarting("class", "list5");
-        contentMap.put(CourtJudgementSetJobAssist.RIGHT_TYPE, trimSpaces(contentElements.get(4).text()));
-        contentMap.put(CourtJudgementSetJobAssist.LAWSUIT_TYPE, trimSpaces(contentElements.get(5).text()));
+        contentMap.put(CourtJudgementSetJobAssist.RIGHT_TYPE, formatLogic.trimPrefixSpaces(contentElements.get(4).text()));
+        contentMap.put(CourtJudgementSetJobAssist.LAWSUIT_TYPE, formatLogic.trimPrefixSpaces(contentElements.get(5).text()));
     }
 
     // ===================================================================================
@@ -209,21 +212,6 @@ public class CourtJudgementSetJob implements LaJob {
         }).map(entity -> {
             return entity.getSourceOriginalId();
         }).orElse(0);
-    }
-
-    private String trimSpaces(String string) {
-        while (string.startsWith(" ") || string.startsWith("　")) { //|| string.startsWith(" ")
-            while (string.startsWith(" ")) {
-                string.replaceFirst(" ", "");
-            }
-            while (string.startsWith("　")) {
-                string.replaceFirst("　", "");
-            }
-        }
-        while (string.startsWith(" ")) { // よくわからないが半スペではない。
-            string = string.substring(1);
-        }
-        return string;
     }
 
     private String recordMessage(Integer id, String message) {

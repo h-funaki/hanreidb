@@ -6,7 +6,7 @@
 * * * * * * * * * *
 data-directory: playsql/data/common/xls
 
-[10-master.xls]
+[1-hanrei_master.xls]
   CLS_COURT_TYPE (5)
   CLS_CASE_CATEGORY (7)
   CASE_MARK (189)
@@ -15,8 +15,13 @@ data-directory: playsql/data/common/xls
   CLS_BENCH (4)
   CLS_JUDGEMENT_TYPE (2)
   CLS_JUDGEMENT_RESULT (5)
-  CLS_SOURCE (1)
+  CLS_SOURCE (2)
   REPORT (4)
   CLS_USER_STATUS (2)
   USER (1)
   LOGIN_HISTORY (1)
+
+[2-law_master.xls]
+  LAW_TYPE (12)
+  LAW_CATEGORY (50)
+  SOURCE_LAW_CATEGORY (50)

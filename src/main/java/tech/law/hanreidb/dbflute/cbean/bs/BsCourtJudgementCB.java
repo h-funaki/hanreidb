@@ -315,7 +315,7 @@ public class BsCourtJudgementCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnCourtJudgementId() { return doColumn("COURT_JUDGEMENT_ID"); }
         /**
-         * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+         * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnCaseNumber() { return doColumn("CASE_NUMBER"); }
@@ -330,7 +330,7 @@ public class BsCourtJudgementCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnJudgementDate() { return doColumn("JUDGEMENT_DATE"); }
         /**
-         * (裁判所名)COURT_NAME: {VARCHAR(50)}
+         * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnCourtName() { return doColumn("COURT_NAME"); }
@@ -350,12 +350,12 @@ public class BsCourtJudgementCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnPrecedentReports() { return doColumn("PRECEDENT_REPORTS"); }
         /**
-         * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+         * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnOriginalCourtName() { return doColumn("ORIGINAL_COURT_NAME"); }
         /**
-         * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+         * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnOriginalCaseNumber() { return doColumn("ORIGINAL_CASE_NUMBER"); }

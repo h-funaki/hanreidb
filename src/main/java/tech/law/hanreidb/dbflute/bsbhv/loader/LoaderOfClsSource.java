@@ -45,13 +45,13 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     JUDGEMENT_SOURCE_REL
+ *     JUDGEMENT_SOURCE_REL, LAW_SOURCE_REL, SOURCE_LAW_CATEGORY
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     judgementSourceRelList
+ *     judgementSourceRelList, lawSourceRelList, sourceLawCategoryList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -108,6 +108,74 @@ public class LoaderOfClsSource {
     public NestedReferrerLoaderGateway<LoaderOfJudgementSourceRel> loadJudgementSourceRel(ReferrerConditionSetupper<JudgementSourceRelCB> refCBLambda) {
         myBhv().loadJudgementSourceRel(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerJudgementSourceRel = refLs);
         return hd -> hd.handle(new LoaderOfJudgementSourceRel().ready(_referrerJudgementSourceRel, _selector));
+    }
+
+    protected List<LawSourceRel> _referrerLawSourceRel;
+
+    /**
+     * Load referrer of lawSourceRelList by the set-upper of referrer. <br>
+     * (法令取得元リレーション)LAW_SOURCE_REL by SOURCE_CODE, named 'lawSourceRelList'.
+     * <pre>
+     * <span style="color: #0000C0">clsSourceBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">clsSourceList</span>, <span style="color: #553000">sourceLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">sourceLoader</span>.<span style="color: #CC4747">loadLawSourceRel</span>(<span style="color: #553000">relCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">relCB</span>.setupSelect...
+     *         <span style="color: #553000">relCB</span>.query().set...
+     *         <span style="color: #553000">relCB</span>.query().addOrderBy...
+     *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">relLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    relLoader.load...</span>
+     *     <span style="color: #3F7E5E">//});</span>
+     * });
+     * for (ClsSource clsSource : <span style="color: #553000">clsSourceList</span>) {
+     *     ... = clsSource.<span style="color: #CC4747">getLawSourceRelList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setSourceCode_InScope(pkList);
+     * cb.query().addOrderBy_SourceCode_Asc();
+     * </pre>
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerLoaderGateway<LoaderOfLawSourceRel> loadLawSourceRel(ReferrerConditionSetupper<LawSourceRelCB> refCBLambda) {
+        myBhv().loadLawSourceRel(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerLawSourceRel = refLs);
+        return hd -> hd.handle(new LoaderOfLawSourceRel().ready(_referrerLawSourceRel, _selector));
+    }
+
+    protected List<SourceLawCategory> _referrerSourceLawCategory;
+
+    /**
+     * Load referrer of sourceLawCategoryList by the set-upper of referrer. <br>
+     * (取得元法令カテゴリー)SOURCE_LAW_CATEGORY by SOURCE_CODE, named 'sourceLawCategoryList'.
+     * <pre>
+     * <span style="color: #0000C0">clsSourceBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">clsSourceList</span>, <span style="color: #553000">sourceLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">sourceLoader</span>.<span style="color: #CC4747">loadSourceLawCategory</span>(<span style="color: #553000">categoryCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">categoryCB</span>.setupSelect...
+     *         <span style="color: #553000">categoryCB</span>.query().set...
+     *         <span style="color: #553000">categoryCB</span>.query().addOrderBy...
+     *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">categoryLoader</span> -&gt; {</span>
+     *     <span style="color: #3F7E5E">//    categoryLoader.load...</span>
+     *     <span style="color: #3F7E5E">//});</span>
+     * });
+     * for (ClsSource clsSource : <span style="color: #553000">clsSourceList</span>) {
+     *     ... = clsSource.<span style="color: #CC4747">getSourceLawCategoryList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setSourceCode_InScope(pkList);
+     * cb.query().addOrderBy_SourceCode_Asc();
+     * </pre>
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerLoaderGateway<LoaderOfSourceLawCategory> loadSourceLawCategory(ReferrerConditionSetupper<SourceLawCategoryCB> refCBLambda) {
+        myBhv().loadSourceLawCategory(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerSourceLawCategory = refLs);
+        return hd -> hd.handle(new LoaderOfSourceLawCategory().ready(_referrerSourceLawCategory, _selector));
     }
 
     // ===================================================================================

@@ -116,14 +116,14 @@ public class BsCourtJudgementCQ extends AbstractBsCourtJudgementCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_CaseNumber_Asc() { regOBA("CASE_NUMBER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (事件番号)CASE_NUMBER: {NotNull, VARCHAR(50)}
+     * (事件番号)CASE_NUMBER: {IX, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_CaseNumber_Desc() { regOBD("CASE_NUMBER"); return this; }
@@ -162,14 +162,14 @@ public class BsCourtJudgementCQ extends AbstractBsCourtJudgementCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_CourtName_Asc() { regOBA("COURT_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (裁判所名)COURT_NAME: {VARCHAR(50)}
+     * (裁判所名)COURT_NAME: {IX, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_CourtName_Desc() { regOBD("COURT_NAME"); return this; }
@@ -242,14 +242,14 @@ public class BsCourtJudgementCQ extends AbstractBsCourtJudgementCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_OriginalCourtName_Asc() { regOBA("ORIGINAL_COURT_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (原審裁判所名)ORIGINAL_COURT_NAME: {VARCHAR(50)}
+     * (原審裁判所名)ORIGINAL_COURT_NAME: {IX, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_OriginalCourtName_Desc() { regOBD("ORIGINAL_COURT_NAME"); return this; }
@@ -262,14 +262,14 @@ public class BsCourtJudgementCQ extends AbstractBsCourtJudgementCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_OriginalCaseNumber_Asc() { regOBA("ORIGINAL_CASE_NUMBER"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (原審事件番号)ORIGINAL_CASE_NUMBER: {VARCHAR(50)}
+     * (原審事件番号)ORIGINAL_CASE_NUMBER: {IX, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsCourtJudgementCQ addOrderBy_OriginalCaseNumber_Desc() { regOBD("ORIGINAL_CASE_NUMBER"); return this; }

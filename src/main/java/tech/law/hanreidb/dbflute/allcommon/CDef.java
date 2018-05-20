@@ -915,6 +915,9 @@ public interface CDef extends Classification {
     public enum Source implements CDef {
         /** 裁判所裁判例: 裁判所裁判例 */
         裁判所裁判例("COURT", "裁判所裁判例", emptyStrings())
+        ,
+        /** e-Gov: e-Gov */
+        Egov("EGOV", "e-Gov", emptyStrings())
         ;
         private static final Map<String, Source> _codeClsMap = new HashMap<String, Source>();
         private static final Map<String, Source> _nameClsMap = new HashMap<String, Source>();

@@ -13,6 +13,8 @@
 	<component name="commonColumnAutoSetupper" class="tech.law.hanreidb.dbflute.allcommon.ImplementedCommonColumnAutoSetupper"/>
 
 	<!-- The components of Behavior. -->
+	<component name="articleBhv" class="tech.law.hanreidb.dbflute.exbhv.ArticleBhv"/>
+	<component name="articleContentBhv" class="tech.law.hanreidb.dbflute.exbhv.ArticleContentBhv"/>
 	<component name="caseMarkBhv" class="tech.law.hanreidb.dbflute.exbhv.CaseMarkBhv"/>
 	<component name="clsBenchBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsBenchBhv"/>
 	<component name="clsCaseCategoryBhv" class="tech.law.hanreidb.dbflute.exbhv.ClsCaseCategoryBhv"/>
@@ -25,11 +27,23 @@
 	<component name="courtBhv" class="tech.law.hanreidb.dbflute.exbhv.CourtBhv"/>
 	<component name="courtJudgementBhv" class="tech.law.hanreidb.dbflute.exbhv.CourtJudgementBhv"/>
 	<component name="judgementBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementBhv"/>
+	<component name="judgementArticleRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementArticleRelBhv"/>
 	<component name="judgementReportRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementReportRelBhv"/>
 	<component name="judgementSourceRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementSourceRelBhv"/>
 	<component name="judgementUserFavoriteRelBhv" class="tech.law.hanreidb.dbflute.exbhv.JudgementUserFavoriteRelBhv"/>
+	<component name="lawBhv" class="tech.law.hanreidb.dbflute.exbhv.LawBhv"/>
+	<component name="lawAliasBhv" class="tech.law.hanreidb.dbflute.exbhv.LawAliasBhv"/>
+	<component name="lawCategoryBhv" class="tech.law.hanreidb.dbflute.exbhv.LawCategoryBhv"/>
+	<component name="lawCategoryRelBhv" class="tech.law.hanreidb.dbflute.exbhv.LawCategoryRelBhv"/>
+	<component name="lawContentBhv" class="tech.law.hanreidb.dbflute.exbhv.LawContentBhv"/>
+	<component name="lawHistoryBhv" class="tech.law.hanreidb.dbflute.exbhv.LawHistoryBhv"/>
+	<component name="lawSourceRelBhv" class="tech.law.hanreidb.dbflute.exbhv.LawSourceRelBhv"/>
+	<component name="lawTocBhv" class="tech.law.hanreidb.dbflute.exbhv.LawTocBhv"/>
+	<component name="lawTypeBhv" class="tech.law.hanreidb.dbflute.exbhv.LawTypeBhv"/>
 	<component name="loginHistoryBhv" class="tech.law.hanreidb.dbflute.exbhv.LoginHistoryBhv"/>
 	<component name="reportBhv" class="tech.law.hanreidb.dbflute.exbhv.ReportBhv"/>
+	<component name="sourceLawCategoryBhv" class="tech.law.hanreidb.dbflute.exbhv.SourceLawCategoryBhv"/>
+	<component name="sourceLawCategoryRelBhv" class="tech.law.hanreidb.dbflute.exbhv.SourceLawCategoryRelBhv"/>
 	<component name="userBhv" class="tech.law.hanreidb.dbflute.exbhv.UserBhv"/>
 	<component name="userStatusHistoryBhv" class="tech.law.hanreidb.dbflute.exbhv.UserStatusHistoryBhv"/>
 </components>

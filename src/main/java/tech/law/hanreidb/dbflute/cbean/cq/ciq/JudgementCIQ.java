@@ -79,6 +79,8 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     protected ConditionValue xgetCValueJudgementId() { return _myCQ.xdfgetJudgementId(); }
     public String keepJudgementId_ExistsReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
+    public String keepJudgementId_ExistsReferrer_JudgementArticleRelList(JudgementArticleRelCQ sq)
+    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepJudgementId_ExistsReferrer_JudgementReportRelList(JudgementReportRelCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepJudgementId_ExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
@@ -87,6 +89,8 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepJudgementId_NotExistsReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
+    public String keepJudgementId_NotExistsReferrer_JudgementArticleRelList(JudgementArticleRelCQ sq)
+    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepJudgementId_NotExistsReferrer_JudgementReportRelList(JudgementReportRelCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepJudgementId_NotExistsReferrer_JudgementSourceRelList(JudgementSourceRelCQ sq)
@@ -94,6 +98,8 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     public String keepJudgementId_NotExistsReferrer_JudgementUserFavoriteRelList(JudgementUserFavoriteRelCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementSelfList(JudgementCQ sq)
+    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
+    public String keepJudgementId_SpecifyDerivedReferrer_JudgementArticleRelList(JudgementArticleRelCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepJudgementId_SpecifyDerivedReferrer_JudgementReportRelList(JudgementReportRelCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
@@ -104,6 +110,10 @@ public class JudgementCIQ extends AbstractBsJudgementCQ {
     public String keepJudgementId_QueryDerivedReferrer_JudgementSelfList(JudgementCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepJudgementId_QueryDerivedReferrer_JudgementSelfListParameter(Object vl)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementArticleRelList(JudgementArticleRelCQ sq)
+    { throwIICBOE("(Query)DerivedReferrer"); return null; }
+    public String keepJudgementId_QueryDerivedReferrer_JudgementArticleRelListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepJudgementId_QueryDerivedReferrer_JudgementReportRelList(JudgementReportRelCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }

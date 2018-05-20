@@ -56,13 +56,13 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     CLS_BENCH, CASE_MARK, CLS_ERA, COURT, CLS_JUDGEMENT_RESULT, CLS_JUDGEMENT_TYPE, JUDGEMENT
  *
  * [referrer table]
- *     JUDGEMENT, JUDGEMENT_REPORT_REL, JUDGEMENT_SOURCE_REL, JUDGEMENT_USER_FAVORITE_REL
+ *     JUDGEMENT, JUDGEMENT_ARTICLE_REL, JUDGEMENT_REPORT_REL, JUDGEMENT_SOURCE_REL, JUDGEMENT_USER_FAVORITE_REL
  *
  * [foreign property]
  *     clsBench, caseMark, clsEra, court, clsJudgementResult, clsJudgementType, judgementSelf
  *
  * [referrer property]
- *     judgementSelfList, judgementReportRelList, judgementSourceRelList, judgementUserFavoriteRelList
+ *     judgementSelfList, judgementArticleRelList, judgementReportRelList, judgementSourceRelList, judgementUserFavoriteRelList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -461,6 +461,70 @@ public abstract class BsJudgementBhv extends AbstractBehaviorWritable<Judgement,
 
     protected NestedReferrerListGateway<Judgement> doLoadJudgementSelf(List<Judgement> judgementList, LoadReferrerOption<JudgementCB, Judgement> option) {
         return helpLoadReferrerInternally(judgementList, option, "judgementSelfList");
+    }
+
+    /**
+     * Load referrer of judgementArticleRelList by the set-upper of referrer. <br>
+     * (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelList'.
+     * <pre>
+     * <span style="color: #0000C0">judgementBhv</span>.<span style="color: #CC4747">loadJudgementArticleRel</span>(<span style="color: #553000">judgementList</span>, <span style="color: #553000">relCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">relCB</span>.setupSelect...
+     *     <span style="color: #553000">relCB</span>.query().set...
+     *     <span style="color: #553000">relCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (Judgement judgement : <span style="color: #553000">judgementList</span>) {
+     *     ... = judgement.<span style="color: #CC4747">getJudgementArticleRelList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setJudgementId_InScope(pkList);
+     * cb.query().addOrderBy_JudgementId_Asc();
+     * </pre>
+     * @param judgementList The entity list of judgement. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<JudgementArticleRel> loadJudgementArticleRel(List<Judgement> judgementList, ReferrerConditionSetupper<JudgementArticleRelCB> refCBLambda) {
+        xassLRArg(judgementList, refCBLambda);
+        return doLoadJudgementArticleRel(judgementList, new LoadReferrerOption<JudgementArticleRelCB, JudgementArticleRel>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of judgementArticleRelList by the set-upper of referrer. <br>
+     * (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelList'.
+     * <pre>
+     * <span style="color: #0000C0">judgementBhv</span>.<span style="color: #CC4747">loadJudgementArticleRel</span>(<span style="color: #553000">judgement</span>, <span style="color: #553000">relCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">relCB</span>.setupSelect...
+     *     <span style="color: #553000">relCB</span>.query().set...
+     *     <span style="color: #553000">relCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">judgement</span>.<span style="color: #CC4747">getJudgementArticleRelList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setJudgementId_InScope(pkList);
+     * cb.query().addOrderBy_JudgementId_Asc();
+     * </pre>
+     * @param judgement The entity of judgement. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<JudgementArticleRel> loadJudgementArticleRel(Judgement judgement, ReferrerConditionSetupper<JudgementArticleRelCB> refCBLambda) {
+        xassLRArg(judgement, refCBLambda);
+        return doLoadJudgementArticleRel(xnewLRLs(judgement), new LoadReferrerOption<JudgementArticleRelCB, JudgementArticleRel>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<JudgementArticleRel> doLoadJudgementArticleRel(List<Judgement> judgementList, LoadReferrerOption<JudgementArticleRelCB, JudgementArticleRel> option) {
+        return helpLoadReferrerInternally(judgementList, option, "judgementArticleRelList");
     }
 
     /**

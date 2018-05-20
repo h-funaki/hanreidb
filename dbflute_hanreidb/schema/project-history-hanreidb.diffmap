@@ -1,4 +1,320 @@
 map:{
+    ; 2018/05/20 12:07:50 = map:{
+        ; diffDate = 2018/05/20 12:07:50
+        ; tableDiff = map:{
+            ; LAW_ALIAS = map:{
+                ; tableName = LAW_ALIAS
+                ; diffType = CHANGE
+                ; uniqueKeyDiff = map:{
+                    ; UQ_LAW_ALIAS = map:{
+                        ; constraintName = UQ_LAW_ALIAS
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/05/19 19:45:09 = map:{
+        ; diffDate = 2018/05/19 19:45:09
+        ; tableCount = map:{
+            ; next = 33
+            ; previous = 32
+        }
+        ; tableDiff = map:{
+            ; LAW_ALIAS = map:{
+                ; tableName = LAW_ALIAS
+                ; diffType = ADD
+            }
+            ; LAW = map:{
+                ; tableName = LAW
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; LAW_ALIAS = map:{
+                        ; columnName = LAW_ALIAS
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/05/15 10:08:48 = map:{
+        ; diffDate = 2018/05/15 10:08:48
+        ; tableDiff = map:{
+            ; ARTICLE = map:{
+                ; tableName = ARTICLE
+                ; diffType = CHANGE
+                ; columnDefOrderDiff = map:{
+                    ; next = LAW_TOC_ID(2)
+                    ; previous = LAW_TOC_ID(3)
+                }
+                ; columnDiff = map:{
+                    ; LAW_TOC_ID = map:{
+                        ; columnName = LAW_TOC_ID
+                        ; diffType = CHANGE
+                        ; notNullDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                }
+            }
+            ; ARTICLE_CONTENT = map:{
+                ; tableName = ARTICLE_CONTENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; ARTICLE_CONTENT_RAW_XML = map:{
+                        ; columnName = ARTICLE_CONTENT_RAW_XML
+                        ; diffType = ADD
+                    }
+                    ; ARTICLE_CONTENT_VIEW_XML = map:{
+                        ; columnName = ARTICLE_CONTENT_VIEW_XML
+                        ; diffType = ADD
+                    }
+                    ; ARTICLE_CONTENT_XML = map:{
+                        ; columnName = ARTICLE_CONTENT_XML
+                        ; diffType = DELETE
+                    }
+                }
+            }
+            ; LAW_CONTENT = map:{
+                ; tableName = LAW_CONTENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; LAW_CONTENT_VIEW_XML = map:{
+                        ; columnName = LAW_CONTENT_VIEW_XML
+                        ; diffType = ADD
+                    }
+                    ; LAW_CONTENT_SCREEN_XML = map:{
+                        ; columnName = LAW_CONTENT_SCREEN_XML
+                        ; diffType = DELETE
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/05/15 10:06:25 = map:{
+        ; diffDate = 2018/05/15 10:06:25
+        ; tableDiff = map:{
+            ; LAW_TOC = map:{
+                ; tableName = LAW_TOC
+                ; diffType = ADD
+            }
+            ; ARTICLE = map:{
+                ; tableName = ARTICLE
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; LAW_TOC_ID = map:{
+                        ; columnName = LAW_TOC_ID
+                        ; diffType = ADD
+                    }
+                    ; TOC_ID = map:{
+                        ; columnName = TOC_ID
+                        ; diffType = DELETE
+                    }
+                }
+                ; foreignKeyDiff = map:{
+                    ; FK_ARTICLE_TOC = map:{
+                        ; constraintName = FK_ARTICLE_TOC
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = LAW_TOC_ID
+                            ; previous = TOC_ID
+                        }
+                        ; foreignTableDiff = map:{
+                            ; next = LAW_TOC
+                            ; previous = TOC
+                        }
+                    }
+                }
+                ; indexDiff = map:{
+                    ; FK_ARTICLE_TOC = map:{
+                        ; constraintName = FK_ARTICLE_TOC
+                        ; diffType = CHANGE
+                        ; columnDiff = map:{
+                            ; next = LAW_TOC_ID
+                            ; previous = TOC_ID
+                        }
+                    }
+                }
+            }
+            ; TOC = map:{
+                ; tableName = TOC
+                ; diffType = DELETE
+            }
+        }
+    }
+    ; 2018/05/13 19:34:00 = map:{
+        ; diffDate = 2018/05/13 19:34:00
+        ; tableDiff = map:{
+            ; JUDGEMENT_ARTICLE_REL = map:{
+                ; tableName = JUDGEMENT_ARTICLE_REL
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; JUDGEMENT_ARTICLE_REL_ID = map:{
+                        ; columnName = JUDGEMENT_ARTICLE_REL_ID
+                        ; diffType = CHANGE
+                        ; autoIncrementDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                }
+            }
+            ; LAW_CATEGORY = map:{
+                ; tableName = LAW_CATEGORY
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; LAW_CATEGORY_ID = map:{
+                        ; columnName = LAW_CATEGORY_ID
+                        ; diffType = CHANGE
+                        ; autoIncrementDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                }
+            }
+            ; SOURCE_LAW_CATEGORY = map:{
+                ; tableName = SOURCE_LAW_CATEGORY
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SOURCE_LAW_CATEGORY_ID = map:{
+                        ; columnName = SOURCE_LAW_CATEGORY_ID
+                        ; diffType = CHANGE
+                        ; autoIncrementDiff = map:{
+                            ; next = true
+                            ; previous = false
+                        }
+                    }
+                }
+            }
+            ; TOC = map:{
+                ; tableName = TOC
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; PART_TITLE = map:{
+                        ; columnName = PART_TITLE
+                        ; diffType = ADD
+                    }
+                    ; CHAPTER_TITLE = map:{
+                        ; columnName = CHAPTER_TITLE
+                        ; diffType = ADD
+                    }
+                    ; SECTION_TITLE = map:{
+                        ; columnName = SECTION_TITLE
+                        ; diffType = ADD
+                    }
+                    ; SUBSECTION_NUMBER = map:{
+                        ; columnName = SUBSECTION_NUMBER
+                        ; diffType = ADD
+                    }
+                    ; SUBSECTION_TITLE = map:{
+                        ; columnName = SUBSECTION_TITLE
+                        ; diffType = ADD
+                    }
+                    ; SUBSECTION_CAPTION = map:{
+                        ; columnName = SUBSECTION_CAPTION
+                        ; diffType = ADD
+                    }
+                    ; DIVISION_NUMBER = map:{
+                        ; columnName = DIVISION_NUMBER
+                        ; diffType = ADD
+                    }
+                    ; DIVISION_TITLE = map:{
+                        ; columnName = DIVISION_TITLE
+                        ; diffType = ADD
+                    }
+                    ; DIVISION_CAPTION = map:{
+                        ; columnName = DIVISION_CAPTION
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
+    ; 2018/05/13 19:15:40 = map:{
+        ; diffDate = 2018/05/13 19:15:40
+        ; tableCount = map:{
+            ; next = 32
+            ; previous = 19
+        }
+        ; tableDiff = map:{
+            ; ARTICLE = map:{
+                ; tableName = ARTICLE
+                ; diffType = ADD
+            }
+            ; ARTICLE_CONTENT = map:{
+                ; tableName = ARTICLE_CONTENT
+                ; diffType = ADD
+            }
+            ; JUDGEMENT_ARTICLE_REL = map:{
+                ; tableName = JUDGEMENT_ARTICLE_REL
+                ; diffType = ADD
+            }
+            ; LAW = map:{
+                ; tableName = LAW
+                ; diffType = ADD
+            }
+            ; LAW_CATEGORY = map:{
+                ; tableName = LAW_CATEGORY
+                ; diffType = ADD
+            }
+            ; LAW_CATEGORY_REL = map:{
+                ; tableName = LAW_CATEGORY_REL
+                ; diffType = ADD
+            }
+            ; LAW_CONTENT = map:{
+                ; tableName = LAW_CONTENT
+                ; diffType = ADD
+            }
+            ; LAW_HISTORY = map:{
+                ; tableName = LAW_HISTORY
+                ; diffType = ADD
+            }
+            ; LAW_SOURCE_REL = map:{
+                ; tableName = LAW_SOURCE_REL
+                ; diffType = ADD
+            }
+            ; LAW_TYPE = map:{
+                ; tableName = LAW_TYPE
+                ; diffType = ADD
+            }
+            ; SOURCE_LAW_CATEGORY = map:{
+                ; tableName = SOURCE_LAW_CATEGORY
+                ; diffType = ADD
+            }
+            ; SOURCE_LAW_CATEGORY_REL = map:{
+                ; tableName = SOURCE_LAW_CATEGORY_REL
+                ; diffType = ADD
+            }
+            ; TOC = map:{
+                ; tableName = TOC
+                ; diffType = ADD
+            }
+            ; COURT_JUDGEMENT = map:{
+                ; tableName = COURT_JUDGEMENT
+                ; diffType = CHANGE
+                ; indexDiff = map:{
+                    ; IX_COURT_JUDGEMENT_CASE_NUMBER = map:{
+                        ; constraintName = IX_COURT_JUDGEMENT_CASE_NUMBER
+                        ; diffType = ADD
+                    }
+                    ; IX_COURT_JUDGEMENT_COURT_NAME = map:{
+                        ; constraintName = IX_COURT_JUDGEMENT_COURT_NAME
+                        ; diffType = ADD
+                    }
+                    ; IX_COURT_JUDGEMENT_ORIGINAL_CASE_NUMBER = map:{
+                        ; constraintName = IX_COURT_JUDGEMENT_ORIGINAL_CASE_NUMBER
+                        ; diffType = ADD
+                    }
+                    ; IX_COURT_JUDGEMENT_ORIGINAL_COURT_NAME = map:{
+                        ; constraintName = IX_COURT_JUDGEMENT_ORIGINAL_COURT_NAME
+                        ; diffType = ADD
+                    }
+                }
+            }
+        }
+    }
     ; 2018/04/15 15:35:49 = map:{
         ; diffDate = 2018/04/15 15:35:49
         ; tableDiff = map:{

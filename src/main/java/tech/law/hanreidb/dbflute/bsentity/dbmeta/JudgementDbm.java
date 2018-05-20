@@ -116,7 +116,7 @@ public class JudgementDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, "judgementSelfList,judgementReportRelList,judgementSourceRelList,judgementUserFavoriteRelList", null, false);
+    protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, "judgementSelfList,judgementArticleRelList,judgementReportRelList,judgementSourceRelList,judgementUserFavoriteRelList", null, false);
     protected final ColumnInfo _columnJudgementPublicCode = cci("JUDGEMENT_PUBLIC_CODE", "JUDGEMENT_PUBLIC_CODE", null, "判決公開コード", String.class, "judgementPublicCode", null, false, false, true, "VARCHAR", 12, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnCaseName = cci("CASE_NAME", "CASE_NAME", null, "事件名", String.class, "caseName", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnJudgementDate = cci("JUDGEMENT_DATE", "JUDGEMENT_DATE", null, "裁判年月日", java.time.LocalDate.class, "judgementDate", null, false, false, false, "DATE", 10, 0, null, false, null, null, null, null, null, false);
@@ -341,6 +341,14 @@ public class JudgementDbm extends AbstractDBMeta {
     public ReferrerInfo referrerJudgementSelfList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnJudgementId(), JudgementDbm.getInstance().columnOriginalJudgementId());
         return cri("FK_JUDGEMENT_JUDGEMENT", "judgementSelfList", this, JudgementDbm.getInstance(), mp, false, "judgementSelf");
+    }
+    /**
+     * (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerJudgementArticleRelList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnJudgementId(), JudgementArticleRelDbm.getInstance().columnJudgementId());
+        return cri("FK_JUDGEMENT_ARTICLE_REL_JUDGEMENT", "judgementArticleRelList", this, JudgementArticleRelDbm.getInstance(), mp, false, "judgement");
     }
     /**
      * (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelList'.

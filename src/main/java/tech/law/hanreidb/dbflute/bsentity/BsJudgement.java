@@ -50,13 +50,13 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     CLS_BENCH, CASE_MARK, CLS_ERA, COURT, CLS_JUDGEMENT_RESULT, CLS_JUDGEMENT_TYPE, JUDGEMENT
  *
  * [referrer table]
- *     JUDGEMENT, JUDGEMENT_REPORT_REL, JUDGEMENT_SOURCE_REL, JUDGEMENT_USER_FAVORITE_REL
+ *     JUDGEMENT, JUDGEMENT_ARTICLE_REL, JUDGEMENT_REPORT_REL, JUDGEMENT_SOURCE_REL, JUDGEMENT_USER_FAVORITE_REL
  *
  * [foreign property]
  *     clsBench, caseMark, clsEra, court, clsJudgementResult, clsJudgementType, judgementSelf
  *
  * [referrer property]
- *     judgementSelfList, judgementReportRelList, judgementSourceRelList, judgementUserFavoriteRelList
+ *     judgementSelfList, judgementArticleRelList, judgementReportRelList, judgementSourceRelList, judgementUserFavoriteRelList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -741,6 +741,26 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         _judgementSelfList = judgementSelfList;
     }
 
+    /** (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelList'. */
+    protected List<JudgementArticleRel> _judgementArticleRelList;
+
+    /**
+     * [get] (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelList'.
+     * @return The entity list of referrer property 'judgementArticleRelList'. (NotNull: even if no loading, returns empty list)
+     */
+    public List<JudgementArticleRel> getJudgementArticleRelList() {
+        if (_judgementArticleRelList == null) { _judgementArticleRelList = newReferrerList(); }
+        return _judgementArticleRelList;
+    }
+
+    /**
+     * [set] (判決条文リレーション)JUDGEMENT_ARTICLE_REL by JUDGEMENT_ID, named 'judgementArticleRelList'.
+     * @param judgementArticleRelList The entity list of referrer property 'judgementArticleRelList'. (NullAllowed)
+     */
+    public void setJudgementArticleRelList(List<JudgementArticleRel> judgementArticleRelList) {
+        _judgementArticleRelList = judgementArticleRelList;
+    }
+
     /** (判決判例集リレーション)JUDGEMENT_REPORT_REL by JUDGEMENT_ID, named 'judgementReportRelList'. */
     protected List<JudgementReportRel> _judgementReportRelList;
 
@@ -846,6 +866,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         { sb.append(li).append(xbRDS(_judgementSelf, "judgementSelf")); }
         if (_judgementSelfList != null) { for (Judgement et : _judgementSelfList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "judgementSelfList")); } } }
+        if (_judgementArticleRelList != null) { for (JudgementArticleRel et : _judgementArticleRelList)
+        { if (et != null) { sb.append(li).append(xbRDS(et, "judgementArticleRelList")); } } }
         if (_judgementReportRelList != null) { for (JudgementReportRel et : _judgementReportRelList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "judgementReportRelList")); } } }
         if (_judgementSourceRelList != null) { for (JudgementSourceRel et : _judgementSourceRelList)
@@ -905,6 +927,8 @@ public abstract class BsJudgement extends AbstractEntity implements DomainEntity
         { sb.append(dm).append("judgementSelf"); }
         if (_judgementSelfList != null && !_judgementSelfList.isEmpty())
         { sb.append(dm).append("judgementSelfList"); }
+        if (_judgementArticleRelList != null && !_judgementArticleRelList.isEmpty())
+        { sb.append(dm).append("judgementArticleRelList"); }
         if (_judgementReportRelList != null && !_judgementReportRelList.isEmpty())
         { sb.append(dm).append("judgementReportRelList"); }
         if (_judgementSourceRelList != null && !_judgementSourceRelList.isEmpty())

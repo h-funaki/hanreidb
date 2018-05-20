@@ -46,6 +46,8 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
     protected static final Map<String, String> _tableDbNameClassNameMap;
     static {
         final Map<String, String> tmpMap = newHashMap();
+        tmpMap.put("ARTICLE", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ArticleDbm");
+        tmpMap.put("ARTICLE_CONTENT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ArticleContentDbm");
         tmpMap.put("CASE_MARK", "tech.law.hanreidb.dbflute.bsentity.dbmeta.CaseMarkDbm");
         tmpMap.put("CLS_BENCH", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsBenchDbm");
         tmpMap.put("CLS_CASE_CATEGORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ClsCaseCategoryDbm");
@@ -58,11 +60,23 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
         tmpMap.put("COURT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.CourtDbm");
         tmpMap.put("COURT_JUDGEMENT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.CourtJudgementDbm");
         tmpMap.put("JUDGEMENT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementDbm");
+        tmpMap.put("JUDGEMENT_ARTICLE_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementArticleRelDbm");
         tmpMap.put("JUDGEMENT_REPORT_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementReportRelDbm");
         tmpMap.put("JUDGEMENT_SOURCE_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementSourceRelDbm");
         tmpMap.put("JUDGEMENT_USER_FAVORITE_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.JudgementUserFavoriteRelDbm");
+        tmpMap.put("LAW", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawDbm");
+        tmpMap.put("LAW_ALIAS", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawAliasDbm");
+        tmpMap.put("LAW_CATEGORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawCategoryDbm");
+        tmpMap.put("LAW_CATEGORY_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawCategoryRelDbm");
+        tmpMap.put("LAW_CONTENT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawContentDbm");
+        tmpMap.put("LAW_HISTORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawHistoryDbm");
+        tmpMap.put("LAW_SOURCE_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawSourceRelDbm");
+        tmpMap.put("LAW_TOC", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawTocDbm");
+        tmpMap.put("LAW_TYPE", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LawTypeDbm");
         tmpMap.put("LOGIN_HISTORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.LoginHistoryDbm");
         tmpMap.put("REPORT", "tech.law.hanreidb.dbflute.bsentity.dbmeta.ReportDbm");
+        tmpMap.put("SOURCE_LAW_CATEGORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.SourceLawCategoryDbm");
+        tmpMap.put("SOURCE_LAW_CATEGORY_REL", "tech.law.hanreidb.dbflute.bsentity.dbmeta.SourceLawCategoryRelDbm");
         tmpMap.put("USER", "tech.law.hanreidb.dbflute.bsentity.dbmeta.UserDbm");
         tmpMap.put("USER_STATUS_HISTORY", "tech.law.hanreidb.dbflute.bsentity.dbmeta.UserStatusHistoryDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);

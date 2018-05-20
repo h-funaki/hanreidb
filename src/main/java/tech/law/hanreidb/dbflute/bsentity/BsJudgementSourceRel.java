@@ -193,6 +193,14 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
         setSourceCodeAsSource(CDef.Source.裁判所裁判例);
     }
 
+    /**
+     * Set the value of sourceCode as Egov (EGOV). <br>
+     * e-Gov: e-Gov
+     */
+    public void setSourceCode_Egov() {
+        setSourceCodeAsSource(CDef.Source.Egov);
+    }
+
     // ===================================================================================
     //                                                        Classification Determination
     //                                                        ============================
@@ -205,6 +213,17 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     public boolean isSourceCode裁判所裁判例() {
         CDef.Source cdef = getSourceCodeAsSource();
         return cdef != null ? cdef.equals(CDef.Source.裁判所裁判例) : false;
+    }
+
+    /**
+     * Is the value of sourceCode Egov? <br>
+     * e-Gov: e-Gov
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isSourceCodeEgov() {
+        CDef.Source cdef = getSourceCodeAsSource();
+        return cdef != null ? cdef.equals(CDef.Source.Egov) : false;
     }
 
     // ===================================================================================
