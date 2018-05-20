@@ -16,9 +16,13 @@ import tech.law.hanreidb.app.web.master.list.MasterListContentResult.LabelValueP
 import tech.law.hanreidb.dbflute.allcommon.CDef;
 import tech.law.hanreidb.dbflute.exbhv.CaseMarkBhv;
 import tech.law.hanreidb.dbflute.exbhv.CourtBhv;
+import tech.law.hanreidb.dbflute.exbhv.LawCategoryBhv;
+import tech.law.hanreidb.dbflute.exbhv.LawTypeBhv;
 import tech.law.hanreidb.dbflute.exbhv.ReportBhv;
 import tech.law.hanreidb.dbflute.exentity.CaseMark;
 import tech.law.hanreidb.dbflute.exentity.Court;
+import tech.law.hanreidb.dbflute.exentity.LawCategory;
+import tech.law.hanreidb.dbflute.exentity.LawType;
 import tech.law.hanreidb.dbflute.exentity.Report;
 
 /**
@@ -38,6 +42,10 @@ public class MasterListAction extends HanreidbBaseAction {
     private CourtBhv courtBhv;
     @Resource
     private ReportBhv reportBhv;
+    @Resource
+    private LawTypeBhv lawTypeBhv;
+    @Resource
+    private LawCategoryBhv lawCategoryBhv;
 
     // ===================================================================================
     //                                                                             Execute
@@ -53,7 +61,9 @@ public class MasterListAction extends HanreidbBaseAction {
                 toImmutable(CDef.CourtType.listAll()), //
                 toImmutable(selectCourtList()), //
                 toImmutable(selectCaseMarkList()), //
-                toImmutable(selectReportlist()));
+                toImmutable(selectReportlist()), //
+                toImmutable(selectLawTypelist()), //
+                toImmutable(selectLawCategorylist()));
         return asJson(result);
     }
 
@@ -81,6 +91,22 @@ public class MasterListAction extends HanreidbBaseAction {
         });
     }
 
+    private List<LawType> selectLawTypelist() {
+        return lawTypeBhv.selectList(cb -> {
+            cb.specify().columnLawTypeCode();
+            cb.specify().columnLawTypeAlias();
+            cb.query().addOrderBy_DisplayOrder_Asc();
+        });
+    }
+
+    private List<LawCategory> selectLawCategorylist() {
+        return lawCategoryBhv.selectList(cb -> {
+            cb.specify().columnLawCategoryId();
+            cb.specify().columnLawCategoryAlias();
+            cb.query().addOrderBy_LawCategoryId_Asc();
+        });
+    }
+
     // ===================================================================================
     //                                                                             Mapping
     //                                                                             =======
@@ -93,7 +119,9 @@ public class MasterListAction extends HanreidbBaseAction {
             ImmutableList<CDef.CourtType> courtTypeList, //
             ImmutableList<Court> courtList, //
             ImmutableList<CaseMark> caseMarkList, //
-            ImmutableList<Report> reportList) {
+            ImmutableList<Report> reportList, //
+            ImmutableList<LawType> lawTypeList, //
+            ImmutableList<LawCategory> lawCategoryList) {
         // TODO h-funaki なぜかImmutableではjsonにはいらない (2017/12/17)
         MasterListContentResult content = new MasterListContentResult();
         content.era_list = eraList.collect(this::convertToLabelValuePart).castToList();
@@ -105,6 +133,8 @@ public class MasterListAction extends HanreidbBaseAction {
         content.court_list = courtList.collect(this::convertToLabelValuePart).castToList();
         content.case_mark_list = caseMarkList.collect(this::convertToLabelValuePart).castToList();
         content.report_list = reportList.collect(this::convertToLabelValuePart).castToList();
+        content.law_type_list = lawTypeList.collect(this::convertToLabelValuePart).castToList();
+        content.law_category_list = lawCategoryList.collect(this::convertToLabelValuePart).castToList();
         return content;
     }
 
@@ -126,6 +156,20 @@ public class MasterListAction extends HanreidbBaseAction {
         LabelValuePart part = new LabelValuePart();
         part.label = entity.getReportAlias();
         part.value = entity.getReportId().toString();
+        return part;
+    }
+
+    private LabelValuePart convertToLabelValuePart(LawType entity) {
+        LabelValuePart part = new LabelValuePart();
+        part.label = entity.getLawTypeAlias();
+        part.value = entity.getLawTypeCode();
+        return part;
+    }
+
+    private LabelValuePart convertToLabelValuePart(LawCategory entity) {
+        LabelValuePart part = new LabelValuePart();
+        part.label = entity.getLawCategoryAlias();
+        part.value = entity.getLawCategoryId().toString();
         return part;
     }
 

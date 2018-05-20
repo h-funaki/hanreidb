@@ -48,6 +48,14 @@ public class MasterListContentResult {
     @Valid
     public List<LabelValuePart> report_list;
 
+    @NotNull
+    @Valid
+    public List<LabelValuePart> law_type_list;
+
+    @NotNull
+    @Valid
+    public List<LabelValuePart> law_category_list;
+
     public static class LabelValuePart {
 
         @Required

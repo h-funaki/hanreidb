@@ -42,6 +42,7 @@ public class FormatLogic {
         while (string.startsWith("\n")) {
             string = string.substring(1);
         }
+        // TODO h-funaki 終わりに改行文字があるパターンも発見 (2018/05/20)
         return string;
     }
 
