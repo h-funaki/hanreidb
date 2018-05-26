@@ -1,14 +1,33 @@
 package tech.law.hanreidb.app.web;
 
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.newImmutableList;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.addAuthor;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.addFields;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.addMappings;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.addPackage;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getActionClassName;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getActionTestClassName;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getBaseTableColumnInfo;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getBehaviorFieldName;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getBehaviorName;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getBodyClassName;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getContentResultClassName;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getEntityFieldName;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.getEntityName;
+import static tech.law.hanreidb.app.web.CreateApiTestAssist.write;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.dbflute.dbmeta.AbstractEntity;
-import org.dbflute.dbmeta.info.ColumnInfo;
+import org.eclipse.collections.api.list.ImmutableList;
 
+import tech.law.hanreidb.dbflute.exentity.ClsSource;
+import tech.law.hanreidb.dbflute.exentity.Law;
 import tech.law.hanreidb.dbflute.exentity.LawAlias;
+import tech.law.hanreidb.dbflute.exentity.LawCategory;
+import tech.law.hanreidb.dbflute.exentity.LawType;
 import tech.law.hanreidb.unit.UnitHanreidbTestCase;
 
 public class CreateApiTest extends UnitHanreidbTestCase {
@@ -17,12 +36,22 @@ public class CreateApiTest extends UnitHanreidbTestCase {
     //                                                                          Definition
     //                                                                          ==========
     /** path e.g. aaa/bbb/ccc */
-    public final String PATH = "law/alias/put";
+    public final static String PATH = "law/list";
 
     private final boolean REAL_EXECUTE = false;
 
     /** base table column info e.g. JUDGEMENT */
-    private AbstractEntity entity = new LawAlias();
+    static AbstractEntity BASE_ENTITY = new Law();
+
+    /** base table column info e.g. JUDGEMENT */
+    public static ImmutableList<? extends AbstractEntity> ENTITY_LIST =
+            newImmutableList(new LawAlias(), new LawType(), new ClsSource(), new LawCategory());
+
+    /** do you create body class? */
+    private final boolean CREATE_BODY = true;
+
+    /** do you create content result class? */
+    private final boolean CREATE_RESULT = true;
 
     // ===================================================================================
     //                                                                        Create Files
@@ -52,6 +81,23 @@ public class CreateApiTest extends UnitHanreidbTestCase {
         File actionTestClassFile = new File(fileTestPath + actionTestClassName + ".java");
 
         // action class file
+        createAction(actionClassFile);
+
+        // body class
+        if (CREATE_BODY) {
+            createBody(bodyClassFile);
+        }
+
+        // content result class file
+        if (CREATE_RESULT) {
+            createResult(contentResultClassFile);
+        }
+
+        // test class file
+        createTest(actionTestClassFile);
+    }
+
+    private void createAction(File actionClassFile) throws IOException {
         List<String> actionLines = newArrayList();
         addPackage(actionLines);
         actionLines.add("");
@@ -70,13 +116,13 @@ public class CreateApiTest extends UnitHanreidbTestCase {
         actionLines.add("import tech.law.hanreidb.dbflute.exbhv." + getBehaviorName() + ";");
         actionLines.add("import tech.law.hanreidb.dbflute.exentity." + getEntityName() + ";");
         addAuthor(actionLines);
-        actionLines.add("public class " + actionClassName + " extends HanreidbBaseAction {");
+        actionLines.add("public class " + getActionClassName() + " extends HanreidbBaseAction {");
         actionLines.add("");
 
         actionLines.add("    // ===================================================================================");
         actionLines.add("    //                                                                          Definition");
         actionLines.add("    //                                                                          ==========");
-        actionLines.add("        private static final Logger logger = LoggerFactory.getLogger(" + actionClassName + ".class);");
+        actionLines.add("        private static final Logger logger = LoggerFactory.getLogger(" + getActionClassName() + ".class);");
         actionLines.add("");
         actionLines.add("    // ===================================================================================");
         actionLines.add("    //                                                                           Attribute");
@@ -88,7 +134,7 @@ public class CreateApiTest extends UnitHanreidbTestCase {
         actionLines.add("    //                                                                             Execute");
         actionLines.add("    //                                                                             =======");
         actionLines.add("    @Execute");
-        actionLines.add("    public JsonResponse<" + resultClassName + "> index(" + bodyClassName + " body) {");
+        actionLines.add("    public JsonResponse<" + getContentResultClassName() + "> index(" + getBodyClassName() + " body) {");
         actionLines.add("        return asJson(mappingToContent());");
         actionLines.add("    }");
         actionLines.add("");
@@ -97,6 +143,7 @@ public class CreateApiTest extends UnitHanreidbTestCase {
         actionLines.add("    //                                                                              ======");
         actionLines.add("    private ImmutableList<" + getEntityName() + ">" + " select" + getEntityName() + "List() {");
         actionLines.add("    return toImmutable(" + getBehaviorFieldName() + ".selectList(cb ->{");
+        actionLines.add("        cb.specify().everyColumn();");
         getBaseTableColumnInfo().forEach(column -> {
             // actionLines.add("        cb.specify().column" + column + "();");
         });
@@ -106,40 +153,44 @@ public class CreateApiTest extends UnitHanreidbTestCase {
         actionLines.add("    // ===================================================================================");
         actionLines.add("    //                                                                             Mapping");
         actionLines.add("    //                                                                             =======");
-        actionLines.add("    private " + resultClassName + " mappingToContent(" + getEntityName() + " " + getEntityFieldName() + ") {");
+        actionLines.add(
+                "    private " + getContentResultClassName() + " mappingToContent(" + getEntityName() + " " + getEntityFieldName() + ") {");
         addMappings(actionLines);
         actionLines.add("    }");
         actionLines.add("");
         actionLines.add("}");
         write(actionClassFile, actionLines);
+    }
 
-        // body class
+    private void createBody(File bodyClassFile) throws IOException {
         List<String> bodyLines = newArrayList();
         addPackage(bodyLines);
         addAuthor(bodyLines);
-        bodyLines.add("public class " + bodyClassName + " {");
+        bodyLines.add("public class " + getBodyClassName() + " {");
         bodyLines.add("    ");
         addFields(bodyLines);
         bodyLines.add("}");
         write(bodyClassFile, bodyLines);
+    }
 
-        // content result class file
-        List<String> resultLines = newArrayList();
-        addPackage(resultLines);
-        addAuthor(resultLines);
-        resultLines.add("public class " + resultClassName + " {");
-        resultLines.add("    ");
-        addFields(resultLines);
-        resultLines.add("}");
-        write(contentResultClassFile, resultLines);
+    private void createResult(File bodyClassFile) throws IOException {
+        List<String> bodyLines = newArrayList();
+        addPackage(bodyLines);
+        addAuthor(bodyLines);
+        bodyLines.add("public class " + getContentResultClassName() + " {");
+        bodyLines.add("    ");
+        addFields(bodyLines);
+        bodyLines.add("}");
+        write(bodyClassFile, bodyLines);
+    }
 
-        // test class file
+    private void createTest(File actionTestClassFile) throws IOException {
         List<String> testLines = newArrayList();
         addPackage(testLines);
         testLines.add("");
         testLines.add("import tech.law.hanreidb.unit.UnitHanreidbTestCase;");
         addAuthor(testLines);
-        testLines.add("public class " + actionTestClassName + " extends UnitHanreidbTestCase {");
+        testLines.add("public class " + getActionTestClassName() + " extends UnitHanreidbTestCase {");
         testLines.add("");
         testLines.add("    // ===================================================================================");
         testLines.add("    //                                                                           Attribute");
@@ -150,10 +201,10 @@ public class CreateApiTest extends UnitHanreidbTestCase {
         testLines.add("    //                                                                               =====");
         testLines.add("    public void test_正常に登録されている() {");
         testLines.add("    // ## Arrange ##");
-        testLines.add("    " + actionClassName + " action = new " + actionClassName + "();");
+        testLines.add("    " + getActionClassName() + " action = new " + getActionClassName() + "();");
         testLines.add("    inject(action);");
         testLines.add("    ");
-        testLines.add("    " + bodyClassName + " body = new " + bodyClassName + "();");
+        testLines.add("    " + getBodyClassName() + " body = new " + getBodyClassName() + "();");
         testLines.add("    ");
         testLines.add("    // ## Act ##");
         testLines.add("    ");
@@ -165,203 +216,5 @@ public class CreateApiTest extends UnitHanreidbTestCase {
         testLines.add("    //                                                                               =====");
         testLines.add("}");
         write(actionTestClassFile, testLines);
-    }
-
-    // -----------------------------------------------------
-    //                                               書く処理
-    //                                               -------
-    private void write(File file, List<String> lines) throws IOException {
-        try {
-            FileUtils.writeLines(file, lines);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // -----------------------------------------------------
-    //                                                共通部分
-    //                                                ------
-    private void addPackage(List<String> lines) {
-        lines.add("package tech.law.hanreidb.app.web" + pathToPackage(PATH) + ";");
-    }
-
-    private void addAuthor(List<String> lines) {
-        lines.add("");
-        lines.add("/**");
-        lines.add(" * @author h-funaki");
-        lines.add(" */");
-    }
-
-    private void addFields(List<String> lines) {
-        getBaseTableColumnInfo().forEach(column -> {
-            if (column.isNotNull()) {
-                lines.add("    /** " + column.getColumnAlias() + " e.g. " + column.getColumnComment() + " */");
-                lines.add("    @Required");
-            } else {
-                lines.add("    /** " + column.getColumnAlias() + " e.g. " + column.getColumnComment() + " (NullAllowed)*/");
-            }
-            lines.add("    public " + getJavaType(column) + " " + column.getColumnSqlName().toString().toLowerCase() + ";");
-            lines.add("    ");
-        });
-    }
-
-    private void addMappings(List<String> lines) {
-        lines.add("    " + getContentResultClassName() + " content = new " + getContentResultClassName() + "();");
-        getBaseTableColumnInfo().forEach(column -> {
-            lines.add("        content." + column.getColumnSqlName().toString().toLowerCase() + " = " + getEntityFieldName() + "."
-                    + getGetterName(column.getColumnSqlName().toString()) + ";");
-            lines.add("    ");
-        });
-        lines.add("    return content;");
-    }
-
-    // ===================================================================================
-    //                                                                        Assist Tests
-    //                                                                        ============
-    public void test_something() throws Exception {
-        List<String> lines = newArrayList();
-        addMappings(lines);
-        lines.forEach(line -> {
-            log(line);
-        });
-    }
-
-    // ===================================================================================
-    //                                                                        Small Helper
-    //                                                                        ============
-    /**
-     * e.g. String, Long
-     * @param column (NotNull)
-     * @return java type (NotNull)
-     */
-    private String getJavaType(ColumnInfo column) {
-        String typeName = column.getPropertyAccessType().getTypeName();
-        typeName = typeName.replace("java.lang.", "");
-        typeName = typeName.replace("java.time.", "");
-        return typeName;
-    }
-
-    /**
-     * Entity => column info
-     * @return column info (NotNull)
-     */
-    private List<ColumnInfo> getBaseTableColumnInfo() {
-        return entity.asDBMeta().getColumnInfoList();
-    }
-
-    /**
-     * @return e.g. Judgement (NotNull)
-     */
-    private String getEntityName() {
-        return entity.asDBMeta().getEntityTypeName().replace("tech.law.hanreidb.dbflute.exentity.", "");
-    }
-
-    /**
-     * @return e.g. judgement (NotNull)
-     */
-    private String getEntityFieldName() {
-        return getFieldName(getEntityName());
-    }
-
-    /**
-     * @return JUDGEMENT_ID -> judgementId
-     */
-    private String getCamelName(String snake_name) {
-        String field = "";
-        String[] words = snake_name.split("_");
-        for (int i = 0; i < words.length; i++) {
-            if (i == 0) {
-                field = words[i].toLowerCase();
-            } else {
-                field = field + words[i].substring(0, 1) + words[i].substring(1).toLowerCase();
-            }
-        }
-        return field;
-    }
-
-    /**
-     * getJudgementId()
-     */
-    private String getGetterName(String column_snake_name) {
-        return getCamelName("GET_" + column_snake_name) + "()";
-    }
-
-    // -----------------------------------------------------
-    //                                         Behavior名取得
-    //                                         -------------
-    /**
-     * @return e.g. JudgementBhv (NotNull)
-     */
-    private String getBehaviorName() {
-        return getEntityName() + "Bhv";
-    }
-
-    /**
-     * @return e.g. judgementBhv (NotNull)
-     */
-    private String getBehaviorFieldName() {
-        return getFieldName(getBehaviorName());
-    }
-
-    // -----------------------------------------------------
-    //                                            フィールド名
-    //                                            ----------
-    /**
-     * @return e.g. JudgementId -> judgementId (NotNull)
-     */
-    private String getFieldName(String string) {
-        return string.substring(0, 1).toLowerCase() + string.substring(1);
-    }
-
-    // -----------------------------------------------------
-    //                                          package名取得
-    //                                          ------------
-    /**
-     * @param path e.g. aaa/bbb/ccc (NotNull)
-     * @return package e.g. .aaa.bbb.ccc (NotNull)
-     */
-    private String pathToPackage(String path) {
-        String packagePath = "";
-        String[] split = path.split("/");
-        for (String string : split) {
-            packagePath = packagePath + "." + string;
-        }
-        return packagePath;
-    }
-
-    // -----------------------------------------------------
-    //                                            クラス名取得
-    //                                            ----------
-    /**
-     * @param path e.g. aaa/bbb/ccc (NotNull)
-     * @return class name e.g. AaaBbbCcc (NotNull)
-     */
-    private String pathToClassName(String path) {
-        String className = "";
-        String[] split = path.split("/");
-        for (String string : split) {
-            className = className + string.substring(0, 1).toUpperCase() + string.substring(1);
-        }
-        return className;
-    }
-
-    private String getClassName() {
-        return pathToClassName(PATH);
-    }
-
-    private String getActionClassName() {
-        return getClassName() + "Action";
-    }
-
-    private String getBodyClassName() {
-        return getClassName() + "Body";
-    }
-
-    private String getContentResultClassName() {
-        return getClassName() + "ContentResult";
-    }
-
-    private String getActionTestClassName() {
-        return getClassName() + "ActionTest";
     }
 }

@@ -13,11 +13,11 @@ data-directory: playsql/data/ut/xls
   COURT_JUDGEMENT (43)
 
 [2-law_test.xls]
-  LAW (1)
-  LAW_ALIAS (1)
-  LAW_SOURCE_REL (0)
-  LAW_CATEGORY_ID (0)
-  SOURCE_LAW_CATEGORY_REL (0)
+  LAW (105)
+  LAW_ALIAS (18)
+  LAW_SOURCE_REL (105)
+  LAW_CATEGORY_REL (105)
+  SOURCE_LAW_CATEGORY_REL (105)
 
 [3-article_test.xls]
   LAW_HISOTRY (0)

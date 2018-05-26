@@ -56,7 +56,9 @@ public class LawAliasPutAction extends HanreidbBaseAction {
     //                                                                              ======
     private ImmutableList<LawAlias> selectLawAliasList() {
 
-        return toImmutable(lawAliasBhv.selectList(cb -> {}));
+        return toImmutable(lawAliasBhv.selectList(cb -> {
+            cb.specify().everyColumn();
+        }));
     }
 
     // ===================================================================================
