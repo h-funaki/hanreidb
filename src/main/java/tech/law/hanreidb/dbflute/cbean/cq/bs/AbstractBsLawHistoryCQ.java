@@ -193,25 +193,6 @@ public abstract class AbstractBsLawHistoryCQ extends AbstractConditionQuery {
 
     /**
      * Set up ExistsReferrer (correlated sub-query). <br>
-     * {exists (select LAW_HISTORY_ID from LAW_CONTENT where ...)} <br>
-     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #CC4747">existsLawContent</span>(contentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     contentCB.query().set...
-     * });
-     * </pre>
-     * @param subCBLambda The callback for sub-query of LawContentList for 'exists'. (NotNull)
-     */
-    public void existsLawContent(SubQuery<LawContentCB> subCBLambda) {
-        assertObjectNotNull("subCBLambda", subCBLambda);
-        LawContentCB cb = new LawContentCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepLawHistoryId_ExistsReferrer_LawContentList(cb.query());
-        registerExistsReferrer(cb.query(), "LAW_HISTORY_ID", "LAW_HISTORY_ID", pp, "lawContentList");
-    }
-    public abstract String keepLawHistoryId_ExistsReferrer_LawContentList(LawContentCQ sq);
-
-    /**
-     * Set up ExistsReferrer (correlated sub-query). <br>
      * {exists (select LAW_HISTORY_ID from LAW_TOC where ...)} <br>
      * (法令目次)LAW_TOC by LAW_HISTORY_ID, named 'lawTocAsOne'.
      * <pre>
@@ -250,25 +231,6 @@ public abstract class AbstractBsLawHistoryCQ extends AbstractConditionQuery {
 
     /**
      * Set up NotExistsReferrer (correlated sub-query). <br>
-     * {not exists (select LAW_HISTORY_ID from LAW_CONTENT where ...)} <br>
-     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #CC4747">notExistsLawContent</span>(contentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     contentCB.query().set...
-     * });
-     * </pre>
-     * @param subCBLambda The callback for sub-query of LawHistoryId_NotExistsReferrer_LawContentList for 'not exists'. (NotNull)
-     */
-    public void notExistsLawContent(SubQuery<LawContentCB> subCBLambda) {
-        assertObjectNotNull("subCBLambda", subCBLambda);
-        LawContentCB cb = new LawContentCB(); cb.xsetupForExistsReferrer(this);
-        lockCall(() -> subCBLambda.query(cb)); String pp = keepLawHistoryId_NotExistsReferrer_LawContentList(cb.query());
-        registerNotExistsReferrer(cb.query(), "LAW_HISTORY_ID", "LAW_HISTORY_ID", pp, "lawContentList");
-    }
-    public abstract String keepLawHistoryId_NotExistsReferrer_LawContentList(LawContentCQ sq);
-
-    /**
-     * Set up NotExistsReferrer (correlated sub-query). <br>
      * {not exists (select LAW_HISTORY_ID from LAW_TOC where ...)} <br>
      * (法令目次)LAW_TOC by LAW_HISTORY_ID, named 'lawTocAsOne'.
      * <pre>
@@ -293,14 +255,6 @@ public abstract class AbstractBsLawHistoryCQ extends AbstractConditionQuery {
         registerSpecifyDerivedReferrer(fn, cb.query(), "LAW_HISTORY_ID", "LAW_HISTORY_ID", pp, "articleList", al, op);
     }
     public abstract String keepLawHistoryId_SpecifyDerivedReferrer_ArticleList(ArticleCQ sq);
-
-    public void xsderiveLawContentList(String fn, SubQuery<LawContentCB> sq, String al, DerivedReferrerOption op) {
-        assertObjectNotNull("subQuery", sq);
-        LawContentCB cb = new LawContentCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String pp = keepLawHistoryId_SpecifyDerivedReferrer_LawContentList(cb.query());
-        registerSpecifyDerivedReferrer(fn, cb.query(), "LAW_HISTORY_ID", "LAW_HISTORY_ID", pp, "lawContentList", al, op);
-    }
-    public abstract String keepLawHistoryId_SpecifyDerivedReferrer_LawContentList(LawContentCQ sq);
 
     public void xsderiveLawTocList(String fn, SubQuery<LawTocCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
@@ -336,33 +290,6 @@ public abstract class AbstractBsLawHistoryCQ extends AbstractConditionQuery {
     }
     public abstract String keepLawHistoryId_QueryDerivedReferrer_ArticleList(ArticleCQ sq);
     public abstract String keepLawHistoryId_QueryDerivedReferrer_ArticleListParameter(Object vl);
-
-    /**
-     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
-     * {FOO &lt;= (select max(BAR) from LAW_CONTENT where ...)} <br>
-     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
-     * <pre>
-     * cb.query().<span style="color: #CC4747">derivedLawContent()</span>.<span style="color: #CC4747">max</span>(contentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     contentCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
-     *     contentCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
-     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
-     * </pre>
-     * @return The object to set up a function for referrer table. (NotNull)
-     */
-    public HpQDRFunction<LawContentCB> derivedLawContent() {
-        return xcreateQDRFunctionLawContentList();
-    }
-    protected HpQDRFunction<LawContentCB> xcreateQDRFunctionLawContentList() {
-        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveLawContentList(fn, sq, rd, vl, op));
-    }
-    public void xqderiveLawContentList(String fn, SubQuery<LawContentCB> sq, String rd, Object vl, DerivedReferrerOption op) {
-        assertObjectNotNull("subQuery", sq);
-        LawContentCB cb = new LawContentCB(); cb.xsetupForDerivedReferrer(this);
-        lockCall(() -> sq.query(cb)); String sqpp = keepLawHistoryId_QueryDerivedReferrer_LawContentList(cb.query()); String prpp = keepLawHistoryId_QueryDerivedReferrer_LawContentListParameter(vl);
-        registerQueryDerivedReferrer(fn, cb.query(), "LAW_HISTORY_ID", "LAW_HISTORY_ID", sqpp, "lawContentList", rd, vl, prpp, op);
-    }
-    public abstract String keepLawHistoryId_QueryDerivedReferrer_LawContentList(LawContentCQ sq);
-    public abstract String keepLawHistoryId_QueryDerivedReferrer_LawContentListParameter(Object vl);
 
     /**
      * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>

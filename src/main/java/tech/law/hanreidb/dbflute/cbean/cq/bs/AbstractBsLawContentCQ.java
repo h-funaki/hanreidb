@@ -189,7 +189,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param lawHistoryId The value of lawHistoryId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setLawHistoryId_Equal(Integer lawHistoryId) {
@@ -202,7 +202,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param lawHistoryId The value of lawHistoryId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setLawHistoryId_NotEqual(Integer lawHistoryId) {
@@ -215,7 +215,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param lawHistoryId The value of lawHistoryId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setLawHistoryId_GreaterThan(Integer lawHistoryId) {
@@ -224,7 +224,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param lawHistoryId The value of lawHistoryId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setLawHistoryId_LessThan(Integer lawHistoryId) {
@@ -233,7 +233,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param lawHistoryId The value of lawHistoryId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setLawHistoryId_GreaterEqual(Integer lawHistoryId) {
@@ -242,7 +242,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param lawHistoryId The value of lawHistoryId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setLawHistoryId_LessEqual(Integer lawHistoryId) {
@@ -253,7 +253,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param minNumber The min number of lawHistoryId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of lawHistoryId. (NullAllowed: if null, no to-condition)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -266,7 +266,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param minNumber The min number of lawHistoryId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of lawHistoryId. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -277,7 +277,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param lawHistoryIdList The collection of lawHistoryId as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setLawHistoryId_InScope(Collection<Integer> lawHistoryIdList) {
@@ -290,7 +290,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @param lawHistoryIdList The collection of lawHistoryId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setLawHistoryId_NotInScope(Collection<Integer> lawHistoryIdList) {

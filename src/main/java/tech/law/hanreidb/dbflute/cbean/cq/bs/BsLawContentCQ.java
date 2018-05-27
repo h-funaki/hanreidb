@@ -116,14 +116,14 @@ public class BsLawContentCQ extends AbstractBsLawContentCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @return this. (NotNull)
      */
     public BsLawContentCQ addOrderBy_LawHistoryId_Asc() { regOBA("LAW_HISTORY_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @return this. (NotNull)
      */
     public BsLawContentCQ addOrderBy_LawHistoryId_Desc() { regOBD("LAW_HISTORY_ID"); return this; }

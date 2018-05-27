@@ -51,4 +51,13 @@ public class LawHistoryNss {
         _query.xdoNss(() -> _query.queryLawByLawId());
         return new LawNss(_query.queryLawByLawId());
     }
+    /**
+     * With nested relation columns to select clause. <br>
+     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
+     * @return The set-upper of more nested relation. {...with[nested-relation].with[more-nested-relation]} (NotNull)
+     */
+    public LawContentNss withLawContentAsOne() {
+        _query.xdoNss(() -> _query.queryLawContentAsOne());
+        return new LawContentNss(_query.queryLawContentAsOne());
+    }
 }

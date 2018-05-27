@@ -47,16 +47,16 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     LAW
+ *     LAW, LAW_CONTENT(AsOne)
  *
  * [referrer table]
- *     ARTICLE, LAW_CONTENT, LAW_TOC
+ *     ARTICLE, LAW_TOC, LAW_CONTENT
  *
  * [foreign property]
- *     lawByAmendLawId, lawByLawId
+ *     lawByAmendLawId, lawByLawId, lawContentAsOne
  *
  * [referrer property]
- *     articleList, lawContentList, lawTocList
+ *     articleList, lawTocList
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -304,6 +304,27 @@ public abstract class BsLawHistory extends AbstractEntity implements DomainEntit
         _lawByLawId = lawByLawId;
     }
 
+    /** (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'. */
+    protected OptionalEntity<LawContent> _lawContentAsOne;
+
+    /**
+     * [get] (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
+     * Optional: alwaysPresent(), ifPresent().orElse(), get(), ...
+     * @return the entity of foreign property(referrer-as-one) 'lawContentAsOne'. (NotNull, EmptyAllowed: when e.g. no data, no setupSelect)
+     */
+    public OptionalEntity<LawContent> getLawContentAsOne() {
+        if (_lawContentAsOne == null) { _lawContentAsOne = OptionalEntity.relationEmpty(this, "lawContentAsOne"); }
+        return _lawContentAsOne;
+    }
+
+    /**
+     * [set] (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
+     * @param lawContentAsOne The entity of foreign property(referrer-as-one) 'lawContentAsOne'. (NullAllowed)
+     */
+    public void setLawContentAsOne(OptionalEntity<LawContent> lawContentAsOne) {
+        _lawContentAsOne = lawContentAsOne;
+    }
+
     // ===================================================================================
     //                                                                   Referrer Property
     //                                                                   =================
@@ -325,26 +346,6 @@ public abstract class BsLawHistory extends AbstractEntity implements DomainEntit
      */
     public void setArticleList(List<Article> articleList) {
         _articleList = articleList;
-    }
-
-    /** (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentList'. */
-    protected List<LawContent> _lawContentList;
-
-    /**
-     * [get] (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentList'.
-     * @return The entity list of referrer property 'lawContentList'. (NotNull: even if no loading, returns empty list)
-     */
-    public List<LawContent> getLawContentList() {
-        if (_lawContentList == null) { _lawContentList = newReferrerList(); }
-        return _lawContentList;
-    }
-
-    /**
-     * [set] (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentList'.
-     * @param lawContentList The entity list of referrer property 'lawContentList'. (NullAllowed)
-     */
-    public void setLawContentList(List<LawContent> lawContentList) {
-        _lawContentList = lawContentList;
     }
 
     /** (法令目次)LAW_TOC by LAW_HISTORY_ID, named 'lawTocList'. */
@@ -400,10 +401,10 @@ public abstract class BsLawHistory extends AbstractEntity implements DomainEntit
         { sb.append(li).append(xbRDS(_lawByAmendLawId, "lawByAmendLawId")); }
         if (_lawByLawId != null && _lawByLawId.isPresent())
         { sb.append(li).append(xbRDS(_lawByLawId, "lawByLawId")); }
+        if (_lawContentAsOne != null && _lawContentAsOne.isPresent())
+        { sb.append(li).append(xbRDS(_lawContentAsOne, "lawContentAsOne")); }
         if (_articleList != null) { for (Article et : _articleList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "articleList")); } } }
-        if (_lawContentList != null) { for (LawContent et : _lawContentList)
-        { if (et != null) { sb.append(li).append(xbRDS(et, "lawContentList")); } } }
         if (_lawTocList != null) { for (LawToc et : _lawTocList)
         { if (et != null) { sb.append(li).append(xbRDS(et, "lawTocList")); } } }
         return sb.toString();
@@ -439,10 +440,10 @@ public abstract class BsLawHistory extends AbstractEntity implements DomainEntit
         { sb.append(dm).append("lawByAmendLawId"); }
         if (_lawByLawId != null && _lawByLawId.isPresent())
         { sb.append(dm).append("lawByLawId"); }
+        if (_lawContentAsOne != null && _lawContentAsOne.isPresent())
+        { sb.append(dm).append("lawContentAsOne"); }
         if (_articleList != null && !_articleList.isEmpty())
         { sb.append(dm).append("articleList"); }
-        if (_lawContentList != null && !_lawContentList.isEmpty())
-        { sb.append(dm).append("lawContentList"); }
         if (_lawTocList != null && !_lawTocList.isEmpty())
         { sb.append(dm).append("lawTocList"); }
         if (sb.length() > dm.length()) {

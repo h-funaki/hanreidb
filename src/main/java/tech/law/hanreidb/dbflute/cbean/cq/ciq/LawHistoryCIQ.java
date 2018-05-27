@@ -79,29 +79,19 @@ public class LawHistoryCIQ extends AbstractBsLawHistoryCQ {
     protected ConditionValue xgetCValueLawHistoryId() { return _myCQ.xdfgetLawHistoryId(); }
     public String keepLawHistoryId_ExistsReferrer_ArticleList(ArticleCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
-    public String keepLawHistoryId_ExistsReferrer_LawContentList(LawContentCQ sq)
-    { throwIICBOE("ExistsReferrer"); return null; }
     public String keepLawHistoryId_ExistsReferrer_LawTocList(LawTocCQ sq)
     { throwIICBOE("ExistsReferrer"); return null; }
     public String keepLawHistoryId_NotExistsReferrer_ArticleList(ArticleCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
-    public String keepLawHistoryId_NotExistsReferrer_LawContentList(LawContentCQ sq)
-    { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepLawHistoryId_NotExistsReferrer_LawTocList(LawTocCQ sq)
     { throwIICBOE("NotExistsReferrer"); return null; }
     public String keepLawHistoryId_SpecifyDerivedReferrer_ArticleList(ArticleCQ sq)
-    { throwIICBOE("(Specify)DerivedReferrer"); return null; }
-    public String keepLawHistoryId_SpecifyDerivedReferrer_LawContentList(LawContentCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepLawHistoryId_SpecifyDerivedReferrer_LawTocList(LawTocCQ sq)
     { throwIICBOE("(Specify)DerivedReferrer"); return null; }
     public String keepLawHistoryId_QueryDerivedReferrer_ArticleList(ArticleCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepLawHistoryId_QueryDerivedReferrer_ArticleListParameter(Object vl)
-    { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepLawHistoryId_QueryDerivedReferrer_LawContentList(LawContentCQ sq)
-    { throwIICBOE("(Query)DerivedReferrer"); return null; }
-    public String keepLawHistoryId_QueryDerivedReferrer_LawContentListParameter(Object vl)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }
     public String keepLawHistoryId_QueryDerivedReferrer_LawTocList(LawTocCQ sq)
     { throwIICBOE("(Query)DerivedReferrer"); return null; }

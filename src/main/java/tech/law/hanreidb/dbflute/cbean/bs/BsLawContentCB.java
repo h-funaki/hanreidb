@@ -106,6 +106,18 @@ public class BsLawContentCB extends AbstractConditionBean {
         return (LawContentCB)this;
     }
 
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param lawHistoryId (法令履歴ID): UQ, NotNull, INT(10), FK to LAW_HISTORY. (NotNull)
+     * @return this. (NotNull)
+     */
+    public LawContentCB acceptUniqueOf(Integer lawHistoryId) {
+        assertObjectNotNull("lawHistoryId", lawHistoryId);
+        BsLawContentCB cb = this;
+        cb.query().setLawHistoryId_Equal(lawHistoryId);
+        return (LawContentCB)this;
+    }
+
     public ConditionBean addOrderBy_PK_Asc() {
         query().addOrderBy_LawContentId_Asc();
         return this;
@@ -334,7 +346,7 @@ public class BsLawContentCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnLawContentId() { return doColumn("LAW_CONTENT_ID"); }
         /**
-         * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+         * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnLawHistoryId() { return doColumn("LAW_HISTORY_ID"); }

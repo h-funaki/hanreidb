@@ -83,6 +83,7 @@ public class LawHistoryDbm extends AbstractDBMeta {
     protected void xsetupEfpg() {
         setupEfpg(_efpgMap, et -> ((LawHistory)et).getLawByAmendLawId(), (et, vl) -> ((LawHistory)et).setLawByAmendLawId((OptionalEntity<Law>)vl), "lawByAmendLawId");
         setupEfpg(_efpgMap, et -> ((LawHistory)et).getLawByLawId(), (et, vl) -> ((LawHistory)et).setLawByLawId((OptionalEntity<Law>)vl), "lawByLawId");
+        setupEfpg(_efpgMap, et -> ((LawHistory)et).getLawContentAsOne(), (et, vl) -> ((LawHistory)et).setLawContentAsOne((OptionalEntity<LawContent>)vl), "lawContentAsOne");
     }
     public PropertyGateway findForeignPropertyGateway(String prop)
     { return doFindEfpg(_efpgMap, prop); }
@@ -105,7 +106,7 @@ public class LawHistoryDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnLawHistoryId = cci("LAW_HISTORY_ID", "LAW_HISTORY_ID", null, "法令履歴ID", Integer.class, "lawHistoryId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "articleList,lawContentList,lawTocList", null, false);
+    protected final ColumnInfo _columnLawHistoryId = cci("LAW_HISTORY_ID", "LAW_HISTORY_ID", null, "法令履歴ID", Integer.class, "lawHistoryId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "articleList,lawTocList", null, false);
     protected final ColumnInfo _columnLawId = cci("LAW_ID", "LAW_ID", null, "法令ID", Integer.class, "lawId", null, false, false, true, "INT", 10, 0, null, false, null, null, "lawByLawId", null, null, false);
     protected final ColumnInfo _columnAmendLawId = cci("AMEND_LAW_ID", "AMEND_LAW_ID", null, "改正法令ID", Integer.class, "amendLawId", null, false, false, false, "INT", 10, 0, null, false, null, null, "lawByAmendLawId", null, null, false);
     protected final ColumnInfo _columnLawAmendVersion = cci("LAW_AMEND_VERSION", "LAW_AMEND_VERSION", null, "法令改正バージョン", Integer.class, "lawAmendVersion", null, false, false, true, "INT", 10, 0, null, false, null, null, null, null, null, false);
@@ -228,6 +229,14 @@ public class LawHistoryDbm extends AbstractDBMeta {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnLawId(), LawDbm.getInstance().columnLawId());
         return cfi("FK_LAW_HISTORY_LAW", "lawByLawId", this, LawDbm.getInstance(), mp, 1, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "lawHistoryByLawIdList", false);
     }
+    /**
+     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
+     * @return The information object of foreign property(referrer-as-one). (NotNull)
+     */
+    public ForeignInfo foreignLawContentAsOne() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnLawHistoryId(), LawContentDbm.getInstance().columnLawHistoryId());
+        return cfi("FK_LAW_CONTENT_LAW_HISTORY", "lawContentAsOne", this, LawContentDbm.getInstance(), mp, 2, org.dbflute.optional.OptionalEntity.class, true, false, true, false, null, null, false, "lawHistory", false);
+    }
 
     // -----------------------------------------------------
     //                                     Referrer Property
@@ -239,14 +248,6 @@ public class LawHistoryDbm extends AbstractDBMeta {
     public ReferrerInfo referrerArticleList() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnLawHistoryId(), ArticleDbm.getInstance().columnLawHistoryId());
         return cri("FK_ARTICLE_LAW_HISTORY", "articleList", this, ArticleDbm.getInstance(), mp, false, "lawHistory");
-    }
-    /**
-     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentList'.
-     * @return The information object of referrer property. (NotNull)
-     */
-    public ReferrerInfo referrerLawContentList() {
-        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnLawHistoryId(), LawContentDbm.getInstance().columnLawHistoryId());
-        return cri("FK_LAW_CONTENT_LAW_HISTORY", "lawContentList", this, LawContentDbm.getInstance(), mp, false, "lawHistory");
     }
     /**
      * (法令目次)LAW_TOC by LAW_HISTORY_ID, named 'lawTocList'.

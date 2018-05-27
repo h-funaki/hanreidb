@@ -1077,9 +1077,9 @@
             foreignTable="LAW_HISTORY" name="FK_LAW_CONTENT_LAW_HISTORY">
             <reference foreign="LAW_HISTORY_ID" local="LAW_HISTORY_ID"/>
         </foreign-key>
-        <index name="FK_LAW_CONTENT_LAW_HISTORY">
-            <index-column name="LAW_HISTORY_ID" position="1"/>
-        </index>
+        <unique name="LAW_HISTORY_ID">
+            <unique-column name="LAW_HISTORY_ID" position="1"/>
+        </unique>
     </table>
     <table comment="法令履歴" name="LAW_HISTORY"
         schema="hanreidb.$$NoNameSchema$$" type="TABLE">

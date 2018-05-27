@@ -97,26 +97,17 @@ public class BsLawHistoryCQ extends AbstractBsLawHistoryCQ {
     public Map<String, ArticleCQ> xdfgetLawHistoryId_ExistsReferrer_ArticleList() { return xgetSQueMap("lawHistoryId_ExistsReferrer_ArticleList"); }
     public String keepLawHistoryId_ExistsReferrer_ArticleList(ArticleCQ sq) { return xkeepSQue("lawHistoryId_ExistsReferrer_ArticleList", sq); }
 
-    public Map<String, LawContentCQ> xdfgetLawHistoryId_ExistsReferrer_LawContentList() { return xgetSQueMap("lawHistoryId_ExistsReferrer_LawContentList"); }
-    public String keepLawHistoryId_ExistsReferrer_LawContentList(LawContentCQ sq) { return xkeepSQue("lawHistoryId_ExistsReferrer_LawContentList", sq); }
-
     public Map<String, LawTocCQ> xdfgetLawHistoryId_ExistsReferrer_LawTocList() { return xgetSQueMap("lawHistoryId_ExistsReferrer_LawTocList"); }
     public String keepLawHistoryId_ExistsReferrer_LawTocList(LawTocCQ sq) { return xkeepSQue("lawHistoryId_ExistsReferrer_LawTocList", sq); }
 
     public Map<String, ArticleCQ> xdfgetLawHistoryId_NotExistsReferrer_ArticleList() { return xgetSQueMap("lawHistoryId_NotExistsReferrer_ArticleList"); }
     public String keepLawHistoryId_NotExistsReferrer_ArticleList(ArticleCQ sq) { return xkeepSQue("lawHistoryId_NotExistsReferrer_ArticleList", sq); }
 
-    public Map<String, LawContentCQ> xdfgetLawHistoryId_NotExistsReferrer_LawContentList() { return xgetSQueMap("lawHistoryId_NotExistsReferrer_LawContentList"); }
-    public String keepLawHistoryId_NotExistsReferrer_LawContentList(LawContentCQ sq) { return xkeepSQue("lawHistoryId_NotExistsReferrer_LawContentList", sq); }
-
     public Map<String, LawTocCQ> xdfgetLawHistoryId_NotExistsReferrer_LawTocList() { return xgetSQueMap("lawHistoryId_NotExistsReferrer_LawTocList"); }
     public String keepLawHistoryId_NotExistsReferrer_LawTocList(LawTocCQ sq) { return xkeepSQue("lawHistoryId_NotExistsReferrer_LawTocList", sq); }
 
     public Map<String, ArticleCQ> xdfgetLawHistoryId_SpecifyDerivedReferrer_ArticleList() { return xgetSQueMap("lawHistoryId_SpecifyDerivedReferrer_ArticleList"); }
     public String keepLawHistoryId_SpecifyDerivedReferrer_ArticleList(ArticleCQ sq) { return xkeepSQue("lawHistoryId_SpecifyDerivedReferrer_ArticleList", sq); }
-
-    public Map<String, LawContentCQ> xdfgetLawHistoryId_SpecifyDerivedReferrer_LawContentList() { return xgetSQueMap("lawHistoryId_SpecifyDerivedReferrer_LawContentList"); }
-    public String keepLawHistoryId_SpecifyDerivedReferrer_LawContentList(LawContentCQ sq) { return xkeepSQue("lawHistoryId_SpecifyDerivedReferrer_LawContentList", sq); }
 
     public Map<String, LawTocCQ> xdfgetLawHistoryId_SpecifyDerivedReferrer_LawTocList() { return xgetSQueMap("lawHistoryId_SpecifyDerivedReferrer_LawTocList"); }
     public String keepLawHistoryId_SpecifyDerivedReferrer_LawTocList(LawTocCQ sq) { return xkeepSQue("lawHistoryId_SpecifyDerivedReferrer_LawTocList", sq); }
@@ -125,11 +116,6 @@ public class BsLawHistoryCQ extends AbstractBsLawHistoryCQ {
     public String keepLawHistoryId_QueryDerivedReferrer_ArticleList(ArticleCQ sq) { return xkeepSQue("lawHistoryId_QueryDerivedReferrer_ArticleList", sq); }
     public Map<String, Object> xdfgetLawHistoryId_QueryDerivedReferrer_ArticleListParameter() { return xgetSQuePmMap("lawHistoryId_QueryDerivedReferrer_ArticleList"); }
     public String keepLawHistoryId_QueryDerivedReferrer_ArticleListParameter(Object pm) { return xkeepSQuePm("lawHistoryId_QueryDerivedReferrer_ArticleList", pm); }
-
-    public Map<String, LawContentCQ> xdfgetLawHistoryId_QueryDerivedReferrer_LawContentList() { return xgetSQueMap("lawHistoryId_QueryDerivedReferrer_LawContentList"); }
-    public String keepLawHistoryId_QueryDerivedReferrer_LawContentList(LawContentCQ sq) { return xkeepSQue("lawHistoryId_QueryDerivedReferrer_LawContentList", sq); }
-    public Map<String, Object> xdfgetLawHistoryId_QueryDerivedReferrer_LawContentListParameter() { return xgetSQuePmMap("lawHistoryId_QueryDerivedReferrer_LawContentList"); }
-    public String keepLawHistoryId_QueryDerivedReferrer_LawContentListParameter(Object pm) { return xkeepSQuePm("lawHistoryId_QueryDerivedReferrer_LawContentList", pm); }
 
     public Map<String, LawTocCQ> xdfgetLawHistoryId_QueryDerivedReferrer_LawTocList() { return xgetSQueMap("lawHistoryId_QueryDerivedReferrer_LawTocList"); }
     public String keepLawHistoryId_QueryDerivedReferrer_LawTocList(LawTocCQ sq) { return xkeepSQue("lawHistoryId_QueryDerivedReferrer_LawTocList", sq); }
@@ -377,6 +363,9 @@ public class BsLawHistoryCQ extends AbstractBsLawHistoryCQ {
         if (bq.hasConditionQueryLawByLawId()) {
             uq.queryLawByLawId().reflectRelationOnUnionQuery(bq.queryLawByLawId(), uq.queryLawByLawId());
         }
+        if (bq.hasConditionQueryLawContentAsOne()) {
+            uq.queryLawContentAsOne().reflectRelationOnUnionQuery(bq.queryLawContentAsOne(), uq.queryLawContentAsOne());
+        }
     }
 
     // ===================================================================================
@@ -421,6 +410,24 @@ public class BsLawHistoryCQ extends AbstractBsLawHistoryCQ {
     }
     protected void xsetupOuterJoinLawByLawId() { xregOutJo("lawByLawId"); }
     public boolean hasConditionQueryLawByLawId() { return xhasQueRlMap("lawByLawId"); }
+
+    /**
+     * Get the condition-query for relation table. <br>
+     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
+     * @return The instance of condition-query. (NotNull)
+     */
+    public LawContentCQ queryLawContentAsOne() { return xdfgetConditionQueryLawContentAsOne(); }
+    public LawContentCQ xdfgetConditionQueryLawContentAsOne() {
+        String prop = "lawContentAsOne";
+        if (!xhasQueRlMap(prop)) { xregQueRl(prop, xcreateQueryLawContentAsOne()); xsetupOuterJoinLawContentAsOne(); }
+        return xgetQueRlMap(prop);
+    }
+    protected LawContentCQ xcreateQueryLawContentAsOne() {
+        String nrp = xresolveNRP("LAW_HISTORY", "lawContentAsOne"); String jan = xresolveJAN(nrp, xgetNNLvl());
+        return xinitRelCQ(new LawContentCQ(this, xgetSqlClause(), jan, xgetNNLvl()), _baseCB, "lawContentAsOne", nrp);
+    }
+    protected void xsetupOuterJoinLawContentAsOne() { xregOutJo("lawContentAsOne"); }
+    public boolean hasConditionQueryLawContentAsOne() { return xhasQueRlMap("lawContentAsOne"); }
 
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String property) {
         return null;

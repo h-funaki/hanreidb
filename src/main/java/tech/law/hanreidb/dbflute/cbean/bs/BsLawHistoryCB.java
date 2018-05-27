@@ -324,6 +324,32 @@ public class BsLawHistoryCB extends AbstractConditionBean {
         return _nssLawByLawId;
     }
 
+    protected LawContentNss _nssLawContentAsOne;
+    public LawContentNss xdfgetNssLawContentAsOne() {
+        if (_nssLawContentAsOne == null) { _nssLawContentAsOne = new LawContentNss(null); }
+        return _nssLawContentAsOne;
+    }
+    /**
+     * Set up relation columns to select clause. <br>
+     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
+     * <pre>
+     * <span style="color: #0000C0">lawHistoryBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_LawContentAsOne()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.query().set...
+     * }).alwaysPresent(<span style="color: #553000">lawHistory</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">lawHistory</span>.<span style="color: #CC4747">getLawContentAsOne()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * });
+     * </pre>
+     * @return The set-upper of nested relation. {setupSelect...().with[nested-relation]} (NotNull)
+     */
+    public LawContentNss setupSelect_LawContentAsOne() {
+        assertSetupSelectPurpose("lawContentAsOne");
+        doSetupSelect(() -> query().queryLawContentAsOne());
+        if (_nssLawContentAsOne == null || !_nssLawContentAsOne.hasConditionQuery())
+        { _nssLawContentAsOne = new LawContentNss(query().queryLawContentAsOne()); }
+        return _nssLawContentAsOne;
+    }
+
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -367,6 +393,7 @@ public class BsLawHistoryCB extends AbstractConditionBean {
     public static class HpSpecification extends HpAbstractSpecification<LawHistoryCQ> {
         protected LawCB.HpSpecification _lawByAmendLawId;
         protected LawCB.HpSpecification _lawByLawId;
+        protected LawContentCB.HpSpecification _lawContentAsOne;
         public HpSpecification(ConditionBean baseCB, HpSpQyCall<LawHistoryCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
@@ -478,6 +505,26 @@ public class BsLawHistoryCB extends AbstractConditionBean {
             return _lawByLawId;
         }
         /**
+         * Prepare to specify functions about relation table. <br>
+         * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentAsOne'.
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public LawContentCB.HpSpecification specifyLawContentAsOne() {
+            assertRelation("lawContentAsOne");
+            if (_lawContentAsOne == null) {
+                _lawContentAsOne = new LawContentCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryLawContentAsOne()
+                                    , () -> _qyCall.qy().queryLawContentAsOne())
+                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
+                if (xhasSyncQyCall()) { // inherits it
+                    _lawContentAsOne.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryLawContentAsOne()
+                      , () -> xsyncQyCall().qy().queryLawContentAsOne()));
+                }
+            }
+            return _lawContentAsOne;
+        }
+        /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
          * {select max(FOO) from ARTICLE where ...) as FOO_MAX} <br>
          * (条文)ARTICLE by LAW_HISTORY_ID, named 'articleList'.
@@ -493,23 +540,6 @@ public class BsLawHistoryCB extends AbstractConditionBean {
             assertDerived("articleList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
             return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<ArticleCB> sq, LawHistoryCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsderiveArticleList(fn, sq, al, op), _dbmetaProvider);
-        }
-        /**
-         * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>
-         * {select max(FOO) from LAW_CONTENT where ...) as FOO_MAX} <br>
-         * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentList'.
-         * <pre>
-         * cb.specify().<span style="color: #CC4747">derived${relationMethodIdentityName}()</span>.<span style="color: #CC4747">max</span>(contentCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-         *     contentCB.specify().<span style="color: #CC4747">column...</span> <span style="color: #3F7E5E">// derived column by function</span>
-         *     contentCB.query().set... <span style="color: #3F7E5E">// referrer condition</span>
-         * }, LawContent.<span style="color: #CC4747">ALIAS_foo...</span>);
-         * </pre>
-         * @return The object to set up a function for referrer table. (NotNull)
-         */
-        public HpSDRFunction<LawContentCB, LawHistoryCQ> derivedLawContent() {
-            assertDerived("lawContentList"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<LawContentCB> sq, LawHistoryCQ cq, String al, DerivedReferrerOption op)
-                    -> cq.xsderiveLawContentList(fn, sq, al, op), _dbmetaProvider);
         }
         /**
          * Prepare for (Specify)DerivedReferrer (correlated sub-query). <br>

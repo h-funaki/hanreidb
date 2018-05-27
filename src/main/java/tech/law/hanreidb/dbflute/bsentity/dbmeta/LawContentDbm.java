@@ -119,7 +119,7 @@ public class LawContentDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnLawContentId() { return _columnLawContentId; }
     /**
-     * (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY}
+     * (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnLawHistoryId() { return _columnLawHistoryId; }
@@ -191,6 +191,11 @@ public class LawContentDbm extends AbstractDBMeta {
     public boolean hasPrimaryKey() { return true; }
     public boolean hasCompoundPrimaryKey() { return false; }
 
+    // -----------------------------------------------------
+    //                                        Unique Element
+    //                                        --------------
+    public UniqueInfo uniqueOf() { return hpcui(columnLawHistoryId()); }
+
     // ===================================================================================
     //                                                                       Relation Info
     //                                                                       =============
@@ -205,7 +210,7 @@ public class LawContentDbm extends AbstractDBMeta {
      */
     public ForeignInfo foreignLawHistory() {
         Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnLawHistoryId(), LawHistoryDbm.getInstance().columnLawHistoryId());
-        return cfi("FK_LAW_CONTENT_LAW_HISTORY", "lawHistory", this, LawHistoryDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, false, false, false, false, null, null, false, "lawContentList", false);
+        return cfi("FK_LAW_CONTENT_LAW_HISTORY", "lawHistory", this, LawHistoryDbm.getInstance(), mp, 0, org.dbflute.optional.OptionalEntity.class, true, false, false, false, null, null, false, "lawContentAsOne", false);
     }
 
     // -----------------------------------------------------

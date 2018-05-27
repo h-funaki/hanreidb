@@ -42,16 +42,16 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     LAW
+ *     LAW, LAW_CONTENT(AsOne)
  *
  * [referrer table]
- *     ARTICLE, LAW_CONTENT, LAW_TOC
+ *     ARTICLE, LAW_TOC, LAW_CONTENT
  *
  * [foreign property]
- *     lawByAmendLawId, lawByLawId
+ *     lawByAmendLawId, lawByLawId, lawContentAsOne
  *
  * [referrer property]
- *     articleList, lawContentList, lawTocList
+ *     articleList, lawTocList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -110,40 +110,6 @@ public class LoaderOfLawHistory {
         return hd -> hd.handle(new LoaderOfArticle().ready(_referrerArticle, _selector));
     }
 
-    protected List<LawContent> _referrerLawContent;
-
-    /**
-     * Load referrer of lawContentList by the set-upper of referrer. <br>
-     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentList'.
-     * <pre>
-     * <span style="color: #0000C0">lawHistoryBhv</span>.<span style="color: #994747">load</span>(<span style="color: #553000">lawHistoryList</span>, <span style="color: #553000">historyLoader</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">historyLoader</span>.<span style="color: #CC4747">loadLawContent</span>(<span style="color: #553000">contentCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *         <span style="color: #553000">contentCB</span>.setupSelect...
-     *         <span style="color: #553000">contentCB</span>.query().set...
-     *         <span style="color: #553000">contentCB</span>.query().addOrderBy...
-     *     }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     *     <span style="color: #3F7E5E">//}).withNestedReferrer(<span style="color: #553000">contentLoader</span> -&gt; {</span>
-     *     <span style="color: #3F7E5E">//    contentLoader.load...</span>
-     *     <span style="color: #3F7E5E">//});</span>
-     * });
-     * for (LawHistory lawHistory : <span style="color: #553000">lawHistoryList</span>) {
-     *     ... = lawHistory.<span style="color: #CC4747">getLawContentList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setLawHistoryId_InScope(pkList);
-     * cb.query().addOrderBy_LawHistoryId_Asc();
-     * </pre>
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerLoaderGateway<LoaderOfLawContent> loadLawContent(ReferrerConditionSetupper<LawContentCB> refCBLambda) {
-        myBhv().loadLawContent(_selectedList, refCBLambda).withNestedReferrer(refLs -> _referrerLawContent = refLs);
-        return hd -> hd.handle(new LoaderOfLawContent().ready(_referrerLawContent, _selector));
-    }
-
     protected List<LawToc> _referrerLawToc;
 
     /**
@@ -193,6 +159,13 @@ public class LoaderOfLawHistory {
         if (_foreignLawByLawIdLoader == null)
         { _foreignLawByLawIdLoader = new LoaderOfLaw().ready(myBhv().pulloutLawByLawId(_selectedList), _selector); }
         return _foreignLawByLawIdLoader;
+    }
+
+    protected LoaderOfLawContent _foreignLawContentAsOneLoader;
+    public LoaderOfLawContent pulloutLawContentAsOne() {
+        if (_foreignLawContentAsOneLoader == null)
+        { _foreignLawContentAsOneLoader = new LoaderOfLawContent().ready(myBhv().pulloutLawContentAsOne(_selectedList), _selector); }
+        return _foreignLawContentAsOneLoader;
     }
 
     // ===================================================================================

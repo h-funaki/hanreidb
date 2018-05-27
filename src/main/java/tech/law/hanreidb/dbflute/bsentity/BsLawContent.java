@@ -97,7 +97,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     /** (法令内容ID)LAW_CONTENT_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _lawContentId;
 
-    /** (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY} */
+    /** (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY} */
     protected Integer _lawHistoryId;
 
     /** (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)} */
@@ -144,6 +144,17 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     public boolean hasPrimaryKeyValue() {
         if (_lawContentId == null) { return false; }
         return true;
+    }
+
+    /**
+     * To be unique by the unique column. <br>
+     * You can update the entity by the key when entity update (NOT batch update).
+     * @param lawHistoryId (法令履歴ID): UQ, NotNull, INT(10), FK to LAW_HISTORY. (NotNull)
+     */
+    public void uniqueBy(Integer lawHistoryId) {
+        __uniqueDrivenProperties.clear();
+        __uniqueDrivenProperties.addPropertyName("lawHistoryId");
+        setLawHistoryId(lawHistoryId);
     }
 
     // ===================================================================================
@@ -268,7 +279,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     }
 
     /**
-     * [get] (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY} <br>
+     * [get] (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY} <br>
      * @return The value of the column 'LAW_HISTORY_ID'. (basically NotNull if selected: for the constraint)
      */
     public Integer getLawHistoryId() {
@@ -277,7 +288,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     }
 
     /**
-     * [set] (法令履歴ID)LAW_HISTORY_ID: {IX, NotNull, INT(10), FK to LAW_HISTORY} <br>
+     * [set] (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY} <br>
      * @param lawHistoryId The value of the column 'LAW_HISTORY_ID'. (basically NotNull if update: for the constraint)
      */
     public void setLawHistoryId(Integer lawHistoryId) {

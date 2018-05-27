@@ -1,5 +1,7 @@
 package tech.law.hanreidb.app.web.law.list;
 
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotBlank;
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.ifNotEmpty;
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.newArrayList;
 import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.toImmutable;
 
@@ -59,6 +61,24 @@ public class LawListAction extends HanreidbBaseAction {
         PagingResultBean<Law> page = lawBhv.selectPage(cb -> {
             cb.setupSelect_LawType();
             cb.specify().everyColumn();
+            ifNotBlank(body.law_name).ifPresent(value -> {
+                cb.orScopeQuery(orCB -> {
+                    orCB.query().setLawName_LikeSearch(value, op -> op.likeContain());
+                    orCB.query().existsLawAlias(aliasCB -> {
+                        aliasCB.query().setLawAlias_LikeSearch(value, op -> op.likeContain());
+                    });
+                });
+            });
+            ifNotBlank(body.law_content).ifPresent(value -> {
+                cb.query().existsLawHistoryByLawId(historyCB -> {
+                    historyCB.query().queryLawContentAsOne().setLawContentSearchText_LikeSearch(value, op -> op.likeContain());
+                });
+            });
+            ifNotEmpty(body.law_category_id_list).ifPresent(list -> {
+                cb.query().existsLawCategoryRel(categoryRelCB -> {
+                    categoryRelCB.query().setLawCategoryId_InScope(list);
+                });
+            });
             cb.paging(body.page_size, body.page_number);
         });
         lawBhv.load(page, lawLoader -> {
@@ -92,6 +112,7 @@ public class LawListAction extends HanreidbBaseAction {
     private LawPart convertToLaw(Law law) {
         LawPart part = new LawPart();
         part.law_type_code = law.getLawTypeCode();
+
         part.law_type_alias = law.getLawType().get().getLawTypeAlias();
 
         part.law_public_code = law.getLawPublicCode();

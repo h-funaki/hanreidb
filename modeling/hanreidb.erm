@@ -277,6 +277,7 @@
 					<type>text</type>
 					<not_null>true</not_null>
 				</normal_column>
+				<column_group>共通カラム</column_group>
 			</columns>
 			<indexes>
 			</indexes>
@@ -2066,6 +2067,7 @@
 					<referred_column>table.LAW_HISTORY.LAW_HISTORY_ID</referred_column>
 					<relationship>FK_LAW_CONTENT_LAW_HISTORY</relationship>
 					<not_null>true</not_null>
+					<unique_key>true</unique_key>
 				</normal_column>
 				<normal_column>
 					<physical_name>LAW_CONTENT_RAW_XML</physical_name>
@@ -2418,6 +2420,7 @@
 					<type>varchar(n)</type>
 					<length>200</length>
 				</normal_column>
+				<column_group>共通カラム</column_group>
 			</columns>
 			<indexes>
 			</indexes>
@@ -2469,6 +2472,7 @@
 					<unique_key>true</unique_key>
 				</normal_column>
 				<column_group>区分値共通カラム</column_group>
+				<column_group>共通カラム</column_group>
 			</columns>
 			<indexes>
 			</indexes>

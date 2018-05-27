@@ -53,16 +53,16 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     VERSION_NO
  *
  * [foreign table]
- *     LAW
+ *     LAW, LAW_CONTENT(AsOne)
  *
  * [referrer table]
- *     ARTICLE, LAW_CONTENT, LAW_TOC
+ *     ARTICLE, LAW_TOC, LAW_CONTENT
  *
  * [foreign property]
- *     lawByAmendLawId, lawByLawId
+ *     lawByAmendLawId, lawByLawId, lawContentAsOne
  *
  * [referrer property]
- *     articleList, lawContentList, lawTocList
+ *     articleList, lawTocList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
@@ -465,70 +465,6 @@ public abstract class BsLawHistoryBhv extends AbstractBehaviorWritable<LawHistor
     }
 
     /**
-     * Load referrer of lawContentList by the set-upper of referrer. <br>
-     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentList'.
-     * <pre>
-     * <span style="color: #0000C0">lawHistoryBhv</span>.<span style="color: #CC4747">loadLawContent</span>(<span style="color: #553000">lawHistoryList</span>, <span style="color: #553000">contentCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">contentCB</span>.setupSelect...
-     *     <span style="color: #553000">contentCB</span>.query().set...
-     *     <span style="color: #553000">contentCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * <span style="color: #70226C">for</span> (LawHistory lawHistory : <span style="color: #553000">lawHistoryList</span>) {
-     *     ... = lawHistory.<span style="color: #CC4747">getLawContentList()</span>;
-     * }
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setLawHistoryId_InScope(pkList);
-     * cb.query().addOrderBy_LawHistoryId_Asc();
-     * </pre>
-     * @param lawHistoryList The entity list of lawHistory. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<LawContent> loadLawContent(List<LawHistory> lawHistoryList, ReferrerConditionSetupper<LawContentCB> refCBLambda) {
-        xassLRArg(lawHistoryList, refCBLambda);
-        return doLoadLawContent(lawHistoryList, new LoadReferrerOption<LawContentCB, LawContent>().xinit(refCBLambda));
-    }
-
-    /**
-     * Load referrer of lawContentList by the set-upper of referrer. <br>
-     * (法令内容)LAW_CONTENT by LAW_HISTORY_ID, named 'lawContentList'.
-     * <pre>
-     * <span style="color: #0000C0">lawHistoryBhv</span>.<span style="color: #CC4747">loadLawContent</span>(<span style="color: #553000">lawHistory</span>, <span style="color: #553000">contentCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
-     *     <span style="color: #553000">contentCB</span>.setupSelect...
-     *     <span style="color: #553000">contentCB</span>.query().set...
-     *     <span style="color: #553000">contentCB</span>.query().addOrderBy...
-     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
-     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
-     * <span style="color: #3F7E5E">//    ...</span>
-     * <span style="color: #3F7E5E">//});</span>
-     * ... = <span style="color: #553000">lawHistory</span>.<span style="color: #CC4747">getLawContentList()</span>;
-     * </pre>
-     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
-     * The condition-bean, which the set-upper provides, has settings before callback as follows:
-     * <pre>
-     * cb.query().setLawHistoryId_InScope(pkList);
-     * cb.query().addOrderBy_LawHistoryId_Asc();
-     * </pre>
-     * @param lawHistory The entity of lawHistory. (NotNull)
-     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
-     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
-     */
-    public NestedReferrerListGateway<LawContent> loadLawContent(LawHistory lawHistory, ReferrerConditionSetupper<LawContentCB> refCBLambda) {
-        xassLRArg(lawHistory, refCBLambda);
-        return doLoadLawContent(xnewLRLs(lawHistory), new LoadReferrerOption<LawContentCB, LawContent>().xinit(refCBLambda));
-    }
-
-    protected NestedReferrerListGateway<LawContent> doLoadLawContent(List<LawHistory> lawHistoryList, LoadReferrerOption<LawContentCB, LawContent> option) {
-        return helpLoadReferrerInternally(lawHistoryList, option, "lawContentList");
-    }
-
-    /**
      * Load referrer of lawTocList by the set-upper of referrer. <br>
      * (法令目次)LAW_TOC by LAW_HISTORY_ID, named 'lawTocList'.
      * <pre>
@@ -610,6 +546,14 @@ public abstract class BsLawHistoryBhv extends AbstractBehaviorWritable<LawHistor
      */
     public List<Law> pulloutLawByLawId(List<LawHistory> lawHistoryList)
     { return helpPulloutInternally(lawHistoryList, "lawByLawId"); }
+
+    /**
+     * Pull out the list of referrer-as-one table 'LawContent'.
+     * @param lawHistoryList The list of lawHistory. (NotNull, EmptyAllowed)
+     * @return The list of referrer-as-one table. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<LawContent> pulloutLawContentAsOne(List<LawHistory> lawHistoryList)
+    { return helpPulloutInternally(lawHistoryList, "lawContentAsOne"); }
 
     // ===================================================================================
     //                                                                      Extract Column

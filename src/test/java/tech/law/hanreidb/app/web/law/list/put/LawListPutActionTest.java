@@ -8,6 +8,8 @@ import javax.xml.stream.XMLStreamException;
 
 import org.xml.sax.SAXException;
 
+import net.sourceforge.plantuml.code.Transcoder;
+import net.sourceforge.plantuml.code.TranscoderUtil;
 import tech.law.hanreidb.unit.UnitHanreidbTestCase;
 
 /**
@@ -29,10 +31,14 @@ public class LawListPutActionTest extends UnitHanreidbTestCase {
         inject(action);
 
         // ## Act ##
-        LawListPutContentResult result = action.index().getJsonResult();
+        // LawListPutContentResult result = action.index().getJsonResult();
+
+        Transcoder t = TranscoderUtil.getDefaultTranscoder();
+        String s = "Alice->Bob: hello1\nAlice->Bob: hello2\n";
+        String url = t.encode(s);
 
         // ## Assert ##
-        log(result);
+        log(url);
     }
     // ===================================================================================
     //                                                                               異常系

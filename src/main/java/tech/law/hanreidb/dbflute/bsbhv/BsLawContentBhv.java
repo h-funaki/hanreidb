@@ -199,6 +199,31 @@ public abstract class BsLawContentBhv extends AbstractBehaviorWritable<LawConten
         return newConditionBean().acceptPK(lawContentId);
     }
 
+    /**
+     * Select the entity by the unique-key value.
+     * @param lawHistoryId (法令履歴ID): UQ, NotNull, INT(10), FK to LAW_HISTORY. (NotNull)
+     * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
+     * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
+     */
+    public OptionalEntity<LawContent> selectByUniqueOf(Integer lawHistoryId) {
+        return facadeSelectByUniqueOf(lawHistoryId);
+    }
+
+    protected OptionalEntity<LawContent> facadeSelectByUniqueOf(Integer lawHistoryId) {
+        return doSelectByUniqueOf(lawHistoryId, typeOfSelectedEntity());
+    }
+
+    protected <ENTITY extends LawContent> OptionalEntity<ENTITY> doSelectByUniqueOf(Integer lawHistoryId, Class<? extends ENTITY> tp) {
+        return createOptionalEntity(doSelectEntity(xprepareCBAsUniqueOf(lawHistoryId), tp), lawHistoryId);
+    }
+
+    protected LawContentCB xprepareCBAsUniqueOf(Integer lawHistoryId) {
+        assertObjectNotNull("lawHistoryId", lawHistoryId);
+        return newConditionBean().acceptUniqueOf(lawHistoryId);
+    }
+
     // ===================================================================================
     //                                                                         List Select
     //                                                                         ===========
@@ -395,6 +420,14 @@ public abstract class BsLawContentBhv extends AbstractBehaviorWritable<LawConten
      */
     public List<Integer> extractLawContentIdList(List<LawContent> lawContentList)
     { return helpExtractListInternally(lawContentList, "lawContentId"); }
+
+    /**
+     * Extract the value list of (single) unique key lawHistoryId.
+     * @param lawContentList The list of lawContent. (NotNull, EmptyAllowed)
+     * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
+     */
+    public List<Integer> extractLawHistoryIdList(List<LawContent> lawContentList)
+    { return helpExtractListInternally(lawContentList, "lawHistoryId"); }
 
     // ===================================================================================
     //                                                                       Entity Update
