@@ -103,6 +103,11 @@ public class LawTocCIQ extends AbstractBsLawTocCQ {
     protected ConditionValue xgetCValueDivisionNumber() { return _myCQ.xdfgetDivisionNumber(); }
     protected ConditionValue xgetCValueDivisionTitle() { return _myCQ.xdfgetDivisionTitle(); }
     protected ConditionValue xgetCValueDivisionCaption() { return _myCQ.xdfgetDivisionCaption(); }
+    protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
+    protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }
+    protected ConditionValue xgetCValueUpdateDatetime() { return _myCQ.xdfgetUpdateDatetime(); }
+    protected ConditionValue xgetCValueUpdateUser() { return _myCQ.xdfgetUpdateUser(); }
+    protected ConditionValue xgetCValueVersionNo() { return _myCQ.xdfgetVersionNo(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(LawTocCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

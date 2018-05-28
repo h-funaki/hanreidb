@@ -41,7 +41,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     LAW_TYPE_CODE
  *
  * [column]
- *     LAW_TYPE_CODE, LAW_TYPE_NAME, LAW_TYPE_ALIAS, DESCRIPTION, DISPLAY_ORDER
+ *     LAW_TYPE_CODE, LAW_TYPE_NAME, LAW_TYPE_ALIAS, DESCRIPTION, DISPLAY_ORDER, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -50,7 +50,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     
  *
  * [version-no]
- *     
+ *     VERSION_NO
  *
  * [foreign table]
  *     
@@ -576,7 +576,7 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     }
 
     /**
-     * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Update the entity modified-only. (ZeroUpdateException, ExclusiveControl) <br>
      * By PK as default, and also you can update by unique keys using entity's uniqueOf().
      * <pre>
      * LawType lawType = <span style="color: #70226C">new</span> LawType();
@@ -589,8 +589,8 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
      * lawType.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #0000C0">lawTypeBhv</span>.<span style="color: #CC4747">update</span>(lawType);
      * </pre>
-     * @param lawType The entity of update. (NotNull, PrimaryKeyNotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @param lawType The entity of update. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -599,11 +599,35 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     }
 
     /**
-     * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
+     * Update the entity non-strictly modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * By PK as default, and also you can update by unique keys using entity's uniqueOf().
+     * <pre>
+     * LawType lawType = <span style="color: #70226C">new</span> LawType();
+     * lawType.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * lawType.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
+     * <span style="color: #3F7E5E">//lawType.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//lawType.set...;</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//lawType.setVersionNo(value);</span>
+     * <span style="color: #0000C0">lawTypeBhv</span>.<span style="color: #CC4747">updateNonstrict</span>(lawType);
+     * </pre>
+     * @param lawType The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void updateNonstrict(LawType lawType) {
+        doUpdateNonstrict(lawType, null);
+    }
+
+    /**
+     * Insert or update the entity modified-only. (DefaultConstraintsEnabled, ExclusiveControl) <br>
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
      * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
      * @param lawType The entity of insert or update. (NotNull, ...depends on insert or update)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -612,7 +636,20 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     }
 
     /**
-     * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Insert or update the entity non-strictly modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
+     * if (the entity has no PK) { insert() } else { update(), but no data, insert() }
+     * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
+     * @param lawType The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void insertOrUpdateNonstrict(LawType lawType) {
+        doInsertOrUpdateNonstrict(lawType, null, null);
+    }
+
+    /**
+     * Delete the entity. (ZeroUpdateException, ExclusiveControl) <br>
      * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
      * <pre>
      * LawType lawType = <span style="color: #70226C">new</span> LawType();
@@ -625,12 +662,31 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
      *     ...
      * }
      * </pre>
-     * @param lawType The entity of delete. (NotNull, PrimaryKeyNotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @param lawType The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
     public void delete(LawType lawType) {
         doDelete(lawType, null);
+    }
+
+    /**
+     * Delete the entity non-strictly. {ZeroUpdateException, NonExclusiveControl} <br>
+     * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
+     * <pre>
+     * LawType lawType = <span style="color: #70226C">new</span> LawType();
+     * lawType.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//lawType.setVersionNo(value);</span>
+     * <span style="color: #0000C0">lawTypeBhv</span>.<span style="color: #CC4747">deleteNonstrict</span>(lawType);
+     * </pre>
+     * @param lawType The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void deleteNonstrict(LawType lawType) {
+        doDeleteNonstrict(lawType, null);
     }
 
     // ===================================================================================
@@ -665,7 +721,7 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     }
 
     /**
-     * Batch-update the entity list modified-only of same-set columns. (NonExclusiveControl) <br>
+     * Batch-update the entity list modified-only of same-set columns. (ExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement. <br>
      * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
@@ -684,23 +740,62 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
      * }
      * <span style="color: #0000C0">lawTypeBhv</span>.<span style="color: #CC4747">batchUpdate</span>(lawTypeList);
      * </pre>
-     * @param lawTypeList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param lawTypeList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws BatchEntityAlreadyUpdatedException When the entity has already been updated. This exception extends EntityAlreadyUpdatedException.
      */
     public int[] batchUpdate(List<LawType> lawTypeList) {
         return doBatchUpdate(lawTypeList, null);
     }
 
     /**
-     * Batch-delete the entity list. (NonExclusiveControl) <br>
+     * Batch-update the entity list non-strictly modified-only of same-set columns. (NonExclusiveControl) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement. <br>
+     * <span style="color: #CC4747; font-size: 140%">You should specify same-set columns to all entities like this:</span>
+     * <pre>
+     * <span style="color: #70226C">for</span> (... : ...) {
+     *     LawType lawType = <span style="color: #70226C">new</span> LawType();
+     *     lawType.setFooName("foo");
+     *     <span style="color: #70226C">if</span> (...) {
+     *         lawType.setFooPrice(123);
+     *     } <span style="color: #70226C">else</span> {
+     *         lawType.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//lawType.setFooDate(...); // *not allowed, fragmented</span>
+     *     }
+     *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
+     *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
+     *     lawTypeList.add(lawType);
+     * }
+     * <span style="color: #0000C0">lawTypeBhv</span>.<span style="color: #CC4747">batchUpdate</span>(lawTypeList);
+     * </pre>
+     * @param lawTypeList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     */
+    public int[] batchUpdateNonstrict(List<LawType> lawTypeList) {
+        return doBatchUpdateNonstrict(lawTypeList, null);
+    }
+
+    /**
+     * Batch-delete the entity list. (ExclusiveControl) <br>
+     * This method uses executeBatch() of java.sql.PreparedStatement.
+     * @param lawTypeList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     * @throws BatchEntityAlreadyUpdatedException When the entity has already been updated. This exception extends EntityAlreadyUpdatedException.
+     */
+    public int[] batchDelete(List<LawType> lawTypeList) {
+        return doBatchDelete(lawTypeList, null);
+    }
+
+    /**
+     * Batch-delete the entity list non-strictly. {NonExclusiveControl} <br>
      * This method uses executeBatch() of java.sql.PreparedStatement.
      * @param lawTypeList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchDelete(List<LawType> lawTypeList) {
-        return doBatchDelete(lawTypeList, null);
+    public int[] batchDeleteNonstrict(List<LawType> lawTypeList) {
+        return doBatchDeleteNonstrict(lawTypeList, null);
     }
 
     // ===================================================================================
@@ -807,7 +902,7 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     }
 
     /**
-     * Update the entity with varying requests modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Update the entity with varying requests modified-only. (ZeroUpdateException, ExclusiveControl) <br>
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
      * Other specifications are same as update(entity).
      * <pre>
@@ -823,9 +918,9 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
      * });
      * </pre>
-     * @param lawType The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param lawType The entity of update. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -834,12 +929,40 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     }
 
     /**
+     * Update the entity with varying requests non-strictly modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
+     * Other specifications are same as updateNonstrict(entity).
+     * <pre>
+     * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
+     * LawType lawType = <span style="color: #70226C">new</span> LawType();
+     * lawType.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * lawType.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
+     * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
+     * <span style="color: #3F7E5E">//lawType.setVersionNo(value);</span>
+     * <span style="color: #0000C0">lawTypeBhv</span>.<span style="color: #CC4747">varyingUpdateNonstrict</span>(lawType, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
+     *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
+     * });
+     * </pre>
+     * @param lawType The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingUpdateNonstrict(LawType lawType, WritableOptionCall<LawTypeCB, UpdateOption<LawTypeCB>> opLambda) {
+        doUpdateNonstrict(lawType, createUpdateOption(opLambda));
+    }
+
+    /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
      * Other specifications are same as insertOrUpdate(entity).
      * @param lawType The entity of insert or update. (NotNull)
      * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
      * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
-     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
@@ -848,16 +971,43 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     }
 
     /**
-     * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Insert or update the entity with varying requests non-strictly. (NonExclusiveControl: when update) <br>
+     * Other specifications are same as insertOrUpdateNonstrict(entity).
+     * @param lawType The entity of insert or update. (NotNull)
+     * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
+     * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
+     * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
+     */
+    public void varyingInsertOrUpdateNonstrict(LawType lawType, WritableOptionCall<LawTypeCB, InsertOption<LawTypeCB>> insertOpLambda, WritableOptionCall<LawTypeCB, UpdateOption<LawTypeCB>> updateOpLambda) {
+        doInsertOrUpdateNonstrict(lawType, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    }
+
+    /**
+     * Delete the entity with varying requests. (ZeroUpdateException, ExclusiveControl) <br>
      * Now a valid option does not exist. <br>
      * Other specifications are same as delete(entity).
+     * @param lawType The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @throws EntityAlreadyUpdatedException When the entity has already been updated.
+     * @throws EntityDuplicatedException When the entity has been duplicated.
+     */
+    public void varyingDelete(LawType lawType, WritableOptionCall<LawTypeCB, DeleteOption<LawTypeCB>> opLambda) {
+        doDelete(lawType, createDeleteOption(opLambda));
+    }
+
+    /**
+     * Delete the entity with varying requests non-strictly. (ZeroUpdateException, NonExclusiveControl) <br>
+     * Now a valid option does not exist. <br>
+     * Other specifications are same as deleteNonstrict(entity).
      * @param lawType The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void varyingDelete(LawType lawType, WritableOptionCall<LawTypeCB, DeleteOption<LawTypeCB>> opLambda) {
-        doDelete(lawType, createDeleteOption(opLambda));
+    public void varyingDeleteNonstrict(LawType lawType, WritableOptionCall<LawTypeCB, DeleteOption<LawTypeCB>> opLambda) {
+        doDeleteNonstrict(lawType, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -890,6 +1040,19 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     }
 
     /**
+     * Batch-update the list with varying requests non-strictly. <br>
+     * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
+     * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
+     * Other specifications are same as batchUpdateNonstrict(entityList).
+     * @param lawTypeList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of update for varying requests. (NotNull)
+     * @return The array of updated count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchUpdateNonstrict(List<LawType> lawTypeList, WritableOptionCall<LawTypeCB, UpdateOption<LawTypeCB>> opLambda) {
+        return doBatchUpdateNonstrict(lawTypeList, createUpdateOption(opLambda));
+    }
+
+    /**
      * Batch-delete the list with varying requests. <br>
      * For example, limitBatchDeleteLogging(). <br>
      * Other specifications are same as batchDelete(entityList).
@@ -899,6 +1062,18 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
      */
     public int[] varyingBatchDelete(List<LawType> lawTypeList, WritableOptionCall<LawTypeCB, DeleteOption<LawTypeCB>> opLambda) {
         return doBatchDelete(lawTypeList, createDeleteOption(opLambda));
+    }
+
+    /**
+     * Batch-delete the list with varying requests non-strictly. <br>
+     * For example, limitBatchDeleteLogging(). <br>
+     * Other specifications are same as batchDeleteNonstrict(entityList).
+     * @param lawTypeList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param opLambda The callback for option of delete for varying requests. (NotNull)
+     * @return The array of deleted count. (NotNull, EmptyAllowed)
+     */
+    public int[] varyingBatchDeleteNonstrict(List<LawType> lawTypeList, WritableOptionCall<LawTypeCB, DeleteOption<LawTypeCB>> opLambda) {
+        return doBatchDeleteNonstrict(lawTypeList, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -1002,6 +1177,12 @@ public abstract class BsLawTypeBhv extends AbstractBehaviorWritable<LawType, Law
     public OutsideSqlAllFacadeExecutor<LawTypeBhv> outsideSql() {
         return doOutsideSql();
     }
+
+    // ===================================================================================
+    //                                                                Optimistic Lock Info
+    //                                                                ====================
+    @Override
+    protected boolean hasVersionNoValue(Entity et) { return downcast(et).getVersionNo() != null; }
 
     // ===================================================================================
     //                                                                         Type Helper

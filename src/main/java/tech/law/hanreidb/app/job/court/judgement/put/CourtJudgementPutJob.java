@@ -17,6 +17,7 @@ import tech.law.hanreidb.app.base.job.JobRecorder;
 import tech.law.hanreidb.app.base.job.exception.JobBusinessSkipException;
 import tech.law.hanreidb.app.logic.FileLogic;
 import tech.law.hanreidb.dbflute.exbhv.CourtJudgementBhv;
+import tech.law.hanreidb.mylasta.direction.HanreidbConfig;
 import tech.law.hanreidb.mylasta.direction.HanreidbEnv;
 
 public class CourtJudgementPutJob implements LaJob {
@@ -25,10 +26,6 @@ public class CourtJudgementPutJob implements LaJob {
     //                                                                          Definition
     //                                                                          ==========
     private static final Logger logger = LoggerFactory.getLogger(CourtJudgementPutJob.class);
-
-    public static final String HTML_URL = "http://www.courts.go.jp/app/hanrei_jp/";
-
-    public static final String PDF_URL = "http://www.courts.go.jp/app/files/hanrei_jp/";
 
     public static final String BEGIN_ID = "begin_id";
 
@@ -41,6 +38,8 @@ public class CourtJudgementPutJob implements LaJob {
     private CourtJudgementBhv courtJudgementBhv;
     @Resource
     private HanreidbEnv env;
+    @Resource
+    private HanreidbConfig config;
     @Resource
     private FileLogic fileLogic;
 
@@ -98,7 +97,7 @@ public class CourtJudgementPutJob implements LaJob {
     }
 
     protected void putHtmlDocument(Integer targetId, Integer detail) {
-        String url = HTML_URL.concat("detail").concat(detail.toString()).concat("?id=").concat(targetId.toString());
+        String url = config.getCourtWebBaseUrl().concat("detail").concat(detail.toString()).concat("?id=").concat(targetId.toString());
         try {
             Document document = Jsoup.connect(url).get();
             String htmlFileName = env.getCourtHtmlPath() + targetId + "_" + detail + ".html";
@@ -115,8 +114,9 @@ public class CourtJudgementPutJob implements LaJob {
 
     protected void putPdf(Integer targetId) {
         // e.g. http://www.courts.go.jp/app/files/hanrei_jp/001/000001_hanrei.pdf
+        // TODO JudgementGetActionと共通化したい
         String targetIdStr = String.format("%06d", targetId);
-        String url = PDF_URL.concat(targetIdStr.substring(3)).concat("/").concat(targetIdStr).concat("_hanrei.pdf"); // 586/087586
+        String url = config.getCourtFileBaseUrl().concat(targetIdStr.substring(3)).concat("/").concat(targetIdStr).concat("_hanrei.pdf"); // 586/087586
         String outputPath = env.getCourtPdfPath() + targetId + ".pdf";
         try {
             fileLogic.getFile(url, outputPath);

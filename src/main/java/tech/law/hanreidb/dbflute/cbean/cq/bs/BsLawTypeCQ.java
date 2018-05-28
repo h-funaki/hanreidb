@@ -188,6 +188,106 @@ public class BsLawTypeCQ extends AbstractBsLawTypeCQ {
      */
     public BsLawTypeCQ addOrderBy_DisplayOrder_Desc() { regOBD("DISPLAY_ORDER"); return this; }
 
+    protected ConditionValue _registerDatetime;
+    public ConditionValue xdfgetRegisterDatetime()
+    { if (_registerDatetime == null) { _registerDatetime = nCV(); }
+      return _registerDatetime; }
+    protected ConditionValue xgetCValueRegisterDatetime() { return xdfgetRegisterDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_RegisterDatetime_Asc() { regOBA("REGISTER_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_RegisterDatetime_Desc() { regOBD("REGISTER_DATETIME"); return this; }
+
+    protected ConditionValue _registerUser;
+    public ConditionValue xdfgetRegisterUser()
+    { if (_registerUser == null) { _registerUser = nCV(); }
+      return _registerUser; }
+    protected ConditionValue xgetCValueRegisterUser() { return xdfgetRegisterUser(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_RegisterUser_Asc() { regOBA("REGISTER_USER"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_RegisterUser_Desc() { regOBD("REGISTER_USER"); return this; }
+
+    protected ConditionValue _updateDatetime;
+    public ConditionValue xdfgetUpdateDatetime()
+    { if (_updateDatetime == null) { _updateDatetime = nCV(); }
+      return _updateDatetime; }
+    protected ConditionValue xgetCValueUpdateDatetime() { return xdfgetUpdateDatetime(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_UpdateDatetime_Asc() { regOBA("UPDATE_DATETIME"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_UpdateDatetime_Desc() { regOBD("UPDATE_DATETIME"); return this; }
+
+    protected ConditionValue _updateUser;
+    public ConditionValue xdfgetUpdateUser()
+    { if (_updateUser == null) { _updateUser = nCV(); }
+      return _updateUser; }
+    protected ConditionValue xgetCValueUpdateUser() { return xdfgetUpdateUser(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_UpdateUser_Asc() { regOBA("UPDATE_USER"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_UpdateUser_Desc() { regOBD("UPDATE_USER"); return this; }
+
+    protected ConditionValue _versionNo;
+    public ConditionValue xdfgetVersionNo()
+    { if (_versionNo == null) { _versionNo = nCV(); }
+      return _versionNo; }
+    protected ConditionValue xgetCValueVersionNo() { return xdfgetVersionNo(); }
+
+    /** 
+     * Add order-by as ascend. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_VersionNo_Asc() { regOBA("VERSION_NO"); return this; }
+
+    /**
+     * Add order-by as descend. <br>
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return this. (NotNull)
+     */
+    public BsLawTypeCQ addOrderBy_VersionNo_Desc() { regOBD("VERSION_NO"); return this; }
+
     // ===================================================================================
     //                                                             SpecifiedDerivedOrderBy
     //                                                             =======================

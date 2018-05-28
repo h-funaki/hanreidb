@@ -28,7 +28,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     ARTICLE_CONTENT_ID
  *
  * [column]
- *     ARTICLE_CONTENT_ID, ARTICLE_ID, ARTICLE_CONTENT_RAW_XML, ARTICLE_CONTENT_VIEW_XML
+ *     ARTICLE_CONTENT_ID, ARTICLE_ID, ARTICLE_CONTENT_RAW_XML, ARTICLE_CONTENT_VIEW_XML, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -37,7 +37,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     ARTICLE_CONTENT_ID
  *
  * [version-no]
- *     
+ *     VERSION_NO
  *
  * [foreign table]
  *     ARTICLE

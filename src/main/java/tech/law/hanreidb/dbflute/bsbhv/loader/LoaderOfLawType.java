@@ -30,7 +30,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     LAW_TYPE_CODE
  *
  * [column]
- *     LAW_TYPE_CODE, LAW_TYPE_NAME, LAW_TYPE_ALIAS, DESCRIPTION, DISPLAY_ORDER
+ *     LAW_TYPE_CODE, LAW_TYPE_NAME, LAW_TYPE_ALIAS, DESCRIPTION, DISPLAY_ORDER, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -39,7 +39,7 @@ import tech.law.hanreidb.dbflute.cbean.*;
  *     
  *
  * [version-no]
- *     
+ *     VERSION_NO
  *
  * [foreign table]
  *     

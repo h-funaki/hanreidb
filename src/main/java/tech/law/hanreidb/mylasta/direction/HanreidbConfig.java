@@ -38,6 +38,12 @@ public interface HanreidbConfig extends HanreidbEnv {
     /** The key of the configuration. e.g. HH:mm:ss */
     String APP_STANDARD_TIME_PATTERN = "app.standard.time.pattern";
 
+    /** The key of the configuration. e.g. http://www.courts.go.jp/app/hanrei_jp/ */
+    String COURT_WEB_BASE_URL = "court.web.base.url";
+
+    /** The key of the configuration. e.g. http://www.courts.go.jp/app/files/hanrei_jp/ */
+    String COURT_FILE_BASE_URL = "court.file.base.url";
+
     /** The key of the configuration. e.g. / */
     String COOKIE_DEFAULT_PATH = "cookie.default.path";
 
@@ -105,6 +111,21 @@ public interface HanreidbConfig extends HanreidbEnv {
      * @return The value of found property. (NotNull: if not found, exception but basically no way)
      */
     String getAppStandardTimePattern();
+
+    /**
+     * Get the value for the key 'court.web.base.url'. <br>
+     * The value is, e.g. http://www.courts.go.jp/app/hanrei_jp/ <br>
+     * comment: ---------
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getCourtWebBaseUrl();
+
+    /**
+     * Get the value for the key 'court.file.base.url'. <br>
+     * The value is, e.g. http://www.courts.go.jp/app/files/hanrei_jp/ <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getCourtFileBaseUrl();
 
     /**
      * Get the value for the key 'cookie.default.path'. <br>
@@ -183,6 +204,14 @@ public interface HanreidbConfig extends HanreidbEnv {
 
         public String getAppStandardTimePattern() {
             return get(HanreidbConfig.APP_STANDARD_TIME_PATTERN);
+        }
+
+        public String getCourtWebBaseUrl() {
+            return get(HanreidbConfig.COURT_WEB_BASE_URL);
+        }
+
+        public String getCourtFileBaseUrl() {
+            return get(HanreidbConfig.COURT_FILE_BASE_URL);
         }
 
         public String getCookieDefaultPath() {

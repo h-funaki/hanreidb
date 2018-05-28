@@ -62,6 +62,11 @@ public class LawTypeDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((LawType)et).getLawTypeAlias(), (et, vl) -> ((LawType)et).setLawTypeAlias((String)vl), "lawTypeAlias");
         setupEpg(_epgMap, et -> ((LawType)et).getDescription(), (et, vl) -> ((LawType)et).setDescription((String)vl), "description");
         setupEpg(_epgMap, et -> ((LawType)et).getDisplayOrder(), (et, vl) -> ((LawType)et).setDisplayOrder(cti(vl)), "displayOrder");
+        setupEpg(_epgMap, et -> ((LawType)et).getRegisterDatetime(), (et, vl) -> ((LawType)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
+        setupEpg(_epgMap, et -> ((LawType)et).getRegisterUser(), (et, vl) -> ((LawType)et).setRegisterUser((String)vl), "registerUser");
+        setupEpg(_epgMap, et -> ((LawType)et).getUpdateDatetime(), (et, vl) -> ((LawType)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
+        setupEpg(_epgMap, et -> ((LawType)et).getUpdateUser(), (et, vl) -> ((LawType)et).setUpdateUser((String)vl), "updateUser");
+        setupEpg(_epgMap, et -> ((LawType)et).getVersionNo(), (et, vl) -> ((LawType)et).setVersionNo(ctl(vl)), "versionNo");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -89,6 +94,11 @@ public class LawTypeDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnLawTypeAlias = cci("LAW_TYPE_ALIAS", "LAW_TYPE_ALIAS", null, "法令種別別名", String.class, "lawTypeAlias", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDescription = cci("DESCRIPTION", "DESCRIPTION", null, "説明", String.class, "description", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, "順番", Integer.class, "displayOrder", null, false, false, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, "更新ユーザー", String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT UNSIGNED", 20, 0, "0", false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
      * (法令種別コード)LAW_TYPE_CODE: {PK, NotNull, VARCHAR(20)}
@@ -115,6 +125,31 @@ public class LawTypeDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnDisplayOrder() { return _columnDisplayOrder; }
+    /**
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRegisterDatetime() { return _columnRegisterDatetime; }
+    /**
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRegisterUser() { return _columnRegisterUser; }
+    /**
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }
+    /**
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdateUser() { return _columnUpdateUser; }
+    /**
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnVersionNo() { return _columnVersionNo; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
@@ -123,6 +158,11 @@ public class LawTypeDbm extends AbstractDBMeta {
         ls.add(columnLawTypeAlias());
         ls.add(columnDescription());
         ls.add(columnDisplayOrder());
+        ls.add(columnRegisterDatetime());
+        ls.add(columnRegisterUser());
+        ls.add(columnUpdateDatetime());
+        ls.add(columnUpdateUser());
+        ls.add(columnVersionNo());
         return ls;
     }
 
@@ -169,6 +209,15 @@ public class LawTypeDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                        Various Info
     //                                                                        ============
+    public boolean hasVersionNo() { return true; }
+    public ColumnInfo getVersionNoColumnInfo() { return _columnVersionNo; }
+    public boolean hasCommonColumn() { return true; }
+    public List<ColumnInfo> getCommonColumnInfoList()
+    { return newArrayList(columnRegisterDatetime(), columnRegisterUser(), columnUpdateDatetime(), columnUpdateUser()); }
+    public List<ColumnInfo> getCommonColumnInfoBeforeInsertList()
+    { return newArrayList(columnRegisterDatetime(), columnRegisterUser(), columnUpdateDatetime(), columnUpdateUser()); }
+    public List<ColumnInfo> getCommonColumnInfoBeforeUpdateList()
+    { return newArrayList(columnUpdateDatetime(), columnUpdateUser()); }
 
     // ===================================================================================
     //                                                                           Type Name

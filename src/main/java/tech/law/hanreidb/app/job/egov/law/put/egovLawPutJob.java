@@ -11,9 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import tech.law.hanreidb.app.base.job.JobRecorder;
-import tech.law.hanreidb.app.base.job.exception.JobBusinessSkipException;
-import tech.law.hanreidb.dbflute.exbhv.CourtJudgementBhv;
-import tech.law.hanreidb.dbflute.exentity.CourtJudgement;
+import tech.law.hanreidb.dbflute.exbhv.LawBhv;
 
 /**
  * @author h-funaki
@@ -26,7 +24,7 @@ public class egovLawPutJob implements LaJob {
     //                                                                          ==========
     private static final Logger logger = LoggerFactory.getLogger(egovLawPutJob.class);
 
-    private static final String LAW_LIST_URL = "http://elaws.e-gov.go.jp/api/1/lawlists/1";
+    private static final String BASE_URL = "http://elaws.e-gov.go.jp/api/1/lawdata/";
 
     // ===================================================================================
     //                                                                           Attribute
@@ -34,7 +32,7 @@ public class egovLawPutJob implements LaJob {
     @Resource
     private TransactionStage transactionStage;
     @Resource
-    private CourtJudgementBhv courtJudgementBhv;
+    private LawBhv lawBhv;
 
     // ===================================================================================
     //                                                                             Execute
@@ -47,34 +45,38 @@ public class egovLawPutJob implements LaJob {
             data.register("recorder", recorder);
         });
 
-        List<CourtJudgement> targetList = null;
-        logger.info("法令行対象件数:{}", targetList.size());
+        List<String> lawNumberList = lawBhv.selectList(cb -> {
+            cb.specify().columnLawNumber();
+        }).extractColumnList(entity -> {
+            return entity.getLawNumber();
+        });
+        logger.info("法令内容取得予定件数:{}", lawNumberList.size());
 
-        recorder.planBatch(targetList.size());
+        recorder.planBatch(lawNumberList.size());
 
-        for (CourtJudgement courtJudgement : targetList) {
-            Long pk = courtJudgement.getCourtJudgementId();
-            Integer sourceOriginalId = courtJudgement.getSourceOriginalId();
-            logger.info("target court id:{}", sourceOriginalId);
+        for (String lawNumber : lawNumberList) {
+            logger.info("target law number:{}", lawNumber);
             try {
                 transactionStage.requiresNew(tx -> {
                     //processMigrate(courtJudgement);
                 });
                 recorder.asSuccess();
-            } catch (JobBusinessSkipException skip) {
-                logger.info("business skip court_original_id {}", sourceOriginalId);
-                recorder.asBusinessSkip(recordMessage(pk, sourceOriginalId, skip.getMessage()));
-                transactionStage.requiresNew(tx -> {
-                    courtJudgement.setMemo(skip.getMessage()); // 備考欄にメモ
-                    courtJudgementBhv.updateNonstrict(courtJudgement);
-                });
-            } catch (Exception error) {
-                logger.info("error court_original_id {}", sourceOriginalId);
-                recorder.asError(recordMessage(pk, sourceOriginalId, error.getMessage()));
-                transactionStage.requiresNew(tx -> {
-                    courtJudgement.setMemo(error.getMessage()); // 備考欄にメモ
-                    courtJudgementBhv.updateNonstrict(courtJudgement);
-                });
+            }
+            //            catch (JobBusinessSkipException skip) {
+            //                logger.info("business skip court_original_id {}", lawNumber);
+            //                recorder.asBusinessSkip(recordMessage(pk, sourceOriginalId, skip.getMessage()));
+            //                transactionStage.requiresNew(tx -> {
+            //                    courtJudgement.setMemo(skip.getMessage()); // 備考欄にメモ
+            //                    courtJudgementBhv.updateNonstrict(courtJudgement);
+            //                });
+            //            }
+            catch (Exception error) {
+                logger.info("error court_original_id {}", lawNumber);
+                // recorder.asError(recordMessage(pk, sourceOriginalId, error.getMessage()));
+                // transactionStage.requiresNew(tx -> {
+                //      courtJudgement.setMemo(error.getMessage()); // 備考欄にメモ
+                //     courtJudgementBhv.updateNonstrict(courtJudgement);
+                // });
             }
         }
     }

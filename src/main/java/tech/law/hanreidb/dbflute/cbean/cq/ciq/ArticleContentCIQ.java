@@ -80,6 +80,11 @@ public class ArticleContentCIQ extends AbstractBsArticleContentCQ {
     protected ConditionValue xgetCValueArticleId() { return _myCQ.xdfgetArticleId(); }
     protected ConditionValue xgetCValueArticleContentRawXml() { return _myCQ.xdfgetArticleContentRawXml(); }
     protected ConditionValue xgetCValueArticleContentViewXml() { return _myCQ.xdfgetArticleContentViewXml(); }
+    protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
+    protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }
+    protected ConditionValue xgetCValueUpdateDatetime() { return _myCQ.xdfgetUpdateDatetime(); }
+    protected ConditionValue xgetCValueUpdateUser() { return _myCQ.xdfgetUpdateUser(); }
+    protected ConditionValue xgetCValueVersionNo() { return _myCQ.xdfgetVersionNo(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(ArticleContentCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

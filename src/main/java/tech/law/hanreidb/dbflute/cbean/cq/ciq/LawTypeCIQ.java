@@ -91,6 +91,11 @@ public class LawTypeCIQ extends AbstractBsLawTypeCQ {
     protected ConditionValue xgetCValueLawTypeAlias() { return _myCQ.xdfgetLawTypeAlias(); }
     protected ConditionValue xgetCValueDescription() { return _myCQ.xdfgetDescription(); }
     protected ConditionValue xgetCValueDisplayOrder() { return _myCQ.xdfgetDisplayOrder(); }
+    protected ConditionValue xgetCValueRegisterDatetime() { return _myCQ.xdfgetRegisterDatetime(); }
+    protected ConditionValue xgetCValueRegisterUser() { return _myCQ.xdfgetRegisterUser(); }
+    protected ConditionValue xgetCValueUpdateDatetime() { return _myCQ.xdfgetUpdateDatetime(); }
+    protected ConditionValue xgetCValueUpdateUser() { return _myCQ.xdfgetUpdateUser(); }
+    protected ConditionValue xgetCValueVersionNo() { return _myCQ.xdfgetVersionNo(); }
     protected Map<String, Object> xfindFixedConditionDynamicParameterMap(String pp) { return null; }
     public String keepScalarCondition(LawTypeCQ sq)
     { throwIICBOE("ScalarCondition"); return null; }

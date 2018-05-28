@@ -65,6 +65,12 @@ public class JudgementGetContentResult {
     /** 判決種別別名 e.g. null (NullAllowed)*/
     public String judgement_type_alias;
 
+    /** 裁判所webURL e.g. http://www.courts.go.jp/app/hanrei_jp/detail2?id=87734 */
+    public String court_web_url;
+
+    /** 裁判所PDFファイルURL e.g. http://www.courts.go.jp/app/files/hanrei_jp/315/050315_hanrei.pdf */
+    public String court_file_url;
+
     /** 判決文 e.g. null (NullAllowed)*/
     public String sentence;
 

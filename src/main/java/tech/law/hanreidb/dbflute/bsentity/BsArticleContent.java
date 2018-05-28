@@ -23,6 +23,7 @@ import org.dbflute.dbmeta.DBMeta;
 import org.dbflute.dbmeta.AbstractEntity;
 import org.dbflute.dbmeta.accessory.DomainEntity;
 import org.dbflute.optional.OptionalEntity;
+import tech.law.hanreidb.dbflute.allcommon.EntityDefinedCommonColumn;
 import tech.law.hanreidb.dbflute.allcommon.DBMetaInstanceHandler;
 import tech.law.hanreidb.dbflute.exentity.*;
 
@@ -33,7 +34,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     ARTICLE_CONTENT_ID
  *
  * [column]
- *     ARTICLE_CONTENT_ID, ARTICLE_ID, ARTICLE_CONTENT_RAW_XML, ARTICLE_CONTENT_VIEW_XML
+ *     ARTICLE_CONTENT_ID, ARTICLE_ID, ARTICLE_CONTENT_RAW_XML, ARTICLE_CONTENT_VIEW_XML, REGISTER_DATETIME, REGISTER_USER, UPDATE_DATETIME, UPDATE_USER, VERSION_NO
  *
  * [sequence]
  *     
@@ -42,7 +43,7 @@ import tech.law.hanreidb.dbflute.exentity.*;
  *     ARTICLE_CONTENT_ID
  *
  * [version-no]
- *     
+ *     VERSION_NO
  *
  * [foreign table]
  *     ARTICLE
@@ -62,15 +63,25 @@ import tech.law.hanreidb.dbflute.exentity.*;
  * Long articleId = entity.getArticleId();
  * String articleContentRawXml = entity.getArticleContentRawXml();
  * String articleContentViewXml = entity.getArticleContentViewXml();
+ * java.time.LocalDateTime registerDatetime = entity.getRegisterDatetime();
+ * String registerUser = entity.getRegisterUser();
+ * java.time.LocalDateTime updateDatetime = entity.getUpdateDatetime();
+ * String updateUser = entity.getUpdateUser();
+ * Long versionNo = entity.getVersionNo();
  * entity.setArticleContentId(articleContentId);
  * entity.setArticleId(articleId);
  * entity.setArticleContentRawXml(articleContentRawXml);
  * entity.setArticleContentViewXml(articleContentViewXml);
+ * entity.setRegisterDatetime(registerDatetime);
+ * entity.setRegisterUser(registerUser);
+ * entity.setUpdateDatetime(updateDatetime);
+ * entity.setUpdateUser(updateUser);
+ * entity.setVersionNo(versionNo);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsArticleContent extends AbstractEntity implements DomainEntity {
+public abstract class BsArticleContent extends AbstractEntity implements DomainEntity, EntityDefinedCommonColumn {
 
     // ===================================================================================
     //                                                                          Definition
@@ -92,6 +103,21 @@ public abstract class BsArticleContent extends AbstractEntity implements DomainE
 
     /** (条文内容画面用XML)ARTICLE_CONTENT_VIEW_XML: {NotNull, TEXT(65535)} */
     protected String _articleContentViewXml;
+
+    /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.time.LocalDateTime _registerDatetime;
+
+    /** (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} */
+    protected String _registerUser;
+
+    /** (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} */
+    protected java.time.LocalDateTime _updateDatetime;
+
+    /** (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} */
+    protected String _updateUser;
+
+    /** (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} */
+    protected Long _versionNo;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -186,6 +212,11 @@ public abstract class BsArticleContent extends AbstractEntity implements DomainE
         sb.append(dm).append(xfND(_articleId));
         sb.append(dm).append(xfND(_articleContentRawXml));
         sb.append(dm).append(xfND(_articleContentViewXml));
+        sb.append(dm).append(xfND(_registerDatetime));
+        sb.append(dm).append(xfND(_registerUser));
+        sb.append(dm).append(xfND(_updateDatetime));
+        sb.append(dm).append(xfND(_updateUser));
+        sb.append(dm).append(xfND(_versionNo));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -282,5 +313,105 @@ public abstract class BsArticleContent extends AbstractEntity implements DomainE
     public void setArticleContentViewXml(String articleContentViewXml) {
         registerModifiedProperty("articleContentViewXml");
         _articleContentViewXml = articleContentViewXml;
+    }
+
+    /**
+     * [get] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
+     * @return The value of the column 'REGISTER_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public java.time.LocalDateTime getRegisterDatetime() {
+        checkSpecifiedProperty("registerDatetime");
+        return _registerDatetime;
+    }
+
+    /**
+     * [set] (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} <br>
+     * レコードが登録された日時 e.g. 2018-01-02T12:34:56
+     * @param registerDatetime The value of the column 'REGISTER_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setRegisterDatetime(java.time.LocalDateTime registerDatetime) {
+        registerModifiedProperty("registerDatetime");
+        _registerDatetime = registerDatetime;
+    }
+
+    /**
+     * [get] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
+     * レコードを登録したユーザー e.g. funa
+     * @return The value of the column 'REGISTER_USER'. (basically NotNull if selected: for the constraint)
+     */
+    public String getRegisterUser() {
+        checkSpecifiedProperty("registerUser");
+        return convertEmptyToNull(_registerUser);
+    }
+
+    /**
+     * [set] (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)} <br>
+     * レコードを登録したユーザー e.g. funa
+     * @param registerUser The value of the column 'REGISTER_USER'. (basically NotNull if update: for the constraint)
+     */
+    public void setRegisterUser(String registerUser) {
+        registerModifiedProperty("registerUser");
+        _registerUser = registerUser;
+    }
+
+    /**
+     * [get] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
+     * @return The value of the column 'UPDATE_DATETIME'. (basically NotNull if selected: for the constraint)
+     */
+    public java.time.LocalDateTime getUpdateDatetime() {
+        checkSpecifiedProperty("updateDatetime");
+        return _updateDatetime;
+    }
+
+    /**
+     * [set] (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)} <br>
+     * レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56
+     * @param updateDatetime The value of the column 'UPDATE_DATETIME'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdateDatetime(java.time.LocalDateTime updateDatetime) {
+        registerModifiedProperty("updateDatetime");
+        _updateDatetime = updateDatetime;
+    }
+
+    /**
+     * [get] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
+     * レコードを(最後に)更新したユーザー e.g. funa
+     * @return The value of the column 'UPDATE_USER'. (basically NotNull if selected: for the constraint)
+     */
+    public String getUpdateUser() {
+        checkSpecifiedProperty("updateUser");
+        return convertEmptyToNull(_updateUser);
+    }
+
+    /**
+     * [set] (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)} <br>
+     * レコードを(最後に)更新したユーザー e.g. funa
+     * @param updateUser The value of the column 'UPDATE_USER'. (basically NotNull if update: for the constraint)
+     */
+    public void setUpdateUser(String updateUser) {
+        registerModifiedProperty("updateUser");
+        _updateUser = updateUser;
+    }
+
+    /**
+     * [get] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
+     * バージョン番号 e.g. 0
+     * @return The value of the column 'VERSION_NO'. (basically NotNull if selected: for the constraint)
+     */
+    public Long getVersionNo() {
+        checkSpecifiedProperty("versionNo");
+        return _versionNo;
+    }
+
+    /**
+     * [set] (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]} <br>
+     * バージョン番号 e.g. 0
+     * @param versionNo The value of the column 'VERSION_NO'. (basically NotNull if update: for the constraint)
+     */
+    public void setVersionNo(Long versionNo) {
+        registerModifiedProperty("versionNo");
+        _versionNo = versionNo;
     }
 }

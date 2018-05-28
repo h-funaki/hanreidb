@@ -317,7 +317,7 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">2</td>
 		<td class="aliascell">条文内容</td>
-		<td><a href="#article_content" title="type=TABLE, primaryKey={ARTICLE_CONTENT_ID}, nameLength=15, columnCount=4">ARTICLE_CONTENT</a></td>
+		<td><a href="#article_content" title="type=TABLE, primaryKey={ARTICLE_CONTENT_ID}, nameLength=15, columnCount=9">ARTICLE_CONTENT</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#article" title="FK_ARTICLE_CONTENT_ARTICLE">ARTICLE</a></td>
 		<td class="relcell">&nbsp;</td>
@@ -557,7 +557,7 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">26</td>
 		<td class="aliascell">法令目次</td>
-		<td><a href="#law_toc" title="type=TABLE, primaryKey={LAW_TOC_ID}, nameLength=7, columnCount=17">LAW_TOC</a></td>
+		<td><a href="#law_toc" title="type=TABLE, primaryKey={LAW_TOC_ID}, nameLength=7, columnCount=22">LAW_TOC</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell"><a href="#law_history" title="FK_LAW_TOC_LAW_HISTORY">LAW_HISTORY</a></td>
 		<td class="relcell"><a href="#article" title="FK_ARTICLE_LAW_TOC">ARTICLE</a></td>
@@ -567,7 +567,7 @@ dl.procedurelist dd.column pre {
 	<tr>
 		<td class="rownumcell">27</td>
 		<td class="aliascell">法令種別</td>
-		<td><a href="#law_type" title="type=TABLE, primaryKey={LAW_TYPE_CODE}, nameLength=8, columnCount=5">LAW_TYPE</a></td>
+		<td><a href="#law_type" title="type=TABLE, primaryKey={LAW_TYPE_CODE}, nameLength=8, columnCount=10">LAW_TYPE</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"><a href="#law" title="FK_LAW_LAW_TYPE">LAW</a></td>
@@ -891,7 +891,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Long</td>
 	</tr>
 </table>
-<h2 id="article_content" title="type=TABLE, primaryKey={ARTICLE_CONTENT_ID}, nameLength=15, columnCount=4">
+<h2 id="article_content" title="type=TABLE, primaryKey={ARTICLE_CONTENT_ID}, nameLength=15, columnCount=9">
 (条文内容)ARTICLE_CONTENT
 </h2>
 <table>
@@ -907,9 +907,11 @@ dl.procedurelist dd.column pre {
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
+		<th>Default</th>
 		<th>ForeignTable</th>
 		<th>ReferrerTable</th>
 		<th>Classification</th>
+		<th>ColumnComment</th>
 		<th>PropertyName</th>
 		<th>JavaType</th>
 	</tr>
@@ -925,9 +927,11 @@ dl.procedurelist dd.column pre {
 		<td id="article_content_article_content_id">ARTICLE_CONTENT_ID</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">articleContentId</td>
 		<td class="subcell">Long</td>
 	</tr>
@@ -942,9 +946,11 @@ dl.procedurelist dd.column pre {
 		<td id="article_content_article_id">ARTICLE_ID</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell"><a href="#article" title="FK_ARTICLE_CONTENT_ARTICLE">ARTICLE</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">articleId</td>
 		<td class="subcell">Long</td>
 	</tr>
@@ -959,9 +965,11 @@ dl.procedurelist dd.column pre {
 		<td id="article_content_article_content_raw_xml">ARTICLE_CONTENT_RAW_XML</td>
 		<td class="typecell">TEXT</td>
 		<td class="sizecell"> 65535 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">articleContentRawXml</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -976,11 +984,108 @@ dl.procedurelist dd.column pre {
 		<td id="article_content_article_content_view_xml">ARTICLE_CONTENT_VIEW_XML</td>
 		<td class="typecell">TEXT</td>
 		<td class="sizecell"> 65535 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">articleContentViewXml</td>
 		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">登録日時</td>
+		<td class="comcolcell" id="article_content_register_datetime">REGISTER_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードが登録された日時&nbsp;e.g.&nbsp;2018-01-02T12:34:56</td>
+		<td class="subcell">registerDatetime</td>
+		<td class="subcell">LocalDateTime</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">登録ユーザー</td>
+		<td class="comcolcell" id="article_content_register_user">REGISTER_USER</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードを登録したユーザー&nbsp;e.g.&nbsp;funa</td>
+		<td class="subcell">registerUser</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">7</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">更新日時</td>
+		<td class="comcolcell" id="article_content_update_datetime">UPDATE_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードが(最後に)更新された日時&nbsp;e.g.&nbsp;2018-01-02T12:34:56</td>
+		<td class="subcell">updateDatetime</td>
+		<td class="subcell">LocalDateTime</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">8</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">更新ユーザー</td>
+		<td class="comcolcell" id="article_content_update_user">UPDATE_USER</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードを(最後に)更新したユーザー&nbsp;e.g.&nbsp;funa</td>
+		<td class="subcell">updateUser</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">9</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell optcell">バージョン番号</td>
+		<td class="optcell" id="article_content_version_no">VERSION_NO</td>
+		<td class="typecell">BIGINT UNSIGNED</td>
+		<td class="sizecell"> 20 </td>
+		<td class="defvalcell"> 0</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> バージョン番号&nbsp;e.g.&nbsp;0</td>
+		<td class="subcell">versionNo</td>
+		<td class="subcell">Long</td>
 	</tr>
 </table>
 <h2 id="case_mark" title="type=TABLE, primaryKey={CASE_MARK_ID}, nameLength=9, columnCount=11">
@@ -5716,8 +5821,8 @@ dl.procedurelist dd.column pre {
 		<td class="rownumcell">2</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell" title="LAW_HISTORY_ID(LAW_HISTORY_ID)">o</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell" title="FK_LAW_CONTENT_LAW_HISTORY(LAW_HISTORY_ID)">o</td>
 		<td class="flgcell">*</td>
 		<td class="aliascell">法令履歴ID</td>
 		<td id="law_content_law_history_id">LAW_HISTORY_ID</td>
@@ -6297,7 +6402,7 @@ dl.procedurelist dd.column pre {
 		<td class="subcell">Long</td>
 	</tr>
 </table>
-<h2 id="law_toc" title="type=TABLE, primaryKey={LAW_TOC_ID}, nameLength=7, columnCount=17">
+<h2 id="law_toc" title="type=TABLE, primaryKey={LAW_TOC_ID}, nameLength=7, columnCount=22">
 (法令目次)LAW_TOC
 </h2>
 <table>
@@ -6313,9 +6418,11 @@ dl.procedurelist dd.column pre {
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
+		<th>Default</th>
 		<th>ForeignTable</th>
 		<th>ReferrerTable</th>
 		<th>Classification</th>
+		<th>ColumnComment</th>
 		<th>PropertyName</th>
 		<th>JavaType</th>
 	</tr>
@@ -6331,9 +6438,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_law_toc_id">LAW_TOC_ID</td>
 		<td class="typecell">BIGINT</td>
 		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell"><a href="#article" title="FK_ARTICLE_LAW_TOC">ARTICLE</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">lawTocId</td>
 		<td class="subcell">Long</td>
 	</tr>
@@ -6348,9 +6457,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_law_history_id">LAW_HISTORY_ID</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell"><a href="#law_history" title="FK_LAW_TOC_LAW_HISTORY">LAW_HISTORY</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">lawHistoryId</td>
 		<td class="subcell">Integer</td>
 	</tr>
@@ -6365,9 +6476,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_part_number">PART_NUMBER</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">partNumber</td>
 		<td class="subcell">Integer</td>
 	</tr>
@@ -6382,9 +6495,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_part_title">PART_TITLE</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">partTitle</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6399,9 +6514,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_part_caption">PART_CAPTION</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">partCaption</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6416,9 +6533,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_chapter_number">CHAPTER_NUMBER</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">chapterNumber</td>
 		<td class="subcell">Integer</td>
 	</tr>
@@ -6433,9 +6552,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_chapter_title">CHAPTER_TITLE</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">chapterTitle</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6450,9 +6571,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_chapter_caption">CHAPTER_CAPTION</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">chapterCaption</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6467,9 +6590,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_section_number">SECTION_NUMBER</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">sectionNumber</td>
 		<td class="subcell">Integer</td>
 	</tr>
@@ -6484,9 +6609,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_section_title">SECTION_TITLE</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">sectionTitle</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6501,9 +6628,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_section_caption">SECTION_CAPTION</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">sectionCaption</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6518,9 +6647,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_subsection_number">SUBSECTION_NUMBER</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">subsectionNumber</td>
 		<td class="subcell">Integer</td>
 	</tr>
@@ -6535,9 +6666,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_subsection_title">SUBSECTION_TITLE</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">subsectionTitle</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6552,9 +6685,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_subsection_caption">SUBSECTION_CAPTION</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">subsectionCaption</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6569,9 +6704,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_division_number">DIVISION_NUMBER</td>
 		<td class="typecell">INT</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">divisionNumber</td>
 		<td class="subcell">Integer</td>
 	</tr>
@@ -6586,9 +6723,11 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_division_title">DIVISION_TITLE</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 100 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">divisionTitle</td>
 		<td class="subcell">String</td>
 	</tr>
@@ -6603,14 +6742,111 @@ dl.procedurelist dd.column pre {
 		<td id="law_toc_division_caption">DIVISION_CAPTION</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">divisionCaption</td>
 		<td class="subcell">String</td>
 	</tr>
+	<tr>
+		<td class="rownumcell">18</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">登録日時</td>
+		<td class="comcolcell" id="law_toc_register_datetime">REGISTER_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードが登録された日時&nbsp;e.g.&nbsp;2018-01-02T12:34:56</td>
+		<td class="subcell">registerDatetime</td>
+		<td class="subcell">LocalDateTime</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">19</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">登録ユーザー</td>
+		<td class="comcolcell" id="law_toc_register_user">REGISTER_USER</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードを登録したユーザー&nbsp;e.g.&nbsp;funa</td>
+		<td class="subcell">registerUser</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">20</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">更新日時</td>
+		<td class="comcolcell" id="law_toc_update_datetime">UPDATE_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードが(最後に)更新された日時&nbsp;e.g.&nbsp;2018-01-02T12:34:56</td>
+		<td class="subcell">updateDatetime</td>
+		<td class="subcell">LocalDateTime</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">21</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">更新ユーザー</td>
+		<td class="comcolcell" id="law_toc_update_user">UPDATE_USER</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードを(最後に)更新したユーザー&nbsp;e.g.&nbsp;funa</td>
+		<td class="subcell">updateUser</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">22</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell optcell">バージョン番号</td>
+		<td class="optcell" id="law_toc_version_no">VERSION_NO</td>
+		<td class="typecell">BIGINT UNSIGNED</td>
+		<td class="sizecell"> 20 </td>
+		<td class="defvalcell"> 0</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> バージョン番号&nbsp;e.g.&nbsp;0</td>
+		<td class="subcell">versionNo</td>
+		<td class="subcell">Long</td>
+	</tr>
 </table>
-<h2 id="law_type" title="type=TABLE, primaryKey={LAW_TYPE_CODE}, nameLength=8, columnCount=5">
+<h2 id="law_type" title="type=TABLE, primaryKey={LAW_TYPE_CODE}, nameLength=8, columnCount=10">
 (法令種別)LAW_TYPE
 </h2>
 <p class="tablecomment">e.g.&nbsp;法律,&nbsp;政令</p>
@@ -6627,6 +6863,7 @@ dl.procedurelist dd.column pre {
 		<th>Name</th>
 		<th>Type</th>
 		<th>Size</th>
+		<th>Default</th>
 		<th>ForeignTable</th>
 		<th>ReferrerTable</th>
 		<th>Classification</th>
@@ -6646,6 +6883,7 @@ dl.procedurelist dd.column pre {
 		<td id="law_type_law_type_code">LAW_TYPE_CODE</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 20 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell"><a href="#law" title="FK_LAW_LAW_TYPE">LAW</a>&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
@@ -6664,6 +6902,7 @@ dl.procedurelist dd.column pre {
 		<td id="law_type_law_type_name">LAW_TYPE_NAME</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 20 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
@@ -6682,6 +6921,7 @@ dl.procedurelist dd.column pre {
 		<td id="law_type_law_type_alias">LAW_TYPE_ALIAS</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 20 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
@@ -6700,6 +6940,7 @@ dl.procedurelist dd.column pre {
 		<td id="law_type_description">DESCRIPTION</td>
 		<td class="typecell">TEXT</td>
 		<td class="sizecell"> 65535 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
@@ -6718,12 +6959,108 @@ dl.procedurelist dd.column pre {
 		<td id="law_type_display_order">DISPLAY_ORDER</td>
 		<td class="typecell">INT UNSIGNED</td>
 		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
 		<td class="commentcell"> 順番&nbsp;e.g.&nbsp;1</td>
 		<td class="subcell">displayOrder</td>
 		<td class="subcell">Integer</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">登録日時</td>
+		<td class="comcolcell" id="law_type_register_datetime">REGISTER_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードが登録された日時&nbsp;e.g.&nbsp;2018-01-02T12:34:56</td>
+		<td class="subcell">registerDatetime</td>
+		<td class="subcell">LocalDateTime</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">7</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">登録ユーザー</td>
+		<td class="comcolcell" id="law_type_register_user">REGISTER_USER</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードを登録したユーザー&nbsp;e.g.&nbsp;funa</td>
+		<td class="subcell">registerUser</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">8</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">更新日時</td>
+		<td class="comcolcell" id="law_type_update_datetime">UPDATE_DATETIME</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードが(最後に)更新された日時&nbsp;e.g.&nbsp;2018-01-02T12:34:56</td>
+		<td class="subcell">updateDatetime</td>
+		<td class="subcell">LocalDateTime</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">9</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell comcolcell">更新ユーザー</td>
+		<td class="comcolcell" id="law_type_update_user">UPDATE_USER</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 200 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> レコードを(最後に)更新したユーザー&nbsp;e.g.&nbsp;funa</td>
+		<td class="subcell">updateUser</td>
+		<td class="subcell">String</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">10</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class="aliascell optcell">バージョン番号</td>
+		<td class="optcell" id="law_type_version_no">VERSION_NO</td>
+		<td class="typecell">BIGINT UNSIGNED</td>
+		<td class="sizecell"> 20 </td>
+		<td class="defvalcell"> 0</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"> バージョン番号&nbsp;e.g.&nbsp;0</td>
+		<td class="subcell">versionNo</td>
+		<td class="subcell">Long</td>
 	</tr>
 </table>
 <h2 id="login_history" title="type=TABLE, primaryKey={LOGIN_HISTORY_ID}, nameLength=13, columnCount=8">

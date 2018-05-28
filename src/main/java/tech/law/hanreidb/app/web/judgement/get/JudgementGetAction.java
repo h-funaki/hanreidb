@@ -13,8 +13,10 @@ import org.lastaflute.web.response.JsonResponse;
 import tech.law.hanreidb.app.base.HanreidbBaseAction;
 import tech.law.hanreidb.app.web.judgement.get.JudgementGetContentResult.CaseMarkPart;
 import tech.law.hanreidb.dbflute.exbhv.JudgementBhv;
+import tech.law.hanreidb.dbflute.exentity.Court;
 import tech.law.hanreidb.dbflute.exentity.Judgement;
 import tech.law.hanreidb.dbflute.exentity.JudgementSourceRel;
+import tech.law.hanreidb.mylasta.direction.HanreidbConfig;
 
 /**
  * @author h-funaki
@@ -27,6 +29,8 @@ public class JudgementGetAction extends HanreidbBaseAction {
     //                                                                           =========
     @Resource
     private JudgementBhv judgementBhv;
+    @Resource
+    private HanreidbConfig config;
 
     // ===================================================================================
     //                                                                             Execute
@@ -73,9 +77,24 @@ public class JudgementGetAction extends HanreidbBaseAction {
         List<JudgementSourceRel> sourceRelList = judgement.getJudgementSourceRelList();
         for (JudgementSourceRel rel : sourceRelList) {
             if (rel.isSourceCode裁判所裁判例()) {
+                // TODO あとで綺麗にする
                 content.sentence = rel.getJudgementSourceSentence();
+                String judgementSourceId = String.format("%06d", Integer.parseInt(rel.getJudgementSourceId()));
+                content.court_file_url =
+                        config.getCourtFileBaseUrl().concat(judgementSourceId.substring(3)).concat("/").concat(judgementSourceId).concat(
+                                "_hanrei.pdf");
+                Court court = judgement.getCourt().get();
+                if (court.isCourtTypeCode最高裁判所()) {
+                    content.court_web_url = getCourtWebUrl(judgementSourceId, "2");
+                } else if (court.isCourtTypeCode高等裁判所()) {
+                    content.court_web_url = getCourtWebUrl(judgementSourceId, "3");
+                } else if (court.isCourtTypeCode高等裁判所()) {
+                    content.court_web_url = getCourtWebUrl(judgementSourceId, "4");
+                } else {
+                    content.court_web_url = null;
+                }
                 break;
-            } // 裁判所裁判例以外は無視する。(追加次第優先順位を検討する必要がるため。)
+            } // 裁判所裁判例以外は無視する。(追加次第優先順位を検討する必要があるため。)
         }
         content.version_no = judgement.getVersionNo();
 
@@ -83,6 +102,10 @@ public class JudgementGetAction extends HanreidbBaseAction {
         content.case_mark_part = convertToCaseMarkPart(judgement);
 
         return content;
+    }
+
+    private String getCourtWebUrl(String judgementSourceId, String detail) {
+        return config.getCourtWebBaseUrl().concat("detail").concat(detail).concat("?id=").concat(judgementSourceId);
     }
 
     // ===================================================================================

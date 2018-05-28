@@ -61,6 +61,22 @@
             name="ARTICLE_CONTENT_RAW_XML" required="true" size="65535" type="LONGVARCHAR"/>
         <column comment="条文内容画面用XML" dbType="TEXT" javaType="String"
             name="ARTICLE_CONTENT_VIEW_XML" required="true" size="65535" type="LONGVARCHAR"/>
+        <column comment="登録日時 : レコードが登録された日時 e.g. 2018-01-02T12:34:56"
+            dbType="DATETIME" javaType="java.time.LocalDateTime"
+            name="REGISTER_DATETIME" required="true" size="19" type="TIMESTAMP"/>
+        <column comment="登録ユーザー : レコードを登録したユーザー e.g. funa"
+            dbType="VARCHAR" javaType="String" name="REGISTER_USER"
+            required="true" size="200" type="VARCHAR"/>
+        <column
+            comment="更新日時 : レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56"
+            dbType="DATETIME" javaType="java.time.LocalDateTime"
+            name="UPDATE_DATETIME" required="true" size="19" type="TIMESTAMP"/>
+        <column comment="更新ユーザー : レコードを(最後に)更新したユーザー e.g. funa"
+            dbType="VARCHAR" javaType="String" name="UPDATE_USER"
+            required="true" size="200" type="VARCHAR"/>
+        <column comment="バージョン番号 : バージョン番号 e.g. 0"
+            dbType="BIGINT UNSIGNED" default="0" javaType="Long"
+            name="VERSION_NO" required="true" size="20" type="BIGINT"/>
         <foreign-key foreignSchema="hanreidb.$$NoNameSchema$$"
             foreignTable="ARTICLE" name="FK_ARTICLE_CONTENT_ARTICLE">
             <reference foreign="ARTICLE_ID" local="ARTICLE_ID"/>
@@ -1209,6 +1225,22 @@
             name="DIVISION_TITLE" size="100" type="VARCHAR"/>
         <column comment="目見出し" dbType="VARCHAR" javaType="String"
             name="DIVISION_CAPTION" size="200" type="VARCHAR"/>
+        <column comment="登録日時 : レコードが登録された日時 e.g. 2018-01-02T12:34:56"
+            dbType="DATETIME" javaType="java.time.LocalDateTime"
+            name="REGISTER_DATETIME" required="true" size="19" type="TIMESTAMP"/>
+        <column comment="登録ユーザー : レコードを登録したユーザー e.g. funa"
+            dbType="VARCHAR" javaType="String" name="REGISTER_USER"
+            required="true" size="200" type="VARCHAR"/>
+        <column
+            comment="更新日時 : レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56"
+            dbType="DATETIME" javaType="java.time.LocalDateTime"
+            name="UPDATE_DATETIME" required="true" size="19" type="TIMESTAMP"/>
+        <column comment="更新ユーザー : レコードを(最後に)更新したユーザー e.g. funa"
+            dbType="VARCHAR" javaType="String" name="UPDATE_USER"
+            required="true" size="200" type="VARCHAR"/>
+        <column comment="バージョン番号 : バージョン番号 e.g. 0"
+            dbType="BIGINT UNSIGNED" default="0" javaType="Long"
+            name="VERSION_NO" required="true" size="20" type="BIGINT"/>
         <foreign-key foreignSchema="hanreidb.$$NoNameSchema$$"
             foreignTable="LAW_HISTORY" name="FK_LAW_TOC_LAW_HISTORY">
             <reference foreign="LAW_HISTORY_ID" local="LAW_HISTORY_ID"/>
@@ -1232,6 +1264,22 @@
         <column comment="順番 : 順番 e.g. 1" dbType="INT UNSIGNED"
             javaType="Integer" name="DISPLAY_ORDER" required="true"
             size="10" type="INTEGER"/>
+        <column comment="登録日時 : レコードが登録された日時 e.g. 2018-01-02T12:34:56"
+            dbType="DATETIME" javaType="java.time.LocalDateTime"
+            name="REGISTER_DATETIME" required="true" size="19" type="TIMESTAMP"/>
+        <column comment="登録ユーザー : レコードを登録したユーザー e.g. funa"
+            dbType="VARCHAR" javaType="String" name="REGISTER_USER"
+            required="true" size="200" type="VARCHAR"/>
+        <column
+            comment="更新日時 : レコードが(最後に)更新された日時 e.g. 2018-01-02T12:34:56"
+            dbType="DATETIME" javaType="java.time.LocalDateTime"
+            name="UPDATE_DATETIME" required="true" size="19" type="TIMESTAMP"/>
+        <column comment="更新ユーザー : レコードを(最後に)更新したユーザー e.g. funa"
+            dbType="VARCHAR" javaType="String" name="UPDATE_USER"
+            required="true" size="200" type="VARCHAR"/>
+        <column comment="バージョン番号 : バージョン番号 e.g. 0"
+            dbType="BIGINT UNSIGNED" default="0" javaType="Long"
+            name="VERSION_NO" required="true" size="20" type="BIGINT"/>
         <unique name="DISPLAY_ORDER">
             <unique-column name="DISPLAY_ORDER" position="1"/>
         </unique>

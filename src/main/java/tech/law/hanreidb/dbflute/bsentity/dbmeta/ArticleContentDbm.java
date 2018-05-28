@@ -62,6 +62,11 @@ public class ArticleContentDbm extends AbstractDBMeta {
         setupEpg(_epgMap, et -> ((ArticleContent)et).getArticleId(), (et, vl) -> ((ArticleContent)et).setArticleId(ctl(vl)), "articleId");
         setupEpg(_epgMap, et -> ((ArticleContent)et).getArticleContentRawXml(), (et, vl) -> ((ArticleContent)et).setArticleContentRawXml((String)vl), "articleContentRawXml");
         setupEpg(_epgMap, et -> ((ArticleContent)et).getArticleContentViewXml(), (et, vl) -> ((ArticleContent)et).setArticleContentViewXml((String)vl), "articleContentViewXml");
+        setupEpg(_epgMap, et -> ((ArticleContent)et).getRegisterDatetime(), (et, vl) -> ((ArticleContent)et).setRegisterDatetime(ctldt(vl)), "registerDatetime");
+        setupEpg(_epgMap, et -> ((ArticleContent)et).getRegisterUser(), (et, vl) -> ((ArticleContent)et).setRegisterUser((String)vl), "registerUser");
+        setupEpg(_epgMap, et -> ((ArticleContent)et).getUpdateDatetime(), (et, vl) -> ((ArticleContent)et).setUpdateDatetime(ctldt(vl)), "updateDatetime");
+        setupEpg(_epgMap, et -> ((ArticleContent)et).getUpdateUser(), (et, vl) -> ((ArticleContent)et).setUpdateUser((String)vl), "updateUser");
+        setupEpg(_epgMap, et -> ((ArticleContent)et).getVersionNo(), (et, vl) -> ((ArticleContent)et).setVersionNo(ctl(vl)), "versionNo");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -100,6 +105,11 @@ public class ArticleContentDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnArticleId = cci("ARTICLE_ID", "ARTICLE_ID", null, "条文ID", Long.class, "articleId", null, false, false, true, "BIGINT", 19, 0, null, false, null, null, "article", null, null, false);
     protected final ColumnInfo _columnArticleContentRawXml = cci("ARTICLE_CONTENT_RAW_XML", "ARTICLE_CONTENT_RAW_XML", null, "条文内容加工前XML", String.class, "articleContentRawXml", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnArticleContentViewXml = cci("ARTICLE_CONTENT_VIEW_XML", "ARTICLE_CONTENT_VIEW_XML", null, "条文内容画面用XML", String.class, "articleContentViewXml", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUpdateUser = cci("UPDATE_USER", "UPDATE_USER", null, "更新ユーザー", String.class, "updateUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
+    protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT UNSIGNED", 20, 0, "0", false, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
      * (条文内容ID)ARTICLE_CONTENT_ID: {PK, ID, NotNull, BIGINT(19)}
@@ -121,6 +131,31 @@ public class ArticleContentDbm extends AbstractDBMeta {
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnArticleContentViewXml() { return _columnArticleContentViewXml; }
+    /**
+     * (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRegisterDatetime() { return _columnRegisterDatetime; }
+    /**
+     * (登録ユーザー)REGISTER_USER: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnRegisterUser() { return _columnRegisterUser; }
+    /**
+     * (更新日時)UPDATE_DATETIME: {NotNull, DATETIME(19)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdateDatetime() { return _columnUpdateDatetime; }
+    /**
+     * (更新ユーザー)UPDATE_USER: {NotNull, VARCHAR(200)}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnUpdateUser() { return _columnUpdateUser; }
+    /**
+     * (バージョン番号)VERSION_NO: {NotNull, BIGINT UNSIGNED(20), default=[0]}
+     * @return The information object of specified column. (NotNull)
+     */
+    public ColumnInfo columnVersionNo() { return _columnVersionNo; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
@@ -128,6 +163,11 @@ public class ArticleContentDbm extends AbstractDBMeta {
         ls.add(columnArticleId());
         ls.add(columnArticleContentRawXml());
         ls.add(columnArticleContentViewXml());
+        ls.add(columnRegisterDatetime());
+        ls.add(columnRegisterUser());
+        ls.add(columnUpdateDatetime());
+        ls.add(columnUpdateUser());
+        ls.add(columnVersionNo());
         return ls;
     }
 
@@ -168,6 +208,15 @@ public class ArticleContentDbm extends AbstractDBMeta {
     //                                                                        Various Info
     //                                                                        ============
     public boolean hasIdentity() { return true; }
+    public boolean hasVersionNo() { return true; }
+    public ColumnInfo getVersionNoColumnInfo() { return _columnVersionNo; }
+    public boolean hasCommonColumn() { return true; }
+    public List<ColumnInfo> getCommonColumnInfoList()
+    { return newArrayList(columnRegisterDatetime(), columnRegisterUser(), columnUpdateDatetime(), columnUpdateUser()); }
+    public List<ColumnInfo> getCommonColumnInfoBeforeInsertList()
+    { return newArrayList(columnRegisterDatetime(), columnRegisterUser(), columnUpdateDatetime(), columnUpdateUser()); }
+    public List<ColumnInfo> getCommonColumnInfoBeforeUpdateList()
+    { return newArrayList(columnUpdateDatetime(), columnUpdateUser()); }
 
     // ===================================================================================
     //                                                                           Type Name
