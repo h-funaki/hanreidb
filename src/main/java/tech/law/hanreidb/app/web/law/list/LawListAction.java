@@ -64,6 +64,7 @@ public class LawListAction extends HanreidbBaseAction {
             ifNotBlank(body.law_name).ifPresent(value -> {
                 cb.orScopeQuery(orCB -> {
                     orCB.query().setLawName_LikeSearch(value, op -> op.likeContain());
+                    orCB.query().setLawNumber_LikeSearch(value, op -> op.likeContain());
                     orCB.query().existsLawAlias(aliasCB -> {
                         aliasCB.query().setLawAlias_LikeSearch(value, op -> op.likeContain());
                     });

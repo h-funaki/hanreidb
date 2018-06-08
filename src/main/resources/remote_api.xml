@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE components PUBLIC "-//DBFLUTE//DTD LastaDi 1.0//EN" 
+	"http://dbflute.org/meta/lastadi10.dtd">
+<components namespace="remote_api">
+<!-- The components of Behavior. -->
+    <include path="lastaflute.xml"/>
+	<component name="remoteEgovBhv" class="tech.law.hanreidb.remote.egov.RemoteEgovBhv"/>
+</components>

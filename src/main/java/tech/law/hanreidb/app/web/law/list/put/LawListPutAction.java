@@ -9,8 +9,6 @@ import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 
@@ -28,9 +26,11 @@ import org.xml.sax.SAXException;
 
 import tech.law.hanreidb.app.base.HanreidbBaseAction;
 import tech.law.hanreidb.app.base.exception.HanreidbSystemException;
+import tech.law.hanreidb.app.logic.CodeCreateLogic;
 import tech.law.hanreidb.app.logic.FormatLogic;
 import tech.law.hanreidb.dbflute.exbhv.LawBhv;
 import tech.law.hanreidb.dbflute.exentity.Law;
+import tech.law.hanreidb.remote.egov.RemoteEgovBhv;
 
 /**
  * @author h-funaki
@@ -50,6 +50,10 @@ public class LawListPutAction extends HanreidbBaseAction {
     private LawBhv lawBhv;
     @Resource
     private FormatLogic formatLogic;
+    @Resource
+    private CodeCreateLogic codeCreateLogic;
+    @Resource
+    private RemoteEgovBhv remoteEgovBhv;
 
     // ===================================================================================
     //                                                                             Execute
@@ -57,12 +61,9 @@ public class LawListPutAction extends HanreidbBaseAction {
     @Execute
     public JsonResponse<LawListPutContentResult> index()
             throws XMLStreamException, MalformedURLException, IOException, SAXException, ParserConfigurationException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = factory.newDocumentBuilder();
-        Document document = documentBuilder.parse("/Users/h-funaki/Documents/hanreidb/dbflute_hanreidb/playsql/data/ut/xml/lawlist.xml");
-        Element root = document.getDocumentElement();
-        Node applDataNode = root.getElementsByTagName("ApplData").item(0);
-        Element applData = (Element) applDataNode;
+        Document document =
+                remoteEgovBhv.createDocument("/Users/h-funaki/Documents/hanreidb/dbflute_hanreidb/playsql/data/ut/xml/lawlist.xml");
+        Element applData = remoteEgovBhv.getApplDataElement(document);
         NodeList lawInfoNodeList = applData.getElementsByTagName("LawNameListInfo");
 
         List<Law> lawList = newArrayList();
@@ -89,7 +90,7 @@ public class LawListPutAction extends HanreidbBaseAction {
                         }
                     }
                 }
-                law.setLawPublicCode(makeNextPublicCode());
+                law.setLawPublicCode(codeCreateLogic.createLawPublicCode());
                 if (lawNo.contains("憲法")) {
                     law.setLawTypeCode("CONSTITUTION");
                 } else if (lawNo.contains("法律")) {
@@ -168,10 +169,6 @@ public class LawListPutAction extends HanreidbBaseAction {
     // ===================================================================================
     //                                                                        Assist Logic
     //                                                                        ============
-    private String recordMessage(Long pk, Integer sourceOriginalId, String message) {
-        return String.format("court judgement id:\"%s\", source original id:\"%s\", message:\"%s\"", pk, sourceOriginalId, message);
-    }
-
     // TODO h-funaki JIDと共通化する (2018/05/07)
     protected String makeNextPublicCode() {
         return "LID" + RandomStringUtils.random(3, "ABCDEFGHIJKLMNOPQRSTUVWXYZ") + RandomStringUtils.random(6, "0123456789");

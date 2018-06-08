@@ -6,4 +6,5 @@
 	<include path="dbflute.xml"/>
 	<include path="lastaflute.xml"/>
 	<include path="lasta_job.xml"/>
+	<include path="remote_api.xml"/>
 </components>

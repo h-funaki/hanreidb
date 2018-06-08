@@ -44,6 +44,9 @@ public interface HanreidbConfig extends HanreidbEnv {
     /** The key of the configuration. e.g. http://www.courts.go.jp/app/files/hanrei_jp/ */
     String COURT_FILE_BASE_URL = "court.file.base.url";
 
+    /** The key of the configuration. e.g. http://elaws.e-gov.go.jp/api/1/ */
+    String REMOTE_API_BASE_URL_EGOV = "remote.api.base.url.egov";
+
     /** The key of the configuration. e.g. / */
     String COOKIE_DEFAULT_PATH = "cookie.default.path";
 
@@ -126,6 +129,13 @@ public interface HanreidbConfig extends HanreidbEnv {
      * @return The value of found property. (NotNull: if not found, exception but basically no way)
      */
     String getCourtFileBaseUrl();
+
+    /**
+     * Get the value for the key 'remote.api.base.url.egov'. <br>
+     * The value is, e.g. http://elaws.e-gov.go.jp/api/1/ <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getRemoteApiBaseUrlEgov();
 
     /**
      * Get the value for the key 'cookie.default.path'. <br>
@@ -212,6 +222,10 @@ public interface HanreidbConfig extends HanreidbEnv {
 
         public String getCourtFileBaseUrl() {
             return get(HanreidbConfig.COURT_FILE_BASE_URL);
+        }
+
+        public String getRemoteApiBaseUrlEgov() {
+            return get(HanreidbConfig.REMOTE_API_BASE_URL_EGOV);
         }
 
         public String getCookieDefaultPath() {
