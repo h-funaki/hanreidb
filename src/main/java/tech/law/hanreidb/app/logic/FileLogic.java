@@ -109,4 +109,36 @@ public class FileLogic {
             }
         }
     };
+
+    /**
+     * recorderの内容をファイル出力
+     * e.g. /court/recorder/CourtJudgementPutJob_No2.txt
+     * @param recorder レコーダー (NotNull)
+     * @param jobName Jobの名前 (NotNull)
+     * @param beginId 処理対象の最初のID (NotNull)
+     * @param endId 処理対象最後のID (NotNull)
+     */
+    public void outputRecorder(JobRecorder recorder, String jobName) {
+        String fileName = env.getLogCourtJobRecorderFileBasedir() + jobName + ".txt";
+        File file = new File(fileName);
+        Integer serialNumber = 1;
+        while (file.exists()) {
+            serialNumber += 1;
+            file = new File(env.getLogCourtJobRecorderFileBasedir() + jobName + "_No" + serialNumber + ".txt");
+        }
+        FileWriter filewriter = null;
+        try {
+            filewriter = new FileWriter(file);
+            filewriter.write(recorder.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                filewriter.close();
+                logger.info("出力したレコーダーファイル名:{}", file.getName());
+            } catch (Exception e2) {
+                // 握りつぶす
+            }
+        }
+    };
 }

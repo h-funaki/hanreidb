@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import tech.law.hanreidb.app.base.exception.HanreidbSystemException;
 import tech.law.hanreidb.app.base.job.JobRecorder;
+import tech.law.hanreidb.app.logic.FileLogic;
 import tech.law.hanreidb.app.logic.XmlLogic;
 import tech.law.hanreidb.dbflute.exbhv.ArticleBhv;
 import tech.law.hanreidb.dbflute.exbhv.ArticleContentBhv;
@@ -60,6 +61,8 @@ public class EgovLawPutJob implements LaJob {
     private ArticleContentBhv articleContentBhv;
     @Resource
     private XmlLogic xmlLogic;
+    @Resource
+    private FileLogic fileLogic;
 
     // ===================================================================================
     //                                                                             Execute
@@ -96,6 +99,7 @@ public class EgovLawPutJob implements LaJob {
                 recorder.asError(recordMessage(lawId, lawNumber, error.getMessage()));
             }
         }
+        fileLogic.outputRecorder(recorder, getClass().getSimpleName());
     }
 
     public void processGetEgovLawDataXml(Integer lawId, String lawNumber) {
