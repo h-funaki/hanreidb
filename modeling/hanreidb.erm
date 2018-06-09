@@ -2072,19 +2072,19 @@
 				<normal_column>
 					<physical_name>LAW_CONTENT_RAW_XML</physical_name>
 					<logical_name>法令内容加工前XML</logical_name>
-					<type>text</type>
+					<type>mediumtext</type>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
 					<physical_name>LAW_CONTENT_SEARCH_TEXT</physical_name>
 					<logical_name>法令内容検索全文</logical_name>
-					<type>text</type>
+					<type>mediumtext</type>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
 					<physical_name>LAW_CONTENT_VIEW_XML</physical_name>
 					<logical_name>法令内容画面用XML</logical_name>
-					<type>text</type>
+					<type>mediumtext</type>
 					<not_null>true</not_null>
 				</normal_column>
 				<column_group>共通カラム</column_group>
