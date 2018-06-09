@@ -78,6 +78,7 @@ public class EgovLawPutJob implements LaJob {
         List<Law> lawList = lawBhv.selectList(cb -> {
             cb.specify().columnLawId();
             cb.specify().columnLawNumber();
+            cb.query().notExistsLawHistoryByLawId(historyCB -> {});
         });
         logger.info("法令内容取得予定件数:{}", lawList.size());
 
@@ -109,9 +110,9 @@ public class EgovLawPutJob implements LaJob {
         } catch (RemoteApiHttpClientErrorException e) {
             throw new HanreidbSystemException("エラーレスポンス");
         }
-
         LawHistory lawHistory = insertLawHistory(lawId);
         insertLawContent(lawHistory.getLawHistoryId(), xmlResponse);
+        xmlResponse = null;
     }
 
     // ===================================================================================
