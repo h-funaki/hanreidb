@@ -79,6 +79,7 @@ public class EgovLawPutJob implements LaJob {
             cb.specify().columnLawId();
             cb.specify().columnLawNumber();
             cb.query().notExistsLawHistoryByLawId(historyCB -> {});
+            cb.fetchFirst(100);
         });
         logger.info("法令内容取得予定件数:{}", lawList.size());
 
