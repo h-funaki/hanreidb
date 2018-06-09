@@ -14,6 +14,8 @@ data-directory: playsql/data/ut/xls
 
 [2-law_test.xls]
   LAW (105)
+  LAW_HISTORY (105)
+  LAW_CONTENT (105)
   LAW_ALIAS (18)
   LAW_SOURCE_REL (105)
   LAW_CATEGORY_REL (105)

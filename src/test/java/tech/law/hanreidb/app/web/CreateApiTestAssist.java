@@ -54,7 +54,7 @@ public class CreateApiTestAssist {
             columnList.add(column); // 同じ名前のフィールドを作らないようにするため
         });
         getRelatedTableColumnInfo().forEach(column -> {
-            if (!columnList.contains(column)) {
+            if (!columnList.contains(column) && !column.isCommonColumn() && !column.isForeignKey()) {
                 if (column.isNotNull()) {
                     lines.add("    /** " + column.getColumnAlias() + " e.g. " + column.getColumnComment() + " */");
                     lines.add("    @Required");

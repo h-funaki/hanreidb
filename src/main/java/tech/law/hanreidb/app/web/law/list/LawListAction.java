@@ -24,7 +24,6 @@ import tech.law.hanreidb.app.web.law.list.LawListContentResult.LawPart.SourcePar
 import tech.law.hanreidb.dbflute.exbhv.LawBhv;
 import tech.law.hanreidb.dbflute.exentity.ClsSource;
 import tech.law.hanreidb.dbflute.exentity.Law;
-import tech.law.hanreidb.dbflute.exentity.LawAlias;
 import tech.law.hanreidb.dbflute.exentity.LawCategory;
 import tech.law.hanreidb.dbflute.exentity.LawCategoryRel;
 import tech.law.hanreidb.dbflute.exentity.LawSourceRel;
@@ -113,24 +112,14 @@ public class LawListAction extends HanreidbBaseAction {
     private LawPart convertToLaw(Law law) {
         LawPart part = new LawPart();
         part.law_type_code = law.getLawTypeCode();
-
         part.law_type_alias = law.getLawType().get().getLawTypeAlias();
-
         part.law_public_code = law.getLawPublicCode();
-
         part.law_name = law.getLawName();
-
         part.law_number = law.getLawNumber();
-
         part.promulgation_date = law.getPromulgationDate();
-
         part.effective_date = law.getEffectiveDate();
 
-        List<String> lawAliasList = newArrayList();
-        for (LawAlias lawAlias : law.getLawAliasList()) {
-            lawAliasList.add(lawAlias.getLawAlias());
-        }
-        part.law_alias_list = lawAliasList;
+        part.law_alias_list = law.getLawAliasListAsStringList();
 
         List<SourcePart> sourcePartList = newArrayList();
         for (LawSourceRel rel : law.getLawSourceRelList()) {

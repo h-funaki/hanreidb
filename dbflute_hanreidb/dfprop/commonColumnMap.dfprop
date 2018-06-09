@@ -32,13 +32,14 @@ map:{
     ; commonColumnMap = map:{
         ; REGISTER_DATETIME=TIMESTAMP ; REGISTER_USER=VARCHAR
         ; UPDATE_DATETIME=TIMESTAMP   ; UPDATE_USER=VARCHAR
+        ; VERSION_NO=BIGINT
     }
     ; beforeInsertMap = map:{
         ; REGISTER_DATETIME = $$AccessContext$$.getAccessLocalDateTimeOnThread()
         ; REGISTER_USER     = $$AccessContext$$.getAccessUserOnThread()
         ; UPDATE_DATETIME   = entity.getRegisterDatetime()
         ; UPDATE_USER       = entity.getRegisterUser()
-        ; VERSION_NO        = 0        
+        ; VERSION_NO        = 0L
     }
     ; beforeUpdateMap = map:{
         ; UPDATE_DATETIME   = $$AccessContext$$.getAccessLocalDateTimeOnThread()

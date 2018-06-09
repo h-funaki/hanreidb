@@ -60,6 +60,8 @@ public class ImplementedCommonColumnAutoSetupper implements CommonColumnAutoSetu
         entity.setUpdateDatetime(updateDatetime);
         final String updateUser = entity.getRegisterUser();
         entity.setUpdateUser(updateUser);
+        final Long versionNo = 0L;
+        entity.setVersionNo(versionNo);
     }
 
     /** {@inheritDoc} */

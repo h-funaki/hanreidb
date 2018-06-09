@@ -70,4 +70,16 @@ public interface EntityDefinedCommonColumn extends Entity {
      * @param updateUser The instance of the property type. (NullAllowed)
      */
     void setUpdateUser(String updateUser);
+
+    /**
+     * Get the value of versionNo.
+     * @return The instance of the property type. (NullAllowed)
+     */
+    Long getVersionNo();
+
+    /**
+     * Set the value of versionNo.
+     * @param versionNo The instance of the property type. (NullAllowed)
+     */
+    void setVersionNo(Long versionNo);
 }

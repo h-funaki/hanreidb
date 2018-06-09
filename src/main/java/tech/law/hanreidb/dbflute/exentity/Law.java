@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 the original author or authors.
+u * Copyright 2015-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,10 @@
  */
 package tech.law.hanreidb.dbflute.exentity;
 
+import static tech.law.hanreidb.app.base.util.UnextStaticImportUtil.newArrayList;
+
+import java.util.List;
+
 import tech.law.hanreidb.dbflute.bsentity.BsLaw;
 
 /**
@@ -29,4 +33,12 @@ public class Law extends BsLaw {
 
     /** The serial version UID for object serialization. (Default) */
     private static final long serialVersionUID = 1L;
+
+    public List<String> getLawAliasListAsStringList() {
+        List<String> lawAliasList = newArrayList();
+        for (LawAlias lawAlias : getLawAliasList()) {
+            lawAliasList.add(lawAlias.getLawAlias());
+        }
+        return lawAliasList;
+    }
 }

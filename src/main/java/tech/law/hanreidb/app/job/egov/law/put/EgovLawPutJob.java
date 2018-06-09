@@ -105,7 +105,7 @@ public class EgovLawPutJob implements LaJob {
     public void processGetEgovLawDataXml(Integer lawId, String lawNumber) {
         String xmlResponse = "";
         try {
-            xmlResponse = remoteEgovBhv.requestRemoteLawDataXml("明治八年太政官布告第五十四号");
+            xmlResponse = remoteEgovBhv.requestRemoteLawDataXml(lawNumber);
         } catch (RemoteApiHttpClientErrorException e) {
             throw new HanreidbSystemException("エラーレスポンス");
         }
