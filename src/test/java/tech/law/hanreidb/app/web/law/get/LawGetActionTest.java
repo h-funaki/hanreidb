@@ -10,21 +10,19 @@ public class LawGetActionTest extends UnitHanreidbTestCase {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    
+
     // ===================================================================================
     //                                                                               正常系
     //                                                                               =====
     public void test_正常に登録されている() {
-    // ## Arrange ##
-    LawGetAction action = new LawGetAction();
-    inject(action);
-    
-    LawGetBody body = new LawGetBody();
-    
-    // ## Act ##
-    
-    // ## Assert ##
-    
+        // ## Arrange ##
+        LawGetAction action = new LawGetAction();
+        inject(action);
+
+        // ## Act ##
+
+        // ## Assert ##
+
     }
     // ===================================================================================
     //                                                                               異常系
