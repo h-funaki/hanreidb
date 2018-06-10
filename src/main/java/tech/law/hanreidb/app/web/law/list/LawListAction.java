@@ -79,6 +79,7 @@ public class LawListAction extends HanreidbBaseAction {
                     categoryRelCB.query().setLawCategoryId_InScope(list);
                 });
             });
+            cb.query().existsLawHistoryByLawId(historyCB -> {});
             cb.paging(body.page_size, body.page_number);
         });
         lawBhv.load(page, lawLoader -> {

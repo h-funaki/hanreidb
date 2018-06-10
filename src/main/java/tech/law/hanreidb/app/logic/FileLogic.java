@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -75,6 +79,10 @@ public class FileLogic {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    public String readAll(final String path) throws IOException {
+        return Files.lines(Paths.get(path), Charset.forName("UTF-8")).collect(Collectors.joining(System.getProperty("line.separator")));
     }
 
     /**

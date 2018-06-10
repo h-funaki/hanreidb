@@ -1813,11 +1813,11 @@
 			<logical_name>法令略称</logical_name>
 			<description></description>
 			<height>107</height>
-			<width>174</width>
+			<width>220</width>
 			<font_name>.AppleSystemUIFont</font_name>
 			<font_size>9</font_size>
-			<x>1661</x>
-			<y>1269</y>
+			<x>1786</x>
+			<y>1157</y>
 			<color>
 				<r>0</r>
 				<g>255</g>
@@ -2025,11 +2025,11 @@
 			<physical_name>LAW_CONTENT</physical_name>
 			<logical_name>法令内容</logical_name>
 			<description></description>
-			<height>75</height>
-			<width>120</width>
+			<height>143</height>
+			<width>313</width>
 			<font_name>.AppleSystemUIFont</font_name>
 			<font_size>9</font_size>
-			<x>1292</x>
+			<x>1424</x>
 			<y>1241</y>
 			<color>
 				<r>0</r>
@@ -2924,6 +2924,30 @@
 			<table_properties>
 			</table_properties>
 		</table>
+		<walker_note>
+			<height>81</height>
+			<width>263</width>
+			<font_name>.AppleSystemUIFont</font_name>
+			<font_size>9</font_size>
+			<x>1288</x>
+			<y>1494</y>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>128</b>
+			</color>
+			<connections>
+				<comment_connection>
+					<source>36</source>
+					<target>table.LAW_HISTORY</target>
+				</comment_connection>
+				<comment_connection>
+					<source>36</source>
+					<target>table.LAW_CONTENT</target>
+				</comment_connection>
+			</connections>
+			<note_text>EgovLawPutJobで50件の取得漏れ（egov側で削除されている・容量が大きすぎる・文字列での取得に失敗など）。&#x0A;リランすればまた詳細がわかるはず。</note_text>
+		</walker_note>
 		<walker_note>
 			<height>60</height>
 			<width>230</width>

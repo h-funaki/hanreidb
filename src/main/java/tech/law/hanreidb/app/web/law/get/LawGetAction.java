@@ -95,6 +95,7 @@ public class LawGetAction extends HanreidbBaseAction {
             ClsSource clsSource = rel.getClsSource().get();
             sourcePart.source_code = clsSource.getSourceCode();
             sourcePart.source_alias = clsSource.getSourceAlias();
+            sourcePartList.add(sourcePart);
         }
         content.source_part_list = sourcePartList;
 
@@ -108,7 +109,7 @@ public class LawGetAction extends HanreidbBaseAction {
         }
         content.law_category_part_list = lawCategoryPartList;
 
-        LawHistory lawHistory = law.getLawHistoryByLawIdList().get(0);
+        LawHistory lawHistory = law.getLawHistoryByLawIdList().get(0); // 50件法令履歴がないので、ないやつは一覧で返さないようにする。
         content.law_amend_version = lawHistory.getLawAmendVersion();
         content.latest_version_flg = lawHistory.getLatestVersionFlg();
 

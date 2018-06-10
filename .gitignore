@@ -3,6 +3,8 @@
 /build
 /bin
 .DS_Store
+/dbflute_hanreidb/playsql/data/ut
+/dbflute_hanreidb/playsql/take-finally-20-law_content.sql
 
 # IntelliJ IDEA
 /.idea/artifacts

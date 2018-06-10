@@ -14,13 +14,9 @@ import org.slf4j.LoggerFactory;
 import tech.law.hanreidb.app.base.exception.HanreidbSystemException;
 import tech.law.hanreidb.app.base.job.JobRecorder;
 import tech.law.hanreidb.app.logic.FileLogic;
-import tech.law.hanreidb.app.logic.XmlLogic;
-import tech.law.hanreidb.dbflute.exbhv.ArticleBhv;
-import tech.law.hanreidb.dbflute.exbhv.ArticleContentBhv;
 import tech.law.hanreidb.dbflute.exbhv.LawBhv;
 import tech.law.hanreidb.dbflute.exbhv.LawContentBhv;
 import tech.law.hanreidb.dbflute.exbhv.LawHistoryBhv;
-import tech.law.hanreidb.dbflute.exbhv.LawTocBhv;
 import tech.law.hanreidb.dbflute.exentity.Law;
 import tech.law.hanreidb.dbflute.exentity.LawContent;
 import tech.law.hanreidb.dbflute.exentity.LawHistory;
@@ -53,14 +49,6 @@ public class EgovLawPutJob implements LaJob {
     private LawHistoryBhv lawHistoryBhv;
     @Resource
     private LawContentBhv lawContentBhv;
-    @Resource
-    private LawTocBhv lawTocBhv;
-    @Resource
-    private ArticleBhv articleBhv;
-    @Resource
-    private ArticleContentBhv articleContentBhv;
-    @Resource
-    private XmlLogic xmlLogic;
     @Resource
     private FileLogic fileLogic;
 
