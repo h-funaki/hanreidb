@@ -24,6 +24,7 @@ import tech.law.hanreidb.dbflute.exentity.LawContent;
 import tech.law.hanreidb.dbflute.exentity.LawHistory;
 import tech.law.hanreidb.dbflute.exentity.LawSourceRel;
 import tech.law.hanreidb.dbflute.exentity.LawType;
+import tech.law.hanreidb.remote.egov.RemoteEgovBhv;
 
 /**
  * @author h-funaki
@@ -41,6 +42,8 @@ public class LawGetAction extends HanreidbBaseAction {
     //                                                                           =========
     @Resource
     private LawBhv lawBhv;
+    @Resource
+    private RemoteEgovBhv remoteEgovBhv;
 
     // ===================================================================================
     //                                                                             Execute
@@ -109,13 +112,38 @@ public class LawGetAction extends HanreidbBaseAction {
         }
         content.law_category_part_list = lawCategoryPartList;
 
-        LawHistory lawHistory = law.getLawHistoryByLawIdList().get(0); // 50件法令履歴がないので、ないやつは一覧で返さないようにする。
+        LawHistory lawHistory = law.getLawHistoryByLawIdList().get(0); // 50件法令履歴がないので、ないやつはそもそも一覧で返さないようにする。
         content.law_amend_version = lawHistory.getLawAmendVersion();
         content.latest_version_flg = lawHistory.getLatestVersionFlg();
 
         LawContent lawContent = lawHistory.getLawContentAsOne().get();
-        content.law_content_view_xml = lawContent.getLawContentViewXml();
+
+        content.law_content_view_xml = toXml(lawContent.getLawContentViewXml());
 
         return content;
+    }
+
+    public String toXml(String rawXml) {
+        String viewXml = rawXml.substring(rawXml.indexOf("<LawBody>", 1), rawXml.indexOf("</Law>", 1) - 1) // LawBodyを取り出す。 
+                .replaceFirst("<LawTitle>.*</LawTitle>", "") // 法令名 e.g. 牧野法
+                .replaceFirst("<TOCLabel>目次</TOCLabel>", "") // "目次"
+                .replaceAll("<TOCChapter", "<a><TOCChapter") // 目次のリンク
+                .replaceAll("</TOCChapter>", "</TOCChapter></a>") // 目次のリンク
+                .replaceAll("</ArticleRange>", "</ArticleRange><br>") // 目次の条文範囲ごとの改行
+                .replaceFirst("<TOCSupplProvision>", "<TOCSupplProvision><a>") // 附則のリンク
+                .replaceFirst("</TOCSupplProvision>", "</a></TOCSupplProvision><br>") // 附則のリンク
+                // ここからメイン
+                .replaceAll("<MainProvision>>", "<MainProvision><br><br>") // 目次とメインの間
+                .replaceAll("</TOC>", "</TOC><br>") //
+                .replaceAll("</ArticleCaption>", "</ArticleCaption><br>") //
+                .replaceAll("</Sentence>", "</Sentence><br>")
+                .replaceAll("</Chapter>", "</Chapter><br><br>") // 章の終わり
+                .replaceAll("<ChapterTitle>", "<ChapterTitle><h5>") // 
+                .replaceAll("</ChapterTitle>", "</h5></ChapterTitle>") // 
+                // ここから附則
+                .replaceAll("</SupplProvision>", "</SupplProvision><br>") // 附則の終わり
+        ;
+        logger.debug(viewXml);
+        return viewXml;
     }
 }

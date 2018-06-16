@@ -15,6 +15,7 @@ import tech.law.hanreidb.app.base.job.JobRecorder;
 import tech.law.hanreidb.app.logic.FileLogic;
 import tech.law.hanreidb.dbflute.exbhv.LawContentBhv;
 import tech.law.hanreidb.dbflute.exentity.LawContent;
+import tech.law.hanreidb.remote.egov.RemoteEgovBhv;
 
 /**
  * @author h-funaki
@@ -36,6 +37,8 @@ public class EgovLawContentFormatJob implements LaJob {
     private LawContentBhv lawContentBhv;
     @Resource
     private FileLogic fileLogic;
+    @Resource
+    private RemoteEgovBhv remoteEgovBhv;
 
     // ===================================================================================
     //                                                                             Execute
@@ -94,15 +97,16 @@ public class EgovLawContentFormatJob implements LaJob {
     }
 
     protected String toViewXml(String rawXml) {
-        // TODO Auto-generated method stub
-        return null;
+        String viewXml = "";
+        return viewXml;
     }
 
     protected String toSearchText(String rawXml) {
         String searchText = "";
-        searchText =
-                rawXml.replaceAll("<[a-zA-Z \"=0-9]++>", "").replaceAll("</[a-zA-Z]++>", "").replaceAll("<[a-zA-Z]++/>", "").replaceAll(
-                        "\\s", "");
+        searchText = rawXml.replaceAll("<[a-zA-Z \"=0-9]++>", "") // e.g. <message aaa="24">
+                .replaceAll("</[a-zA-Z]++>", "") // e.g. </message>
+                .replaceAll("<[a-zA-Z]++/>", "") //　e.g. <message />
+                .replaceAll("\\s", ""); // 改行とか、空白行とか不要な文字を削除
         return searchText;
     }
 
