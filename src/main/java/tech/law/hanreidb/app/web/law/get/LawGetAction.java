@@ -124,8 +124,7 @@ public class LawGetAction extends HanreidbBaseAction {
     }
 
     public String toXml(String rawXml) {
-        String viewXml = rawXml.substring(rawXml.indexOf("<LawBody>", 1), rawXml.indexOf("</Law>", 1) - 1) // LawBodyを取り出す。 
-                .replaceFirst("<LawTitle>.*</LawTitle>", "") // 法令名 e.g. 牧野法
+        String viewXml = rawXml.replaceFirst("<LawTitle>.*</LawTitle>", "") // 法令名 e.g. 牧野法
                 .replaceFirst("<TOCLabel>目次</TOCLabel>", "") // "目次"
                 .replaceAll("(<TOCChapter[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<a href=\"#chapter$2\">$1$2$3") // 目次のリンク(開始タグ)
                 .replaceAll("</TOCChapter>", "</TOCChapter></a>") // 目次のリンク(終了タグ)
