@@ -127,21 +127,25 @@ public class LawGetAction extends HanreidbBaseAction {
         String viewXml = rawXml.substring(rawXml.indexOf("<LawBody>", 1), rawXml.indexOf("</Law>", 1) - 1) // LawBodyを取り出す。 
                 .replaceFirst("<LawTitle>.*</LawTitle>", "") // 法令名 e.g. 牧野法
                 .replaceFirst("<TOCLabel>目次</TOCLabel>", "") // "目次"
-                .replaceAll("<TOCChapter", "<a><TOCChapter") // 目次のリンク
-                .replaceAll("</TOCChapter>", "</TOCChapter></a>") // 目次のリンク
+                .replaceAll("(<TOCChapter[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<a href=\"#chapter$2\">$1$2$3") // 目次のリンク(開始タグ)
+                .replaceAll("</TOCChapter>", "</TOCChapter></a>") // 目次のリンク(終了タグ)
                 .replaceAll("</ArticleRange>", "</ArticleRange><br>") // 目次の条文範囲ごとの改行
-                .replaceFirst("<TOCSupplProvision>", "<TOCSupplProvision><a>") // 附則のリンク
-                .replaceFirst("</TOCSupplProvision>", "</a></TOCSupplProvision><br>") // 附則のリンク
+                .replaceFirst("<TOCSupplProvision>", "<h5><TOCSupplProvision><a>") // 附則のリンク(開始タグ)
+                .replaceFirst("</TOCSupplProvision>", "</a></TOCSupplProvision></h5><br>") // 附則のリンク(終了タグ)
+                .replaceAll("<ArticleRange>", "<h5><ArticleRange>")
+                .replaceAll("</ArticleRange>", "</ArticleRange></h5>")
                 // ここからメイン
-                .replaceAll("<MainProvision>>", "<MainProvision><br><br>") // 目次とメインの間
-                .replaceAll("</TOC>", "</TOC><br>") //
+                .replaceFirst("<MainProvision>>", "<MainProvision><br><br>") // 目次とメインの間
+                .replaceFirst("</TOC>", "</TOC><br>") //
                 .replaceAll("</ArticleCaption>", "</ArticleCaption><br>") //
                 .replaceAll("</Sentence>", "</Sentence><br>")
                 .replaceAll("</Chapter>", "</Chapter><br><br>") // 章の終わり
-                .replaceAll("<ChapterTitle>", "<ChapterTitle><h5>") // 
-                .replaceAll("</ChapterTitle>", "</h5></ChapterTitle>") // 
+                .replaceAll("<ChapterTitle>", "<h5><ChapterTitle>") // 
+                .replaceAll("</ChapterTitle>", "</ChapterTitle></h5>") // 
+                .replaceFirst("</MainProvision>>", "</MainProvision><br><br>") // メインと附則の間
+                .replaceAll("(<Chapter[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "$1$2\" id=\"chapter$2$3") // e.g. " id=chapter2"
                 // ここから附則
-                .replaceAll("</SupplProvision>", "</SupplProvision><br>") // 附則の終わり
+                .replaceAll("<SupplProvisionLabel>附　則</SupplProvisionLabel>", "<br><SupplProvisionLabel><h5>附　則</h5></SupplProvisionLabel>") // "附則"
         ;
         logger.debug(viewXml);
         return viewXml;
