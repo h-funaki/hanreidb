@@ -1,7 +1,5 @@
 package tech.law.hanreidb.app.job.egov.law.content.format;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.lastaflute.db.jta.stage.TransactionStage;
@@ -57,10 +55,6 @@ public class EgovLawContentFormatJob implements LaJob {
         logger.info("法令内容取得予定件数:{}", count);
         recorder.planBatch(count);
 
-        List<LawContent> contentList = lawContentBhv.selectList(cb -> {
-            cb.specify().columnLawContentId();
-        });
-
         lawContentBhv.selectCursor(cb -> {
             cb.specify().columnLawContentId();
             cb.specify().columnLawContentRawXml();
@@ -81,7 +75,7 @@ public class EgovLawContentFormatJob implements LaJob {
                 recorder.asError(recordMessage(lawContentId, error.getMessage()));
             }
         });
-        fileLogic.outputRecorder(recorder, getClass().getSimpleName());
+        // fileLogic.outputRecorder(recorder, getClass().getSimpleName());
     }
 
     // ===================================================================================
@@ -97,17 +91,14 @@ public class EgovLawContentFormatJob implements LaJob {
     }
 
     protected String toViewXml(String rawXml) {
-        String viewXml = "";
-        return viewXml;
+        return rawXml.substring(rawXml.indexOf("<LawBody>", 1), rawXml.indexOf("</Law>", 1) - 1); // LawBodyを取り出す
     }
 
     protected String toSearchText(String rawXml) {
-        String searchText = "";
-        searchText = rawXml.replaceAll("<[a-zA-Z \"=0-9]++>", "") // e.g. <message aaa="24">
+        return rawXml.replaceAll("<[a-zA-Z \"=0-9]++>", "") // e.g. <message aaa="24">
                 .replaceAll("</[a-zA-Z]++>", "") // e.g. </message>
                 .replaceAll("<[a-zA-Z]++/>", "") //　e.g. <message />
                 .replaceAll("\\s", ""); // 改行とか、空白行とか不要な文字を削除
-        return searchText;
     }
 
     // ===================================================================================
