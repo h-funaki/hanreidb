@@ -15,6 +15,7 @@ import tech.law.hanreidb.app.job.court.judgement.migrate.CourtJudgementMigrateJo
 import tech.law.hanreidb.app.job.court.judgement.put.CourtJudgementPutJob;
 import tech.law.hanreidb.app.job.court.judgement.sentence.set.CourtJudgementSentenceSetJob;
 import tech.law.hanreidb.app.job.court.judgement.set.CourtJudgementSetJob;
+import tech.law.hanreidb.app.job.egov.law.content.format.EgovLawContentFormatJob;
 import tech.law.hanreidb.app.job.egov.law.put.EgovLawPutJob;
 
 /**
@@ -46,6 +47,9 @@ public class AllJobScheduler implements LaJobScheduler {
         });
         cron.registerNonCron(EgovLawPutJob.class, waitIfConcurrent(), op -> {
             op.uniqueBy("EgovLawPut");
+        });
+        cron.registerNonCron(EgovLawContentFormatJob.class, waitIfConcurrent(), op -> {
+            op.uniqueBy("EgovLawContentFormatJob");
         });
     }
 
