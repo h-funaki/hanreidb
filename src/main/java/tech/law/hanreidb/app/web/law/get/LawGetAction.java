@@ -139,29 +139,30 @@ public class LawGetAction extends HanreidbBaseAction {
                 .replaceAll("<EnactStatement>", "<br><EnactStatement>") //
                 // 目次
                 .replaceFirst("<TOCLabel>目次</TOCLabel>", "") // "目次"
-                .replaceAll("", "") //
                 // 編
-                .replaceAll("(<TOCPart[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><h4>$1$2$3<a href=\"#part$2\">") // 目次の編(開始タグ)
-                .replaceAll("</PartTitle>", "</PartTitle></a></h4>") // 目次の編(終了タグ)
+                .replaceAll("(<TOCPart[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br>$1$2$3<a href=\"#part$2\">") // 目次の編(開始タグ)
+                .replaceAll("<PartTitle>", "<PartTitle>") // 目次の編(終了タグ)
+                .replaceAll("</PartTitle>", "</PartTitle></a>") // 目次の編(終了タグ)
                 // 章
-                .replaceAll("(<TOCChapter[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><h5><a href=\"#chapter$2\">$1$2$3") // 目次の章(開始タグ)
-                .replaceAll("</TOCChapter>", "</TOCChapter></a></h5>") // 目次の章(終了タグ)
+                .replaceAll("(<TOCChapter[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><a href=\"#chapter$2\">$1$2$3") // 目次の章(開始タグ)
+                .replaceAll("</TOCChapter>", "</TOCChapter></a>") // 目次の章(終了タグ)
                 // 節
-                .replaceAll("(<TOCSection[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><h5><a href=\"#section$2\">$1$2$3") // 目次の節(開始タグ)
-                .replaceAll("</TOCSection>", "</TOCSection></a></h5>") // 目次の節(終了タグ)
+                .replaceAll("(<TOCSection[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><a href=\"#section$2\">$1$2$3") // 目次の節(開始タグ)
+                .replaceAll("</TOCSection>", "</TOCSection></a>") // 目次の節(終了タグ)
                 // 款
-                .replaceAll("(<TOCSubsection[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><h6><a href=\"#subsection$2\">$1$2$3") // 目次の款(開始タグ)
-                .replaceAll("</TOCSubsection>", "</TOCSubsection></a></h6>") // 目次の款(終了タグ)
+                .replaceAll("(<TOCSubsection[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><a href=\"#subsection$2\">$1$2$3") // 目次の款(開始タグ)
+                .replaceAll("</TOCSubsection>", "</TOCSubsection></a>") // 目次の款(終了タグ)
                 // 目
-                .replaceAll("(<TOCDivision[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><h6><a href=\"#division$2\">$1$2$3") // 目次の目(開始タグ)
-                .replaceAll("</TOCDivision>", "</TOCDivision></a></h6>") // 目次の目(終了タグ)
+                .replaceAll("(<TOCDivision[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br><a href=\"#division$2\">$1$2$3") // 目次の目(開始タグ)
+                .replaceAll("</TOCDivision>", "</TOCDivision></a>") // 目次の目(終了タグ)
                 // 
-                .replaceFirst("<TOCSupplProvision>", "<br><h5><TOCSupplProvision><a>") // 附則のリンク(開始タグ)
-                .replaceFirst("</TOCSupplProvision>", "</a></TOCSupplProvision></h5>") // 附則のリンク(終了タグ)
+                .replaceFirst("<TOCSupplProvision>", "<br><TOCSupplProvision><a>") // 附則のリンク(開始タグ)
+                .replaceFirst("</TOCSupplProvision>", "</a></TOCSupplProvision>") // 附則のリンク(終了タグ)
                 // -----------------------------------------------------
                 //                                                 メイン
                 //                                                 -----
-                .replaceFirst("", "") //
+                .replaceFirst("<TOC>", "<div class=\"ui center aligned grid\"><div class=\"twelve wide column\"><TOC>") //
+                .replaceFirst("</TOC>", "</TOC></div></div>") //
                 .replaceAll("", "") //
                 .replaceAll("<ArticleCaption>", "<br><ArticleCaption>") //
                 .replaceAll("<ArticleTitle>", "<br><ArticleTitle>") //
@@ -173,13 +174,13 @@ public class LawGetAction extends HanreidbBaseAction {
                 .replaceAll("(<Subsection[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br>$1$2\" id=\"subsection$2$3") // e.g. " id=subsection2"
                 .replaceAll("(<Division[\"= a-zA-Z0-9]* Num=\")(\\d+)(\">)", "<br>$1$2\" id=\"division$2$3") // e.g. " id=division2"
                 // メインと附則の間
+                .replaceAll("(<Item Num=\"\\d+\">)", "<br>$1") //
+                .replaceAll("(<Subitem1 Num=\"\\d+\">)", "<br>$1") //
                 .replaceFirst("</MainProvision>>", "</MainProvision><br><br>")
                 // -----------------------------------------------------
                 //                                                   附則
                 //                                                   ---       
-                .replaceAll("<SupplProvisionLabel>附　則</SupplProvisionLabel>",
-                        "<br><SupplProvisionLabel><h5>附　則</h5></SupplProvisionLabel><br>") // "附則"
-                .replaceAll("</SupplProvision>", "</SupplProvision>")
+                .replaceAll("<SupplProvisionLabel>附　則</SupplProvisionLabel>", "<br><SupplProvisionLabel>附　則</SupplProvisionLabel>") // "附則"
                 // -----------------------------------------------------
                 //                                               テーブル
                 //                                               -------
