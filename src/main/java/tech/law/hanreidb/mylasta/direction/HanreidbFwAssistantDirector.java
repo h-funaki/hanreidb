@@ -144,7 +144,6 @@ public class HanreidbFwAssistantDirector extends CachedFwAssistantDirector {
         direction.directHtmlRendering(createHtmlRenderingProvider());
         direction.directMultipart(createMultipartResourceProvider());
         direction.directCors(new CorsHook(env.getCorsUrl()));
-        direction.directCors(new CorsHook("http://35.200.44.89:10000/"));
     }
 
     protected UserLocaleProcessProvider createUserLocaleProcessProvider() {
