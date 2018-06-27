@@ -104,9 +104,9 @@ public class LawContentDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnLawContentId = cci("LAW_CONTENT_ID", "LAW_CONTENT_ID", null, "法令内容ID", Integer.class, "lawContentId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnLawHistoryId = cci("LAW_HISTORY_ID", "LAW_HISTORY_ID", null, "法令履歴ID", Integer.class, "lawHistoryId", null, false, false, true, "INT", 10, 0, null, false, null, null, "lawHistory", null, null, false);
-    protected final ColumnInfo _columnLawContentRawXml = cci("LAW_CONTENT_RAW_XML", "LAW_CONTENT_RAW_XML", null, "法令内容加工前XML", String.class, "lawContentRawXml", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnLawContentSearchText = cci("LAW_CONTENT_SEARCH_TEXT", "LAW_CONTENT_SEARCH_TEXT", null, "法令内容検索全文", String.class, "lawContentSearchText", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnLawContentViewXml = cci("LAW_CONTENT_VIEW_XML", "LAW_CONTENT_VIEW_XML", null, "法令内容画面用XML", String.class, "lawContentViewXml", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnLawContentRawXml = cci("LAW_CONTENT_RAW_XML", "LAW_CONTENT_RAW_XML", null, "法令内容加工前XML", String.class, "lawContentRawXml", null, false, false, true, "MEDIUMTEXT", 16777215, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnLawContentSearchText = cci("LAW_CONTENT_SEARCH_TEXT", "LAW_CONTENT_SEARCH_TEXT", null, "法令内容検索全文", String.class, "lawContentSearchText", null, false, false, true, "MEDIUMTEXT", 16777215, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnLawContentViewXml = cci("LAW_CONTENT_VIEW_XML", "LAW_CONTENT_VIEW_XML", null, "法令内容画面用XML", String.class, "lawContentViewXml", null, false, false, true, "MEDIUMTEXT", 16777215, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -124,17 +124,17 @@ public class LawContentDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnLawHistoryId() { return _columnLawHistoryId; }
     /**
-     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)}
+     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnLawContentRawXml() { return _columnLawContentRawXml; }
     /**
-     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)}
+     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnLawContentSearchText() { return _columnLawContentSearchText; }
     /**
-     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)}
+     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnLawContentViewXml() { return _columnLawContentViewXml; }

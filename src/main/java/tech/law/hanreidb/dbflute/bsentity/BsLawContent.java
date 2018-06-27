@@ -100,13 +100,13 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     /** (法令履歴ID)LAW_HISTORY_ID: {UQ, NotNull, INT(10), FK to LAW_HISTORY} */
     protected Integer _lawHistoryId;
 
-    /** (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)} */
+    /** (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)} */
     protected String _lawContentRawXml;
 
-    /** (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)} */
+    /** (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)} */
     protected String _lawContentSearchText;
 
-    /** (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)} */
+    /** (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)} */
     protected String _lawContentViewXml;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -297,7 +297,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     }
 
     /**
-     * [get] (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)} <br>
+     * [get] (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)} <br>
      * @return The value of the column 'LAW_CONTENT_RAW_XML'. (basically NotNull if selected: for the constraint)
      */
     public String getLawContentRawXml() {
@@ -306,7 +306,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     }
 
     /**
-     * [set] (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)} <br>
+     * [set] (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)} <br>
      * @param lawContentRawXml The value of the column 'LAW_CONTENT_RAW_XML'. (basically NotNull if update: for the constraint)
      */
     public void setLawContentRawXml(String lawContentRawXml) {
@@ -315,7 +315,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     }
 
     /**
-     * [get] (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)} <br>
+     * [get] (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)} <br>
      * @return The value of the column 'LAW_CONTENT_SEARCH_TEXT'. (basically NotNull if selected: for the constraint)
      */
     public String getLawContentSearchText() {
@@ -324,7 +324,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     }
 
     /**
-     * [set] (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)} <br>
+     * [set] (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)} <br>
      * @param lawContentSearchText The value of the column 'LAW_CONTENT_SEARCH_TEXT'. (basically NotNull if update: for the constraint)
      */
     public void setLawContentSearchText(String lawContentSearchText) {
@@ -333,7 +333,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     }
 
     /**
-     * [get] (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)} <br>
+     * [get] (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)} <br>
      * @return The value of the column 'LAW_CONTENT_VIEW_XML'. (basically NotNull if selected: for the constraint)
      */
     public String getLawContentViewXml() {
@@ -342,7 +342,7 @@ public abstract class BsLawContent extends AbstractEntity implements DomainEntit
     }
 
     /**
-     * [set] (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)} <br>
+     * [set] (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)} <br>
      * @param lawContentViewXml The value of the column 'LAW_CONTENT_VIEW_XML'. (basically NotNull if update: for the constraint)
      */
     public void setLawContentViewXml(String lawContentViewXml) {

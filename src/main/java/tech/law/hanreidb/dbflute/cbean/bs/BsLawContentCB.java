@@ -351,17 +351,17 @@ public class BsLawContentCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnLawHistoryId() { return doColumn("LAW_HISTORY_ID"); }
         /**
-         * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)}
+         * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnLawContentRawXml() { return doColumn("LAW_CONTENT_RAW_XML"); }
         /**
-         * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)}
+         * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnLawContentSearchText() { return doColumn("LAW_CONTENT_SEARCH_TEXT"); }
         /**
-         * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)}
+         * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnLawContentViewXml() { return doColumn("LAW_CONTENT_VIEW_XML"); }

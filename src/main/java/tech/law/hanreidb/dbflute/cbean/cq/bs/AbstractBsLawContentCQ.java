@@ -306,7 +306,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)}
+     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentRawXml The value of lawContentRawXml as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setLawContentRawXml_Equal(String lawContentRawXml) {
@@ -319,7 +319,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)} <br>
+     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)} <br>
      * <pre>e.g. setLawContentRawXml_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param lawContentRawXml The value of lawContentRawXml as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -330,7 +330,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)} <br>
+     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)} <br>
      * <pre>e.g. setLawContentRawXml_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param lawContentRawXml The value of lawContentRawXml as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -342,7 +342,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)}
+     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentRawXml The value of lawContentRawXml as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -353,7 +353,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, TEXT(65535)}
+     * (法令内容加工前XML)LAW_CONTENT_RAW_XML: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentRawXml The value of lawContentRawXml as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -366,7 +366,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)}
+     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentSearchText The value of lawContentSearchText as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setLawContentSearchText_Equal(String lawContentSearchText) {
@@ -379,7 +379,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)} <br>
+     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)} <br>
      * <pre>e.g. setLawContentSearchText_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param lawContentSearchText The value of lawContentSearchText as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -390,7 +390,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)} <br>
+     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)} <br>
      * <pre>e.g. setLawContentSearchText_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param lawContentSearchText The value of lawContentSearchText as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -402,7 +402,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)}
+     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentSearchText The value of lawContentSearchText as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -413,7 +413,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, TEXT(65535)}
+     * (法令内容検索全文)LAW_CONTENT_SEARCH_TEXT: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentSearchText The value of lawContentSearchText as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -426,7 +426,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)}
+     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentViewXml The value of lawContentViewXml as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setLawContentViewXml_Equal(String lawContentViewXml) {
@@ -439,7 +439,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)} <br>
+     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)} <br>
      * <pre>e.g. setLawContentViewXml_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param lawContentViewXml The value of lawContentViewXml as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -450,7 +450,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)} <br>
+     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)} <br>
      * <pre>e.g. setLawContentViewXml_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param lawContentViewXml The value of lawContentViewXml as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -462,7 +462,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)}
+     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentViewXml The value of lawContentViewXml as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -473,7 +473,7 @@ public abstract class AbstractBsLawContentCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, TEXT(65535)}
+     * (法令内容画面用XML)LAW_CONTENT_VIEW_XML: {NotNull, MEDIUMTEXT(16777215)}
      * @param lawContentViewXml The value of lawContentViewXml as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */

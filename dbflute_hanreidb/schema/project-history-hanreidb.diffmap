@@ -1,4 +1,51 @@
 map:{
+    ; 2018/06/27 20:20:06 = map:{
+        ; diffDate = 2018/06/27 20:20:06
+        ; tableDiff = map:{
+            ; LAW_CONTENT = map:{
+                ; tableName = LAW_CONTENT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; LAW_CONTENT_RAW_XML = map:{
+                        ; columnName = LAW_CONTENT_RAW_XML
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = MEDIUMTEXT
+                            ; previous = TEXT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 16777215
+                            ; previous = 65535
+                        }
+                    }
+                    ; LAW_CONTENT_SEARCH_TEXT = map:{
+                        ; columnName = LAW_CONTENT_SEARCH_TEXT
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = MEDIUMTEXT
+                            ; previous = TEXT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 16777215
+                            ; previous = 65535
+                        }
+                    }
+                    ; LAW_CONTENT_VIEW_XML = map:{
+                        ; columnName = LAW_CONTENT_VIEW_XML
+                        ; diffType = CHANGE
+                        ; dbTypeDiff = map:{
+                            ; next = MEDIUMTEXT
+                            ; previous = TEXT
+                        }
+                        ; columnSizeDiff = map:{
+                            ; next = 16777215
+                            ; previous = 65535
+                        }
+                    }
+                }
+            }
+        }
+    }
     ; 2018/05/28 00:43:37 = map:{
         ; diffDate = 2018/05/28 00:43:37
         ; tableDiff = map:{
