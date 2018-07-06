@@ -2874,7 +2874,7 @@ dl.procedurelist dd.column pre {
 		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell"><a href="#user" title="FK_USER_CLS_USER_STATUS">USER</a>,<br><a href="#user_status_history" title="FK_USER_STATUS_HISTORY_CLS_USER_STATUS">USER_STATUS_HISTORY</a>&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
+		<td class="relcell"><a href="#UserStatusCls">UserStatus</a></td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">userStatusCode</td>
 		<td class="subcell">String</td>
@@ -7910,7 +7910,7 @@ dl.procedurelist dd.column pre {
 		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell"><a href="#cls_user_status" title="FK_USER_CLS_USER_STATUS">CLS_USER_STATUS</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
+		<td class="relcell"><a href="#UserStatusCls">UserStatus</a></td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">userStatusCode</td>
 		<td class="subcell">String</td>
@@ -8088,7 +8088,7 @@ dl.procedurelist dd.column pre {
 		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell"><a href="#cls_user_status" title="FK_USER_STATUS_HISTORY_CLS_USER_STATUS">CLS_USER_STATUS</a>&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell"> &nbsp;</td>
+		<td class="relcell"><a href="#UserStatusCls">UserStatus</a></td>
 		<td class="commentcell"> &nbsp;</td>
 		<td class="subcell">userNewStatusCode</td>
 		<td class="subcell">String</td>
@@ -8500,6 +8500,30 @@ dl.procedurelist dd.column pre {
 				<td>Egov</td>
 				<td>e-Gov</td>
 				<td class="commentcell">e-Gov</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>UserStatus</td>
+		<td class="clstypecell">table</td>
+		<td> &nbsp;</td>
+		<td>
+			<table class="child">
+			<tr>
+				<th id="UserStatusCls">Code</th>
+				<th>Name</th>
+				<th>Comment</th>
+			</tr>
+			<tr>
+				<td>FML</td>
+				<td>正式会員</td>
+				<td class="commentcell">正式会員</td>
+			</tr>
+			<tr>
+				<td>PRO</td>
+				<td>仮会員</td>
+				<td class="commentcell">仮会員</td>
 			</tr>
 			</table>
 		</td>

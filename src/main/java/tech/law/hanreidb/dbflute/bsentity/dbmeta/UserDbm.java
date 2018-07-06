@@ -104,7 +104,7 @@ public class UserDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, "ユーザーID", Integer.class, "userId", null, true, true, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, "judgementUserFavoriteRelList,loginHistoryList,userStatusHistoryList", null, false);
     protected final ColumnInfo _columnMailAddress = cci("MAIL_ADDRESS", "MAIL_ADDRESS", null, "メールアドレス", String.class, "mailAddress", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnPassword = cci("PASSWORD", "PASSWORD", null, "パスワード", String.class, "password", null, false, false, true, "VARCHAR", 255, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUserStatusCode = cci("USER_STATUS_CODE", "USER_STATUS_CODE", null, "ユーザーステータスコード", String.class, "userStatusCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsUserStatus", null, null, false);
+    protected final ColumnInfo _columnUserStatusCode = cci("USER_STATUS_CODE", "USER_STATUS_CODE", null, "ユーザーステータスコード", String.class, "userStatusCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsUserStatus", null, CDef.DefMeta.UserStatus, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -127,7 +127,7 @@ public class UserDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnPassword() { return _columnPassword; }
     /**
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserStatusCode() { return _columnUserStatusCode; }

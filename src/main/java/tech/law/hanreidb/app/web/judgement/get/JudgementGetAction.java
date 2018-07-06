@@ -83,16 +83,7 @@ public class JudgementGetAction extends HanreidbBaseAction {
                 content.court_file_url =
                         config.getCourtFileBaseUrl().concat(judgementSourceId.substring(3)).concat("/").concat(judgementSourceId).concat(
                                 "_hanrei.pdf");
-                Court court = judgement.getCourt().get();
-                if (court.isCourtTypeCode最高裁判所()) {
-                    content.court_web_url = getCourtWebUrl(judgementSourceId, "2");
-                } else if (court.isCourtTypeCode高等裁判所()) {
-                    content.court_web_url = getCourtWebUrl(judgementSourceId, "3");
-                } else if (court.isCourtTypeCode高等裁判所()) {
-                    content.court_web_url = getCourtWebUrl(judgementSourceId, "4");
-                } else {
-                    content.court_web_url = null;
-                }
+                content.court_web_url = getCourtWebUrl(judgement.getCourt().get(), judgementSourceId);
                 break;
             } // 裁判所裁判例以外は無視する。(追加次第優先順位を検討する必要があるため。)
         }
@@ -102,6 +93,18 @@ public class JudgementGetAction extends HanreidbBaseAction {
         content.case_mark_part = convertToCaseMarkPart(judgement);
 
         return content;
+    }
+
+    private String getCourtWebUrl(Court court, String judgementSourceId) {
+        if (court.isCourtTypeCode最高裁判所()) {
+            return getCourtWebUrl(judgementSourceId, "2");
+        } else if (court.isCourtTypeCode高等裁判所()) {
+            return getCourtWebUrl(judgementSourceId, "3");
+        } else if (court.isCourtTypeCode高等裁判所()) {
+            return getCourtWebUrl(judgementSourceId, "4");
+        } else {
+            return null;
+        }
     }
 
     private String getCourtWebUrl(String judgementSourceId, String detail) {

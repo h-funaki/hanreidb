@@ -124,14 +124,14 @@ public class BsClsUserStatusCQ extends AbstractBsClsUserStatusCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusCode_Asc() { regOBA("USER_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusCode_Desc() { regOBD("USER_STATUS_CODE"); return this; }

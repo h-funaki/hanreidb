@@ -23,13 +23,7 @@ import java.util.List;
 import org.dbflute.dbmeta.AbstractEntity;
 import org.eclipse.collections.api.list.ImmutableList;
 
-import tech.law.hanreidb.dbflute.exentity.ClsSource;
-import tech.law.hanreidb.dbflute.exentity.Law;
-import tech.law.hanreidb.dbflute.exentity.LawAlias;
-import tech.law.hanreidb.dbflute.exentity.LawCategory;
-import tech.law.hanreidb.dbflute.exentity.LawContent;
-import tech.law.hanreidb.dbflute.exentity.LawHistory;
-import tech.law.hanreidb.dbflute.exentity.LawType;
+import tech.law.hanreidb.dbflute.exentity.User;
 import tech.law.hanreidb.unit.UnitHanreidbTestCase;
 
 public class CreateApiTest extends UnitHanreidbTestCase {
@@ -38,16 +32,15 @@ public class CreateApiTest extends UnitHanreidbTestCase {
     //                                                                          Definition
     //                                                                          ==========
     /** path e.g. aaa/bbb/ccc */
-    public final static String PATH = "law/get";
+    public final static String PATH = "user/put";
 
     private final boolean REAL_EXECUTE = true;
 
     /** base table column info e.g. JUDGEMENT */
-    static AbstractEntity BASE_ENTITY = new Law();
+    static AbstractEntity BASE_ENTITY = new User();
 
     /** base table column info e.g. JUDGEMENT */
-    public static ImmutableList<? extends AbstractEntity> ENTITY_LIST =
-            newImmutableList(new LawAlias(), new LawType(), new ClsSource(), new LawCategory(), new LawHistory(), new LawContent());
+    public static ImmutableList<? extends AbstractEntity> ENTITY_LIST = newImmutableList();
 
     /** do you create body class? */
     private final boolean CREATE_BODY = true;

@@ -744,7 +744,7 @@
 					<physical_name>SOURCE_CODE</physical_name>
 					<logical_name>取得元コード</logical_name>
 					<type>varchar(n)</type>
-					<length>10</length>
+					<length>20</length>
 					<unsigned>true</unsigned>
 					<description>取得元コード e.g. COURT</description>
 					<not_null>true</not_null>
@@ -754,7 +754,7 @@
 					<physical_name>SOURCE_NAME</physical_name>
 					<logical_name>取得元名</logical_name>
 					<type>varchar(n)</type>
-					<length>100</length>
+					<length>50</length>
 					<description>取得元名 e.g. 裁判所裁判例</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
@@ -763,7 +763,7 @@
 					<physical_name>SOURCE_ALIAS</physical_name>
 					<logical_name>取得元別名</logical_name>
 					<type>varchar(n)</type>
-					<length>100</length>
+					<length>50</length>
 					<description>取得元別名 e.g. 裁判所裁判例</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
@@ -800,7 +800,7 @@
 					<physical_name>USER_STATUS_CODE</physical_name>
 					<logical_name>ユーザーステータスコード</logical_name>
 					<type>varchar(n)</type>
-					<length>10</length>
+					<length>20</length>
 					<unsigned>true</unsigned>
 					<not_null>true</not_null>
 					<primary_key>true</primary_key>
@@ -809,14 +809,14 @@
 					<physical_name>USER_STATUS_NAME</physical_name>
 					<logical_name>ユーザーステータス名</logical_name>
 					<type>varchar(n)</type>
-					<length>10</length>
+					<length>50</length>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
 					<physical_name>USER_STATUS_ALIAS</physical_name>
 					<logical_name>ユーザーステータス別名</logical_name>
 					<type>varchar(n)</type>
-					<length>10</length>
+					<length>50</length>
 					<not_null>true</not_null>
 				</normal_column>
 				<column_group>区分値共通カラム</column_group>
@@ -1912,7 +1912,7 @@
 					<physical_name>LAW_CATEGORY_NAME</physical_name>
 					<logical_name>法令カテゴリー名</logical_name>
 					<type>varchar(n)</type>
-					<length>20</length>
+					<length>50</length>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -1920,7 +1920,7 @@
 					<physical_name>LAW_CATEGORY_ALIAS</physical_name>
 					<logical_name>法令カテゴリー別名</logical_name>
 					<type>varchar(n)</type>
-					<length>20</length>
+					<length>50</length>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
 				</normal_column>
@@ -2576,7 +2576,7 @@
 					<physical_name>REPORT_NAME</physical_name>
 					<logical_name>判例集名</logical_name>
 					<type>varchar(n)</type>
-					<length>100</length>
+					<length>50</length>
 					<description>判例集名 e.g. 最高裁判所刑事判例</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
@@ -2585,7 +2585,7 @@
 					<physical_name>REPORT_ALIAS</physical_name>
 					<logical_name>判例集別名</logical_name>
 					<type>varchar(n)</type>
-					<length>100</length>
+					<length>50</length>
 					<description>判例集別名 e.g. 刑集</description>
 					<not_null>true</not_null>
 					<unique_key>true</unique_key>
@@ -2671,14 +2671,14 @@
 					<physical_name>SOURCE_LAW_CATEGORY_NAME</physical_name>
 					<logical_name>取得元法令カテゴリー名</logical_name>
 					<type>varchar(n)</type>
-					<length>20</length>
+					<length>50</length>
 					<not_null>true</not_null>
 				</normal_column>
 				<normal_column>
 					<physical_name>SOURCE_LAW_CATEGORY_ALIAS</physical_name>
 					<logical_name>取得元法令カテゴリー別名</logical_name>
 					<type>varchar(n)</type>
-					<length>20</length>
+					<length>50</length>
 					<not_null>true</not_null>
 				</normal_column>
 				<column_group>共通カラム</column_group>
@@ -2889,6 +2889,7 @@
 			<columns>
 				<normal_column>
 					<physical_name>USER_STATUS_HISTORY_ID</physical_name>
+					<logical_name>ユーザーステータス履歴ID</logical_name>
 					<type>bigint</type>
 					<unsigned>true</unsigned>
 					<not_null>true</not_null>
@@ -2938,11 +2939,11 @@
 			</color>
 			<connections>
 				<comment_connection>
-					<source>36</source>
+					<source>34</source>
 					<target>table.LAW_HISTORY</target>
 				</comment_connection>
 				<comment_connection>
-					<source>36</source>
+					<source>34</source>
 					<target>table.LAW_CONTENT</target>
 				</comment_connection>
 			</connections>

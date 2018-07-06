@@ -306,11 +306,36 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userNewStatusCode The value of userNewStatusCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_Equal(String userNewStatusCode) {
         doSetUserNewStatusCode_Equal(fRES(userNewStatusCode));
+    }
+
+    /**
+     * Equal(=). As UserStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setUserNewStatusCode_Equal_AsUserStatus(CDef.UserStatus cdef) {
+        doSetUserNewStatusCode_Equal(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * Equal(=). As 正式会員 (FML). And OnlyOnceRegistered. <br>
+     * 正式会員: 正式会員
+     */
+    public void setUserNewStatusCode_Equal_正式会員() {
+        setUserNewStatusCode_Equal_AsUserStatus(CDef.UserStatus.正式会員);
+    }
+
+    /**
+     * Equal(=). As 仮会員 (PRO). And OnlyOnceRegistered. <br>
+     * 仮会員: 仮会員
+     */
+    public void setUserNewStatusCode_Equal_仮会員() {
+        setUserNewStatusCode_Equal_AsUserStatus(CDef.UserStatus.仮会員);
     }
 
     protected void doSetUserNewStatusCode_Equal(String userNewStatusCode) {
@@ -319,11 +344,36 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userNewStatusCode The value of userNewStatusCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_NotEqual(String userNewStatusCode) {
         doSetUserNewStatusCode_NotEqual(fRES(userNewStatusCode));
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As UserStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setUserNewStatusCode_NotEqual_AsUserStatus(CDef.UserStatus cdef) {
+        doSetUserNewStatusCode_NotEqual(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 正式会員 (FML). And OnlyOnceRegistered. <br>
+     * 正式会員: 正式会員
+     */
+    public void setUserNewStatusCode_NotEqual_正式会員() {
+        setUserNewStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.正式会員);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 仮会員 (PRO). And OnlyOnceRegistered. <br>
+     * 仮会員: 仮会員
+     */
+    public void setUserNewStatusCode_NotEqual_仮会員() {
+        setUserNewStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.仮会員);
     }
 
     protected void doSetUserNewStatusCode_NotEqual(String userNewStatusCode) {
@@ -332,11 +382,20 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userNewStatusCodeList The collection of userNewStatusCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_InScope(Collection<String> userNewStatusCodeList) {
         doSetUserNewStatusCode_InScope(userNewStatusCodeList);
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. As UserStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUserNewStatusCode_InScope_AsUserStatus(Collection<CDef.UserStatus> cdefList) {
+        doSetUserNewStatusCode_InScope(cTStrL(cdefList));
     }
 
     protected void doSetUserNewStatusCode_InScope(Collection<String> userNewStatusCodeList) {
@@ -345,59 +404,24 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userNewStatusCodeList The collection of userNewStatusCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_NotInScope(Collection<String> userNewStatusCodeList) {
         doSetUserNewStatusCode_NotInScope(userNewStatusCodeList);
     }
 
+    /**
+     * NotInScope {not in ('a', 'b')}. As UserStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUserNewStatusCode_NotInScope_AsUserStatus(Collection<CDef.UserStatus> cdefList) {
+        doSetUserNewStatusCode_NotInScope(cTStrL(cdefList));
+    }
+
     protected void doSetUserNewStatusCode_NotInScope(Collection<String> userNewStatusCodeList) {
         regINS(CK_NINS, cTL(userNewStatusCodeList), xgetCValueUserNewStatusCode(), "USER_NEW_STATUS_CODE");
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS} <br>
-     * <pre>e.g. setUserNewStatusCode_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param userNewStatusCode The value of userNewStatusCode as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setUserNewStatusCode_LikeSearch(String userNewStatusCode, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setUserNewStatusCode_LikeSearch(userNewStatusCode, xcLSOP(opLambda));
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS} <br>
-     * <pre>e.g. setUserNewStatusCode_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param userNewStatusCode The value of userNewStatusCode as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    protected void setUserNewStatusCode_LikeSearch(String userNewStatusCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(userNewStatusCode), xgetCValueUserNewStatusCode(), "USER_NEW_STATUS_CODE", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
-     * @param userNewStatusCode The value of userNewStatusCode as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setUserNewStatusCode_NotLikeSearch(String userNewStatusCode, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setUserNewStatusCode_NotLikeSearch(userNewStatusCode, xcLSOP(opLambda));
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
-     * @param userNewStatusCode The value of userNewStatusCode as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    protected void setUserNewStatusCode_NotLikeSearch(String userNewStatusCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(userNewStatusCode), xgetCValueUserNewStatusCode(), "USER_NEW_STATUS_CODE", likeSearchOption);
     }
 
     protected void regUserNewStatusCode(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueUserNewStatusCode(), "USER_NEW_STATUS_CODE"); }

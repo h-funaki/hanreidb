@@ -360,7 +360,7 @@ public class BsUserStatusHistoryCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
         /**
-         * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+         * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserNewStatusCode() { return doColumn("USER_NEW_STATUS_CODE"); }

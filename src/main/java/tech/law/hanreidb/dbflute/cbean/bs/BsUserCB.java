@@ -346,7 +346,7 @@ public class BsUserCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnPassword() { return doColumn("PASSWORD"); }
         /**
-         * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+         * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserStatusCode() { return doColumn("USER_STATUS_CODE"); }

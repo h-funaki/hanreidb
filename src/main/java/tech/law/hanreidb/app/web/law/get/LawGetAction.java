@@ -124,7 +124,6 @@ public class LawGetAction extends HanreidbBaseAction {
         //                toXml(fileLogic.readAll("/Users/h-funaki/Documents/hanreidb/src/test/resources/job/law/content/raw_xml_2.xml"));
         LawContent lawContent = lawHistory.getLawContentAsOne().get();
         content.law_content_view_xml = toXml(lawContent.getLawContentViewXml());
-
         return content;
     }
 

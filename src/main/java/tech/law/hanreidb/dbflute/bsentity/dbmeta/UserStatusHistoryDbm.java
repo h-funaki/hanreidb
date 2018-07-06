@@ -104,7 +104,7 @@ public class UserStatusHistoryDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnUserStatusHistoryId = cci("USER_STATUS_HISTORY_ID", "USER_STATUS_HISTORY_ID", null, null, Long.class, "userStatusHistoryId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUserId = cci("USER_ID", "USER_ID", null, "ユーザーID", Integer.class, "userId", null, false, false, true, "INT UNSIGNED", 10, 0, null, false, null, null, "user", null, null, false);
-    protected final ColumnInfo _columnUserNewStatusCode = cci("USER_NEW_STATUS_CODE", "USER_NEW_STATUS_CODE", null, "ユーザー新ステータスコード", String.class, "userNewStatusCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsUserStatus", null, null, false);
+    protected final ColumnInfo _columnUserNewStatusCode = cci("USER_NEW_STATUS_CODE", "USER_NEW_STATUS_CODE", null, "ユーザー新ステータスコード", String.class, "userNewStatusCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsUserStatus", null, CDef.DefMeta.UserStatus, false);
     protected final ColumnInfo _columnUserStatusUpdateDatetime = cci("USER_STATUS_UPDATE_DATETIME", "USER_STATUS_UPDATE_DATETIME", null, "ユーザーステータス更新日時", java.time.LocalDateTime.class, "userStatusUpdateDatetime", null, false, false, true, "DATETIME", 19, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
@@ -123,7 +123,7 @@ public class UserStatusHistoryDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnUserId() { return _columnUserId; }
     /**
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserNewStatusCode() { return _columnUserNewStatusCode; }

@@ -5,6 +5,7 @@
 .DS_Store
 /dbflute_hanreidb/playsql/data/ut
 /dbflute_hanreidb/playsql/take-finally-20-law_content.sql
+/dbflute_hanreidb/playsql/migration/
 
 # IntelliJ IDEA
 /.idea/artifacts

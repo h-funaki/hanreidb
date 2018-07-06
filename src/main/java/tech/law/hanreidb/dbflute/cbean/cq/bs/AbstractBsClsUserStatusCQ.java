@@ -60,11 +60,36 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
      * @param userStatusCode The value of userStatusCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_Equal(String userStatusCode) {
         doSetUserStatusCode_Equal(fRES(userStatusCode));
+    }
+
+    /**
+     * Equal(=). As UserStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} <br>
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setUserStatusCode_Equal_AsUserStatus(CDef.UserStatus cdef) {
+        doSetUserStatusCode_Equal(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * Equal(=). As 正式会員 (FML). And OnlyOnceRegistered. <br>
+     * 正式会員: 正式会員
+     */
+    public void setUserStatusCode_Equal_正式会員() {
+        setUserStatusCode_Equal_AsUserStatus(CDef.UserStatus.正式会員);
+    }
+
+    /**
+     * Equal(=). As 仮会員 (PRO). And OnlyOnceRegistered. <br>
+     * 仮会員: 仮会員
+     */
+    public void setUserStatusCode_Equal_仮会員() {
+        setUserStatusCode_Equal_AsUserStatus(CDef.UserStatus.仮会員);
     }
 
     protected void doSetUserStatusCode_Equal(String userStatusCode) {
@@ -73,11 +98,36 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
      * @param userStatusCode The value of userStatusCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_NotEqual(String userStatusCode) {
         doSetUserStatusCode_NotEqual(fRES(userStatusCode));
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As UserStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} <br>
+     * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
+     */
+    public void setUserStatusCode_NotEqual_AsUserStatus(CDef.UserStatus cdef) {
+        doSetUserStatusCode_NotEqual(cdef != null ? cdef.code() : null);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 正式会員 (FML). And OnlyOnceRegistered. <br>
+     * 正式会員: 正式会員
+     */
+    public void setUserStatusCode_NotEqual_正式会員() {
+        setUserStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.正式会員);
+    }
+
+    /**
+     * NotEqual(&lt;&gt;). As 仮会員 (PRO). And OnlyOnceRegistered. <br>
+     * 仮会員: 仮会員
+     */
+    public void setUserStatusCode_NotEqual_仮会員() {
+        setUserStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.仮会員);
     }
 
     protected void doSetUserStatusCode_NotEqual(String userStatusCode) {
@@ -86,11 +136,20 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
      * @param userStatusCodeList The collection of userStatusCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_InScope(Collection<String> userStatusCodeList) {
         doSetUserStatusCode_InScope(userStatusCodeList);
+    }
+
+    /**
+     * InScope {in ('a', 'b')}. As UserStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} <br>
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUserStatusCode_InScope_AsUserStatus(Collection<CDef.UserStatus> cdefList) {
+        doSetUserStatusCode_InScope(cTStrL(cdefList));
     }
 
     protected void doSetUserStatusCode_InScope(Collection<String> userStatusCodeList) {
@@ -99,59 +158,24 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
      * @param userStatusCodeList The collection of userStatusCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_NotInScope(Collection<String> userStatusCodeList) {
         doSetUserStatusCode_NotInScope(userStatusCodeList);
     }
 
+    /**
+     * NotInScope {not in ('a', 'b')}. As UserStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} <br>
+     * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
+     */
+    public void setUserStatusCode_NotInScope_AsUserStatus(Collection<CDef.UserStatus> cdefList) {
+        doSetUserStatusCode_NotInScope(cTStrL(cdefList));
+    }
+
     protected void doSetUserStatusCode_NotInScope(Collection<String> userStatusCodeList) {
         regINS(CK_NINS, cTL(userStatusCodeList), xgetCValueUserStatusCode(), "USER_STATUS_CODE");
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)} <br>
-     * <pre>e.g. setUserStatusCode_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param userStatusCode The value of userStatusCode as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setUserStatusCode_LikeSearch(String userStatusCode, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setUserStatusCode_LikeSearch(userStatusCode, xcLSOP(opLambda));
-    }
-
-    /**
-     * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)} <br>
-     * <pre>e.g. setUserStatusCode_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param userStatusCode The value of userStatusCode as likeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of like-search. (NotNull)
-     */
-    protected void setUserStatusCode_LikeSearch(String userStatusCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(userStatusCode), xgetCValueUserStatusCode(), "USER_STATUS_CODE", likeSearchOption);
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
-     * @param userStatusCode The value of userStatusCode as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param opLambda The callback for option of like-search. (NotNull)
-     */
-    public void setUserStatusCode_NotLikeSearch(String userStatusCode, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setUserStatusCode_NotLikeSearch(userStatusCode, xcLSOP(opLambda));
-    }
-
-    /**
-     * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
-     * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
-     * @param userStatusCode The value of userStatusCode as notLikeSearch. (NullAllowed: if null (or empty), no condition)
-     * @param likeSearchOption The option of not-like-search. (NotNull)
-     */
-    protected void setUserStatusCode_NotLikeSearch(String userStatusCode, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(userStatusCode), xgetCValueUserStatusCode(), "USER_STATUS_CODE", likeSearchOption);
     }
 
     /**
@@ -302,13 +326,13 @@ public abstract class AbstractBsClsUserStatusCQ extends AbstractConditionQuery {
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
      */
     public void setUserStatusCode_IsNull() { regUserStatusCode(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
      */
     public void setUserStatusCode_IsNotNull() { regUserStatusCode(CK_ISNN, DOBJ); }
 

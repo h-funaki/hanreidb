@@ -136,14 +136,14 @@ public class BsUserStatusHistoryCQ extends AbstractBsUserStatusHistoryCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
      * @return this. (NotNull)
      */
     public BsUserStatusHistoryCQ addOrderBy_UserNewStatusCode_Asc() { regOBA("USER_NEW_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
      * @return this. (NotNull)
      */
     public BsUserStatusHistoryCQ addOrderBy_UserNewStatusCode_Desc() { regOBD("USER_NEW_STATUS_CODE"); return this; }

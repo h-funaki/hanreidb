@@ -1,6 +1,7 @@
-[Saved Previous Resources]: 2018/06/09 23:39:24
+[Saved Previous Resources]: 2018/07/07 01:07:23
 playsql/migration/previous/replace-schema-00-system.sql
 playsql/migration/previous/replace-schema-10-basic.sql
+playsql/migration/previous/take-finally-20-law_content.sql
 playsql/migration/previous/take-finally.sql
 playsql/migration/previous/data/common/xls/.DS_Store
 playsql/migration/previous/data/common/xls/1-hanrei_master.xls
@@ -17,12 +18,13 @@ playsql/migration/previous/data/ut/xls/1-hanreidb_test.xls
 playsql/migration/previous/data/ut/xls/2-law_test.xls
 playsql/migration/previous/data/ut/xls/3-article_test.xls
 playsql/migration/previous/data/ut/xls/defaultValueMap.dataprop
+playsql/migration/previous/data/ut/xls/law_content.xml
 playsql/migration/previous/data/ut/xls/xls-data-result.dfmark
 playsql/migration/previous/data/ut/xml/lawlist.xml
 playsql/migration/previous/data/ut/insertLawAlias.xlsx
 playsql/migration/previous/data/ut/law_alias.tsv
 playsql/migration/previous/data/ut/law_category_rawdata.xlsx
 playsql/migration/previous/data/.DS_Store
-(24 files)
+(26 files)
 
 Look at the log for detail.

@@ -95,7 +95,7 @@ public class BsClsUserStatusCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param userStatusCode (ユーザーステータスコード): PK, NotNull, VARCHAR(10). (NotNull)
+     * @param userStatusCode (ユーザーステータスコード): PK, NotNull, VARCHAR(10), classification=UserStatus. (NotNull)
      * @return this. (NotNull)
      */
     public ClsUserStatusCB acceptPK(String userStatusCode) {
@@ -310,7 +310,7 @@ public class BsClsUserStatusCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)}
+         * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserStatusCode() { return doColumn("USER_STATUS_CODE"); }

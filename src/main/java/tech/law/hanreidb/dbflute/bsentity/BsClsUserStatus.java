@@ -23,6 +23,7 @@ import org.dbflute.dbmeta.AbstractEntity;
 import org.dbflute.dbmeta.accessory.DomainEntity;
 import tech.law.hanreidb.dbflute.allcommon.EntityDefinedCommonColumn;
 import tech.law.hanreidb.dbflute.allcommon.DBMetaInstanceHandler;
+import tech.law.hanreidb.dbflute.allcommon.CDef;
 import tech.law.hanreidb.dbflute.exentity.*;
 
 /**
@@ -92,7 +93,7 @@ public abstract class BsClsUserStatus extends AbstractEntity implements DomainEn
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)} */
+    /** (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} */
     protected String _userStatusCode;
 
     /** (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(10)} */
@@ -153,6 +154,72 @@ public abstract class BsClsUserStatus extends AbstractEntity implements DomainEn
         __uniqueDrivenProperties.clear();
         __uniqueDrivenProperties.addPropertyName("displayOrder");
         setDisplayOrder(displayOrder);
+    }
+
+    // ===================================================================================
+    //                                                             Classification Property
+    //                                                             =======================
+    /**
+     * Get the value of userStatusCode as the classification of UserStatus. <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} <br>
+     * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
+     * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
+     */
+    public CDef.UserStatus getUserStatusCodeAsUserStatus() {
+        return CDef.UserStatus.codeOf(getUserStatusCode());
+    }
+
+    /**
+     * Set the value of userStatusCode as the classification of UserStatus. <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} <br>
+     * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
+     */
+    public void setUserStatusCodeAsUserStatus(CDef.UserStatus cdef) {
+        setUserStatusCode(cdef != null ? cdef.code() : null);
+    }
+
+    // ===================================================================================
+    //                                                              Classification Setting
+    //                                                              ======================
+    /**
+     * Set the value of userStatusCode as 正式会員 (FML). <br>
+     * 正式会員: 正式会員
+     */
+    public void setUserStatusCode_正式会員() {
+        setUserStatusCodeAsUserStatus(CDef.UserStatus.正式会員);
+    }
+
+    /**
+     * Set the value of userStatusCode as 仮会員 (PRO). <br>
+     * 仮会員: 仮会員
+     */
+    public void setUserStatusCode_仮会員() {
+        setUserStatusCodeAsUserStatus(CDef.UserStatus.仮会員);
+    }
+
+    // ===================================================================================
+    //                                                        Classification Determination
+    //                                                        ============================
+    /**
+     * Is the value of userStatusCode 正式会員? <br>
+     * 正式会員: 正式会員
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isUserStatusCode正式会員() {
+        CDef.UserStatus cdef = getUserStatusCodeAsUserStatus();
+        return cdef != null ? cdef.equals(CDef.UserStatus.正式会員) : false;
+    }
+
+    /**
+     * Is the value of userStatusCode 仮会員? <br>
+     * 仮会員: 仮会員
+     * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
+     * @return The determination, true or false.
+     */
+    public boolean isUserStatusCode仮会員() {
+        CDef.UserStatus cdef = getUserStatusCodeAsUserStatus();
+        return cdef != null ? cdef.equals(CDef.UserStatus.仮会員) : false;
     }
 
     // ===================================================================================
@@ -279,7 +346,7 @@ public abstract class BsClsUserStatus extends AbstractEntity implements DomainEn
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)} <br>
+     * [get] (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} <br>
      * @return The value of the column 'USER_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getUserStatusCode() {
@@ -288,7 +355,7 @@ public abstract class BsClsUserStatus extends AbstractEntity implements DomainEn
     }
 
     /**
-     * [set] (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10)} <br>
+     * [set] (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus} <br>
      * @param userStatusCode The value of the column 'USER_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setUserStatusCode(String userStatusCode) {

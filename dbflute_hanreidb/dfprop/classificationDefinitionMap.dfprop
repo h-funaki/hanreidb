@@ -100,5 +100,12 @@ map:{
             ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
         }
     }
+    ; UserStatus = list:{
+        ; map:{
+            ; table=CLS_USER_STATUS
+            ; code=USER_STATUS_CODE; name=USER_STATUS_NAME; alias=USER_STATUS_ALIAS;
+            ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
+        }
+    }
 }
 # ----------------/
