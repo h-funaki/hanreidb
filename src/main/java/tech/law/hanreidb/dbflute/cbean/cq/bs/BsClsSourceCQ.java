@@ -138,14 +138,14 @@ public class BsClsSourceCQ extends AbstractBsClsSourceCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      * @return this. (NotNull)
      */
     public BsClsSourceCQ addOrderBy_SourceCode_Asc() { regOBA("SOURCE_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      * @return this. (NotNull)
      */
     public BsClsSourceCQ addOrderBy_SourceCode_Desc() { regOBD("SOURCE_CODE"); return this; }
@@ -158,14 +158,14 @@ public class BsClsSourceCQ extends AbstractBsClsSourceCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsClsSourceCQ addOrderBy_SourceName_Asc() { regOBA("SOURCE_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsClsSourceCQ addOrderBy_SourceName_Desc() { regOBD("SOURCE_NAME"); return this; }
@@ -178,14 +178,14 @@ public class BsClsSourceCQ extends AbstractBsClsSourceCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsClsSourceCQ addOrderBy_SourceAlias_Asc() { regOBA("SOURCE_ALIAS"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsClsSourceCQ addOrderBy_SourceAlias_Desc() { regOBD("SOURCE_ALIAS"); return this; }

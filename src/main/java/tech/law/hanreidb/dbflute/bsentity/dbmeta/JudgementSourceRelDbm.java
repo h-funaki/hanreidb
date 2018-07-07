@@ -105,7 +105,7 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnJudgementSourceRelId = cci("JUDGEMENT_SOURCE_REL_ID", "JUDGEMENT_SOURCE_REL_ID", null, "判決取得元リレーションID", Long.class, "judgementSourceRelId", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnJudgementId = cci("JUDGEMENT_ID", "JUDGEMENT_ID", null, "判決ID", Long.class, "judgementId", null, false, false, true, "BIGINT UNSIGNED", 20, 0, null, false, null, null, "judgement", null, null, false);
-    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsSource", null, CDef.DefMeta.Source, false);
+    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, "clsSource", null, CDef.DefMeta.Source, false);
     protected final ColumnInfo _columnJudgementSourceId = cci("JUDGEMENT_SOURCE_ID", "JUDGEMENT_SOURCE_ID", null, "判決取得元ID", String.class, "judgementSourceId", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnJudgementSourceSentence = cci("JUDGEMENT_SOURCE_SENTENCE", "JUDGEMENT_SOURCE_SENTENCE", null, "判決文", String.class, "judgementSourceSentence", null, false, false, false, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -125,7 +125,7 @@ public class JudgementSourceRelDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnJudgementId() { return _columnJudgementId; }
     /**
-     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceCode() { return _columnSourceCode; }

@@ -88,8 +88,8 @@ public class ReportDbm extends AbstractDBMeta {
     //                                                                         Column Info
     //                                                                         ===========
     protected final ColumnInfo _columnReportId = cci("REPORT_ID", "REPORT_ID", null, "判例集ID", Integer.class, "reportId", null, true, true, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, "judgementReportRelList", null, false);
-    protected final ColumnInfo _columnReportName = cci("REPORT_NAME", "REPORT_NAME", null, "判例集名", String.class, "reportName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnReportAlias = cci("REPORT_ALIAS", "REPORT_ALIAS", null, "判例集別名", String.class, "reportAlias", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnReportName = cci("REPORT_NAME", "REPORT_NAME", null, "判例集名", String.class, "reportName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnReportAlias = cci("REPORT_ALIAS", "REPORT_ALIAS", null, "判例集別名", String.class, "reportAlias", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -102,12 +102,12 @@ public class ReportDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnReportId() { return _columnReportId; }
     /**
-     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnReportName() { return _columnReportName; }
     /**
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnReportAlias() { return _columnReportAlias; }

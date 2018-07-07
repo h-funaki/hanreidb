@@ -89,9 +89,9 @@ public class ClsUserStatusDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnUserStatusCode = cci("USER_STATUS_CODE", "USER_STATUS_CODE", null, "ユーザーステータスコード", String.class, "userStatusCode", null, true, false, true, "VARCHAR", 10, 0, null, false, null, null, null, "userList,userStatusHistoryList", CDef.DefMeta.UserStatus, false);
-    protected final ColumnInfo _columnUserStatusName = cci("USER_STATUS_NAME", "USER_STATUS_NAME", null, "ユーザーステータス名", String.class, "userStatusName", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUserStatusAlias = cci("USER_STATUS_ALIAS", "USER_STATUS_ALIAS", null, "ユーザーステータス別名", String.class, "userStatusAlias", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUserStatusCode = cci("USER_STATUS_CODE", "USER_STATUS_CODE", null, "ユーザーステータスコード", String.class, "userStatusCode", null, true, false, true, "VARCHAR", 20, 0, null, false, null, null, null, "userList,userStatusHistoryList", CDef.DefMeta.UserStatus, false);
+    protected final ColumnInfo _columnUserStatusName = cci("USER_STATUS_NAME", "USER_STATUS_NAME", null, "ユーザーステータス名", String.class, "userStatusName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnUserStatusAlias = cci("USER_STATUS_ALIAS", "USER_STATUS_ALIAS", null, "ユーザーステータス別名", String.class, "userStatusAlias", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDescription = cci("DESCRIPTION", "DESCRIPTION", null, "説明", String.class, "description", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, "順番", Integer.class, "displayOrder", null, false, false, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -101,17 +101,17 @@ public class ClsUserStatusDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT UNSIGNED", 20, 0, "0", true, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(20), classification=UserStatus}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserStatusCode() { return _columnUserStatusCode; }
     /**
-     * (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(10)}
+     * (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserStatusName() { return _columnUserStatusName; }
     /**
-     * (ユーザーステータス別名)USER_STATUS_ALIAS: {NotNull, VARCHAR(10)}
+     * (ユーザーステータス別名)USER_STATUS_ALIAS: {NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnUserStatusAlias() { return _columnUserStatusAlias; }

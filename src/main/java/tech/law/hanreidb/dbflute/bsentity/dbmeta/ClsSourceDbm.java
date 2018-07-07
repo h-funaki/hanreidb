@@ -89,9 +89,9 @@ public class ClsSourceDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, true, false, true, "VARCHAR", 10, 0, null, false, null, null, null, "judgementSourceRelList,lawSourceRelList,sourceLawCategoryList", CDef.DefMeta.Source, false);
-    protected final ColumnInfo _columnSourceName = cci("SOURCE_NAME", "SOURCE_NAME", null, "取得元名", String.class, "sourceName", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnSourceAlias = cci("SOURCE_ALIAS", "SOURCE_ALIAS", null, "取得元別名", String.class, "sourceAlias", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, true, false, true, "VARCHAR", 20, 0, null, false, null, null, null, "judgementSourceRelList,lawSourceRelList,sourceLawCategoryList", CDef.DefMeta.Source, false);
+    protected final ColumnInfo _columnSourceName = cci("SOURCE_NAME", "SOURCE_NAME", null, "取得元名", String.class, "sourceName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnSourceAlias = cci("SOURCE_ALIAS", "SOURCE_ALIAS", null, "取得元別名", String.class, "sourceAlias", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDescription = cci("DESCRIPTION", "DESCRIPTION", null, "説明", String.class, "description", null, false, false, true, "TEXT", 65535, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDisplayOrder = cci("DISPLAY_ORDER", "DISPLAY_ORDER", null, "順番", Integer.class, "displayOrder", null, false, false, true, "INT UNSIGNED", 10, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -101,17 +101,17 @@ public class ClsSourceDbm extends AbstractDBMeta {
     protected final ColumnInfo _columnVersionNo = cci("VERSION_NO", "VERSION_NO", null, "バージョン番号", Long.class, "versionNo", null, false, false, true, "BIGINT UNSIGNED", 20, 0, "0", true, OptimisticLockType.VERSION_NO, null, null, null, null, false);
 
     /**
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceCode() { return _columnSourceCode; }
     /**
-     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceName() { return _columnSourceName; }
     /**
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceAlias() { return _columnSourceAlias; }

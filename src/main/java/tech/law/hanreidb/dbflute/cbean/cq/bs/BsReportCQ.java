@@ -130,14 +130,14 @@ public class BsReportCQ extends AbstractBsReportCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsReportCQ addOrderBy_ReportName_Asc() { regOBA("REPORT_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsReportCQ addOrderBy_ReportName_Desc() { regOBD("REPORT_NAME"); return this; }
@@ -150,14 +150,14 @@ public class BsReportCQ extends AbstractBsReportCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsReportCQ addOrderBy_ReportAlias_Asc() { regOBA("REPORT_ALIAS"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsReportCQ addOrderBy_ReportAlias_Desc() { regOBD("REPORT_ALIAS"); return this; }

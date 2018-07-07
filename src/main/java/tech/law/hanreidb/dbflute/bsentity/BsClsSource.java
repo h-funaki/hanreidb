@@ -93,13 +93,13 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} */
+    /** (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} */
     protected String _sourceCode;
 
-    /** (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)} */
+    /** (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)} */
     protected String _sourceName;
 
-    /** (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)} */
+    /** (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)} */
     protected String _sourceAlias;
 
     /** (説明)DESCRIPTION: {NotNull, TEXT(65535)} */
@@ -159,7 +159,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param sourceAlias (取得元別名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param sourceAlias (取得元別名): UQ, NotNull, VARCHAR(50). (NotNull)
      */
     public void uniqueBySourceAlias(String sourceAlias) {
         __uniqueDrivenProperties.clear();
@@ -170,7 +170,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param sourceName (取得元名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param sourceName (取得元名): UQ, NotNull, VARCHAR(50). (NotNull)
      */
     public void uniqueBySourceName(String sourceName) {
         __uniqueDrivenProperties.clear();
@@ -183,7 +183,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     //                                                             =======================
     /**
      * Get the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} <br>
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
      */
@@ -193,7 +193,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
 
     /**
      * Set the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
     public void setSourceCodeAsSource(CDef.Source cdef) {
@@ -392,7 +392,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} <br>
+     * [get] (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} <br>
      * 取得元コード e.g. COURT
      * @return The value of the column 'SOURCE_CODE'. (basically NotNull if selected: for the constraint)
      */
@@ -402,7 +402,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     }
 
     /**
-     * [set] (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} <br>
+     * [set] (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} <br>
      * 取得元コード e.g. COURT
      * @param sourceCode The value of the column 'SOURCE_CODE'. (basically NotNull if update: for the constraint)
      */
@@ -412,7 +412,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     }
 
     /**
-     * [get] (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * [get] (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * 取得元名 e.g. 裁判所裁判例
      * @return The value of the column 'SOURCE_NAME'. (basically NotNull if selected: for the constraint)
      */
@@ -422,7 +422,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     }
 
     /**
-     * [set] (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * [set] (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * 取得元名 e.g. 裁判所裁判例
      * @param sourceName The value of the column 'SOURCE_NAME'. (basically NotNull if update: for the constraint)
      */
@@ -432,7 +432,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     }
 
     /**
-     * [get] (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * [get] (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * 取得元別名 e.g. 裁判所裁判例
      * @return The value of the column 'SOURCE_ALIAS'. (basically NotNull if selected: for the constraint)
      */
@@ -442,7 +442,7 @@ public abstract class BsClsSource extends AbstractEntity implements DomainEntity
     }
 
     /**
-     * [set] (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * [set] (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * 取得元別名 e.g. 裁判所裁判例
      * @param sourceAlias The value of the column 'SOURCE_ALIAS'. (basically NotNull if update: for the constraint)
      */

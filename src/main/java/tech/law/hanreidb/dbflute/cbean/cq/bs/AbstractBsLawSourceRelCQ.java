@@ -306,7 +306,7 @@ public abstract class AbstractBsLawSourceRelCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @param sourceCode The value of sourceCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_Equal(String sourceCode) {
@@ -315,7 +315,7 @@ public abstract class AbstractBsLawSourceRelCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceCode_Equal_AsSource(CDef.Source cdef) {
@@ -344,7 +344,7 @@ public abstract class AbstractBsLawSourceRelCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @param sourceCode The value of sourceCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotEqual(String sourceCode) {
@@ -353,7 +353,7 @@ public abstract class AbstractBsLawSourceRelCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceCode_NotEqual_AsSource(CDef.Source cdef) {
@@ -382,7 +382,7 @@ public abstract class AbstractBsLawSourceRelCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @param sourceCodeList The collection of sourceCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_InScope(Collection<String> sourceCodeList) {
@@ -391,7 +391,7 @@ public abstract class AbstractBsLawSourceRelCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_InScope_AsSource(Collection<CDef.Source> cdefList) {
@@ -404,7 +404,7 @@ public abstract class AbstractBsLawSourceRelCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @param sourceCodeList The collection of sourceCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotInScope(Collection<String> sourceCodeList) {
@@ -413,7 +413,7 @@ public abstract class AbstractBsLawSourceRelCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotInScope_AsSource(Collection<CDef.Source> cdefList) {

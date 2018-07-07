@@ -172,7 +172,7 @@ public abstract class BsClsSourceBhv extends AbstractBehaviorWritable<ClsSource,
 
     /**
      * Select the entity by the primary-key value.
-     * @param sourceCode (取得元コード): PK, NotNull, VARCHAR(10), classification=Source. (NotNull)
+     * @param sourceCode (取得元コード): PK, NotNull, VARCHAR(20), classification=Source. (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -226,7 +226,7 @@ public abstract class BsClsSourceBhv extends AbstractBehaviorWritable<ClsSource,
 
     /**
      * Select the entity by the unique-key value.
-     * @param sourceAlias (取得元別名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param sourceAlias (取得元別名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -251,7 +251,7 @@ public abstract class BsClsSourceBhv extends AbstractBehaviorWritable<ClsSource,
 
     /**
      * Select the entity by the unique-key value.
-     * @param sourceName (取得元名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param sourceName (取得元名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.

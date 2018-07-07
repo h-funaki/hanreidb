@@ -104,10 +104,10 @@ public class SourceLawCategoryDbm extends AbstractDBMeta {
     //                                                                         Column Info
     //                                                                         ===========
     protected final ColumnInfo _columnSourceLawCategoryId = cci("SOURCE_LAW_CATEGORY_ID", "SOURCE_LAW_CATEGORY_ID", null, "取得元法令カテゴリーID", Integer.class, "sourceLawCategoryId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "sourceLawCategoryRelList", null, false);
-    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsSource", null, CDef.DefMeta.Source, false);
+    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, "clsSource", null, CDef.DefMeta.Source, false);
     protected final ColumnInfo _columnLawCategoryId = cci("LAW_CATEGORY_ID", "LAW_CATEGORY_ID", null, "法令カテゴリーID", Integer.class, "lawCategoryId", null, false, false, true, "INT", 10, 0, null, false, null, null, "lawCategory", null, null, false);
-    protected final ColumnInfo _columnSourceLawCategoryName = cci("SOURCE_LAW_CATEGORY_NAME", "SOURCE_LAW_CATEGORY_NAME", null, "取得元法令カテゴリー名", String.class, "sourceLawCategoryName", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnSourceLawCategoryAlias = cci("SOURCE_LAW_CATEGORY_ALIAS", "SOURCE_LAW_CATEGORY_ALIAS", null, "取得元法令カテゴリー別名", String.class, "sourceLawCategoryAlias", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnSourceLawCategoryName = cci("SOURCE_LAW_CATEGORY_NAME", "SOURCE_LAW_CATEGORY_NAME", null, "取得元法令カテゴリー名", String.class, "sourceLawCategoryName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnSourceLawCategoryAlias = cci("SOURCE_LAW_CATEGORY_ALIAS", "SOURCE_LAW_CATEGORY_ALIAS", null, "取得元法令カテゴリー別名", String.class, "sourceLawCategoryAlias", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -120,7 +120,7 @@ public class SourceLawCategoryDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnSourceLawCategoryId() { return _columnSourceLawCategoryId; }
     /**
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceCode() { return _columnSourceCode; }
@@ -130,12 +130,12 @@ public class SourceLawCategoryDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnLawCategoryId() { return _columnLawCategoryId; }
     /**
-     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceLawCategoryName() { return _columnSourceLawCategoryName; }
     /**
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceLawCategoryAlias() { return _columnSourceLawCategoryAlias; }

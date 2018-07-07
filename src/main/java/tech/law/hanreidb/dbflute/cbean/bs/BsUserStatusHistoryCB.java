@@ -96,7 +96,7 @@ public class BsUserStatusHistoryCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param userStatusHistoryId : PK, ID, NotNull, BIGINT UNSIGNED(20). (NotNull)
+     * @param userStatusHistoryId (ユーザーステータス履歴ID): PK, ID, NotNull, BIGINT UNSIGNED(20). (NotNull)
      * @return this. (NotNull)
      */
     public UserStatusHistoryCB acceptPK(Long userStatusHistoryId) {
@@ -350,7 +350,7 @@ public class BsUserStatusHistoryCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+         * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserStatusHistoryId() { return doColumn("USER_STATUS_HISTORY_ID"); }
@@ -360,7 +360,7 @@ public class BsUserStatusHistoryCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnUserId() { return doColumn("USER_ID"); }
         /**
-         * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+         * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserNewStatusCode() { return doColumn("USER_NEW_STATUS_CODE"); }

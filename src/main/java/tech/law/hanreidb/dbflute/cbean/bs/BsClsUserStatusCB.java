@@ -95,7 +95,7 @@ public class BsClsUserStatusCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param userStatusCode (ユーザーステータスコード): PK, NotNull, VARCHAR(10), classification=UserStatus. (NotNull)
+     * @param userStatusCode (ユーザーステータスコード): PK, NotNull, VARCHAR(20), classification=UserStatus. (NotNull)
      * @return this. (NotNull)
      */
     public ClsUserStatusCB acceptPK(String userStatusCode) {
@@ -310,17 +310,17 @@ public class BsClsUserStatusCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
+         * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(20), classification=UserStatus}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserStatusCode() { return doColumn("USER_STATUS_CODE"); }
         /**
-         * (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(10)}
+         * (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserStatusName() { return doColumn("USER_STATUS_NAME"); }
         /**
-         * (ユーザーステータス別名)USER_STATUS_ALIAS: {NotNull, VARCHAR(10)}
+         * (ユーザーステータス別名)USER_STATUS_ALIAS: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnUserStatusAlias() { return doColumn("USER_STATUS_ALIAS"); }

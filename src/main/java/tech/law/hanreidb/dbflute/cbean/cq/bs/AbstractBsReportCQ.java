@@ -262,7 +262,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)}
      * @param reportName The value of reportName as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setReportName_Equal(String reportName) {
@@ -275,7 +275,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setReportName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param reportName The value of reportName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -286,7 +286,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setReportName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param reportName The value of reportName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -298,7 +298,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)}
      * @param reportName The value of reportName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -309,7 +309,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)}
      * @param reportName The value of reportName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -322,7 +322,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param reportAlias The value of reportAlias as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setReportAlias_Equal(String reportAlias) {
@@ -335,7 +335,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param reportAlias The value of reportAlias as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setReportAlias_NotEqual(String reportAlias) {
@@ -348,7 +348,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param reportAliasList The collection of reportAlias as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setReportAlias_InScope(Collection<String> reportAliasList) {
@@ -361,7 +361,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param reportAliasList The collection of reportAlias as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setReportAlias_NotInScope(Collection<String> reportAliasList) {
@@ -374,7 +374,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setReportAlias_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param reportAlias The value of reportAlias as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -385,7 +385,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setReportAlias_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param reportAlias The value of reportAlias as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -397,7 +397,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param reportAlias The value of reportAlias as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -408,7 +408,7 @@ public abstract class AbstractBsReportCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param reportAlias The value of reportAlias as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */

@@ -101,7 +101,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     /** (判決ID)JUDGEMENT_ID: {IX, NotNull, BIGINT UNSIGNED(20), FK to JUDGEMENT} */
     protected Long _judgementId;
 
-    /** (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} */
+    /** (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} */
     protected String _sourceCode;
 
     /** (判決取得元ID)JUDGEMENT_SOURCE_ID: {+UQ, NotNull, VARCHAR(100)} */
@@ -150,7 +150,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source. (NotNull)
+     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source. (NotNull)
      * @param judgementSourceId (判決取得元ID): +UQ, NotNull, VARCHAR(100). (NotNull)
      */
     public void uniqueBy(String sourceCode, String judgementSourceId) {
@@ -165,7 +165,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     //                                                             =======================
     /**
      * Get the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
      */
@@ -175,7 +175,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
 
     /**
      * Set the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
     public void setSourceCodeAsSource(CDef.Source cdef) {
@@ -393,7 +393,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     }
 
     /**
-     * [get] (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * [get] (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * 取得元コード e.g. COURT
      * @return The value of the column 'SOURCE_CODE'. (basically NotNull if selected: for the constraint)
      */
@@ -403,7 +403,7 @@ public abstract class BsJudgementSourceRel extends AbstractEntity implements Dom
     }
 
     /**
-     * [set] (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * [set] (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * 取得元コード e.g. COURT
      * @param sourceCode The value of the column 'SOURCE_CODE'. (basically NotNull if update: for the constraint)
      */

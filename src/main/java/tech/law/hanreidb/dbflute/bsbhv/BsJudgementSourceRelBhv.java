@@ -201,7 +201,7 @@ public abstract class BsJudgementSourceRelBhv extends AbstractBehaviorWritable<J
 
     /**
      * Select the entity by the unique-key value.
-     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source. (NotNull)
+     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source. (NotNull)
      * @param judgementSourceId (判決取得元ID): +UQ, NotNull, VARCHAR(100). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).

@@ -93,13 +93,13 @@ public abstract class BsUserStatusHistory extends AbstractEntity implements Doma
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} */
+    /** (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} */
     protected Long _userStatusHistoryId;
 
     /** (ユーザーID)USER_ID: {IX, NotNull, INT UNSIGNED(10), FK to USER} */
     protected Integer _userId;
 
-    /** (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} */
+    /** (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} */
     protected String _userNewStatusCode;
 
     /** (ユーザーステータス更新日時)USER_STATUS_UPDATE_DATETIME: {NotNull, DATETIME(19)} */
@@ -147,7 +147,7 @@ public abstract class BsUserStatusHistory extends AbstractEntity implements Doma
     //                                                             =======================
     /**
      * Get the value of userNewStatusCode as the classification of UserStatus. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
      */
@@ -157,7 +157,7 @@ public abstract class BsUserStatusHistory extends AbstractEntity implements Doma
 
     /**
      * Set the value of userNewStatusCode as the classification of UserStatus. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
     public void setUserNewStatusCodeAsUserStatus(CDef.UserStatus cdef) {
@@ -168,44 +168,44 @@ public abstract class BsUserStatusHistory extends AbstractEntity implements Doma
     //                                                              Classification Setting
     //                                                              ======================
     /**
-     * Set the value of userNewStatusCode as 正式会員 (FML). <br>
-     * 正式会員: 正式会員
+     * Set the value of userNewStatusCode as 契約中 (ACTIVE). <br>
+     * 契約中: 契約中
      */
-    public void setUserNewStatusCode_正式会員() {
-        setUserNewStatusCodeAsUserStatus(CDef.UserStatus.正式会員);
+    public void setUserNewStatusCode_契約中() {
+        setUserNewStatusCodeAsUserStatus(CDef.UserStatus.契約中);
     }
 
     /**
-     * Set the value of userNewStatusCode as 仮会員 (PRO). <br>
-     * 仮会員: 仮会員
+     * Set the value of userNewStatusCode as 解約済 (UNSUBSCRIBE). <br>
+     * 解約済: 解約済
      */
-    public void setUserNewStatusCode_仮会員() {
-        setUserNewStatusCodeAsUserStatus(CDef.UserStatus.仮会員);
+    public void setUserNewStatusCode_解約済() {
+        setUserNewStatusCodeAsUserStatus(CDef.UserStatus.解約済);
     }
 
     // ===================================================================================
     //                                                        Classification Determination
     //                                                        ============================
     /**
-     * Is the value of userNewStatusCode 正式会員? <br>
-     * 正式会員: 正式会員
+     * Is the value of userNewStatusCode 契約中? <br>
+     * 契約中: 契約中
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
-    public boolean isUserNewStatusCode正式会員() {
+    public boolean isUserNewStatusCode契約中() {
         CDef.UserStatus cdef = getUserNewStatusCodeAsUserStatus();
-        return cdef != null ? cdef.equals(CDef.UserStatus.正式会員) : false;
+        return cdef != null ? cdef.equals(CDef.UserStatus.契約中) : false;
     }
 
     /**
-     * Is the value of userNewStatusCode 仮会員? <br>
-     * 仮会員: 仮会員
+     * Is the value of userNewStatusCode 解約済? <br>
+     * 解約済: 解約済
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
-    public boolean isUserNewStatusCode仮会員() {
+    public boolean isUserNewStatusCode解約済() {
         CDef.UserStatus cdef = getUserNewStatusCodeAsUserStatus();
-        return cdef != null ? cdef.equals(CDef.UserStatus.仮会員) : false;
+        return cdef != null ? cdef.equals(CDef.UserStatus.解約済) : false;
     }
 
     // ===================================================================================
@@ -336,7 +336,7 @@ public abstract class BsUserStatusHistory extends AbstractEntity implements Doma
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} <br>
+     * [get] (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} <br>
      * @return The value of the column 'USER_STATUS_HISTORY_ID'. (basically NotNull if selected: for the constraint)
      */
     public Long getUserStatusHistoryId() {
@@ -345,7 +345,7 @@ public abstract class BsUserStatusHistory extends AbstractEntity implements Doma
     }
 
     /**
-     * [set] USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} <br>
+     * [set] (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)} <br>
      * @param userStatusHistoryId The value of the column 'USER_STATUS_HISTORY_ID'. (basically NotNull if update: for the constraint)
      */
     public void setUserStatusHistoryId(Long userStatusHistoryId) {
@@ -372,7 +372,7 @@ public abstract class BsUserStatusHistory extends AbstractEntity implements Doma
     }
 
     /**
-     * [get] (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * [get] (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @return The value of the column 'USER_NEW_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getUserNewStatusCode() {
@@ -381,7 +381,7 @@ public abstract class BsUserStatusHistory extends AbstractEntity implements Doma
     }
 
     /**
-     * [set] (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * [set] (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param userNewStatusCode The value of the column 'USER_NEW_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setUserNewStatusCode(String userNewStatusCode) {

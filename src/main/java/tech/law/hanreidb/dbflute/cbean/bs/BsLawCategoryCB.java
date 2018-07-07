@@ -107,7 +107,7 @@ public class BsLawCategoryCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param lawCategoryAlias (法令カテゴリー別名): UQ, NotNull, VARCHAR(20). (NotNull)
+     * @param lawCategoryAlias (法令カテゴリー別名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return this. (NotNull)
      */
     public LawCategoryCB acceptUniqueOfLawCategoryAlias(String lawCategoryAlias) {
@@ -119,7 +119,7 @@ public class BsLawCategoryCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param lawCategoryName (法令カテゴリー名): UQ, NotNull, VARCHAR(20). (NotNull)
+     * @param lawCategoryName (法令カテゴリー名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return this. (NotNull)
      */
     public LawCategoryCB acceptUniqueOfLawCategoryName(String lawCategoryName) {
@@ -327,12 +327,12 @@ public class BsLawCategoryCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnLawCategoryId() { return doColumn("LAW_CATEGORY_ID"); }
         /**
-         * (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(20)}
+         * (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnLawCategoryName() { return doColumn("LAW_CATEGORY_NAME"); }
         /**
-         * (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(20)}
+         * (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnLawCategoryAlias() { return doColumn("LAW_CATEGORY_ALIAS"); }

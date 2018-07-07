@@ -88,8 +88,8 @@ public class LawCategoryDbm extends AbstractDBMeta {
     //                                                                         Column Info
     //                                                                         ===========
     protected final ColumnInfo _columnLawCategoryId = cci("LAW_CATEGORY_ID", "LAW_CATEGORY_ID", null, "法令カテゴリーID", Integer.class, "lawCategoryId", null, true, true, true, "INT", 10, 0, null, false, null, null, null, "lawCategoryRelList,sourceLawCategoryList", null, false);
-    protected final ColumnInfo _columnLawCategoryName = cci("LAW_CATEGORY_NAME", "LAW_CATEGORY_NAME", null, "法令カテゴリー名", String.class, "lawCategoryName", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnLawCategoryAlias = cci("LAW_CATEGORY_ALIAS", "LAW_CATEGORY_ALIAS", null, "法令カテゴリー別名", String.class, "lawCategoryAlias", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnLawCategoryName = cci("LAW_CATEGORY_NAME", "LAW_CATEGORY_NAME", null, "法令カテゴリー名", String.class, "lawCategoryName", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnLawCategoryAlias = cci("LAW_CATEGORY_ALIAS", "LAW_CATEGORY_ALIAS", null, "法令カテゴリー別名", String.class, "lawCategoryAlias", null, false, false, true, "VARCHAR", 50, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdateDatetime = cci("UPDATE_DATETIME", "UPDATE_DATETIME", null, "更新日時", java.time.LocalDateTime.class, "updateDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
@@ -102,12 +102,12 @@ public class LawCategoryDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnLawCategoryId() { return _columnLawCategoryId; }
     /**
-     * (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(20)}
+     * (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnLawCategoryName() { return _columnLawCategoryName; }
     /**
-     * (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(20)}
+     * (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnLawCategoryAlias() { return _columnLawCategoryAlias; }

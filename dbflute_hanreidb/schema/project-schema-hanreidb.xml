@@ -400,13 +400,13 @@
         schema="hanreidb.$$NoNameSchema$$" type="TABLE">
         <column comment="取得元コード : 取得元コード e.g. COURT" dbType="VARCHAR"
             javaType="String" name="SOURCE_CODE" pkName="PRIMARY"
-            pkPosition="1" primaryKey="true" required="true" size="10" type="VARCHAR"/>
+            pkPosition="1" primaryKey="true" required="true" size="20" type="VARCHAR"/>
         <column comment="取得元名 : 取得元名 e.g. 裁判所裁判例" dbType="VARCHAR"
             javaType="String" name="SOURCE_NAME" required="true"
-            size="100" type="VARCHAR"/>
+            size="50" type="VARCHAR"/>
         <column comment="取得元別名 : 取得元別名 e.g. 裁判所裁判例" dbType="VARCHAR"
             javaType="String" name="SOURCE_ALIAS" required="true"
-            size="100" type="VARCHAR"/>
+            size="50" type="VARCHAR"/>
         <column comment="説明 : 説明 e.g. これこれするときのなになにです。" dbType="TEXT"
             javaType="String" name="DESCRIPTION" required="true"
             size="65535" type="LONGVARCHAR"/>
@@ -443,11 +443,11 @@
         schema="hanreidb.$$NoNameSchema$$" type="TABLE">
         <column comment="ユーザーステータスコード" dbType="VARCHAR"
             javaType="String" name="USER_STATUS_CODE" pkName="PRIMARY"
-            pkPosition="1" primaryKey="true" required="true" size="10" type="VARCHAR"/>
+            pkPosition="1" primaryKey="true" required="true" size="20" type="VARCHAR"/>
         <column comment="ユーザーステータス名" dbType="VARCHAR" javaType="String"
-            name="USER_STATUS_NAME" required="true" size="10" type="VARCHAR"/>
+            name="USER_STATUS_NAME" required="true" size="50" type="VARCHAR"/>
         <column comment="ユーザーステータス別名" dbType="VARCHAR" javaType="String"
-            name="USER_STATUS_ALIAS" required="true" size="10" type="VARCHAR"/>
+            name="USER_STATUS_ALIAS" required="true" size="50" type="VARCHAR"/>
         <column comment="説明 : 説明 e.g. これこれするときのなになにです。" dbType="TEXT"
             javaType="String" name="DESCRIPTION" required="true"
             size="65535" type="LONGVARCHAR"/>
@@ -812,7 +812,7 @@
             size="20" type="BIGINT"/>
         <column comment="取得元コード : 取得元コード e.g. COURT" dbType="VARCHAR"
             javaType="String" name="SOURCE_CODE" required="true"
-            size="10" type="VARCHAR"/>
+            size="20" type="VARCHAR"/>
         <column comment="判決取得元ID" dbType="VARCHAR" javaType="String"
             name="JUDGEMENT_SOURCE_ID" required="true" size="100" type="VARCHAR"/>
         <column
@@ -992,9 +992,9 @@
             javaType="Integer" name="LAW_CATEGORY_ID" pkName="PRIMARY"
             pkPosition="1" primaryKey="true" required="true" size="10" type="INTEGER"/>
         <column comment="法令カテゴリー名" dbType="VARCHAR" javaType="String"
-            name="LAW_CATEGORY_NAME" required="true" size="20" type="VARCHAR"/>
+            name="LAW_CATEGORY_NAME" required="true" size="50" type="VARCHAR"/>
         <column comment="法令カテゴリー別名" dbType="VARCHAR" javaType="String"
-            name="LAW_CATEGORY_ALIAS" required="true" size="20" type="VARCHAR"/>
+            name="LAW_CATEGORY_ALIAS" required="true" size="50" type="VARCHAR"/>
         <column comment="登録日時 : レコードが登録された日時 e.g. 2018-01-02T12:34:56"
             dbType="DATETIME" javaType="java.time.LocalDateTime"
             name="REGISTER_DATETIME" required="true" size="19" type="TIMESTAMP"/>
@@ -1157,7 +1157,7 @@
             name="LAW_ID" required="true" size="10" type="INTEGER"/>
         <column comment="取得元コード : 取得元コード e.g. COURT" dbType="VARCHAR"
             javaType="String" name="SOURCE_CODE" required="true"
-            size="10" type="VARCHAR"/>
+            size="20" type="VARCHAR"/>
         <column comment="法令取得元ID" dbType="VARCHAR" javaType="String"
             name="LAW_SOURCE_ID" required="true" size="100" type="VARCHAR"/>
         <column comment="登録日時 : レコードが登録された日時 e.g. 2018-01-02T12:34:56"
@@ -1336,10 +1336,10 @@
             required="true" size="10" type="INTEGER"/>
         <column comment="判例集名 : 判例集名 e.g. 最高裁判所刑事判例" dbType="VARCHAR"
             javaType="String" name="REPORT_NAME" required="true"
-            size="100" type="VARCHAR"/>
+            size="50" type="VARCHAR"/>
         <column comment="判例集別名 : 判例集別名 e.g. 刑集" dbType="VARCHAR"
             javaType="String" name="REPORT_ALIAS" required="true"
-            size="100" type="VARCHAR"/>
+            size="50" type="VARCHAR"/>
         <column comment="登録日時 : レコードが登録された日時 e.g. 2018-01-02T12:34:56"
             dbType="DATETIME" javaType="java.time.LocalDateTime"
             name="REGISTER_DATETIME" required="true" size="19" type="TIMESTAMP"/>
@@ -1372,14 +1372,14 @@
             required="true" size="10" type="INTEGER"/>
         <column comment="取得元コード : 取得元コード e.g. COURT" dbType="VARCHAR"
             javaType="String" name="SOURCE_CODE" required="true"
-            size="10" type="VARCHAR"/>
+            size="20" type="VARCHAR"/>
         <column comment="法令カテゴリーID" dbType="INT" javaType="Integer"
             name="LAW_CATEGORY_ID" required="true" size="10" type="INTEGER"/>
         <column comment="取得元法令カテゴリー名" dbType="VARCHAR" javaType="String"
-            name="SOURCE_LAW_CATEGORY_NAME" required="true" size="20" type="VARCHAR"/>
+            name="SOURCE_LAW_CATEGORY_NAME" required="true" size="50" type="VARCHAR"/>
         <column comment="取得元法令カテゴリー別名" dbType="VARCHAR"
             javaType="String" name="SOURCE_LAW_CATEGORY_ALIAS"
-            required="true" size="20" type="VARCHAR"/>
+            required="true" size="50" type="VARCHAR"/>
         <column comment="登録日時 : レコードが登録された日時 e.g. 2018-01-02T12:34:56"
             dbType="DATETIME" javaType="java.time.LocalDateTime"
             name="REGISTER_DATETIME" required="true" size="19" type="TIMESTAMP"/>
@@ -1463,7 +1463,7 @@
             name="PASSWORD" required="true" size="255" type="VARCHAR"/>
         <column comment="ユーザーステータスコード" dbType="VARCHAR"
             javaType="String" name="USER_STATUS_CODE" required="true"
-            size="10" type="VARCHAR"/>
+            size="20" type="VARCHAR"/>
         <column comment="登録日時 : レコードが登録された日時 e.g. 2018-01-02T12:34:56"
             dbType="DATETIME" javaType="java.time.LocalDateTime"
             name="REGISTER_DATETIME" required="true" size="19" type="TIMESTAMP"/>
@@ -1493,15 +1493,15 @@
     </table>
     <table comment="ユーザーステータス履歴" name="USER_STATUS_HISTORY"
         schema="hanreidb.$$NoNameSchema$$" type="TABLE">
-        <column autoIncrement="true" comment="" dbType="BIGINT UNSIGNED"
-            javaType="Long" name="USER_STATUS_HISTORY_ID"
-            pkName="PRIMARY" pkPosition="1" primaryKey="true"
-            required="true" size="20" type="BIGINT"/>
+        <column autoIncrement="true" comment="ユーザーステータス履歴ID"
+            dbType="BIGINT UNSIGNED" javaType="Long"
+            name="USER_STATUS_HISTORY_ID" pkName="PRIMARY"
+            pkPosition="1" primaryKey="true" required="true" size="20" type="BIGINT"/>
         <column comment="ユーザーID" dbType="INT UNSIGNED"
             javaType="Integer" name="USER_ID" required="true" size="10" type="INTEGER"/>
         <column comment="ユーザー新ステータスコード" dbType="VARCHAR"
             javaType="String" name="USER_NEW_STATUS_CODE"
-            required="true" size="10" type="VARCHAR"/>
+            required="true" size="20" type="VARCHAR"/>
         <column comment="ユーザーステータス更新日時 : ユーザーステータスが更新された日時"
             dbType="DATETIME" javaType="java.time.LocalDateTime"
             name="USER_STATUS_UPDATE_DATETIME" required="true" size="19" type="TIMESTAMP"/>

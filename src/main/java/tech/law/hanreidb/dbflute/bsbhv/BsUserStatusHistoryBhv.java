@@ -172,7 +172,7 @@ public abstract class BsUserStatusHistoryBhv extends AbstractBehaviorWritable<Us
 
     /**
      * Select the entity by the primary-key value.
-     * @param userStatusHistoryId : PK, ID, NotNull, BIGINT UNSIGNED(20). (NotNull)
+     * @param userStatusHistoryId (ユーザーステータス履歴ID): PK, ID, NotNull, BIGINT UNSIGNED(20). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.

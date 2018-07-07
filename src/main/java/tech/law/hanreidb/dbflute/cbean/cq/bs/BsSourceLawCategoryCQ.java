@@ -130,14 +130,14 @@ public class BsSourceLawCategoryCQ extends AbstractBsSourceLawCategoryCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @return this. (NotNull)
      */
     public BsSourceLawCategoryCQ addOrderBy_SourceCode_Asc() { regOBA("SOURCE_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @return this. (NotNull)
      */
     public BsSourceLawCategoryCQ addOrderBy_SourceCode_Desc() { regOBD("SOURCE_CODE"); return this; }
@@ -170,14 +170,14 @@ public class BsSourceLawCategoryCQ extends AbstractBsSourceLawCategoryCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsSourceLawCategoryCQ addOrderBy_SourceLawCategoryName_Asc() { regOBA("SOURCE_LAW_CATEGORY_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsSourceLawCategoryCQ addOrderBy_SourceLawCategoryName_Desc() { regOBD("SOURCE_LAW_CATEGORY_NAME"); return this; }
@@ -190,14 +190,14 @@ public class BsSourceLawCategoryCQ extends AbstractBsSourceLawCategoryCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsSourceLawCategoryCQ addOrderBy_SourceLawCategoryAlias_Asc() { regOBA("SOURCE_LAW_CATEGORY_ALIAS"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsSourceLawCategoryCQ addOrderBy_SourceLawCategoryAlias_Desc() { regOBD("SOURCE_LAW_CATEGORY_ALIAS"); return this; }

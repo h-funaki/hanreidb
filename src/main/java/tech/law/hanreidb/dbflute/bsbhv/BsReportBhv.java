@@ -201,7 +201,7 @@ public abstract class BsReportBhv extends AbstractBehaviorWritable<Report, Repor
 
     /**
      * Select the entity by the unique-key value.
-     * @param reportAlias (判例集別名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param reportAlias (判例集別名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -226,7 +226,7 @@ public abstract class BsReportBhv extends AbstractBehaviorWritable<Report, Repor
 
     /**
      * Select the entity by the unique-key value.
-     * @param reportName (判例集名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param reportName (判例集名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.

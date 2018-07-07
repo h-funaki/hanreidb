@@ -92,10 +92,10 @@ public abstract class BsLawCategory extends AbstractEntity implements DomainEnti
     /** (法令カテゴリーID)LAW_CATEGORY_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _lawCategoryId;
 
-    /** (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(20)} */
+    /** (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(50)} */
     protected String _lawCategoryName;
 
-    /** (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(20)} */
+    /** (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(50)} */
     protected String _lawCategoryAlias;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -138,7 +138,7 @@ public abstract class BsLawCategory extends AbstractEntity implements DomainEnti
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param lawCategoryAlias (法令カテゴリー別名): UQ, NotNull, VARCHAR(20). (NotNull)
+     * @param lawCategoryAlias (法令カテゴリー別名): UQ, NotNull, VARCHAR(50). (NotNull)
      */
     public void uniqueByLawCategoryAlias(String lawCategoryAlias) {
         __uniqueDrivenProperties.clear();
@@ -149,7 +149,7 @@ public abstract class BsLawCategory extends AbstractEntity implements DomainEnti
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param lawCategoryName (法令カテゴリー名): UQ, NotNull, VARCHAR(20). (NotNull)
+     * @param lawCategoryName (法令カテゴリー名): UQ, NotNull, VARCHAR(50). (NotNull)
      */
     public void uniqueByLawCategoryName(String lawCategoryName) {
         __uniqueDrivenProperties.clear();
@@ -297,7 +297,7 @@ public abstract class BsLawCategory extends AbstractEntity implements DomainEnti
     }
 
     /**
-     * [get] (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(20)} <br>
+     * [get] (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * @return The value of the column 'LAW_CATEGORY_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getLawCategoryName() {
@@ -306,7 +306,7 @@ public abstract class BsLawCategory extends AbstractEntity implements DomainEnti
     }
 
     /**
-     * [set] (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(20)} <br>
+     * [set] (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * @param lawCategoryName The value of the column 'LAW_CATEGORY_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setLawCategoryName(String lawCategoryName) {
@@ -315,7 +315,7 @@ public abstract class BsLawCategory extends AbstractEntity implements DomainEnti
     }
 
     /**
-     * [get] (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(20)} <br>
+     * [get] (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * @return The value of the column 'LAW_CATEGORY_ALIAS'. (basically NotNull if selected: for the constraint)
      */
     public String getLawCategoryAlias() {
@@ -324,7 +324,7 @@ public abstract class BsLawCategory extends AbstractEntity implements DomainEnti
     }
 
     /**
-     * [set] (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(20)} <br>
+     * [set] (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * @param lawCategoryAlias The value of the column 'LAW_CATEGORY_ALIAS'. (basically NotNull if update: for the constraint)
      */
     public void setLawCategoryAlias(String lawCategoryAlias) {

@@ -1032,11 +1032,11 @@ public interface CDef extends Classification {
     }
 
     public enum UserStatus implements CDef {
-        /** 正式会員: 正式会員 */
-        正式会員("FML", "正式会員", emptyStrings())
+        /** 契約中: 契約中 */
+        契約中("ACTIVE", "契約中", emptyStrings())
         ,
-        /** 仮会員: 仮会員 */
-        仮会員("PRO", "仮会員", emptyStrings())
+        /** 解約済: 解約済 */
+        解約済("UNSUBSCRIBE", "解約済", emptyStrings())
         ;
         private static final Map<String, UserStatus> _codeClsMap = new HashMap<String, UserStatus>();
         private static final Map<String, UserStatus> _nameClsMap = new HashMap<String, UserStatus>();

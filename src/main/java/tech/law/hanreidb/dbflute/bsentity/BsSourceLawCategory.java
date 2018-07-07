@@ -99,16 +99,16 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
     /** (取得元法令カテゴリーID)SOURCE_LAW_CATEGORY_ID: {PK, ID, NotNull, INT(10)} */
     protected Integer _sourceLawCategoryId;
 
-    /** (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} */
+    /** (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} */
     protected String _sourceCode;
 
     /** (法令カテゴリーID)LAW_CATEGORY_ID: {IX, NotNull, INT(10), FK to LAW_CATEGORY} */
     protected Integer _lawCategoryId;
 
-    /** (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)} */
+    /** (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)} */
     protected String _sourceLawCategoryName;
 
-    /** (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)} */
+    /** (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)} */
     protected String _sourceLawCategoryAlias;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -153,7 +153,7 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
     //                                                             =======================
     /**
      * Get the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
      */
@@ -163,7 +163,7 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
 
     /**
      * Set the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
     public void setSourceCodeAsSource(CDef.Source cdef) {
@@ -385,7 +385,7 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
     }
 
     /**
-     * [get] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * [get] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * 取得元コード e.g. COURT
      * @return The value of the column 'SOURCE_CODE'. (basically NotNull if selected: for the constraint)
      */
@@ -395,7 +395,7 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
     }
 
     /**
-     * [set] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * [set] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * 取得元コード e.g. COURT
      * @param sourceCode The value of the column 'SOURCE_CODE'. (basically NotNull if update: for the constraint)
      */
@@ -423,7 +423,7 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
     }
 
     /**
-     * [get] (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)} <br>
+     * [get] (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)} <br>
      * @return The value of the column 'SOURCE_LAW_CATEGORY_NAME'. (basically NotNull if selected: for the constraint)
      */
     public String getSourceLawCategoryName() {
@@ -432,7 +432,7 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
     }
 
     /**
-     * [set] (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)} <br>
+     * [set] (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)} <br>
      * @param sourceLawCategoryName The value of the column 'SOURCE_LAW_CATEGORY_NAME'. (basically NotNull if update: for the constraint)
      */
     public void setSourceLawCategoryName(String sourceLawCategoryName) {
@@ -441,7 +441,7 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
     }
 
     /**
-     * [get] (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)} <br>
+     * [get] (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)} <br>
      * @return The value of the column 'SOURCE_LAW_CATEGORY_ALIAS'. (basically NotNull if selected: for the constraint)
      */
     public String getSourceLawCategoryAlias() {
@@ -450,7 +450,7 @@ public abstract class BsSourceLawCategory extends AbstractEntity implements Doma
     }
 
     /**
-     * [set] (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)} <br>
+     * [set] (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)} <br>
      * @param sourceLawCategoryAlias The value of the column 'SOURCE_LAW_CATEGORY_ALIAS'. (basically NotNull if update: for the constraint)
      */
     public void setSourceLawCategoryAlias(String sourceLawCategoryAlias) {

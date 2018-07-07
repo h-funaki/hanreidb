@@ -144,14 +144,14 @@ public class BsLawCategoryCQ extends AbstractBsLawCategoryCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(20)}
+     * (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsLawCategoryCQ addOrderBy_LawCategoryName_Asc() { regOBA("LAW_CATEGORY_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(20)}
+     * (法令カテゴリー名)LAW_CATEGORY_NAME: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsLawCategoryCQ addOrderBy_LawCategoryName_Desc() { regOBD("LAW_CATEGORY_NAME"); return this; }
@@ -164,14 +164,14 @@ public class BsLawCategoryCQ extends AbstractBsLawCategoryCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(20)}
+     * (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsLawCategoryCQ addOrderBy_LawCategoryAlias_Asc() { regOBA("LAW_CATEGORY_ALIAS"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(20)}
+     * (法令カテゴリー別名)LAW_CATEGORY_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsLawCategoryCQ addOrderBy_LawCategoryAlias_Desc() { regOBD("LAW_CATEGORY_ALIAS"); return this; }

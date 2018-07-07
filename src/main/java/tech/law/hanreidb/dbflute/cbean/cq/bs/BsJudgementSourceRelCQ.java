@@ -136,14 +136,14 @@ public class BsJudgementSourceRelCQ extends AbstractBsJudgementSourceRelCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @return this. (NotNull)
      */
     public BsJudgementSourceRelCQ addOrderBy_SourceCode_Asc() { regOBA("SOURCE_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @return this. (NotNull)
      */
     public BsJudgementSourceRelCQ addOrderBy_SourceCode_Desc() { regOBD("SOURCE_CODE"); return this; }

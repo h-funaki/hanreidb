@@ -262,7 +262,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @param sourceCode The value of sourceCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_Equal(String sourceCode) {
@@ -271,7 +271,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * Equal(=). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceCode_Equal_AsSource(CDef.Source cdef) {
@@ -300,7 +300,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @param sourceCode The value of sourceCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotEqual(String sourceCode) {
@@ -309,7 +309,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * NotEqual(&lt;&gt;). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceCode_NotEqual_AsSource(CDef.Source cdef) {
@@ -338,7 +338,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @param sourceCodeList The collection of sourceCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_InScope(Collection<String> sourceCodeList) {
@@ -347,7 +347,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * InScope {in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_InScope_AsSource(Collection<CDef.Source> cdefList) {
@@ -360,7 +360,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @param sourceCodeList The collection of sourceCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotInScope(Collection<String> sourceCodeList) {
@@ -369,7 +369,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * NotInScope {not in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotInScope_AsSource(Collection<CDef.Source> cdefList) {
@@ -502,7 +502,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryName The value of sourceLawCategoryName as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceLawCategoryName_Equal(String sourceLawCategoryName) {
@@ -515,7 +515,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)} <br>
+     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setSourceLawCategoryName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param sourceLawCategoryName The value of sourceLawCategoryName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -526,7 +526,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)} <br>
+     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setSourceLawCategoryName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param sourceLawCategoryName The value of sourceLawCategoryName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -538,7 +538,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryName The value of sourceLawCategoryName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -549,7 +549,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryName The value of sourceLawCategoryName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -562,7 +562,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryAlias The value of sourceLawCategoryAlias as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceLawCategoryAlias_Equal(String sourceLawCategoryAlias) {
@@ -575,7 +575,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryAlias The value of sourceLawCategoryAlias as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceLawCategoryAlias_NotEqual(String sourceLawCategoryAlias) {
@@ -588,7 +588,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryAliasList The collection of sourceLawCategoryAlias as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceLawCategoryAlias_InScope(Collection<String> sourceLawCategoryAliasList) {
@@ -601,7 +601,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryAliasList The collection of sourceLawCategoryAlias as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceLawCategoryAlias_NotInScope(Collection<String> sourceLawCategoryAliasList) {
@@ -614,7 +614,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)} <br>
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setSourceLawCategoryAlias_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param sourceLawCategoryAlias The value of sourceLawCategoryAlias as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -625,7 +625,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)} <br>
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setSourceLawCategoryAlias_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param sourceLawCategoryAlias The value of sourceLawCategoryAlias as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -637,7 +637,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryAlias The value of sourceLawCategoryAlias as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -648,7 +648,7 @@ public abstract class AbstractBsSourceLawCategoryCQ extends AbstractConditionQue
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+     * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
      * @param sourceLawCategoryAlias The value of sourceLawCategoryAlias as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */

@@ -124,14 +124,14 @@ public class BsClsUserStatusCQ extends AbstractBsClsUserStatusCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(20), classification=UserStatus}
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusCode_Asc() { regOBA("USER_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(10), classification=UserStatus}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {PK, NotNull, VARCHAR(20), classification=UserStatus}
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusCode_Desc() { regOBD("USER_STATUS_CODE"); return this; }
@@ -144,14 +144,14 @@ public class BsClsUserStatusCQ extends AbstractBsClsUserStatusCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(10)}
+     * (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusName_Asc() { regOBA("USER_STATUS_NAME"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(10)}
+     * (ユーザーステータス名)USER_STATUS_NAME: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusName_Desc() { regOBD("USER_STATUS_NAME"); return this; }
@@ -164,14 +164,14 @@ public class BsClsUserStatusCQ extends AbstractBsClsUserStatusCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (ユーザーステータス別名)USER_STATUS_ALIAS: {NotNull, VARCHAR(10)}
+     * (ユーザーステータス別名)USER_STATUS_ALIAS: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusAlias_Asc() { regOBA("USER_STATUS_ALIAS"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (ユーザーステータス別名)USER_STATUS_ALIAS: {NotNull, VARCHAR(10)}
+     * (ユーザーステータス別名)USER_STATUS_ALIAS: {NotNull, VARCHAR(50)}
      * @return this. (NotNull)
      */
     public BsClsUserStatusCQ addOrderBy_UserStatusAlias_Desc() { regOBD("USER_STATUS_ALIAS"); return this; }

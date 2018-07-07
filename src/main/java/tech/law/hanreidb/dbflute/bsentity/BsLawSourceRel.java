@@ -99,7 +99,7 @@ public abstract class BsLawSourceRel extends AbstractEntity implements DomainEnt
     /** (法令ID)LAW_ID: {IX, NotNull, INT(10), FK to LAW} */
     protected Integer _lawId;
 
-    /** (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} */
+    /** (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} */
     protected String _sourceCode;
 
     /** (法令取得元ID)LAW_SOURCE_ID: {NotNull, VARCHAR(100)} */
@@ -147,7 +147,7 @@ public abstract class BsLawSourceRel extends AbstractEntity implements DomainEnt
     //                                                             =======================
     /**
      * Get the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
      */
@@ -157,7 +157,7 @@ public abstract class BsLawSourceRel extends AbstractEntity implements DomainEnt
 
     /**
      * Set the value of sourceCode as the classification of Source. <br>
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
     public void setSourceCodeAsSource(CDef.Source cdef) {
@@ -372,7 +372,7 @@ public abstract class BsLawSourceRel extends AbstractEntity implements DomainEnt
     }
 
     /**
-     * [get] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * [get] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * 取得元コード e.g. COURT
      * @return The value of the column 'SOURCE_CODE'. (basically NotNull if selected: for the constraint)
      */
@@ -382,7 +382,7 @@ public abstract class BsLawSourceRel extends AbstractEntity implements DomainEnt
     }
 
     /**
-     * [set] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source} <br>
+     * [set] (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source} <br>
      * 取得元コード e.g. COURT
      * @param sourceCode The value of the column 'SOURCE_CODE'. (basically NotNull if update: for the constraint)
      */

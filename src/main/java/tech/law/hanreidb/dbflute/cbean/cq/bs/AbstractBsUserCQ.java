@@ -606,7 +606,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userStatusCode The value of userStatusCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_Equal(String userStatusCode) {
@@ -615,7 +615,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). As UserStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setUserStatusCode_Equal_AsUserStatus(CDef.UserStatus cdef) {
@@ -623,19 +623,19 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     }
 
     /**
-     * Equal(=). As 正式会員 (FML). And OnlyOnceRegistered. <br>
-     * 正式会員: 正式会員
+     * Equal(=). As 契約中 (ACTIVE). And OnlyOnceRegistered. <br>
+     * 契約中: 契約中
      */
-    public void setUserStatusCode_Equal_正式会員() {
-        setUserStatusCode_Equal_AsUserStatus(CDef.UserStatus.正式会員);
+    public void setUserStatusCode_Equal_契約中() {
+        setUserStatusCode_Equal_AsUserStatus(CDef.UserStatus.契約中);
     }
 
     /**
-     * Equal(=). As 仮会員 (PRO). And OnlyOnceRegistered. <br>
-     * 仮会員: 仮会員
+     * Equal(=). As 解約済 (UNSUBSCRIBE). And OnlyOnceRegistered. <br>
+     * 解約済: 解約済
      */
-    public void setUserStatusCode_Equal_仮会員() {
-        setUserStatusCode_Equal_AsUserStatus(CDef.UserStatus.仮会員);
+    public void setUserStatusCode_Equal_解約済() {
+        setUserStatusCode_Equal_AsUserStatus(CDef.UserStatus.解約済);
     }
 
     protected void doSetUserStatusCode_Equal(String userStatusCode) {
@@ -644,7 +644,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userStatusCode The value of userStatusCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_NotEqual(String userStatusCode) {
@@ -653,7 +653,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). As UserStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setUserStatusCode_NotEqual_AsUserStatus(CDef.UserStatus cdef) {
@@ -661,19 +661,19 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     }
 
     /**
-     * NotEqual(&lt;&gt;). As 正式会員 (FML). And OnlyOnceRegistered. <br>
-     * 正式会員: 正式会員
+     * NotEqual(&lt;&gt;). As 契約中 (ACTIVE). And OnlyOnceRegistered. <br>
+     * 契約中: 契約中
      */
-    public void setUserStatusCode_NotEqual_正式会員() {
-        setUserStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.正式会員);
+    public void setUserStatusCode_NotEqual_契約中() {
+        setUserStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.契約中);
     }
 
     /**
-     * NotEqual(&lt;&gt;). As 仮会員 (PRO). And OnlyOnceRegistered. <br>
-     * 仮会員: 仮会員
+     * NotEqual(&lt;&gt;). As 解約済 (UNSUBSCRIBE). And OnlyOnceRegistered. <br>
+     * 解約済: 解約済
      */
-    public void setUserStatusCode_NotEqual_仮会員() {
-        setUserStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.仮会員);
+    public void setUserStatusCode_NotEqual_解約済() {
+        setUserStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.解約済);
     }
 
     protected void doSetUserStatusCode_NotEqual(String userStatusCode) {
@@ -682,7 +682,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userStatusCodeList The collection of userStatusCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_InScope(Collection<String> userStatusCodeList) {
@@ -691,7 +691,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. As UserStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_InScope_AsUserStatus(Collection<CDef.UserStatus> cdefList) {
@@ -704,7 +704,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userStatusCodeList The collection of userStatusCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_NotInScope(Collection<String> userStatusCodeList) {
@@ -713,7 +713,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. As UserStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusCode_NotInScope_AsUserStatus(Collection<CDef.UserStatus> cdefList) {

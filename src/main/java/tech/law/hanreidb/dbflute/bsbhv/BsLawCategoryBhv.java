@@ -201,7 +201,7 @@ public abstract class BsLawCategoryBhv extends AbstractBehaviorWritable<LawCateg
 
     /**
      * Select the entity by the unique-key value.
-     * @param lawCategoryAlias (法令カテゴリー別名): UQ, NotNull, VARCHAR(20). (NotNull)
+     * @param lawCategoryAlias (法令カテゴリー別名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
@@ -226,7 +226,7 @@ public abstract class BsLawCategoryBhv extends AbstractBehaviorWritable<LawCateg
 
     /**
      * Select the entity by the unique-key value.
-     * @param lawCategoryName (法令カテゴリー名): UQ, NotNull, VARCHAR(20). (NotNull)
+     * @param lawCategoryName (法令カテゴリー名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return The optional entity selected by the unique key. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.

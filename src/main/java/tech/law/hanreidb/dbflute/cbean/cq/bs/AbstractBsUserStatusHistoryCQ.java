@@ -60,7 +60,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param userStatusHistoryId The value of userStatusHistoryId as equal. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserStatusHistoryId_Equal(Long userStatusHistoryId) {
@@ -73,7 +73,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param userStatusHistoryId The value of userStatusHistoryId as notEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserStatusHistoryId_NotEqual(Long userStatusHistoryId) {
@@ -86,7 +86,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param userStatusHistoryId The value of userStatusHistoryId as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserStatusHistoryId_GreaterThan(Long userStatusHistoryId) {
@@ -95,7 +95,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param userStatusHistoryId The value of userStatusHistoryId as lessThan. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserStatusHistoryId_LessThan(Long userStatusHistoryId) {
@@ -104,7 +104,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param userStatusHistoryId The value of userStatusHistoryId as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserStatusHistoryId_GreaterEqual(Long userStatusHistoryId) {
@@ -113,7 +113,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param userStatusHistoryId The value of userStatusHistoryId as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
     public void setUserStatusHistoryId_LessEqual(Long userStatusHistoryId) {
@@ -124,7 +124,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param minNumber The min number of userStatusHistoryId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of userStatusHistoryId. (NullAllowed: if null, no to-condition)
      * @param opLambda The callback for option of range-of. (NotNull)
@@ -137,7 +137,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param minNumber The min number of userStatusHistoryId. (NullAllowed: if null, no from-condition)
      * @param maxNumber The max number of userStatusHistoryId. (NullAllowed: if null, no to-condition)
      * @param rangeOfOption The option of range-of. (NotNull)
@@ -148,7 +148,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param userStatusHistoryIdList The collection of userStatusHistoryId as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusHistoryId_InScope(Collection<Long> userStatusHistoryIdList) {
@@ -161,7 +161,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @param userStatusHistoryIdList The collection of userStatusHistoryId as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserStatusHistoryId_NotInScope(Collection<Long> userStatusHistoryIdList) {
@@ -174,13 +174,13 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      */
     public void setUserStatusHistoryId_IsNull() { regUserStatusHistoryId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      */
     public void setUserStatusHistoryId_IsNotNull() { regUserStatusHistoryId(CK_ISNN, DOBJ); }
 
@@ -306,7 +306,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userNewStatusCode The value of userNewStatusCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_Equal(String userNewStatusCode) {
@@ -315,7 +315,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * Equal(=). As UserStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setUserNewStatusCode_Equal_AsUserStatus(CDef.UserStatus cdef) {
@@ -323,19 +323,19 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
     }
 
     /**
-     * Equal(=). As 正式会員 (FML). And OnlyOnceRegistered. <br>
-     * 正式会員: 正式会員
+     * Equal(=). As 契約中 (ACTIVE). And OnlyOnceRegistered. <br>
+     * 契約中: 契約中
      */
-    public void setUserNewStatusCode_Equal_正式会員() {
-        setUserNewStatusCode_Equal_AsUserStatus(CDef.UserStatus.正式会員);
+    public void setUserNewStatusCode_Equal_契約中() {
+        setUserNewStatusCode_Equal_AsUserStatus(CDef.UserStatus.契約中);
     }
 
     /**
-     * Equal(=). As 仮会員 (PRO). And OnlyOnceRegistered. <br>
-     * 仮会員: 仮会員
+     * Equal(=). As 解約済 (UNSUBSCRIBE). And OnlyOnceRegistered. <br>
+     * 解約済: 解約済
      */
-    public void setUserNewStatusCode_Equal_仮会員() {
-        setUserNewStatusCode_Equal_AsUserStatus(CDef.UserStatus.仮会員);
+    public void setUserNewStatusCode_Equal_解約済() {
+        setUserNewStatusCode_Equal_AsUserStatus(CDef.UserStatus.解約済);
     }
 
     protected void doSetUserNewStatusCode_Equal(String userNewStatusCode) {
@@ -344,7 +344,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userNewStatusCode The value of userNewStatusCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_NotEqual(String userNewStatusCode) {
@@ -353,7 +353,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * NotEqual(&lt;&gt;). As UserStatus. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setUserNewStatusCode_NotEqual_AsUserStatus(CDef.UserStatus cdef) {
@@ -361,19 +361,19 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
     }
 
     /**
-     * NotEqual(&lt;&gt;). As 正式会員 (FML). And OnlyOnceRegistered. <br>
-     * 正式会員: 正式会員
+     * NotEqual(&lt;&gt;). As 契約中 (ACTIVE). And OnlyOnceRegistered. <br>
+     * 契約中: 契約中
      */
-    public void setUserNewStatusCode_NotEqual_正式会員() {
-        setUserNewStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.正式会員);
+    public void setUserNewStatusCode_NotEqual_契約中() {
+        setUserNewStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.契約中);
     }
 
     /**
-     * NotEqual(&lt;&gt;). As 仮会員 (PRO). And OnlyOnceRegistered. <br>
-     * 仮会員: 仮会員
+     * NotEqual(&lt;&gt;). As 解約済 (UNSUBSCRIBE). And OnlyOnceRegistered. <br>
+     * 解約済: 解約済
      */
-    public void setUserNewStatusCode_NotEqual_仮会員() {
-        setUserNewStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.仮会員);
+    public void setUserNewStatusCode_NotEqual_解約済() {
+        setUserNewStatusCode_NotEqual_AsUserStatus(CDef.UserStatus.解約済);
     }
 
     protected void doSetUserNewStatusCode_NotEqual(String userNewStatusCode) {
@@ -382,7 +382,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userNewStatusCodeList The collection of userNewStatusCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_InScope(Collection<String> userNewStatusCodeList) {
@@ -391,7 +391,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * InScope {in ('a', 'b')}. As UserStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_InScope_AsUserStatus(Collection<CDef.UserStatus> cdefList) {
@@ -404,7 +404,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @param userNewStatusCodeList The collection of userNewStatusCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_NotInScope(Collection<String> userNewStatusCodeList) {
@@ -413,7 +413,7 @@ public abstract class AbstractBsUserStatusHistoryCQ extends AbstractConditionQue
 
     /**
      * NotInScope {not in ('a', 'b')}. As UserStatus. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setUserNewStatusCode_NotInScope_AsUserStatus(Collection<CDef.UserStatus> cdefList) {

@@ -104,7 +104,7 @@ public class LawSourceRelDbm extends AbstractDBMeta {
     //                                                                         ===========
     protected final ColumnInfo _columnLawSourceRelId = cci("LAW_SOURCE_REL_ID", "LAW_SOURCE_REL_ID", null, "法令取得元リレーションID", Long.class, "lawSourceRelId", null, true, true, true, "BIGINT", 19, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnLawId = cci("LAW_ID", "LAW_ID", null, "法令ID", Integer.class, "lawId", null, false, false, true, "INT", 10, 0, null, false, null, null, "law", null, null, false);
-    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, false, false, true, "VARCHAR", 10, 0, null, false, null, null, "clsSource", null, CDef.DefMeta.Source, false);
+    protected final ColumnInfo _columnSourceCode = cci("SOURCE_CODE", "SOURCE_CODE", null, "取得元コード", String.class, "sourceCode", null, false, false, true, "VARCHAR", 20, 0, null, false, null, null, "clsSource", null, CDef.DefMeta.Source, false);
     protected final ColumnInfo _columnLawSourceId = cci("LAW_SOURCE_ID", "LAW_SOURCE_ID", null, "法令取得元ID", String.class, "lawSourceId", null, false, false, true, "VARCHAR", 100, 0, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterDatetime = cci("REGISTER_DATETIME", "REGISTER_DATETIME", null, "登録日時", java.time.LocalDateTime.class, "registerDatetime", null, false, false, true, "DATETIME", 19, 0, null, true, null, null, null, null, null, false);
     protected final ColumnInfo _columnRegisterUser = cci("REGISTER_USER", "REGISTER_USER", null, "登録ユーザー", String.class, "registerUser", null, false, false, true, "VARCHAR", 200, 0, null, true, null, null, null, null, null, false);
@@ -123,7 +123,7 @@ public class LawSourceRelDbm extends AbstractDBMeta {
      */
     public ColumnInfo columnLawId() { return _columnLawId; }
     /**
-     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+     * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnSourceCode() { return _columnSourceCode; }

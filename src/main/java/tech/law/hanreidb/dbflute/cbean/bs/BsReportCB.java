@@ -107,7 +107,7 @@ public class BsReportCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param reportAlias (判例集別名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param reportAlias (判例集別名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return this. (NotNull)
      */
     public ReportCB acceptUniqueOfReportAlias(String reportAlias) {
@@ -119,7 +119,7 @@ public class BsReportCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param reportName (判例集名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param reportName (判例集名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return this. (NotNull)
      */
     public ReportCB acceptUniqueOfReportName(String reportName) {
@@ -327,12 +327,12 @@ public class BsReportCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnReportId() { return doColumn("REPORT_ID"); }
         /**
-         * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)}
+         * (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnReportName() { return doColumn("REPORT_NAME"); }
         /**
-         * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)}
+         * (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnReportAlias() { return doColumn("REPORT_ALIAS"); }

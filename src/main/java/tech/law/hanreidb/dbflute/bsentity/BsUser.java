@@ -102,7 +102,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
     /** (パスワード)PASSWORD: {NotNull, VARCHAR(255)} */
     protected String _password;
 
-    /** (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} */
+    /** (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} */
     protected String _userStatusCode;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -158,7 +158,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
     //                                                             =======================
     /**
      * Get the value of userStatusCode as the classification of UserStatus. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * <p>It's treated as case insensitive and if the code value is null, it returns null.</p>
      * @return The instance of classification definition (as ENUM type). (NullAllowed: when the column value is null)
      */
@@ -168,7 +168,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
 
     /**
      * Set the value of userStatusCode as the classification of UserStatus. <br>
-     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param cdef The instance of classification definition (as ENUM type). (NullAllowed: if null, null value is set to the column)
      */
     public void setUserStatusCodeAsUserStatus(CDef.UserStatus cdef) {
@@ -179,44 +179,44 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
     //                                                              Classification Setting
     //                                                              ======================
     /**
-     * Set the value of userStatusCode as 正式会員 (FML). <br>
-     * 正式会員: 正式会員
+     * Set the value of userStatusCode as 契約中 (ACTIVE). <br>
+     * 契約中: 契約中
      */
-    public void setUserStatusCode_正式会員() {
-        setUserStatusCodeAsUserStatus(CDef.UserStatus.正式会員);
+    public void setUserStatusCode_契約中() {
+        setUserStatusCodeAsUserStatus(CDef.UserStatus.契約中);
     }
 
     /**
-     * Set the value of userStatusCode as 仮会員 (PRO). <br>
-     * 仮会員: 仮会員
+     * Set the value of userStatusCode as 解約済 (UNSUBSCRIBE). <br>
+     * 解約済: 解約済
      */
-    public void setUserStatusCode_仮会員() {
-        setUserStatusCodeAsUserStatus(CDef.UserStatus.仮会員);
+    public void setUserStatusCode_解約済() {
+        setUserStatusCodeAsUserStatus(CDef.UserStatus.解約済);
     }
 
     // ===================================================================================
     //                                                        Classification Determination
     //                                                        ============================
     /**
-     * Is the value of userStatusCode 正式会員? <br>
-     * 正式会員: 正式会員
+     * Is the value of userStatusCode 契約中? <br>
+     * 契約中: 契約中
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
-    public boolean isUserStatusCode正式会員() {
+    public boolean isUserStatusCode契約中() {
         CDef.UserStatus cdef = getUserStatusCodeAsUserStatus();
-        return cdef != null ? cdef.equals(CDef.UserStatus.正式会員) : false;
+        return cdef != null ? cdef.equals(CDef.UserStatus.契約中) : false;
     }
 
     /**
-     * Is the value of userStatusCode 仮会員? <br>
-     * 仮会員: 仮会員
+     * Is the value of userStatusCode 解約済? <br>
+     * 解約済: 解約済
      * <p>It's treated as case insensitive and if the code value is null, it returns false.</p>
      * @return The determination, true or false.
      */
-    public boolean isUserStatusCode仮会員() {
+    public boolean isUserStatusCode解約済() {
         CDef.UserStatus cdef = getUserStatusCodeAsUserStatus();
-        return cdef != null ? cdef.equals(CDef.UserStatus.仮会員) : false;
+        return cdef != null ? cdef.equals(CDef.UserStatus.解約済) : false;
     }
 
     // ===================================================================================
@@ -448,7 +448,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
     }
 
     /**
-     * [get] (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * [get] (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @return The value of the column 'USER_STATUS_CODE'. (basically NotNull if selected: for the constraint)
      */
     public String getUserStatusCode() {
@@ -457,7 +457,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity, Ent
     }
 
     /**
-     * [set] (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus} <br>
+     * [set] (ユーザーステータスコード)USER_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus} <br>
      * @param userStatusCode The value of the column 'USER_STATUS_CODE'. (basically NotNull if update: for the constraint)
      */
     public void setUserStatusCode(String userStatusCode) {

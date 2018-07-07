@@ -345,7 +345,7 @@ public class BsSourceLawCategoryCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnSourceLawCategoryId() { return doColumn("SOURCE_LAW_CATEGORY_ID"); }
         /**
-         * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+         * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceCode() { return doColumn("SOURCE_CODE"); }
@@ -355,12 +355,12 @@ public class BsSourceLawCategoryCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnLawCategoryId() { return doColumn("LAW_CATEGORY_ID"); }
         /**
-         * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(20)}
+         * (取得元法令カテゴリー名)SOURCE_LAW_CATEGORY_NAME: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceLawCategoryName() { return doColumn("SOURCE_LAW_CATEGORY_NAME"); }
         /**
-         * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(20)}
+         * (取得元法令カテゴリー別名)SOURCE_LAW_CATEGORY_ALIAS: {NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceLawCategoryAlias() { return doColumn("SOURCE_LAW_CATEGORY_ALIAS"); }

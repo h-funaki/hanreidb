@@ -1,4 +1,199 @@
 map:{
+    ; 2018/07/07 16:31:46 = map:{
+        ; diffDate = 2018/07/07 16:31:46
+        ; tableDiff = map:{
+            ; CLS_SOURCE = map:{
+                ; tableName = CLS_SOURCE
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SOURCE_CODE = map:{
+                        ; columnName = SOURCE_CODE
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                    ; SOURCE_NAME = map:{
+                        ; columnName = SOURCE_NAME
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 100
+                        }
+                    }
+                    ; SOURCE_ALIAS = map:{
+                        ; columnName = SOURCE_ALIAS
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 100
+                        }
+                    }
+                }
+            }
+            ; CLS_USER_STATUS = map:{
+                ; tableName = CLS_USER_STATUS
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USER_STATUS_CODE = map:{
+                        ; columnName = USER_STATUS_CODE
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                    ; USER_STATUS_NAME = map:{
+                        ; columnName = USER_STATUS_NAME
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 10
+                        }
+                    }
+                    ; USER_STATUS_ALIAS = map:{
+                        ; columnName = USER_STATUS_ALIAS
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 10
+                        }
+                    }
+                }
+            }
+            ; JUDGEMENT_SOURCE_REL = map:{
+                ; tableName = JUDGEMENT_SOURCE_REL
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SOURCE_CODE = map:{
+                        ; columnName = SOURCE_CODE
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                }
+            }
+            ; LAW_CATEGORY = map:{
+                ; tableName = LAW_CATEGORY
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; LAW_CATEGORY_NAME = map:{
+                        ; columnName = LAW_CATEGORY_NAME
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 20
+                        }
+                    }
+                    ; LAW_CATEGORY_ALIAS = map:{
+                        ; columnName = LAW_CATEGORY_ALIAS
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 20
+                        }
+                    }
+                }
+            }
+            ; LAW_SOURCE_REL = map:{
+                ; tableName = LAW_SOURCE_REL
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SOURCE_CODE = map:{
+                        ; columnName = SOURCE_CODE
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                }
+            }
+            ; REPORT = map:{
+                ; tableName = REPORT
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; REPORT_NAME = map:{
+                        ; columnName = REPORT_NAME
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 100
+                        }
+                    }
+                    ; REPORT_ALIAS = map:{
+                        ; columnName = REPORT_ALIAS
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 100
+                        }
+                    }
+                }
+            }
+            ; SOURCE_LAW_CATEGORY = map:{
+                ; tableName = SOURCE_LAW_CATEGORY
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; SOURCE_CODE = map:{
+                        ; columnName = SOURCE_CODE
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                    ; SOURCE_LAW_CATEGORY_NAME = map:{
+                        ; columnName = SOURCE_LAW_CATEGORY_NAME
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 20
+                        }
+                    }
+                    ; SOURCE_LAW_CATEGORY_ALIAS = map:{
+                        ; columnName = SOURCE_LAW_CATEGORY_ALIAS
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 50
+                            ; previous = 20
+                        }
+                    }
+                }
+            }
+            ; USER = map:{
+                ; tableName = USER
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USER_STATUS_CODE = map:{
+                        ; columnName = USER_STATUS_CODE
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                }
+            }
+            ; USER_STATUS_HISTORY = map:{
+                ; tableName = USER_STATUS_HISTORY
+                ; diffType = CHANGE
+                ; columnDiff = map:{
+                    ; USER_NEW_STATUS_CODE = map:{
+                        ; columnName = USER_NEW_STATUS_CODE
+                        ; diffType = CHANGE
+                        ; columnSizeDiff = map:{
+                            ; next = 20
+                            ; previous = 10
+                        }
+                    }
+                }
+            }
+        }
+    }
     ; 2018/06/27 20:20:06 = map:{
         ; diffDate = 2018/06/27 20:20:06
         ; tableDiff = map:{

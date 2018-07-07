@@ -95,7 +95,7 @@ public class BsClsSourceCB extends AbstractConditionBean {
     //                                                                 ===================
     /**
      * Accept the query condition of primary key as equal.
-     * @param sourceCode (取得元コード): PK, NotNull, VARCHAR(10), classification=Source. (NotNull)
+     * @param sourceCode (取得元コード): PK, NotNull, VARCHAR(20), classification=Source. (NotNull)
      * @return this. (NotNull)
      */
     public ClsSourceCB acceptPK(String sourceCode) {
@@ -119,7 +119,7 @@ public class BsClsSourceCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param sourceAlias (取得元別名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param sourceAlias (取得元別名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return this. (NotNull)
      */
     public ClsSourceCB acceptUniqueOfSourceAlias(String sourceAlias) {
@@ -131,7 +131,7 @@ public class BsClsSourceCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param sourceName (取得元名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param sourceName (取得元名): UQ, NotNull, VARCHAR(50). (NotNull)
      * @return this. (NotNull)
      */
     public ClsSourceCB acceptUniqueOfSourceName(String sourceName) {
@@ -334,17 +334,17 @@ public class BsClsSourceCB extends AbstractConditionBean {
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
         /**
-         * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+         * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceCode() { return doColumn("SOURCE_CODE"); }
         /**
-         * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)}
+         * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceName() { return doColumn("SOURCE_NAME"); }
         /**
-         * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+         * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceAlias() { return doColumn("SOURCE_ALIAS"); }

@@ -360,7 +360,7 @@ public class BsLawSourceRelCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnLawId() { return doColumn("LAW_ID"); }
         /**
-         * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+         * (取得元コード)SOURCE_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceCode() { return doColumn("SOURCE_CODE"); }

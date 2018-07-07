@@ -60,7 +60,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      * @param sourceCode The value of sourceCode as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_Equal(String sourceCode) {
@@ -69,7 +69,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceCode_Equal_AsSource(CDef.Source cdef) {
@@ -98,7 +98,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      * @param sourceCode The value of sourceCode as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotEqual(String sourceCode) {
@@ -107,7 +107,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). As Source. And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} <br>
      * @param cdef The instance of classification definition (as ENUM type). (basically NotNull: error as default, or no condition as option)
      */
     public void setSourceCode_NotEqual_AsSource(CDef.Source cdef) {
@@ -136,7 +136,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      * @param sourceCodeList The collection of sourceCode as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_InScope(Collection<String> sourceCodeList) {
@@ -145,7 +145,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_InScope_AsSource(Collection<CDef.Source> cdefList) {
@@ -158,7 +158,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      * @param sourceCodeList The collection of sourceCode as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotInScope(Collection<String> sourceCodeList) {
@@ -167,7 +167,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. As Source. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source} <br>
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source} <br>
      * @param cdefList The list of classification definition (as ENUM type). (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceCode_NotInScope_AsSource(Collection<CDef.Source> cdefList) {
@@ -399,13 +399,13 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      */
     public void setSourceCode_IsNull() { regSourceCode(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(10), classification=Source}
+     * (取得元コード)SOURCE_CODE: {PK, NotNull, VARCHAR(20), classification=Source}
      */
     public void setSourceCode_IsNotNull() { regSourceCode(CK_ISNN, DOBJ); }
 
@@ -414,7 +414,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)}
      * @param sourceName The value of sourceName as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceName_Equal(String sourceName) {
@@ -427,7 +427,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setSourceName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param sourceName The value of sourceName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -438,7 +438,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setSourceName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param sourceName The value of sourceName as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -450,7 +450,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)}
      * @param sourceName The value of sourceName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -461,7 +461,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(100)}
+     * (取得元名)SOURCE_NAME: {UQ, NotNull, VARCHAR(50)}
      * @param sourceName The value of sourceName as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
@@ -474,7 +474,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param sourceAlias The value of sourceAlias as equal. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceAlias_Equal(String sourceAlias) {
@@ -487,7 +487,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param sourceAlias The value of sourceAlias as notEqual. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceAlias_NotEqual(String sourceAlias) {
@@ -500,7 +500,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param sourceAliasList The collection of sourceAlias as inScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceAlias_InScope(Collection<String> sourceAliasList) {
@@ -513,7 +513,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param sourceAliasList The collection of sourceAlias as notInScope. (NullAllowed: if null (or empty), no condition)
      */
     public void setSourceAlias_NotInScope(Collection<String> sourceAliasList) {
@@ -526,7 +526,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setSourceAlias_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
      * @param sourceAlias The value of sourceAlias as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
@@ -537,7 +537,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * <pre>e.g. setSourceAlias_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
      * @param sourceAlias The value of sourceAlias as likeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of like-search. (NotNull)
@@ -549,7 +549,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param sourceAlias The value of sourceAlias as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
@@ -560,7 +560,7 @@ public abstract class AbstractBsClsSourceCQ extends AbstractConditionQuery {
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(100)}
+     * (取得元別名)SOURCE_ALIAS: {UQ, NotNull, VARCHAR(50)}
      * @param sourceAlias The value of sourceAlias as notLikeSearch. (NullAllowed: if null (or empty), no condition)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */

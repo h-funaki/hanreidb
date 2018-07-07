@@ -96,14 +96,14 @@ public class BsUserStatusHistoryCQ extends AbstractBsUserStatusHistoryCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @return this. (NotNull)
      */
     public BsUserStatusHistoryCQ addOrderBy_UserStatusHistoryId_Asc() { regOBA("USER_STATUS_HISTORY_ID"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * (ユーザーステータス履歴ID)USER_STATUS_HISTORY_ID: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
      * @return this. (NotNull)
      */
     public BsUserStatusHistoryCQ addOrderBy_UserStatusHistoryId_Desc() { regOBD("USER_STATUS_HISTORY_ID"); return this; }
@@ -136,14 +136,14 @@ public class BsUserStatusHistoryCQ extends AbstractBsUserStatusHistoryCQ {
 
     /** 
      * Add order-by as ascend. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @return this. (NotNull)
      */
     public BsUserStatusHistoryCQ addOrderBy_UserNewStatusCode_Asc() { regOBA("USER_NEW_STATUS_CODE"); return this; }
 
     /**
      * Add order-by as descend. <br>
-     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(10), FK to CLS_USER_STATUS, classification=UserStatus}
+     * (ユーザー新ステータスコード)USER_NEW_STATUS_CODE: {IX, NotNull, VARCHAR(20), FK to CLS_USER_STATUS, classification=UserStatus}
      * @return this. (NotNull)
      */
     public BsUserStatusHistoryCQ addOrderBy_UserNewStatusCode_Desc() { regOBD("USER_NEW_STATUS_CODE"); return this; }

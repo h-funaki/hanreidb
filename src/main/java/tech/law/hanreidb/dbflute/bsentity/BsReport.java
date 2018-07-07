@@ -91,10 +91,10 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
     /** (判例集ID)REPORT_ID: {PK, ID, NotNull, INT UNSIGNED(10)} */
     protected Integer _reportId;
 
-    /** (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)} */
+    /** (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)} */
     protected String _reportName;
 
-    /** (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)} */
+    /** (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)} */
     protected String _reportAlias;
 
     /** (登録日時)REGISTER_DATETIME: {NotNull, DATETIME(19)} */
@@ -137,7 +137,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param reportAlias (判例集別名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param reportAlias (判例集別名): UQ, NotNull, VARCHAR(50). (NotNull)
      */
     public void uniqueByReportAlias(String reportAlias) {
         __uniqueDrivenProperties.clear();
@@ -148,7 +148,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
     /**
      * To be unique by the unique column. <br>
      * You can update the entity by the key when entity update (NOT batch update).
-     * @param reportName (判例集名): UQ, NotNull, VARCHAR(100). (NotNull)
+     * @param reportName (判例集名): UQ, NotNull, VARCHAR(50). (NotNull)
      */
     public void uniqueByReportName(String reportName) {
         __uniqueDrivenProperties.clear();
@@ -274,7 +274,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
     }
 
     /**
-     * [get] (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * [get] (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * 判例集名 e.g. 最高裁判所刑事判例
      * @return The value of the column 'REPORT_NAME'. (basically NotNull if selected: for the constraint)
      */
@@ -284,7 +284,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
     }
 
     /**
-     * [set] (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(100)} <br>
+     * [set] (判例集名)REPORT_NAME: {UQ, NotNull, VARCHAR(50)} <br>
      * 判例集名 e.g. 最高裁判所刑事判例
      * @param reportName The value of the column 'REPORT_NAME'. (basically NotNull if update: for the constraint)
      */
@@ -294,7 +294,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
     }
 
     /**
-     * [get] (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * [get] (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * 判例集別名 e.g. 刑集
      * @return The value of the column 'REPORT_ALIAS'. (basically NotNull if selected: for the constraint)
      */
@@ -304,7 +304,7 @@ public abstract class BsReport extends AbstractEntity implements DomainEntity, E
     }
 
     /**
-     * [set] (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(100)} <br>
+     * [set] (判例集別名)REPORT_ALIAS: {UQ, NotNull, VARCHAR(50)} <br>
      * 判例集別名 e.g. 刑集
      * @param reportAlias The value of the column 'REPORT_ALIAS'. (basically NotNull if update: for the constraint)
      */

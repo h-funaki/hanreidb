@@ -108,7 +108,7 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
 
     /**
      * Accept the query condition of unique key as equal.
-     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source. (NotNull)
+     * @param sourceCode (取得元コード): UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source. (NotNull)
      * @param judgementSourceId (判決取得元ID): +UQ, NotNull, VARCHAR(100). (NotNull)
      * @return this. (NotNull)
      */
@@ -373,7 +373,7 @@ public class BsJudgementSourceRelCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnJudgementId() { return doColumn("JUDGEMENT_ID"); }
         /**
-         * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(10), FK to CLS_SOURCE, classification=Source}
+         * (取得元コード)SOURCE_CODE: {UQ+, NotNull, VARCHAR(20), FK to CLS_SOURCE, classification=Source}
          * @return The information object of specified column. (NotNull)
          */
         public SpecifiedColumn columnSourceCode() { return doColumn("SOURCE_CODE"); }
